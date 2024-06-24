@@ -1,7 +1,8 @@
 @import "../../styles.scss";
+@import "../app.component.scss";
 
 .container {
-  height: 203px;
+  height: $footer-height;
   width: 100vw;
   background-color: #2d3494;
   padding: 50px 112px 50px 112px;

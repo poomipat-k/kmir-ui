@@ -1,0 +1,5 @@
+$footer-height: 203px;
+
+.minContentHight {
+  min-height: calc(100vh - $footer-height);
+}
