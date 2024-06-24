@@ -1,3 +1,5 @@
+@import "../../styles.scss";
+
 .container {
   height: 203px;
   width: 100vw;
@@ -6,9 +8,25 @@
 
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   &__logo {
     display: flex;
     gap: 26px;
   }
+}
+
+.image {
+  height: 103px;
+  width: auto;
+}
+
+.text {
+  font-family: $custom-font-looped;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 23px;
+  // letter-spacing: -0.2%;
+  text-align: right;
+  color: white;
 }
