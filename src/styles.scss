@@ -1,1 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+$custom-font: "IBM Plex Sans Thai", sans-serif;
+$custom-font-looped: "IBM Plex Sans Thai Looped", sans-serif;
+// $inter: "Inter", sans-serif;
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  // set global 1rem = 10px;
+  font-size: 10px;
+  scroll-behavior: smooth;
+}
+
+body {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+ol,
+ul {
+  padding-left: 1.1em;
+}

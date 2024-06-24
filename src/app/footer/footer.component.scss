@@ -1,0 +1,14 @@
+.container {
+  height: 203px;
+  width: 100vw;
+  background-color: #2d3494;
+  padding: 50px 112px 50px 112px;
+
+  display: flex;
+  justify-content: space-between;
+
+  &__logo {
+    display: flex;
+    gap: 26px;
+  }
+}
