@@ -1,5 +1,24 @@
 <div class="login mgt-87">
   <h1 class="login__header">เข้าสู่ระบบเพื่อใช้งาน</h1>
 
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form"></form>
+  <form [formGroup]="form()" (ngSubmit)="onSubmit()" class="form mgt-10">
+    <div>
+      <div>
+        <label for="username">Username</label>
+        <app-com-input-text
+          id="username"
+          [control]="getControl('username')"
+        ></app-com-input-text>
+      </div>
+      <div>
+        <label for="password">Password</label>
+        <app-com-input-text
+          id="password"
+          type="password"
+          [control]="getControl('password')"
+        ></app-com-input-text>
+      </div>
+    </div>
+    <button style="padding: 20px">เข้าสู่ระบบ</button>
+  </form>
 </div>
