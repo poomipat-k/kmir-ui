@@ -1,4 +1,11 @@
-<main class="minContentHight">
-  <router-outlet />
+<main
+  [ngClass]="{
+    minContentHight: true,
+    'background--gold': themeService.currentTheme() === 'gold',
+    'background--silver': themeService.currentTheme() === 'silver'
+  }"
+>
+  <app-navbar></app-navbar>
+  <router-outlet></router-outlet>
 </main>
 <app-footer></app-footer>

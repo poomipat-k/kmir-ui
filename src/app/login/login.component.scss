@@ -1,0 +1,24 @@
+@import "../../styles.scss";
+
+.login {
+  width: 272px;
+  margin: auto;
+  border: 1px solid red;
+  &__header {
+    text-align: left;
+    font-family: $custom-font;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 44px;
+    color: #000;
+  }
+}
+
+.mgt {
+  &-10 {
+    margin-top: 10px;
+  }
+  &-87 {
+    margin-top: 87px;
+  }
+}
