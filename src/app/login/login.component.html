@@ -15,10 +15,11 @@
         <label for="password" class="login__label">Password</label>
         <app-com-input-text
           id="password"
-          type="password"
+          [type]="passwordType()"
           [control]="getControl('password')"
           [isPassword]="true"
           placeholder="Enter Password"
+          (newPasswordType)="onPasswordTypeChange($event)"
         ></app-com-input-text>
       </div>
     </div>

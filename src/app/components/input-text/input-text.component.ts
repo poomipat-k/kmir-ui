@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -18,4 +18,17 @@ export class InputTextComponent {
   height = input('42px');
   margin = input('0');
   fontSize = input('16px');
+
+  newPasswordType = output<'password' | 'text'>();
+
+  togglePasswordVisibility() {
+    if (!this.isPassword()) {
+      return;
+    }
+    if (this.type() === 'password') {
+      this.newPasswordType.emit('text');
+    } else {
+      this.newPasswordType.emit('password');
+    }
+  }
 }

@@ -16,7 +16,21 @@
     [formControl]="control()"
     class="input"
   />
-  <img src="/assets/visibility_off.svg" alt="eye off" class="passwordIcon" />
+  @if (type() === "password") {
+  <img
+    src="/assets/visibility.svg"
+    alt="visibility off"
+    class="passwordIcon"
+    (click)="togglePasswordVisibility()"
+  />
+  } @else {
+  <img
+    src="/assets/visibility_off.svg"
+    alt="visibility on"
+    class="passwordIcon"
+    (click)="togglePasswordVisibility()"
+  />
+  }
 </div>
 } @else {
 <input

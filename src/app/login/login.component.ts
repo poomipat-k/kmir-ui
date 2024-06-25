@@ -17,14 +17,15 @@ import { ThemeService } from '../services/theme.service';
 })
 export class LoginComponent {
   private readonly themeService: ThemeService = inject(ThemeService);
+  protected passwordType = signal<'password' | 'text'>('password');
 
   protected form = signal(
     new FormGroup({
       username: new FormControl(null, [Validators.required]),
       password: new FormControl(null, [
         Validators.required,
-        Validators.minLength(8),
-        Validators.maxLength(60),
+        // Validators.minLength(8),
+        // Validators.maxLength(60),
       ]),
     })
   );
@@ -39,5 +40,9 @@ export class LoginComponent {
 
   onSubmit() {
     console.log('==[onSubmit] this.form()', this.form());
+  }
+
+  onPasswordTypeChange(type: 'text' | 'password') {
+    this.passwordType.set(type);
   }
 }
