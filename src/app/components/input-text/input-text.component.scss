@@ -1,5 +1,18 @@
 @import "../../../styles.scss";
 
+.container {
+  position: relative;
+}
+
+.passwordIcon {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  right: 8px;
+  top: calc(50% - 12px);
+  cursor: pointer;
+}
+
 .input {
   border: 1px solid rgba(0, 0, 0, 0.36);
   height: 42px;

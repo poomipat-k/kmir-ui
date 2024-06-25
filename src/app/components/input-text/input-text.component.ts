@@ -13,6 +13,7 @@ export class InputTextComponent {
   @Input() id: string;
   @Input() placeholder = '';
   @Input() type: 'text' | 'password' | 'email' = 'text';
+  @Input() isPassword = false;
   @Input() width = '100%';
   @Input() height = '44px';
   @Input() margin = '0';

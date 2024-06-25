@@ -1,3 +1,22 @@
+@if (type === "password" && isPassword) {
+<div class="container">
+  <input
+    [type]="type"
+    [id]="id"
+    autocomplete="on"
+    [placeholder]="placeholder"
+    [formControl]="control"
+    [style]="{
+      width: width,
+      margin: margin,
+      height: height,
+      fontSize: fontSize
+    }"
+    class="input"
+  />
+  <img src="/assets/visibility_off.svg" alt="eye off" class="passwordIcon" />
+</div>
+} @else {
 <input
   [type]="type"
   [id]="id"
@@ -12,3 +31,4 @@
   }"
   class="input"
 />
+}
