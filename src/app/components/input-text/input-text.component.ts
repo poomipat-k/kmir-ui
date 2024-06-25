@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -9,13 +9,13 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './input-text.component.scss',
 })
 export class InputTextComponent {
-  @Input() control: FormControl = new FormControl();
-  @Input() id: string;
-  @Input() placeholder = '';
-  @Input() type: 'text' | 'password' | 'email' = 'text';
-  @Input() isPassword = false;
-  @Input() width = '100%';
-  @Input() height = '44px';
-  @Input() margin = '0';
-  @Input() fontSize = '16px';
+  control = input(new FormControl());
+  id = input.required<string>();
+  placeholder = input<string>('');
+  type = input<'text' | 'password' | 'email'>('text');
+  isPassword = input(false);
+  width = input('100%');
+  height = input('42px');
+  margin = input('0');
+  fontSize = input('16px');
 }

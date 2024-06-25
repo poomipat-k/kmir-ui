@@ -16,6 +16,7 @@
 .input {
   border: 1px solid rgba(0, 0, 0, 0.36);
   height: 42px;
+  width: 100%;
   border-radius: 42px;
   padding: 8px 16px;
   background: #fff;
@@ -23,10 +24,11 @@
 
   font-family: $custom-font;
   font-size: 16px;
-  line-height: normal;
+  line-height: 26px;
+  font-weight: 400;
 
   &::placeholder {
-    color: #667085;
+    color: #a0a6b1;
   }
 
   &:disabled {

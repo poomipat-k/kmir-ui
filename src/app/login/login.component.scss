@@ -12,11 +12,28 @@
     line-height: 44px;
     color: #000;
   }
+
+  &__label {
+    font-family: $custom-font;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 23px;
+    color: #000;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
 }
 
 .mgt {
   &-10 {
     margin-top: 10px;
+  }
+  &-24 {
+    margin-top: 24px;
   }
   &-87 {
     margin-top: 87px;

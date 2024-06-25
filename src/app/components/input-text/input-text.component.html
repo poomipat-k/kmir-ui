@@ -1,33 +1,35 @@
-@if (type === "password" && isPassword) {
-<div class="container">
+@if (isPassword()) {
+<div
+  class="container"
+  [style]="{
+    width: width,
+    margin: margin,
+    height: height,
+    fontSize: fontSize
+  }"
+>
   <input
-    [type]="type"
-    [id]="id"
+    [type]="type()"
+    [id]="id()"
     autocomplete="on"
-    [placeholder]="placeholder"
-    [formControl]="control"
-    [style]="{
-      width: width,
-      margin: margin,
-      height: height,
-      fontSize: fontSize
-    }"
+    [placeholder]="placeholder()"
+    [formControl]="control()"
     class="input"
   />
   <img src="/assets/visibility_off.svg" alt="eye off" class="passwordIcon" />
 </div>
 } @else {
 <input
-  [type]="type"
-  [id]="id"
+  [type]="type()"
+  [id]="id()"
   autocomplete="on"
-  [placeholder]="placeholder"
-  [formControl]="control"
+  [placeholder]="placeholder()"
+  [formControl]="control()"
   [style]="{
-    width: width,
-    margin: margin,
-    height: height,
-    fontSize: fontSize
+    width: width(),
+    margin: margin(),
+    height: height(),
+    fontSize: fontSize()
   }"
   class="input"
 />

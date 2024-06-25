@@ -3,22 +3,25 @@
 
   <form [formGroup]="form()" (ngSubmit)="onSubmit()" class="form mgt-10">
     <div>
-      <div>
-        <label for="username">Username</label>
+      <div class="login__item">
+        <label for="username" class="login__label">Username</label>
         <app-com-input-text
           id="username"
           [control]="getControl('username')"
+          placeholder="Enter Username"
         ></app-com-input-text>
       </div>
-      <div>
-        <label for="password">Password</label>
+      <div class="login__item mgt-10">
+        <label for="password" class="login__label">Password</label>
         <app-com-input-text
           id="password"
           type="password"
           [control]="getControl('password')"
+          [isPassword]="true"
+          placeholder="Enter Password"
         ></app-com-input-text>
       </div>
     </div>
-    <button style="padding: 20px">เข้าสู่ระบบ</button>
+    <button style="padding: 20px" class="mgt-24">เข้าสู่ระบบ</button>
   </form>
 </div>
