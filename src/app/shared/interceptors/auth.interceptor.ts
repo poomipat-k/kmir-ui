@@ -8,6 +8,7 @@ import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, switchMap, throwError } from 'rxjs';
 import { UserService } from '../../services/user.service';
+import { User } from '../models/user';
 
 const refreshTokenFragmentUrl = '/refresh-token';
 const statusUnauthorized = 401;
@@ -42,9 +43,11 @@ const doRefreshToken = (
     }),
     catchError((error) => {
       if (error?.status === statusUnauthorized) {
-        console.log('====refresh login token failed');
-        // userService.logout().subscribe();
-        // router.navigate(['/login']);
+        userService.logout().subscribe((res) => {
+          if (res.success) {
+            userService.currentUser.set(new User());
+          }
+        });
       }
       return throwError(() => error);
     })
