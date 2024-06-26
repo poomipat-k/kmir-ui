@@ -5,8 +5,11 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { InputTextComponent } from '../components/input-text/input-text.component';
 import { ThemeService } from '../services/theme.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +20,11 @@ import { ThemeService } from '../services/theme.service';
 })
 export class LoginComponent {
   private readonly themeService: ThemeService = inject(ThemeService);
+  private readonly userService: UserService = inject(UserService);
+  private readonly router = inject(Router);
+
+  private readonly subs: Subscription[] = [];
+
   protected passwordType = signal<'password' | 'text'>('password');
 
   protected form = signal(
@@ -24,8 +32,8 @@ export class LoginComponent {
       username: new FormControl(null, [Validators.required]),
       password: new FormControl(null, [
         Validators.required,
-        // Validators.minLength(8),
-        // Validators.maxLength(60),
+        Validators.minLength(8),
+        Validators.maxLength(60),
       ]),
     })
   );
@@ -40,6 +48,21 @@ export class LoginComponent {
 
   onSubmit() {
     console.log('==[onSubmit] this.form()', this.form());
+    if (!this.form().valid) {
+      return;
+    }
+    this.subs.push(
+      this.userService
+        .login(
+          this.getControl('username').value,
+          this.getControl('password').value
+        )
+        .subscribe((result) => {
+          if (result.success) {
+            this.router.navigate(['/']);
+          }
+        })
+    );
   }
 
   onPasswordTypeChange(type: 'text' | 'password') {
