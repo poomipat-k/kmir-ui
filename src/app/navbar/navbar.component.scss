@@ -1,7 +1,6 @@
 .nav {
   display: flex;
   width: 100%;
-  justify-content: center;
 
   &__logoContainer {
     display: flex;
@@ -12,10 +11,47 @@
     height: 95px;
     width: auto;
   }
+
+  &__user {
+    &Container {
+      display: flex;
+      gap: 32px;
+    }
+
+    &Item {
+      height: 34px;
+    }
+  }
 }
 
 .pdt {
   &-76 {
     padding-top: 76px;
+  }
+}
+
+.mgt {
+  &-20 {
+    margin-top: 20px;
+  }
+}
+
+.center {
+  justify-content: center;
+}
+
+.spaceBetween {
+  justify-content: space-between;
+}
+
+.sidePadding {
+  &--big {
+    padding-left: 112px;
+    padding-right: 122px;
+  }
+
+  &--small {
+    padding-left: 80px;
+    padding-right: 80px;
   }
 }

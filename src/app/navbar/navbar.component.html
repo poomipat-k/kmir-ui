@@ -1,6 +1,23 @@
-<nav class="nav pdt-76">
+<nav
+  [ngClass]="{
+    nav: true,
+    'pdt-76': true,
+    center: !userService.currentUser().username,
+    spaceBetween: userService.currentUser().username,
+    'sidePadding--big': themeService.currentTheme() === 'gold',
+    'sidePadding--small': themeService.currentTheme() === 'silver',
+    
+  }"
+>
   <div class="nav__logoContainer">
     <img class="nav__logo" src="/assets/aaa_color.png" alt="สสส logo" />
     <img class="nav__logo" src="/assets/irks_color.png" alt="IRKS logo" />
+  </div>
+  <div class="nav__userContainer mgt-20">
+    <button class="nav__userItem">All Plan</button>
+    <p class="nav__userItem">
+      Username: {{ userService.currentUser().username }}
+    </p>
+    <button class="nav__userItem">ออกจากระบบ</button>
   </div>
 </nav>
