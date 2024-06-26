@@ -20,9 +20,8 @@ export class NavbarComponent {
   onLogout() {
     this.userService.logout().subscribe((res) => {
       if (res.success) {
-        console.log('==logout successfully');
-        this.router.navigate(['/login']);
         this.userService.currentUser.set(new User());
+        this.router.navigate(['/login']);
       }
     });
   }

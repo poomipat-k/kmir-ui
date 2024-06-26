@@ -28,6 +28,32 @@
   }
 }
 
+.button {
+  padding: 8px 0;
+  border-radius: 42px;
+
+  font-family: $custom-font;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 26px;
+  text-align: center;
+  color: #fff;
+  width: 100%;
+
+  background-color: #2d3494;
+
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    filter: brightness(110%);
+  }
+
+  &:active {
+    filter: brightness(95%);
+  }
+}
+
 .mgt {
   &-10 {
     margin-top: 10px;
