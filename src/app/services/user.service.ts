@@ -27,6 +27,12 @@ export class UserService {
       .pipe(catchError(this.handleError));
   }
 
+  public logout(): Observable<CommonSuccessResponse> {
+    return this.http
+      .post<CommonSuccessResponse>(`${this.baseApiUrl}/auth/logout`, {})
+      .pipe(catchError(this.handleError));
+  }
+
   public getCurrentUser(): Observable<User> {
     return this.http
       .get<User>(`${this.baseApiUrl}/auth/current`)

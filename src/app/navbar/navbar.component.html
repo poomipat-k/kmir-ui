@@ -13,11 +13,13 @@
     <img class="nav__logo" src="/assets/aaa_color.png" alt="สสส logo" />
     <img class="nav__logo" src="/assets/irks_color.png" alt="IRKS logo" />
   </div>
+  @if (userService.currentUser().username) {
   <div class="nav__userContainer mgt-20">
     <button class="nav__userItem">All Plan</button>
     <p class="nav__userItem">
       Username: {{ userService.currentUser().username }}
     </p>
-    <button class="nav__userItem">ออกจากระบบ</button>
+    <button class="nav__userItem" (click)="onLogout()">ออกจากระบบ</button>
   </div>
+  }
 </nav>
