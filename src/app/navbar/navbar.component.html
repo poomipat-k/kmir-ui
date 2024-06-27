@@ -18,12 +18,14 @@
   @if (userService.currentUser().username) {
   <div class="nav__userContainer mgt-20">
     <a routerLink="/plan" class="nav__userItem">
-      <button>All Plan</button>
+      <button class="allPlanButton">All Plan</button>
     </a>
-    <p class="nav__userItem">
+    <p class="nav__userItem username">
       Username: {{ userService.currentUser().displayName }}
     </p>
-    <button class="nav__userItem" (click)="onLogout()">ออกจากระบบ</button>
+    <button class="nav__userItem logout" (click)="onLogout()">
+      ออกจากระบบ
+    </button>
   </div>
   }
 </nav>
