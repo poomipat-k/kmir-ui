@@ -2,11 +2,12 @@
 
 .error {
   display: flex;
-  font-family: $custom-font-looped;
-  font-size: 1.3rem;
+  align-items: center;
+  font-family: $custom-font;
+  font-size: 12px;
   font-weight: 400;
-  line-height: normal;
-  color: #ec4a0a;
+  line-height: 20px;
+  color: #ff3300;
 
   &__text {
     margin-left: 4px;
