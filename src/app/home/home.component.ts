@@ -1,4 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { PlanService } from '../services/plan.service';
 import { ThemeService } from '../services/theme.service';
 
 @Component({
@@ -10,8 +11,13 @@ import { ThemeService } from '../services/theme.service';
 })
 export class HomeComponent implements OnInit {
   protected themeService: ThemeService = inject(ThemeService);
+  private readonly planService: PlanService = inject(PlanService);
 
   ngOnInit(): void {
     this.themeService.changeTheme('gold');
+
+    this.planService.getAllPreviewPlan().subscribe((res) => {
+      console.log('===res', res);
+    });
   }
 }
