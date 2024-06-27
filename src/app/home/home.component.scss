@@ -1,0 +1,58 @@
+@import "../../styles.scss";
+
+.container {
+  padding-top: 60px;
+  padding-left: 115px;
+  padding-right: 112px;
+}
+
+.header {
+  font-family: $custom-font;
+  font-weight: 600;
+  font-size: 34px;
+  line-height: 44px;
+  color: #000;
+}
+
+.description {
+  font-family: $custom-font;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #000;
+
+  white-space: pre-wrap;
+}
+
+.dashboardSummary {
+  display: flex;
+  align-items: center;
+
+  &__logo {
+    width: 68px;
+    height: auto;
+  }
+
+  &__header {
+    font-family: $custom-font;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 53px;
+    color: #000;
+  }
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.mgt {
+  &-15 {
+    margin-top: 15px;
+  }
+  &-48 {
+    margin-top: 48px;
+  }
+}
