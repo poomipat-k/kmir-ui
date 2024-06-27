@@ -11,7 +11,9 @@
             [control]="getControl('username')"
             placeholder="Enter Username"
             (keyUp)="onKeyUp()"
-            [error]="formTouched() && !getControl('username').valid"
+            [error]="
+              (formTouched() && !getControl('username').valid) || apiError()
+            "
           ></app-com-input-text>
           @if (formTouched() && !getControl('username').valid) {
           <app-com-error-message
@@ -32,7 +34,9 @@
             placeholder="Enter Password"
             (newPasswordType)="onPasswordTypeChange($event)"
             (keyUp)="onKeyUp()"
-            [error]="formTouched() && !getControl('password').valid"
+            [error]="
+              (formTouched() && !getControl('password').valid) || apiError()
+            "
           ></app-com-input-text>
           @if (formTouched() && !getControl('password').valid) { @if
           (getControl('password').errors?.['minlength']) {
