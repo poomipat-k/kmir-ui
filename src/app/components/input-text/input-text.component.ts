@@ -1,10 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { Component, input, output } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-com-input-text',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './input-text.component.html',
   styleUrl: './input-text.component.scss',
 })
@@ -18,6 +19,7 @@ export class InputTextComponent {
   height = input('42px');
   margin = input('0');
   fontSize = input('16px');
+  error = input(false);
 
   keyUp = output<KeyboardEvent>();
 

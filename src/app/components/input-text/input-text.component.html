@@ -14,8 +14,8 @@
     autocomplete="on"
     [placeholder]="placeholder()"
     [formControl]="control()"
-    class="input"
     (keydown)="onKeyUp($event)"
+    [ngClass]="{ input: true, 'input--error': error() }"
   />
   @if (type() === "password") {
   <img
@@ -46,7 +46,7 @@
     height: height(),
     fontSize: fontSize()
   }"
-  class="input"
+  [ngClass]="{ input: true, 'input--error': error() }"
   (keydown)="onKeyUp($event)"
 />
 }

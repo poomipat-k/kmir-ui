@@ -18,8 +18,7 @@
   @if (userService.currentUser().username) {
   <div class="nav__userContainer mgt-20">
     <a routerLink="/plan" class="nav__userItem">
-      <!-- <button>All Plan</button> -->
-      All Plan
+      <button>All Plan</button>
     </a>
     <p class="nav__userItem">
       Username: {{ userService.currentUser().displayName }}
