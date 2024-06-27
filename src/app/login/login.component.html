@@ -5,22 +5,37 @@
     <div>
       <div class="login__item">
         <label for="username" class="login__label">Username</label>
-        <app-com-input-text
-          id="username"
-          [control]="getControl('username')"
-          placeholder="Enter Username"
-        ></app-com-input-text>
+        <div>
+          <app-com-input-text
+            id="username"
+            [control]="getControl('username')"
+            placeholder="Enter Username"
+          ></app-com-input-text>
+          @if (formTouched() && !getControl('username').valid) {
+          <p>username error message</p>
+          }
+        </div>
       </div>
       <div class="login__item mgt-10">
         <label for="password" class="login__label">Password</label>
-        <app-com-input-text
-          id="password"
-          [type]="passwordType()"
-          [control]="getControl('password')"
-          [isPassword]="true"
-          placeholder="Enter Password"
-          (newPasswordType)="onPasswordTypeChange($event)"
-        ></app-com-input-text>
+        <div>
+          <app-com-input-text
+            id="password"
+            [type]="passwordType()"
+            [control]="getControl('password')"
+            [isPassword]="true"
+            placeholder="Enter Password"
+            (newPasswordType)="onPasswordTypeChange($event)"
+          ></app-com-input-text>
+          @if (formTouched() && !getControl('password').valid) { @if
+          (getControl('password').errors?.['minlength']) {
+          <p>รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวอักษร</p>
+          } @else if (getControl('password').errors?.['maxlength']) {
+          <p>รหัสผ่านต้องมีความยาวไม่เกิน 60 ตัวอักษร</p>
+          }@else if (getControl('password').errors?.['required']) {
+          <p>โปรดระบุรหัสผ่าน</p>
+          } }
+        </div>
       </div>
     </div>
     <button class="button mgt-24">เข้าสู่ระบบ</button>

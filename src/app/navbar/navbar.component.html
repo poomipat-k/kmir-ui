@@ -22,7 +22,7 @@
       All Plan
     </a>
     <p class="nav__userItem">
-      Username: {{ userService.currentUser().username }}
+      Username: {{ userService.currentUser().displayName }}
     </p>
     <button class="nav__userItem" (click)="onLogout()">ออกจากระบบ</button>
   </div>

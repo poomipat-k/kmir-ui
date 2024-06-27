@@ -26,6 +26,7 @@ export class LoginComponent {
   private readonly subs: Subscription[] = [];
 
   protected passwordType = signal<'password' | 'text'>('password');
+  protected formTouched = signal(false);
 
   protected form = signal(
     new FormGroup({
@@ -48,7 +49,9 @@ export class LoginComponent {
 
   onSubmit() {
     console.log('==[onSubmit] this.form()', this.form());
+    this.formTouched.set(true);
     if (!this.form().valid) {
+      console.log('==form is not valid');
       return;
     }
     this.subs.push(
