@@ -19,7 +19,13 @@ export class InputTextComponent {
   margin = input('0');
   fontSize = input('16px');
 
+  keyUp = output<KeyboardEvent>();
+
   newPasswordType = output<'password' | 'text'>();
+
+  onKeyUp(e: KeyboardEvent) {
+    this.keyUp.emit(e);
+  }
 
   togglePasswordVisibility() {
     if (!this.isPassword()) {

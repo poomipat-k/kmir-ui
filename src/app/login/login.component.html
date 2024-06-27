@@ -10,9 +10,13 @@
             id="username"
             [control]="getControl('username')"
             placeholder="Enter Username"
+            (keyUp)="onKeyUp()"
           ></app-com-input-text>
           @if (formTouched() && !getControl('username').valid) {
-          <p>username error message</p>
+          <app-com-error-message
+            text="กรุณาระบุ Username"
+            marginTop="6px"
+          ></app-com-error-message>
           }
         </div>
       </div>
@@ -26,18 +30,34 @@
             [isPassword]="true"
             placeholder="Enter Password"
             (newPasswordType)="onPasswordTypeChange($event)"
+            (keyUp)="onKeyUp()"
           ></app-com-input-text>
           @if (formTouched() && !getControl('password').valid) { @if
           (getControl('password').errors?.['minlength']) {
-          <p>รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวอักษร</p>
+          <app-com-error-message
+            text="รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวอักษร"
+            marginTop="6px"
+          ></app-com-error-message>
           } @else if (getControl('password').errors?.['maxlength']) {
-          <p>รหัสผ่านต้องมีความยาวไม่เกิน 60 ตัวอักษร</p>
+          <app-com-error-message
+            text="รหัสผ่านต้องมีความยาวไม่เกิน 60 ตัวอักษร"
+            marginTop="6px"
+          ></app-com-error-message>
           }@else if (getControl('password').errors?.['required']) {
-          <p>โปรดระบุรหัสผ่าน</p>
+          <app-com-error-message
+            text="โปรดระบุรหัสผ่าน"
+            marginTop="6px"
+          ></app-com-error-message>
           } }
         </div>
       </div>
     </div>
+    @if (apiError()) {
+    <app-com-error-message
+      text="Username หรือ Password ไม่ถูกต้อง"
+      marginTop="6px"
+    ></app-com-error-message>
+    }
     <button class="button mgt-24">เข้าสู่ระบบ</button>
   </form>
 </div>

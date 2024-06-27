@@ -6,7 +6,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, throwError } from 'rxjs';
+import { ErrorMessageComponent } from '../components/error-message/error-message.component';
 import { InputTextComponent } from '../components/input-text/input-text.component';
 import { ThemeService } from '../services/theme.service';
 import { UserService } from '../services/user.service';
@@ -14,7 +15,7 @@ import { UserService } from '../services/user.service';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, InputTextComponent],
+  imports: [ReactiveFormsModule, InputTextComponent, ErrorMessageComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
@@ -27,6 +28,7 @@ export class LoginComponent {
 
   protected passwordType = signal<'password' | 'text'>('password');
   protected formTouched = signal(false);
+  protected apiError = signal(false);
 
   protected form = signal(
     new FormGroup({
@@ -43,8 +45,18 @@ export class LoginComponent {
     this.themeService.changeTheme('gold');
   }
 
+  onFieldValueChanged() {
+    if (this.apiError) {
+      this.apiError.set(false);
+    }
+  }
+
   getControl(name: string): FormControl {
     return this.form().get(name) as FormControl;
+  }
+
+  onKeyUp() {
+    this.apiError.set(false);
   }
 
   onSubmit() {
@@ -60,10 +72,18 @@ export class LoginComponent {
           this.getControl('username').value,
           this.getControl('password').value
         )
-        .subscribe((result) => {
-          if (result.success) {
-            this.router.navigate(['/']);
-          }
+        .subscribe({
+          next: (result) => {
+            if (result.success) {
+              this.apiError.set(false);
+              this.router.navigate(['/']);
+            }
+          },
+          error: (err) => {
+            console.log('===err', err);
+            this.apiError.set(true);
+            return throwError(() => err);
+          },
         })
     );
   }
