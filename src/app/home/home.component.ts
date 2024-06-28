@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { PlanService } from '../services/plan.service';
 import { ThemeService } from '../services/theme.service';
+import { UserService } from '../services/user.service';
 import { PlanCard } from '../shared/models/plan-card';
 import { PreviewPlan } from '../shared/models/preview-plan';
 
@@ -34,6 +35,7 @@ import { PreviewPlan } from '../shared/models/preview-plan';
 export class HomeComponent implements OnInit {
   protected themeService: ThemeService = inject(ThemeService);
   private readonly planService: PlanService = inject(PlanService);
+  protected readonly userService: UserService = inject(UserService);
 
   protected plans = signal<PlanCard[]>([]);
 

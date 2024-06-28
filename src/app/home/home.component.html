@@ -56,7 +56,35 @@
             </div>
           </div>
           <div class="card__right">
-            <!-- Add or Subtract -->
+            <!-- Add or Remove -->
+            @if(plan.open) {
+            <svg
+              width="40"
+              height="40"
+              viewBox="0 0 40 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <mask
+                id="mask0_304_652"
+                style="mask-type: alpha"
+                maskUnits="userSpaceOnUse"
+                x="0"
+                y="0"
+                width="40"
+                height="40"
+              >
+                <rect width="40" height="40" fill="#D9D9D9" />
+              </mask>
+              <g mask="url(#mask0_304_652)">
+                <path
+                  d="M9.72237 21.3888C9.32887 21.3888 8.99901 21.2553 8.73279 20.9881C8.46659 20.721 8.3335 20.39 8.3335 19.9951C8.3335 19.6002 8.46659 19.2708 8.73279 19.0069C8.99901 18.743 9.32887 18.6111 9.72237 18.6111H30.278C30.6715 18.6111 31.0013 18.7447 31.2675 19.0118C31.5337 19.2789 31.6668 19.6099 31.6668 20.0048C31.6668 20.3997 31.5337 20.7291 31.2675 20.993C31.0013 21.2569 30.6715 21.3888 30.278 21.3888H9.72237Z"
+                  fill="#3A66D6"
+                />
+              </g>
+            </svg>
+
+            } @else {
             <svg
               width="40"
               height="41"
@@ -83,7 +111,9 @@
                 />
               </g>
             </svg>
+            }
             <!-- Next -->
+            @if(userService.currentUser().id === plan.data.userId) {
             <svg
               width="40"
               height="41"
@@ -110,6 +140,7 @@
                 />
               </g>
             </svg>
+            }
           </div>
         </div>
         @if(plan.open){
