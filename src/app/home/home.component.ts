@@ -66,7 +66,9 @@ export class HomeComponent implements OnInit {
   }
 
   goToPlanDetailsPage(e: MouseEvent, index: number) {
-    e.stopImmediatePropagation();
-    this.router.navigate([`plan/${this.plans()[index].data.name}`]);
+    if (this.userService.currentUser().id === this.plans()[index].data.userId) {
+      e.stopImmediatePropagation();
+      this.router.navigate([`plan/${this.plans()[index].data.name}`]);
+    }
   }
 }
