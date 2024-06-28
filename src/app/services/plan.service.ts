@@ -1,7 +1,8 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { catchError, throwError } from 'rxjs';
+import { catchError, of, throwError } from 'rxjs';
 import { environment } from '../../environments/environment.development';
+import { CommonSuccessResponse } from '../shared/models/common-success-response';
 import { PreviewPlan } from '../shared/models/preview-plan';
 
 @Injectable({
@@ -16,6 +17,18 @@ export class PlanService {
   getAllPreviewPlan() {
     return this.http
       .get<PreviewPlan[]>(`${this.baseApiUrl}/plan/preview/all`)
+      .pipe(catchError(this.handleError));
+  }
+
+  canAccessPlanDetails(planName: string) {
+    if (!planName) {
+      const res = new CommonSuccessResponse();
+      res.success = false;
+      res.message = 'empty planName';
+      return of(res);
+    }
+    return this.http
+      .get<CommonSuccessResponse>(`${this.baseApiUrl}/plan/access/${planName}`)
       .pipe(catchError(this.handleError));
   }
 

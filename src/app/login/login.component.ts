@@ -58,10 +58,8 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    console.log('==[onSubmit] this.form()', this.form());
     this.formTouched.set(true);
     if (!this.form().valid) {
-      console.log('==form is not valid');
       return;
     }
 
@@ -78,7 +76,6 @@ export class LoginComponent {
           }
         },
         error: (err) => {
-          console.log('===err', err);
           this.apiError.set(true);
           return throwError(() => err);
         },
