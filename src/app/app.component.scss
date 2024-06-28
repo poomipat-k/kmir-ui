@@ -3,3 +3,24 @@ $footer-height: 203px;
 .minContentHight {
   min-height: calc(100vh - $footer-height);
 }
+
+.background {
+  &--gold {
+    background-image: url("../../public/assets/bg_gold.svg"),
+      linear-gradient(
+        to bottom,
+        #fef8e3 calc(100vw * 742 / 1440 - 10px),
+        #fbe396 calc(100vw * 742 / 1440 - 10px)
+      );
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+  }
+
+  &--silver {
+    // calc(100vw * 826 / 1440 - 50px)
+    background-image: url("../../public/assets/bg_silver.svg"),
+      linear-gradient(to bottom, #e7eafa, #f7f8ff);
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+  }
+}

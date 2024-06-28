@@ -1,0 +1,15 @@
+@import "../../../styles.scss";
+
+.error {
+  display: flex;
+  align-items: center;
+  font-family: $custom-font;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #ff3300;
+
+  &__text {
+    margin-left: 4px;
+  }
+}

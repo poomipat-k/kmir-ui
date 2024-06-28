@@ -1,0 +1,65 @@
+@import "../../styles.scss";
+
+.login {
+  width: 272px;
+  margin: auto;
+
+  &__header {
+    text-align: left;
+    font-family: $custom-font;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 44px;
+    color: #000;
+  }
+
+  &__label {
+    font-family: $custom-font;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 23px;
+    color: #000;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+.button {
+  padding: 8px 0;
+  border-radius: 42px;
+
+  font-family: $custom-font;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 26px;
+  text-align: center;
+  color: #fff;
+  width: 100%;
+
+  background-color: #2d3494;
+
+  border: none;
+  cursor: pointer;
+
+  transition: all 300ms ease-out;
+
+  &:hover {
+    background-color: #454dc0;
+  }
+}
+
+.mgt {
+  &-10 {
+    margin-top: 10px;
+  }
+  &-24 {
+    margin-top: 24px;
+  }
+  &-87 {
+    margin-top: 87px;
+  }
+}

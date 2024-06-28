@@ -1,0 +1,52 @@
+@if (isPassword()) {
+<div
+  class="container"
+  [style]="{
+    width: width,
+    margin: margin,
+    height: height,
+    fontSize: fontSize
+  }"
+>
+  <input
+    [type]="type()"
+    [id]="id()"
+    autocomplete="on"
+    [placeholder]="placeholder()"
+    [formControl]="control()"
+    (keydown)="onKeyUp($event)"
+    [ngClass]="{ input: true, 'input--error': error() }"
+  />
+  @if (type() === "password") {
+  <img
+    src="/assets/visibility.svg"
+    alt="visibility off"
+    class="passwordIcon"
+    (click)="togglePasswordVisibility()"
+  />
+  } @else {
+  <img
+    src="/assets/visibility_off.svg"
+    alt="visibility on"
+    class="passwordIcon"
+    (click)="togglePasswordVisibility()"
+  />
+  }
+</div>
+} @else {
+<input
+  [type]="type()"
+  [id]="id()"
+  autocomplete="on"
+  [placeholder]="placeholder()"
+  [formControl]="control()"
+  [style]="{
+    width: width(),
+    margin: margin(),
+    height: height(),
+    fontSize: fontSize()
+  }"
+  [ngClass]="{ input: true, 'input--error': error() }"
+  (keydown)="onKeyUp($event)"
+/>
+}
