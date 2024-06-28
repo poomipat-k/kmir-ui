@@ -15,7 +15,7 @@ export class PlanService {
 
   getAllPreviewPlan() {
     return this.http
-      .get<PreviewPlan>(`${this.baseApiUrl}/plan/preview/all`)
+      .get<PreviewPlan[]>(`${this.baseApiUrl}/plan/preview/all`)
       .pipe(catchError(this.handleError));
   }
 
