@@ -44,12 +44,15 @@
     <div class="dashboard mgt-44">
       @for (plan of plans(); track $index) {
       <div class="dashboard__item">
-        <div class="card">
+        <div
+          [ngClass]="{ card: true, 'card--open': plan.open }"
+          (click)="onCardClick($index)"
+        >
           <div class="card__left">
-            <h2 class="card__header">{{ plan.name }}</h2>
+            <h2 class="card__header">{{ plan.data.name }}</h2>
             <div>
-              <p class="card__topic">{{ plan.topic }}</p>
-              <p class="card__topic">{{ plan.topicEn }}</p>
+              <p class="card__topic">{{ plan.data.topic }}</p>
+              <p class="card__topic">{{ plan.data.topicEn }}</p>
             </div>
           </div>
           <div class="card__right">
@@ -109,7 +112,8 @@
             </svg>
           </div>
         </div>
-        <div class="cardExpand">
+        @if(plan.open){
+        <div class="cardExpand" @slide>
           <div class="cardExpand__headerContainer">
             <img
               src="/assets/flag_circle.svg"
@@ -118,8 +122,9 @@
             />
             <h3 class="cardExpand__header">IR Work GOAL</h3>
           </div>
-          <p class="cardExpand__text mgt-12">{{ plan.goal }}</p>
+          <p class="cardExpand__text mgt-12">{{ plan.data.goal }}</p>
         </div>
+        }
       </div>
       }
     </div>
