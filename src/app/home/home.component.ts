@@ -17,14 +17,14 @@ import { PreviewPlan } from '../shared/models/preview-plan';
       transition(':enter', [
         style({ opacity: 0, maxHeight: 0, padding: '0 32px' }),
         animate(
-          '300ms linear',
-          style({ opacity: 1, maxHeight: '150px', padding: '32px' })
+          '300ms ease-out',
+          style({ opacity: 1, maxHeight: '300px', padding: '32px' })
         ),
       ]),
       transition(':leave', [
-        style({ opacity: 1, maxHeight: '150px', padding: '32px' }),
+        style({ opacity: 1, maxHeight: '300px', padding: '32px' }),
         animate(
-          '300ms linear',
+          '300ms ease-out',
           style({ opacity: 0, maxHeight: 0, padding: '0 32px' })
         ),
       ]),
