@@ -48,7 +48,7 @@
           [ngClass]="{ card: true, 'card--open': plan.open }"
           (click)="onCardClick($index)"
         >
-          <div class="card__left">
+          <div class="card__left" (click)="goToPlanDetailsPage($event, $index)">
             <h2 class="card__header">{{ plan.data.name }}</h2>
             <div>
               <p class="card__topic">{{ plan.data.topic }}</p>
@@ -120,6 +120,7 @@
               viewBox="0 0 40 41"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
+              (click)="goToPlanDetailsPage($event, $index)"
             >
               <mask
                 id="mask0_565_637"

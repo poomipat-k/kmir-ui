@@ -1,6 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { PlanService } from '../services/plan.service';
 import { ThemeService } from '../services/theme.service';
 import { UserService } from '../services/user.service';
@@ -36,6 +37,7 @@ export class HomeComponent implements OnInit {
   protected themeService: ThemeService = inject(ThemeService);
   private readonly planService: PlanService = inject(PlanService);
   protected readonly userService: UserService = inject(UserService);
+  private readonly router: Router = inject(Router);
 
   protected plans = signal<PlanCard[]>([]);
 
@@ -61,5 +63,10 @@ export class HomeComponent implements OnInit {
       oldValue[index].open = !oldValue[index].open;
       return oldValue;
     });
+  }
+
+  goToPlanDetailsPage(e: MouseEvent, index: number) {
+    e.stopImmediatePropagation();
+    this.router.navigate([`plan/${this.plans()[index].data.name}`]);
   }
 }

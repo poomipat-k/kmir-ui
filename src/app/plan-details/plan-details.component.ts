@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, input } from '@angular/core';
 import { ThemeService } from '../services/theme.service';
 
 @Component({
@@ -9,6 +9,8 @@ import { ThemeService } from '../services/theme.service';
   styleUrl: './plan-details.component.scss',
 })
 export class PlanDetailsComponent implements OnInit {
+  protected planName = input<string>();
+
   protected readonly themeService: ThemeService = inject(ThemeService);
 
   ngOnInit(): void {

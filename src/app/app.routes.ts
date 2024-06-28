@@ -17,7 +17,7 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
-    path: 'plan',
+    path: 'plan/:planName',
     component: PlanDetailsComponent,
     title: 'รายละเอียดแผน',
     canActivate: [authGuard],
