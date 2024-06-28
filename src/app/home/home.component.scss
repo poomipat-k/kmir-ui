@@ -47,6 +47,12 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
 }
 
 .card {
@@ -69,7 +75,7 @@
     color: #3a66d6;
   }
 
-  &:hover path {
+  &:hover .iconPath {
     fill: #3a66d6;
   }
 
@@ -103,7 +109,43 @@
   }
 }
 
+.cardExpand {
+  padding: 32px;
+  border: 1px solid #3a66d6;
+  background-color: #fef8e3;
+  border-radius: 24px;
+
+  &__headerContainer {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__icon {
+    height: 20px;
+    width: auto;
+  }
+
+  &__header {
+    font-family: $custom-font;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 24px;
+    color: #3a66d6;
+  }
+
+  &__text {
+    font-family: $custom-font;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+    color: #1c1b1f;
+  }
+}
+
 .mgt {
+  &-12 {
+    margin-top: 12px;
+  }
   &-15 {
     margin-top: 15px;
   }
