@@ -70,12 +70,16 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  goToPlanDetailsPage(e: MouseEvent, index: number) {
-    if (
+  canAccessPlanDetails(index: number) {
+    return (
       this.userService.currentUser().id === this.plans()[index].data.userId ||
       this.getCurrentUser().userRole === 'admin' ||
       this.getCurrentUser().userRole === 'viewer'
-    ) {
+    );
+  }
+
+  goToPlanDetailsPage(e: MouseEvent, index: number) {
+    if (this.canAccessPlanDetails(index)) {
       e.stopImmediatePropagation();
       this.router.navigate([`plan/${this.plans()[index].data.name}`]);
     }

@@ -1,1 +1,24 @@
-<p>planName: {{ planName() }}</p>
+<div class="container mgt-54">
+  <!-- <p>planName: {{ planName() }}</p> -->
+  <nav class="sideNav">
+    <div class="sideNav__back" (click)="onBackToHomePage()">
+      <img
+        src="/assets/arrow_back.svg"
+        alt="arrow back"
+        class="sideNav__back__icon"
+      />
+      <p class="sideNav__back__text">Back</p>
+    </div>
+    <div class="sideNav__item sideNav__item--active">
+      Readiness and Willingness Assessment
+    </div>
+    <div class="sideNav__item">IR work goal</div>
+    <div class="sideNav__item">Note</div>
+    <div class="sideNav__item">Contact Person</div>
+  </nav>
+  <section class="content mgt-18">
+    <h1 class="header">{{ planName() }}</h1>
+    <h2 class="topic"></h2>
+    <h2 class="topic"></h2>
+  </section>
+</div>

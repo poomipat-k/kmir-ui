@@ -113,9 +113,7 @@
             </svg>
             }
             <!-- Next -->
-            @if(getCurrentUser().id === plan.data.userId ||
-            getCurrentUser().userRole === 'admin' || getCurrentUser().userRole
-            === 'viewer') {
+            @if(canAccessPlanDetails($index)) {
             <svg
               width="40"
               height="41"

@@ -1,0 +1,79 @@
+@import "../../styles.scss";
+
+.container {
+  padding-top: 14;
+  padding-left: 80px;
+  padding-right: 173px;
+  display: flex;
+}
+
+.content {
+  border: 1px solid red;
+  width: 100%;
+}
+
+.header {
+  font-family: $custom-font;
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 106px;
+  color: #1c1b1f;
+}
+
+.topic {
+  font-family: $custom-font;
+  font-weight: 500;
+  font-size: 44px;
+  line-height: 56px;
+  color: #1c1b1f;
+}
+
+.sideNav {
+  display: flex;
+  flex-direction: column;
+
+  &__back {
+    display: flex;
+    gap: 8px;
+    padding: 10px 0;
+    align-items: center;
+    cursor: pointer;
+
+    &__text {
+      font-family: $custom-font;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 23px;
+    }
+
+    &__icon {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &__item {
+    padding: 10px 0;
+    width: 120px;
+    cursor: pointer;
+    font-family: $custom-font;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 23px;
+    color: #1c1b1f;
+
+    &--active {
+      font-weight: 600;
+      color: #e76f51;
+    }
+  }
+}
+
+.mgt {
+  &-18 {
+    margin-top: 18px;
+  }
+  &-54 {
+    margin-top: 54px;
+  }
+}
