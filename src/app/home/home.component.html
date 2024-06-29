@@ -113,7 +113,9 @@
             </svg>
             }
             <!-- Next -->
-            @if(userService.currentUser().id === plan.data.userId) {
+            @if(getCurrentUser().id === plan.data.userId ||
+            getCurrentUser().userRole === 'admin' || getCurrentUser().userRole
+            === 'viewer') {
             <svg
               width="40"
               height="41"

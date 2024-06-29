@@ -7,6 +7,7 @@ import { ThemeService } from '../services/theme.service';
 import { UserService } from '../services/user.service';
 import { PlanCard } from '../shared/models/plan-card';
 import { PreviewPlan } from '../shared/models/preview-plan';
+import { User } from '../shared/models/user';
 
 @Component({
   selector: 'app-home',
@@ -58,6 +59,10 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  getCurrentUser(): User {
+    return this.userService.currentUser();
+  }
+
   onCardClick(index: number) {
     this.plans.update((oldValue) => {
       oldValue[index].open = !oldValue[index].open;
@@ -66,7 +71,11 @@ export class HomeComponent implements OnInit {
   }
 
   goToPlanDetailsPage(e: MouseEvent, index: number) {
-    if (this.userService.currentUser().id === this.plans()[index].data.userId) {
+    if (
+      this.userService.currentUser().id === this.plans()[index].data.userId ||
+      this.getCurrentUser().userRole === 'admin' ||
+      this.getCurrentUser().userRole === 'viewer'
+    ) {
       e.stopImmediatePropagation();
       this.router.navigate([`plan/${this.plans()[index].data.name}`]);
     }
