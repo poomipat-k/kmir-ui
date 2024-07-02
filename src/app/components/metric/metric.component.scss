@@ -1,13 +1,99 @@
 @import "../../../styles.scss";
 
-.container {
+$grid-item-small: 40px;
+$grid-item-large: 54px;
+
+.box {
+  border-left: 1px solid #000;
+  border-bottom: 1px solid #000;
+
+  width: calc(10 * $grid-item-small + 12px);
+  height: calc(10 * $grid-item-small + 13px);
+  position: relative;
+
+  &__label {
+    font-family: $custom-font;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 25px;
+    color: #000;
+    position: absolute;
+
+    &--y {
+      top: -24px;
+      left: -22px;
+    }
+    &--x {
+      bottom: -28px;
+      left: 99.5%;
+    }
+    &--xLow {
+      bottom: -28px;
+      left: 11.5%;
+    }
+    &--xMed {
+      bottom: -28px;
+      left: 37%;
+    }
+    &--xHigh {
+      bottom: -28px;
+      left: 74%;
+    }
+
+    &--10 {
+      bottom: -28px;
+      left: 94.5%;
+      &-y {
+        transform: rotate(90deg);
+      }
+    }
+
+    &--0 {
+      bottom: -28px;
+      left: -17px;
+    }
+
+    &-rotate {
+      transform: rotate(-90deg) translate(-207px, -235px);
+    }
+  }
+}
+
+.grid {
   display: grid;
-  grid-template-columns: repeat(10, 40px);
-  grid-template-rows: repeat(10, 40px);
-  width: 100%;
+  grid-template-columns: repeat(10, $grid-item-small);
+  grid-template-rows: repeat(10, $grid-item-small);
+  transform: translateY(12.2px);
 }
 
 .item {
-  background-color: #fef8e3;
   border: 1px solid #fff;
+
+  &--a {
+    background-color: #fef8e3;
+  }
+  &--b {
+    background-color: #fcedbf;
+  }
+  &--c {
+    background-color: #fbe396;
+  }
+  &--d {
+    background-color: #fcedbf;
+  }
+  &--e {
+    background-color: #fbe396;
+  }
+  &--f {
+    background-color: #fad86f;
+  }
+  &--g {
+    background-color: #fbe396;
+  }
+  &--h {
+    background-color: #fad86f;
+  }
+  &--i {
+    background-color: #facf54;
+  }
 }
