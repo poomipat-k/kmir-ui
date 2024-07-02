@@ -14,4 +14,10 @@ import { ThemeService } from './services/theme.service';
 })
 export class AppComponent {
   protected themeService: ThemeService = inject(ThemeService);
+
+  constructor() {
+    this.themeService.changeTheme(
+      localStorage.getItem('theme') as 'gold' | 'silver'
+    );
+  }
 }

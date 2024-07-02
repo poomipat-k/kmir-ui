@@ -21,7 +21,7 @@ export const routes: Routes = [
     path: 'plan/:planName',
     component: PlanDetailsComponent,
     title: 'รายละเอียดแผน',
-    canActivate: [planDetailsGuard],
+    canActivate: [authGuard, planDetailsGuard],
   },
   {
     path: '**',

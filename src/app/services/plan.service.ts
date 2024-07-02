@@ -3,6 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { catchError, of, throwError } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { CommonSuccessResponse } from '../shared/models/common-success-response';
+import { PlanDetails } from '../shared/models/plan-details';
 import { PreviewPlan } from '../shared/models/preview-plan';
 
 @Injectable({
@@ -29,6 +30,12 @@ export class PlanService {
     }
     return this.http
       .get<CommonSuccessResponse>(`${this.baseApiUrl}/plan/access/${planName}`)
+      .pipe(catchError(this.handleError));
+  }
+
+  getPlanDetails(planName: string) {
+    return this.http
+      .get<PlanDetails>(`${this.baseApiUrl}/plan/details/${planName}`)
       .pipe(catchError(this.handleError));
   }
 
