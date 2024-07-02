@@ -1,5 +1,6 @@
 import { Component, OnInit, inject, input, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { MetricComponent } from '../components/metric/metric.component';
 import { PlanService } from '../services/plan.service';
 import { ThemeService } from '../services/theme.service';
 import { PlanDetails } from '../shared/models/plan-details';
@@ -7,7 +8,7 @@ import { PlanDetails } from '../shared/models/plan-details';
 @Component({
   selector: 'app-plan-details',
   standalone: true,
-  imports: [],
+  imports: [MetricComponent],
   templateUrl: './plan-details.component.html',
   styleUrl: './plan-details.component.scss',
 })

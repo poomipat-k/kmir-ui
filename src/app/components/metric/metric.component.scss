@@ -1,0 +1,13 @@
+@import "../../../styles.scss";
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(10, 40px);
+  grid-template-rows: repeat(10, 40px);
+  width: 100%;
+}
+
+.item {
+  background-color: #fef8e3;
+  border: 1px solid #fff;
+}
