@@ -16,7 +16,19 @@
   </div>
   <div class="grid">
     @for (row of gridItems(); track $index; let idx = $index) { @for (item of
-    row; track $index; let idy = $index) {
+    row; track $index; let idy = $index) { @if (item.name === 'active') {
+    <div
+      [ngClass]="{
+        item: true,
+        'item--active': item.name === 'active'
+      }"
+      appTooltip
+      [tooltipContent]="
+        '&#x2022; Test Tooltip\n&#x2022; Line 2\n&#x2022; Line 3Test Tooltip\n&#x2022; Line 2\n&#x2022; Line 3'
+      "
+    ></div>
+    <!-- '&#x2022; Test Tooltip\n&#x2022; Line 2\n&#x2022; Line 3Test Tooltip\n&#x2022; Line 2\n&#x2022; Line 3' -->
+    } @else {
     <div
       [ngClass]="{
         item: true,
@@ -29,9 +41,8 @@
         'item--g': item.name === 'g',
         'item--h': item.name === 'h',
         'item--i': item.name === 'i',
-        'item--active': item.name === 'active'
       }"
     ></div>
-    } }
+    } } }
   </div>
 </div>

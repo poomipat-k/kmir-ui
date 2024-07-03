@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
+import { TooltipDirective } from '../../shared/directives/tooltip.directive';
 import { MetricCell } from '../../shared/models/metric-cell';
 import { MetricInput } from '../../shared/models/metric-input';
 
 @Component({
   selector: 'app-com-metric',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TooltipDirective],
   templateUrl: './metric.component.html',
   styleUrl: './metric.component.scss',
 })
