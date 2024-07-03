@@ -67,6 +67,14 @@ export class MetricComponent {
     return cellGrid;
   }
 
+  getTooltipContent(cell: MetricCell) {
+    let res: string[] = [];
+    cell.data?.forEach((yearData) => {
+      res.push(`\u2022 ${yearData.name} (${yearData.year + 543})\n`);
+    });
+    return res.join('');
+  }
+
   getItemArea(item: string) {
     return item;
   }

@@ -15,32 +15,29 @@
     <p class="box__label box__label--10 box__label--10-y">10</p>
   </div>
   <div class="grid">
-    @for (row of gridItems(); track $index; let idx = $index) { @for (item of
-    row; track $index; let idy = $index) { @if (item.name === 'active') {
+    @for (row of gridItems(); track $index; let idx = $index) { @for (cell of
+    row; track $index; let idy = $index) { @if (cell.name === 'active') {
     <div
       [ngClass]="{
-        item: true,
-        'item--active': item.name === 'active'
+        cell: true,
+        'item--active': cell.name === 'active'
       }"
       appTooltip
-      [tooltipContent]="
-        '&#x2022; Test Tooltip\n&#x2022; Line 2\n&#x2022; Line 3Test Tooltip\n&#x2022; Line 2\n&#x2022; Line 3'
-      "
+      [tooltipContent]="getTooltipContent(cell)"
     ></div>
-    <!-- '&#x2022; Test Tooltip\n&#x2022; Line 2\n&#x2022; Line 3Test Tooltip\n&#x2022; Line 2\n&#x2022; Line 3' -->
     } @else {
     <div
       [ngClass]="{
         item: true,
-        'item--a': item.name === 'a',
-        'item--b': item.name === 'b',
-        'item--c': item.name === 'c',
-        'item--d': item.name === 'd',
-        'item--e': item.name === 'e',
-        'item--f': item.name === 'f',
-        'item--g': item.name === 'g',
-        'item--h': item.name === 'h',
-        'item--i': item.name === 'i',
+        'item--a': cell.name === 'a',
+        'item--b': cell.name === 'b',
+        'item--c': cell.name === 'c',
+        'item--d': cell.name === 'd',
+        'item--e': cell.name === 'e',
+        'item--f': cell.name === 'f',
+        'item--g': cell.name === 'g',
+        'item--h': cell.name === 'h',
+        'item--i': cell.name === 'i',
       }"
     ></div>
     } } }
