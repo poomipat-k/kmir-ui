@@ -33,6 +33,30 @@
   color: #1c1b1f;
 }
 
+.metricAndWillingness {
+  display: flex;
+
+  &__header {
+    &Container {
+      position: relative;
+    }
+
+    font-family: $custom-font;
+    font-weight: 600;
+    font-size: 44px;
+    line-height: 59px;
+    color: #1c1b1f;
+
+    &__icon {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      right: -10px;
+      bottom: 25%;
+    }
+  }
+}
+
 .editButton {
   height: 46px;
   display: flex;
@@ -100,6 +124,9 @@
 }
 
 .mgt {
+  &-13 {
+    margin-top: 13px;
+  }
   &-18 {
     margin-top: 18px;
   }
@@ -112,4 +139,8 @@
   &-80 {
     margin-top: 80px;
   }
+}
+
+.debug {
+  border: 1px solid red;
 }
