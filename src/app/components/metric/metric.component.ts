@@ -14,26 +14,7 @@ import { MetricInput } from '../../shared/models/metric-input';
 export class MetricComponent {
   xLabel = input<string>('Willingness');
   yLabel = input<string>('Capacity');
-  data = input<MetricInput[]>([
-    // {
-    //   x: 5,
-    //   y: 7,
-    //   year: 2022,
-    //   name: 'Alcohol',
-    // },
-    // {
-    //   x: 5,
-    //   y: 7,
-    //   year: 2023,
-    //   name: 'Alcohol',
-    // },
-    // {
-    //   x: 10,
-    //   y: 9,
-    //   year: 2024,
-    //   name: 'Alcohol',
-    // },
-  ]);
+  data = input<MetricInput[]>([]);
 
   protected gridItems = computed(() => this.handleDataChanged());
   private readonly originalGridPos = [
@@ -52,7 +33,6 @@ export class MetricComponent {
   constructor() {}
 
   handleDataChanged() {
-    console.log('==data()', this.data());
     const metricInput = this.data();
     const rowCount = this.originalGridPos.length;
     const cellGrid: MetricCell[][] = this.originalGridPos.map((row) =>

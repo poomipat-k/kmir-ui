@@ -23,6 +23,7 @@ export class TooltipDirective {
     const text = this.renderer.createText(this.tooltipContent());
     this.renderer.appendChild(tooltip, text);
     this.renderer.addClass(tooltip, 'appTooltip');
+
     // 0 ms won't work
     setTimeout(() => {
       this.renderer.addClass(tooltip, 'appTooltip--visible');
