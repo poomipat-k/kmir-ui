@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
+import { MetricCell } from '../../shared/models/metric-cell';
 import { MetricInput } from '../../shared/models/metric-input';
 
 @Component({
@@ -34,32 +35,35 @@ export class MetricComponent {
   ]);
 
   protected gridItems = computed(() => this.handleDataChanged());
+  private readonly originalGridPos = [
+    ['g', 'g', 'g', 'h', 'h', 'h', 'i', 'i', 'i', 'i'],
+    ['g', 'g', 'g', 'h', 'h', 'h', 'i', 'i', 'i', 'i'],
+    ['g', 'g', 'g', 'h', 'h', 'h', 'i', 'i', 'i', 'i'],
+    ['g', 'g', 'g', 'h', 'h', 'h', 'i', 'i', 'i', 'i'],
+    ['d', 'd', 'd', 'e', 'e', 'e', 'f', 'f', 'f', 'f'],
+    ['d', 'd', 'd', 'e', 'e', 'e', 'f', 'f', 'f', 'f'],
+    ['d', 'd', 'd', 'e', 'e', 'e', 'f', 'f', 'f', 'f'],
+    ['a', 'a', 'a', 'b', 'b', 'b', 'c', 'c', 'c', 'c'],
+    ['a', 'a', 'a', 'b', 'b', 'b', 'c', 'c', 'c', 'c'],
+    ['a', 'a', 'a', 'b', 'b', 'b', 'c', 'c', 'c', 'c'],
+  ];
 
-  constructor() {
-    // this.handleDataChanged = this.handleDataChanged.bind(this);
-  }
+  constructor() {}
 
   handleDataChanged() {
     console.log('==data()', this.data());
-    const data = this.data();
-    const original = [
-      ['g', 'g', 'g', 'h', 'h', 'h', 'i', 'i', 'i', 'i'],
-      ['g', 'g', 'g', 'h', 'h', 'h', 'i', 'i', 'i', 'i'],
-      ['g', 'g', 'g', 'h', 'h', 'h', 'i', 'i', 'i', 'i'],
-      ['g', 'g', 'g', 'h', 'h', 'h', 'i', 'i', 'i', 'i'],
-      ['d', 'd', 'd', 'e', 'e', 'e', 'f', 'f', 'f', 'f'],
-      ['d', 'd', 'd', 'e', 'e', 'e', 'f', 'f', 'f', 'f'],
-      ['d', 'd', 'd', 'e', 'e', 'e', 'f', 'f', 'f', 'f'],
-      ['a', 'a', 'a', 'b', 'b', 'b', 'c', 'c', 'c', 'c'],
-      ['a', 'a', 'a', 'b', 'b', 'b', 'c', 'c', 'c', 'c'],
-      ['a', 'a', 'a', 'b', 'b', 'b', 'c', 'c', 'c', 'c'],
-    ];
-    const rowCount = original.length;
-    data.forEach((item) => {
+    const metricInput = this.data();
+    const rowCount = this.originalGridPos.length;
+    const cellGrid: MetricCell[][] = this.originalGridPos.map((row) =>
+      row.map((s) => new MetricCell(s, []))
+    );
+
+    metricInput.forEach((item) => {
       const [row, col] = [rowCount - item.y, item.x - 1];
-      original[row][col] = 'active';
+      cellGrid[row][col].name = 'active';
+      cellGrid[row][col].data.push(item);
     });
-    return original;
+    return cellGrid;
   }
 
   getItemArea(item: string) {
