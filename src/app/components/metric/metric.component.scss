@@ -67,7 +67,8 @@ $grid-item-large: 54px;
 }
 
 .item {
-  border: 1px solid #fff;
+  border-top: 1px solid #fff;
+  border-right: 1px solid #fff;
 
   &--a {
     background-color: #fef8e3;
@@ -95,5 +96,10 @@ $grid-item-large: 54px;
   }
   &--i {
     background-color: #facf54;
+  }
+  &--active {
+    background-color: rgba(249, 179, 43, 0.88);
+    border: 1px dashed #d32f06;
+    transform: translate(-0.5px, 0.5px);
   }
 }

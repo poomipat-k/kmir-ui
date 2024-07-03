@@ -1,34 +1,36 @@
 <div class="box">
-  <div class="box__label box__label--y">{{ yLabel() }}</div>
-  <div class="box__label box__label--x">{{ xLabel() }}</div>
-  <div class="box__label box__label--0">0</div>
+  <p class="box__label box__label--y">{{ yLabel() }}</p>
+  <p class="box__label box__label--x">{{ xLabel() }}</p>
+  <p class="box__label box__label--0">0</p>
   <div>
-    <div class="box__label box__label--xLow">Low</div>
-    <div class="box__label box__label--xMed">Medium</div>
-    <div class="box__label box__label--xHigh">High</div>
-    <div class="box__label box__label--10">10</div>
+    <p class="box__label box__label--xLow">Low</p>
+    <p class="box__label box__label--xMed">Medium</p>
+    <p class="box__label box__label--xHigh">High</p>
+    <p class="box__label box__label--10">10</p>
   </div>
   <div class="box__label-rotate">
-    <div class="box__label box__label--xLow">Low</div>
-    <div class="box__label box__label--xMed">Medium</div>
-    <div class="box__label box__label--xHigh">High</div>
-    <div class="box__label box__label--10 box__label--10-y">10</div>
+    <p class="box__label box__label--xLow">Low</p>
+    <p class="box__label box__label--xMed">Medium</p>
+    <p class="box__label box__label--xHigh">High</p>
+    <p class="box__label box__label--10 box__label--10-y">10</p>
   </div>
   <div class="grid">
-    @for (row of gridItems(); track $index) { @for (item of row.split(' ');
-    track $index) {
+    @for (row of gridItems(); track $index; let idx = $index) { @for (item of
+    row; track $index; let idy = $index) {
     <div
-      [ngClass]="{ item: true, 
-    'item--a': item === 'a',
-    'item--b': item === 'b',
-    'item--c': item === 'c',
-    'item--d': item === 'd',
-    'item--e': item === 'e',
-    'item--f': item === 'f',
-    'item--g': item === 'g',
-    'item--h': item === 'h',
-    'item--i': item === 'i',
- }"
+      [ngClass]="{
+        item: true,
+        'item--a': item === 'a',
+        'item--b': item === 'b',
+        'item--c': item === 'c',
+        'item--d': item === 'd',
+        'item--e': item === 'e',
+        'item--f': item === 'f',
+        'item--g': item === 'g',
+        'item--h': item === 'h',
+        'item--i': item === 'i',
+        'item--active': item === 'active'
+      }"
     ></div>
     } }
   </div>

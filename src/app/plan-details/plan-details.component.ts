@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MetricComponent } from '../components/metric/metric.component';
 import { PlanService } from '../services/plan.service';
 import { ThemeService } from '../services/theme.service';
+import { MetricInput } from '../shared/models/metric-input';
 import { PlanDetails } from '../shared/models/plan-details';
 
 @Component({
@@ -16,6 +17,27 @@ export class PlanDetailsComponent implements OnInit {
   protected planName = input<string>();
 
   protected planDetails = signal<PlanDetails>(new PlanDetails());
+
+  protected metricData = signal<MetricInput[]>([
+    {
+      x: 5,
+      y: 7,
+      year: 2022,
+      name: 'Alcohol',
+    },
+    {
+      x: 5,
+      y: 7,
+      year: 2023,
+      name: 'Alcohol',
+    },
+    {
+      x: 10,
+      y: 9,
+      year: 2024,
+      name: 'Alcohol',
+    },
+  ]);
 
   protected readonly themeService: ThemeService = inject(ThemeService);
   private readonly planService: PlanService = inject(PlanService);

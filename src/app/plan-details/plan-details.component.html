@@ -1,5 +1,4 @@
 <div class="container mgt-54">
-  <!-- <p>planName: {{ planName() }}</p> -->
   <nav class="sideNav">
     <div class="sideNav__back" (click)="onBackToHomePage()">
       <img
@@ -54,7 +53,7 @@
       </button>
     </div>
     <div class="mgt-80">
-      <app-com-metric></app-com-metric>
+      <app-com-metric [data]="metricData()"></app-com-metric>
     </div>
   </section>
 </div>
