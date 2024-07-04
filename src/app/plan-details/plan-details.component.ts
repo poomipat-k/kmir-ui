@@ -36,8 +36,9 @@ export class PlanDetailsComponent implements OnInit {
   protected planName = input<string>();
 
   protected planDetails = signal<PlanDetails>(new PlanDetails());
-  protected scoreDetails = computed(() => this.computeScore());
+  protected intersectionRootMargin = signal('-120px 0px -80% 0px');
 
+  protected scoreDetails = computed(() => this.computeScore());
   protected metricData = computed(() => this.computeScore());
   protected scoreTableData = computed(() => this.computedScoreTable());
 

@@ -52,7 +52,7 @@
         </svg>
       </button>
     </div>
-    <div class="metricAndWillingness mgt-80">
+    <div id="readiness" class="metricAndWillingness mgt-80">
       <app-com-metric [data]="metricData()"></app-com-metric>
       <div class="mgt-13">
         <div class="metricAndWillingness__headerContainer">
@@ -99,7 +99,7 @@
       <div class="mgt-39">
         <div class="goal__headerSection">
           <div class="goal__headerBox">
-            <h3 class="goal__headerText">IR work goal</h3>
+            <h3 id="irGoal" class="goal__headerText">IR work goal</h3>
             <img src="/assets/flag_circle_unfill.svg" alt="" />
           </div>
           <div class="mgt-15">
@@ -123,7 +123,9 @@
     <div class="mgt-14">
       <div class="commonTextSection__headerSection">
         <div class="commonTextSection__headerBox">
-          <h3 class="commonTextSection__headerText">Proposed activities</h3>
+          <h3 id="proposedActivity" class="commonTextSection__headerText">
+            Proposed activities
+          </h3>
           <img src="/assets/event_note.svg" alt="note icon" />
         </div>
         <div class="mgt-15">
@@ -141,7 +143,7 @@
     <div class="mgt-45">
       <div class="commonTextSection__headerSection">
         <div class="commonTextSection__headerBox">
-          <h3 class="commonTextSection__headerText">Notes</h3>
+          <h3 id="planNote" class="commonTextSection__headerText">Notes</h3>
           <img src="/assets/speaker_notes.svg" alt="speaker notes" />
         </div>
         <div class="mgt-15">
@@ -158,7 +160,9 @@
     <div class="mgt-40">
       <div class="commonTextSection__headerSection">
         <div class="commonTextSection__headerBox">
-          <h3 class="commonTextSection__headerText">Contact Person</h3>
+          <h3 id="contactPerson" class="commonTextSection__headerText">
+            Contact Person
+          </h3>
           <img src="/assets/account_circle.svg" alt="account icon" />
         </div>
         <div class="mgt-15">
@@ -174,3 +178,6 @@
     <app-com-back-to-top></app-com-back-to-top>
   </section>
 </div>
+
+<!-- For intersection API debugging -->
+<div class="intersectionBox"></div>

@@ -1,11 +1,55 @@
 @import "../../styles.scss";
 
 .container {
-  padding-top: 14;
+  padding-top: 14px;
   padding-left: 80px;
   padding-right: 173px;
   display: flex;
   padding-bottom: 135px;
+}
+
+.sideNav {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  position: sticky;
+  top: 60px;
+
+  &__back {
+    display: flex;
+    gap: 8px;
+    padding: 10px 0;
+    align-items: center;
+    cursor: pointer;
+
+    &__text {
+      font-family: $custom-font;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 23px;
+    }
+
+    &__icon {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &__item {
+    padding: 10px 0;
+    width: 120px;
+    cursor: pointer;
+    font-family: $custom-font;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 23px;
+    color: #1c1b1f;
+
+    &--active {
+      font-weight: 600;
+      color: #e76f51;
+    }
+  }
 }
 
 .content {
@@ -37,6 +81,7 @@
 .metricAndWillingness {
   display: flex;
   gap: 7px;
+  padding-left: 22px;
 
   &__header {
     &Container {
@@ -197,47 +242,6 @@
   }
 }
 
-.sideNav {
-  display: flex;
-  flex-direction: column;
-
-  &__back {
-    display: flex;
-    gap: 8px;
-    padding: 10px 0;
-    align-items: center;
-    cursor: pointer;
-
-    &__text {
-      font-family: $custom-font;
-      font-weight: 600;
-      font-size: 14px;
-      line-height: 23px;
-    }
-
-    &__icon {
-      width: 24px;
-      height: 24px;
-    }
-  }
-
-  &__item {
-    padding: 10px 0;
-    width: 120px;
-    cursor: pointer;
-    font-family: $custom-font;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 23px;
-    color: #1c1b1f;
-
-    &--active {
-      font-weight: 600;
-      color: #e76f51;
-    }
-  }
-}
-
 .hr {
   &--dashed {
     border: 1px dashed rgba(0, 0, 0, 0.36);
@@ -298,6 +302,12 @@
   }
 }
 
-.debug {
-  border: 1px solid red;
+// For intersection API debugging purpose
+.intersectionBox {
+  position: fixed;
+  top: 12rem;
+  left: 0;
+  width: 100vw;
+  height: calc(20% - 120px);
+  border: 1px solid blue;
 }
