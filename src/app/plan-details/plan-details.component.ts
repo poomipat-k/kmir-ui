@@ -16,6 +16,7 @@ import { UserService } from '../services/user.service';
 import { TooltipDirective } from '../shared/directives/tooltip.directive';
 import { MetricInput } from '../shared/models/metric-input';
 import { PlanDetails } from '../shared/models/plan-details';
+import { ScoreTableRow } from '../shared/models/score-table-row';
 
 @Component({
   selector: 'app-plan-details',
@@ -36,6 +37,7 @@ export class PlanDetailsComponent implements OnInit {
   protected scoreDetails = computed(() => this.computeScore());
 
   protected metricData = computed(() => this.computeScore());
+  protected scoreTableData = computed(() => this.computedScoreTable());
 
   protected readonly themeService: ThemeService = inject(ThemeService);
   private readonly planService: PlanService = inject(PlanService);
@@ -92,8 +94,31 @@ export class PlanDetailsComponent implements OnInit {
         )
       );
     }
-    console.log('==scoreData', scoreData);
     return scoreData || [];
+  }
+
+  computedScoreTable(): ScoreTableRow[] {
+    const plans = this.planDetails();
+    const res = plans.assessmentCriteria?.map((c) => {
+      const row = new ScoreTableRow();
+      row.order = c.orderNumber;
+      row.question = c.display;
+      return row;
+    });
+    const now = new Date();
+    const nowLocal = now.toLocaleDateString('en-GB', {
+      timeZone: 'Asia/bangkok',
+    });
+    const split = nowLocal.split('/');
+    const year = +split[split.length - 1];
+
+    plans.assessmentScore?.forEach((row) => {
+      // Only display score for current year and from the owner of the plan
+      if (row.year === year && row.userRole === 'user') {
+        res[row.criteriaOrder - 1].score = row.score;
+      }
+    });
+    return res || [];
   }
 
   getEditHistory(name: string): string {
