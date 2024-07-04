@@ -111,6 +111,9 @@
     line-height: 23px;
     color: #000;
     white-space: pre-wrap;
+
+    max-height: 170px;
+    overflow: scroll;
   }
 }
 
@@ -220,6 +223,7 @@
 
 .editButton {
   height: 46px;
+  width: auto;
   display: flex;
   gap: 4px;
   padding: 8px 10px 8px 20px;
