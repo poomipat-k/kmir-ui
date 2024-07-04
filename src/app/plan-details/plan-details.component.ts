@@ -97,6 +97,24 @@ export class PlanDetailsComponent implements OnInit {
       const updatedBy = plan.readinessWillingnessUpdatedBy;
       return this.generateUpdatedAtString(updatedAt, updatedBy);
     }
+    if (name === 'assessmentScore') {
+      let latestUpdateIndex = -1;
+      let date = new Date('1990-06-30T10:46:35.093141Z');
+      plan.assessmentScore?.forEach((item, index) => {
+        const newDate = new Date(item.createdAt);
+        if (newDate > date) {
+          date = newDate;
+          latestUpdateIndex = index;
+        }
+      });
+      if (latestUpdateIndex < 0) {
+        return '';
+      }
+      return this.generateUpdatedAtString(
+        plan.assessmentScore[latestUpdateIndex].createdAt,
+        plan.assessmentScore[latestUpdateIndex].userRole
+      );
+    }
     return 'Todo';
   }
 
