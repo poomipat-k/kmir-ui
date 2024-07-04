@@ -15,10 +15,10 @@ import { Observable, Subscription, debounceTime } from 'rxjs';
 })
 export class IntersectionElementDirective implements OnInit, OnDestroy {
   root = input<HTMLElement | null>(null);
-  rootMargin = input('120px 0px 0px 0px');
+  rootMargin = input('0px 0px 0px 0px');
   threshold = input(0);
   debounceTime = input(0);
-  isContinuous = true;
+  isContinuous = input(true);
 
   isIntersecting = output<boolean>();
 

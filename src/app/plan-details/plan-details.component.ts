@@ -1,3 +1,4 @@
+import { CommonModule, ViewportScroller } from '@angular/common';
 import {
   Component,
   OnInit,
@@ -6,7 +7,7 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { BackToTopComponent } from '../components/back-to-top/back-to-top.component';
 import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.component';
 import { MetricComponent } from '../components/metric/metric.component';
@@ -15,6 +16,7 @@ import { UpdatedAtComponent } from '../components/updated-at/updated-at.componen
 import { PlanService } from '../services/plan.service';
 import { ThemeService } from '../services/theme.service';
 import { UserService } from '../services/user.service';
+import { IntersectionElementDirective } from '../shared/directives/intersection-element.directive';
 import { MetricInput } from '../shared/models/metric-input';
 import { PlanDetails } from '../shared/models/plan-details';
 import { ScoreTableRow } from '../shared/models/score-table-row';
@@ -23,11 +25,14 @@ import { ScoreTableRow } from '../shared/models/score-table-row';
   selector: 'app-plan-details',
   standalone: true,
   imports: [
+    CommonModule,
     MetricComponent,
     UpdatedAtComponent,
     ScoreTableComponent,
     IconTooltipComponent,
     BackToTopComponent,
+    IntersectionElementDirective,
+    RouterModule,
   ],
   templateUrl: './plan-details.component.html',
   styleUrl: './plan-details.component.scss',
@@ -36,19 +41,33 @@ export class PlanDetailsComponent implements OnInit {
   protected planName = input<string>();
 
   protected planDetails = signal<PlanDetails>(new PlanDetails());
-  protected intersectionRootMargin = signal('-120px 0px -80% 0px');
+  protected intersectionRootMargin = signal('-25% 0px -25% 0px');
+  protected navActiveList = signal([true, false, false, false, false]);
+  protected scrollerOffset = signal<[number, number]>([0, 40]); // [x, y]
 
+  protected navActiveIndex = computed<number>(() => {
+    const list = this.navActiveList();
+    for (let i = list.length - 1; i >= 0; i--) {
+      if (list[i]) {
+        return i;
+      }
+    }
+    return 0;
+  });
   protected scoreDetails = computed(() => this.computeScore());
   protected metricData = computed(() => this.computeScore());
   protected scoreTableData = computed(() => this.computedScoreTable());
+  protected baseLink = computed(() => `/plan/${this.planName()}`);
 
   protected readonly themeService: ThemeService = inject(ThemeService);
   private readonly planService: PlanService = inject(PlanService);
   private readonly router: Router = inject(Router);
   protected readonly userService: UserService = inject(UserService);
+  private readonly scroller: ViewportScroller = inject(ViewportScroller);
 
   ngOnInit(): void {
     this.themeService.changeTheme('silver');
+    this.scroller.setOffset(this.scrollerOffset());
     this.planService
       .getPlanDetails(this.planName() || '')
       .subscribe((planDetails) => {
@@ -57,6 +76,14 @@ export class PlanDetailsComponent implements OnInit {
           this.planDetails.set(planDetails);
         }
       });
+  }
+
+  isIntersecting(intersecting: boolean, index: number) {
+    this.navActiveList.update((oldList) => {
+      const newList = [...oldList];
+      newList[index] = intersecting;
+      return newList;
+    });
   }
 
   computeScore() {
@@ -197,5 +224,13 @@ export class PlanDetailsComponent implements OnInit {
 
   onBackToHomePage() {
     this.router.navigate(['/']);
+  }
+
+  onNavItemClick(index: number) {
+    const newList = [false, false, false, false, false];
+    newList[index] = true;
+    setTimeout(() => {
+      this.navActiveList.set(newList);
+    }, 600);
   }
 }

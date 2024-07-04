@@ -8,14 +8,63 @@
       />
       <p class="sideNav__back__text">Back</p>
     </div>
-    <div class="sideNav__item sideNav__item--active">
+    <a
+      [ngClass]="{
+        sideNav__item: true,
+        'sideNav__item--active': navActiveIndex() === 0
+      }"
+      (click)="onNavItemClick(0)"
+      [routerLink]="baseLink()"
+      fragment="readiness"
+    >
       Readiness and Willingness Assessment
-    </div>
-    <div class="sideNav__item">IR work goal</div>
-    <div class="sideNav__item">Note</div>
-    <div class="sideNav__item">Contact Person</div>
+    </a>
+    <a
+      [ngClass]="{
+        sideNav__item: true,
+        'sideNav__item--active': navActiveIndex() === 1
+      }"
+      (click)="onNavItemClick(1)"
+      [routerLink]="baseLink()"
+      fragment="irGoal"
+    >
+      IR work goal
+    </a>
+    <a
+      [ngClass]="{
+        sideNav__item: true,
+        'sideNav__item--active': navActiveIndex() === 2
+      }"
+      (click)="onNavItemClick(2)"
+      [routerLink]="baseLink()"
+      fragment="proposedActivity"
+    >
+      Proposed activities
+    </a>
+    <a
+      [ngClass]="{
+        sideNav__item: true,
+        'sideNav__item--active': navActiveIndex() === 3
+      }"
+      (click)="onNavItemClick(3)"
+      [routerLink]="baseLink()"
+      fragment="planNote"
+    >
+      Note
+    </a>
+    <a
+      [ngClass]="{
+        sideNav__item: true,
+        'sideNav__item--active': navActiveIndex() === 4
+      }"
+      (click)="onNavItemClick(4)"
+      [routerLink]="baseLink()"
+      fragment="contactPerson"
+    >
+      Contact Person
+    </a>
   </nav>
-  <section class="content mgt-18">
+  <section class="content mgt-18 pdl-55">
     <h1 class="header">{{ planName() }}</h1>
     <div class="topicContainer">
       <div>
@@ -52,7 +101,16 @@
         </svg>
       </button>
     </div>
-    <div id="readiness" class="metricAndWillingness mgt-80">
+    <div
+      id="readiness"
+      class="metricAndWillingness mgt-80"
+      appIntersectionElement
+      (isIntersecting)="isIntersecting($event, 0)"
+      [isContinuous]="true"
+      [threshold]="0"
+      [debounceTime]="0"
+      [rootMargin]="intersectionRootMargin()"
+    >
       <app-com-metric [data]="metricData()"></app-com-metric>
       <div class="mgt-13">
         <div class="metricAndWillingness__headerContainer">
@@ -99,7 +157,18 @@
       <div class="mgt-39">
         <div class="goal__headerSection">
           <div class="goal__headerBox">
-            <h3 id="irGoal" class="goal__headerText">IR work goal</h3>
+            <h3
+              id="irGoal"
+              class="goal__headerText"
+              appIntersectionElement
+              (isIntersecting)="isIntersecting($event, 1)"
+              [isContinuous]="true"
+              [threshold]="0"
+              [debounceTime]="0"
+              [rootMargin]="intersectionRootMargin()"
+            >
+              IR work goal
+            </h3>
             <img src="/assets/flag_circle_unfill.svg" alt="" />
           </div>
           <div class="mgt-15">
@@ -123,7 +192,16 @@
     <div class="mgt-14">
       <div class="commonTextSection__headerSection">
         <div class="commonTextSection__headerBox">
-          <h3 id="proposedActivity" class="commonTextSection__headerText">
+          <h3
+            id="proposedActivity"
+            class="commonTextSection__headerText"
+            appIntersectionElement
+            (isIntersecting)="isIntersecting($event, 2)"
+            [isContinuous]="true"
+            [threshold]="0"
+            [debounceTime]="0"
+            [rootMargin]="intersectionRootMargin()"
+          >
             Proposed activities
           </h3>
           <img src="/assets/event_note.svg" alt="note icon" />
@@ -143,7 +221,18 @@
     <div class="mgt-45">
       <div class="commonTextSection__headerSection">
         <div class="commonTextSection__headerBox">
-          <h3 id="planNote" class="commonTextSection__headerText">Notes</h3>
+          <h3
+            id="planNote"
+            class="commonTextSection__headerText"
+            appIntersectionElement
+            (isIntersecting)="isIntersecting($event, 3)"
+            [isContinuous]="true"
+            [threshold]="0"
+            [debounceTime]="0"
+            [rootMargin]="intersectionRootMargin()"
+          >
+            Notes
+          </h3>
           <img src="/assets/speaker_notes.svg" alt="speaker notes" />
         </div>
         <div class="mgt-15">
@@ -160,7 +249,16 @@
     <div class="mgt-40">
       <div class="commonTextSection__headerSection">
         <div class="commonTextSection__headerBox">
-          <h3 id="contactPerson" class="commonTextSection__headerText">
+          <h3
+            id="contactPerson"
+            class="commonTextSection__headerText"
+            appIntersectionElement
+            (isIntersecting)="isIntersecting($event, 4)"
+            [isContinuous]="true"
+            [threshold]="0"
+            [debounceTime]="0"
+            [rootMargin]="intersectionRootMargin()"
+          >
             Contact Person
           </h3>
           <img src="/assets/account_circle.svg" alt="account icon" />
@@ -180,4 +278,4 @@
 </div>
 
 <!-- For intersection API debugging -->
-<div class="intersectionBox"></div>
+<!-- <div class="intersectionBox"></div> -->

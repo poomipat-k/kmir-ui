@@ -37,13 +37,14 @@
 
   &__item {
     padding: 10px 0;
-    width: 120px;
+    width: 125px;
     cursor: pointer;
     font-family: $custom-font;
     font-weight: 400;
     font-size: 14px;
     line-height: 23px;
     color: #1c1b1f;
+    text-decoration: none;
 
     &--active {
       font-weight: 600;
@@ -81,7 +82,7 @@
 .metricAndWillingness {
   display: flex;
   gap: 7px;
-  padding-left: 22px;
+  // padding-left: 22px;
 
   &__header {
     &Container {
@@ -301,13 +302,18 @@
     margin-right: 6px;
   }
 }
+.pdl {
+  &-55 {
+    padding-left: 55px;
+  }
+}
 
 // For intersection API debugging purpose
 .intersectionBox {
   position: fixed;
-  top: 12rem;
-  left: 0;
-  width: 100vw;
-  height: calc(20% - 120px);
+  top: 25%;
+  right: 0;
+  width: 82vw;
+  height: calc(50%);
   border: 1px solid blue;
 }
