@@ -20,6 +20,7 @@ export class PlanDetails {
   proposedActivity?: string;
   proposedActivityUpdatedAt?: string;
   proposedActivityUpdatedBy?: string;
+  planNote?: string;
   planNoteUpdatedAt?: string;
   planNoteUpdatedBy?: string;
   contactPerson?: string;

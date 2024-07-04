@@ -159,7 +159,22 @@ export class PlanDetailsComponent implements OnInit {
           : plan.irGoalDetailsUpdatedBy;
       return this.generateUpdatedAtString(updatedAt || '', updatedBy || '');
     }
-    return 'Todo';
+    if (name === 'proposedActivity') {
+      const updatedAt = plan.proposedActivityUpdatedAt;
+      const updatedBy = plan.proposedActivityUpdatedBy;
+      return this.generateUpdatedAtString(updatedAt || '', updatedBy || '');
+    }
+    if (name === 'planNote') {
+      const updatedAt = plan.planNoteUpdatedAt;
+      const updatedBy = plan.planNoteUpdatedBy;
+      return this.generateUpdatedAtString(updatedAt || '', updatedBy || '');
+    }
+    if (name === 'contactPerson') {
+      const updatedAt = plan.contactPersonUpdatedAt;
+      const updatedBy = plan.contactPersonUpdatedBy;
+      return this.generateUpdatedAtString(updatedAt || '', updatedBy || '');
+    }
+    return 'Something wrong';
   }
 
   private generateUpdatedAtString(

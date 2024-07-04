@@ -119,5 +119,57 @@
       </div>
     </div>
     <div class="hr--dashed mgt-70"></div>
+    <!-- Proposed activities -->
+    <div class="mgt-14">
+      <div class="commonTextSection__headerSection">
+        <div class="commonTextSection__headerBox">
+          <h3 class="commonTextSection__headerText">Proposed activities</h3>
+          <img src="/assets/event_note.svg" alt="note icon" />
+        </div>
+        <div class="mgt-15">
+          <app-com-updated-at
+            [display]="getEditHistory('proposedActivity')"
+          ></app-com-updated-at>
+        </div>
+      </div>
+      <p class="commonTextSection__text mgt-20">
+        {{ planDetails().proposedActivity }}
+      </p>
+    </div>
+    <div class="hr--dashed mgt-80"></div>
+    <!-- Notes -->
+    <div class="mgt-45">
+      <div class="commonTextSection__headerSection">
+        <div class="commonTextSection__headerBox">
+          <h3 class="commonTextSection__headerText">Notes</h3>
+          <img src="/assets/speaker_notes.svg" alt="speaker notes" />
+        </div>
+        <div class="mgt-15">
+          <app-com-updated-at
+            [display]="getEditHistory('planNote')"
+          ></app-com-updated-at>
+        </div>
+      </div>
+      <p class="commonTextSection__text mgt-20">
+        {{ planDetails().planNote }}
+      </p>
+    </div>
+    <!-- Contact Person -->
+    <div class="mgt-40">
+      <div class="commonTextSection__headerSection">
+        <div class="commonTextSection__headerBox">
+          <h3 class="commonTextSection__headerText">Contact Person</h3>
+          <img src="/assets/account_circle.svg" alt="account icon" />
+        </div>
+        <div class="mgt-15">
+          <app-com-updated-at
+            [display]="getEditHistory('contactPerson')"
+          ></app-com-updated-at>
+        </div>
+      </div>
+      <p class="commonTextSection__text mgt-20">
+        {{ planDetails().contactPerson }}
+      </p>
+    </div>
   </section>
 </div>
