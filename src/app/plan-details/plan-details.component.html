@@ -78,16 +78,11 @@
       <div class="assessment__header">
         <div class="assessment__header__textContainer">
           <h3 class="assessment__header__text">Self-assessment Score</h3>
-          <div
-            appTooltip
-            [tooltipContent]="'Self assessment score tooltip content'"
-            class="iconWithTooltip mgt-15"
-          >
-            <img
-              src="/assets/more_info.svg"
-              alt=""
-              class="iconWithTooltip__img"
-            />
+          <div class="mgt-15">
+            <app-com-icon-tooltip
+              [hasTooltip]="true"
+              tooltipText="Test tooltip text"
+            ></app-com-icon-tooltip>
           </div>
         </div>
         <div class="mgt-15">
@@ -99,6 +94,10 @@
 
       <!-- Table -->
       <app-com-score-table [data]="scoreTableData()"></app-com-score-table>
+
+      <div class="hr--dashed mgt-114 mgr-6"></div>
+
+      <!-- IR work goal -->
     </div>
   </section>
 </div>

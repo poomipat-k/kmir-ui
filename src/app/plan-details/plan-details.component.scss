@@ -85,22 +85,6 @@
   }
 }
 
-.iconWithTooltip {
-  position: relative;
-  align-self: start;
-  width: 18px;
-  height: 18px;
-
-  &__img {
-    width: 18px;
-    height: 18px;
-  }
-
-  * {
-    pointer-events: none;
-  }
-}
-
 .editButton {
   height: 46px;
   display: flex;
@@ -167,6 +151,12 @@
   }
 }
 
+.hr {
+  &--dashed {
+    border: 1px dashed rgba(0, 0, 0, 0.36);
+  }
+}
+
 .mgt {
   &-8 {
     margin-top: 8px;
@@ -191,6 +181,15 @@
   }
   &-80 {
     margin-top: 80px;
+  }
+  &-114 {
+    margin-top: 114px;
+  }
+}
+
+.mgr {
+  &-6 {
+    margin-right: 6px;
   }
 }
 

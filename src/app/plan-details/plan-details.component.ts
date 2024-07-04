@@ -7,13 +7,13 @@ import {
   signal,
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.component';
 import { MetricComponent } from '../components/metric/metric.component';
 import { ScoreTableComponent } from '../components/score-table/score-table.component';
 import { UpdatedAtComponent } from '../components/updated-at/updated-at.component';
 import { PlanService } from '../services/plan.service';
 import { ThemeService } from '../services/theme.service';
 import { UserService } from '../services/user.service';
-import { TooltipDirective } from '../shared/directives/tooltip.directive';
 import { MetricInput } from '../shared/models/metric-input';
 import { PlanDetails } from '../shared/models/plan-details';
 import { ScoreTableRow } from '../shared/models/score-table-row';
@@ -24,8 +24,8 @@ import { ScoreTableRow } from '../shared/models/score-table-row';
   imports: [
     MetricComponent,
     UpdatedAtComponent,
-    TooltipDirective,
     ScoreTableComponent,
+    IconTooltipComponent,
   ],
   templateUrl: './plan-details.component.html',
   styleUrl: './plan-details.component.scss',
