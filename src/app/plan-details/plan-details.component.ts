@@ -146,6 +146,19 @@ export class PlanDetailsComponent implements OnInit {
         plan.assessmentScore[latestUpdateIndex].userRole
       );
     }
+    if (name === 'irGoal') {
+      const typeUpdatedAt = new Date(plan.irGoalTypeUpdatedAt || 0);
+      const detailsUpdatedAt = new Date(plan.irGoalDetailsUpdatedAt || 0);
+      const updatedAt =
+        typeUpdatedAt > detailsUpdatedAt
+          ? plan.irGoalTypeUpdatedAt
+          : plan.irGoalDetailsUpdatedAt;
+      const updatedBy =
+        typeUpdatedAt > detailsUpdatedAt
+          ? plan.irGoalTypeUpdatedBy
+          : plan.irGoalDetailsUpdatedBy;
+      return this.generateUpdatedAtString(updatedAt || '', updatedBy || '');
+    }
     return 'Todo';
   }
 

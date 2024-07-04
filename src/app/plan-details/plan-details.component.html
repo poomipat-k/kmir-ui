@@ -94,10 +94,30 @@
 
       <!-- Table -->
       <app-com-score-table [data]="scoreTableData()"></app-com-score-table>
-
       <div class="hr--dashed mgt-114 mgr-6"></div>
-
       <!-- IR work goal -->
+      <div class="mgt-39">
+        <div class="goal__headerSection">
+          <div class="goal__headerBox">
+            <h3 class="goal__headerText">IR work goal</h3>
+            <img src="/assets/flag_circle_unfill.svg" alt="" />
+          </div>
+          <div class="mgt-15">
+            <app-com-updated-at
+              [display]="getEditHistory('irGoal')"
+            ></app-com-updated-at>
+          </div>
+        </div>
+        <div class="goal__type mgt-8">
+          <h4 class="goal__type__text">{{ planDetails().irGoalType }}</h4>
+          <app-com-icon-tooltip
+            [hasTooltip]="true"
+            tooltipText="Type details"
+          ></app-com-icon-tooltip>
+        </div>
+        <p class="goal__details mgt-16">{{ planDetails().irGoalDetails }}</p>
+      </div>
     </div>
+    <div class="hr--dashed mgt-70"></div>
   </section>
 </div>

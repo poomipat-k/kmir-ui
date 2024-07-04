@@ -85,6 +85,53 @@
   }
 }
 
+.goal {
+  &__headerSection {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__headerBox {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  &__headerText {
+    font-family: $custom-font;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 53px;
+    color: #000;
+  }
+
+  &__icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  &__type {
+    display: flex;
+    gap: 9px;
+    align-items: center;
+
+    &__text {
+      font-family: $custom-font;
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 24px;
+      color: #f0b358;
+    }
+  }
+
+  &__details {
+    font-family: $custom-font;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 30px;
+  }
+}
+
 .editButton {
   height: 46px;
   display: flex;
@@ -167,8 +214,14 @@
   &-15 {
     margin-top: 15px;
   }
+  &-16 {
+    margin-top: 16px;
+  }
   &-18 {
     margin-top: 18px;
+  }
+  &-39 {
+    margin-top: 39px;
   }
   &-45 {
     margin-top: 45px;
@@ -178,6 +231,9 @@
   }
   &-58 {
     margin-top: 58px;
+  }
+  &-70 {
+    margin-top: 70px;
   }
   &-80 {
     margin-top: 80px;
