@@ -1,0 +1,8 @@
+<div class="container">
+  <div class="willingness">Willingness</div>
+  <div class="cap">Capacity</div>
+  @for (item of data(); track $index) {
+  <p class="question">{{ item.question }}</p>
+  <div class="score">{{ item.score }}</div>
+  }
+</div>

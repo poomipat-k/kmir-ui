@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { MetricComponent } from '../components/metric/metric.component';
+import { ScoreTableComponent } from '../components/score-table/score-table.component';
 import { UpdatedAtComponent } from '../components/updated-at/updated-at.component';
 import { PlanService } from '../services/plan.service';
 import { ThemeService } from '../services/theme.service';
@@ -19,7 +20,12 @@ import { PlanDetails } from '../shared/models/plan-details';
 @Component({
   selector: 'app-plan-details',
   standalone: true,
-  imports: [MetricComponent, UpdatedAtComponent, TooltipDirective],
+  imports: [
+    MetricComponent,
+    UpdatedAtComponent,
+    TooltipDirective,
+    ScoreTableComponent,
+  ],
   templateUrl: './plan-details.component.html',
   styleUrl: './plan-details.component.scss',
 })
@@ -99,7 +105,7 @@ export class PlanDetailsComponent implements OnInit {
     }
     if (name === 'assessmentScore') {
       let latestUpdateIndex = -1;
-      let date = new Date('1990-06-30T10:46:35.093141Z');
+      let date = new Date(0);
       plan.assessmentScore?.forEach((item, index) => {
         const newDate = new Date(item.createdAt);
         if (newDate > date) {
