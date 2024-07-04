@@ -8,15 +8,17 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { MetricComponent } from '../components/metric/metric.component';
+import { UpdatedAtComponent } from '../components/updated-at/updated-at.component';
 import { PlanService } from '../services/plan.service';
 import { ThemeService } from '../services/theme.service';
+import { UserService } from '../services/user.service';
 import { MetricInput } from '../shared/models/metric-input';
 import { PlanDetails } from '../shared/models/plan-details';
 
 @Component({
   selector: 'app-plan-details',
   standalone: true,
-  imports: [MetricComponent],
+  imports: [MetricComponent, UpdatedAtComponent],
   templateUrl: './plan-details.component.html',
   styleUrl: './plan-details.component.scss',
 })
@@ -31,6 +33,7 @@ export class PlanDetailsComponent implements OnInit {
   protected readonly themeService: ThemeService = inject(ThemeService);
   private readonly planService: PlanService = inject(PlanService);
   private readonly router: Router = inject(Router);
+  protected readonly userService: UserService = inject(UserService);
 
   ngOnInit(): void {
     this.themeService.changeTheme('silver');
@@ -84,6 +87,31 @@ export class PlanDetailsComponent implements OnInit {
     }
     console.log('==scoreData', scoreData);
     return scoreData || [];
+  }
+
+  getEditHistory(name: string): string {
+    const plan = this.planDetails();
+    if (name === 'readinessWillingness') {
+      const updatedAt = plan.readinessWillingnessUpdatedAt;
+      const updatedBy = plan.readinessWillingnessUpdatedBy;
+      return this.generateUpdatedAtString(updatedAt, updatedBy);
+    }
+    return 'Todo';
+  }
+
+  private generateUpdatedAtString(
+    updatedAt: string,
+    updatedBy: string
+  ): string {
+    const user = this.userService.currentUser();
+    const who =
+      updatedBy === 'user' ? user.displayName || user.username : 'ADMIN';
+    const date = new Date(updatedAt);
+    const local = date.toLocaleString('en-GB', {
+      hourCycle: 'h24',
+      timeZone: 'Asia/bangkok',
+    });
+    return `last edited by ${who} ${local}`;
   }
 
   onBackToHomePage() {

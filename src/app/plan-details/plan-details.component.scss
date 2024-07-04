@@ -35,6 +35,7 @@
 
 .metricAndWillingness {
   display: flex;
+  gap: 7px;
 
   &__header {
     &Container {
@@ -54,6 +55,14 @@
       right: -10px;
       bottom: 25%;
     }
+  }
+
+  &__text {
+    font-family: $custom-font-looped;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 23px;
+    color: #000;
   }
 }
 
@@ -124,6 +133,9 @@
 }
 
 .mgt {
+  &-8 {
+    margin-top: 8px;
+  }
   &-13 {
     margin-top: 13px;
   }

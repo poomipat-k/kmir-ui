@@ -52,7 +52,7 @@
         </svg>
       </button>
     </div>
-    <div class="mgt-80 metricAndWillingness debug">
+    <div class="mgt-80 metricAndWillingness">
       <app-com-metric [data]="metricData()"></app-com-metric>
       <div class="mgt-13">
         <div class="metricAndWillingness__headerContainer">
@@ -65,6 +65,12 @@
             class="metricAndWillingness__header__icon"
           />
         </div>
+        <app-com-updated-at
+          [display]="getEditHistory('readinessWillingness')"
+        ></app-com-updated-at>
+        <p class="mgt-8 metricAndWillingness__text">
+          {{ planDetails().readinessWillingness }}
+        </p>
       </div>
     </div>
   </section>
