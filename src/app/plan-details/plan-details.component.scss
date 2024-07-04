@@ -66,6 +66,41 @@
   }
 }
 
+.assessment {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+
+    &__textContainer {
+      display: flex;
+      gap: 3px;
+    }
+    &__text {
+      font-family: $custom-font;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 59px;
+      color: #1c1b1f;
+    }
+  }
+}
+
+.iconWithTooltip {
+  position: relative;
+  align-self: start;
+  width: 18px;
+  height: 18px;
+
+  &__img {
+    width: 18px;
+    height: 18px;
+  }
+
+  * {
+    pointer-events: none;
+  }
+}
+
 .editButton {
   height: 46px;
   display: flex;
@@ -139,8 +174,14 @@
   &-13 {
     margin-top: 13px;
   }
+  &-15 {
+    margin-top: 15px;
+  }
   &-18 {
     margin-top: 18px;
+  }
+  &-45 {
+    margin-top: 45px;
   }
   &-54 {
     margin-top: 54px;

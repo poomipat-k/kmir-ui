@@ -12,13 +12,14 @@ import { UpdatedAtComponent } from '../components/updated-at/updated-at.componen
 import { PlanService } from '../services/plan.service';
 import { ThemeService } from '../services/theme.service';
 import { UserService } from '../services/user.service';
+import { TooltipDirective } from '../shared/directives/tooltip.directive';
 import { MetricInput } from '../shared/models/metric-input';
 import { PlanDetails } from '../shared/models/plan-details';
 
 @Component({
   selector: 'app-plan-details',
   standalone: true,
-  imports: [MetricComponent, UpdatedAtComponent],
+  imports: [MetricComponent, UpdatedAtComponent, TooltipDirective],
   templateUrl: './plan-details.component.html',
   styleUrl: './plan-details.component.scss',
 })
