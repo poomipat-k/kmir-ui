@@ -7,6 +7,7 @@ import {
   signal,
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { BackToTopComponent } from '../components/back-to-top/back-to-top.component';
 import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.component';
 import { MetricComponent } from '../components/metric/metric.component';
 import { ScoreTableComponent } from '../components/score-table/score-table.component';
@@ -26,6 +27,7 @@ import { ScoreTableRow } from '../shared/models/score-table-row';
     UpdatedAtComponent,
     ScoreTableComponent,
     IconTooltipComponent,
+    BackToTopComponent,
   ],
   templateUrl: './plan-details.component.html',
   styleUrl: './plan-details.component.scss',
