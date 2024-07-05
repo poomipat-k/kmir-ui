@@ -33,6 +33,18 @@ export class PlanService {
       .pipe(catchError(this.handleError));
   }
 
+  canEditPlan(planName: string) {
+    if (!planName) {
+      const res = new CommonSuccessResponse();
+      res.success = false;
+      res.message = 'empty planName';
+      return of(res);
+    }
+    return this.http
+      .get<CommonSuccessResponse>(`${this.baseApiUrl}/plan/edit/${planName}`)
+      .pipe(catchError(this.handleError));
+  }
+
   getPlanDetails(planName: string) {
     return this.http
       .get<PlanDetails>(`${this.baseApiUrl}/plan/details/${planName}`)
