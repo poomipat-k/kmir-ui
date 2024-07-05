@@ -14,6 +14,8 @@ import { EditorComponent, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 })
 export class CustomEditorComponent implements OnInit {
   control = input(new FormControl());
+  height = input(326);
+
   protected editorInit = signal<EditorComponent['init']>({});
   protected editorPlugins = signal(
     'preview autolink autosave save code visualblocks visualchars fullscreen link media codesample table charmap nonbreaking anchor lists advlist wordcount help charmap emoticons'
@@ -36,6 +38,7 @@ export class CustomEditorComponent implements OnInit {
         '10px 16px 18px 20px 24px 27px 30px 33px 36px 39px 44px 48px 52px',
       block_unsupported_drop: true,
       paste_block_drop: true,
+      height: this.height(),
     });
   }
 }
