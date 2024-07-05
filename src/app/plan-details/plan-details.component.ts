@@ -41,9 +41,11 @@ export class PlanDetailsComponent implements OnInit {
   protected planName = input<string>();
 
   protected planDetails = signal<PlanDetails>(new PlanDetails());
-  protected intersectionRootMargin = signal('-25% 0px -25% 0px');
+  protected intersectionRootMargin = signal('0px 0px -50% 0px');
   protected navActiveList = signal([true, false, false, false, false]);
   protected scrollerOffset = signal<[number, number]>([0, 40]); // [x, y]
+  protected ignoreIntersection = signal(false);
+  protected releaseIgnoreIntersectionTimeoutId = signal<any>(undefined);
 
   protected navActiveIndex = computed<number>(() => {
     const list = this.navActiveList();
@@ -79,6 +81,9 @@ export class PlanDetailsComponent implements OnInit {
   }
 
   isIntersecting(intersecting: boolean, index: number) {
+    if (this.ignoreIntersection()) {
+      return;
+    }
     this.navActiveList.update((oldList) => {
       const newList = [...oldList];
       newList[index] = intersecting;
@@ -227,10 +232,20 @@ export class PlanDetailsComponent implements OnInit {
   }
 
   onNavItemClick(index: number) {
+    this.ignoreIntersection.set(true);
     const newList = [false, false, false, false, false];
     newList[index] = true;
-    setTimeout(() => {
-      this.navActiveList.set(newList);
-    }, 600);
+    this.navActiveList.set(newList);
+    this.resetReleaseIgnoreIntersectionTimer();
+  }
+
+  private resetReleaseIgnoreIntersectionTimer() {
+    if (!!this.releaseIgnoreIntersectionTimeoutId()) {
+      clearTimeout(this.releaseIgnoreIntersectionTimeoutId());
+    }
+    const timer = setTimeout(() => {
+      this.ignoreIntersection.set(false);
+    }, 800);
+    this.releaseIgnoreIntersectionTimeoutId.set(timer);
   }
 }
