@@ -71,7 +71,8 @@
         <h2 class="topic">{{ planDetails().topic }}</h2>
         <h2 class="topic">{{ planDetails().topicEn }}</h2>
       </div>
-      <button class="editButton mgt-58">
+      @if (userService.currentUser().userRole === 'user') {
+      <button class="editButton mgt-58" (click)="toEditPage()">
         <p class="editButton__text">แก้ไขข้อมูล</p>
         <svg
           width="20"
@@ -100,6 +101,7 @@
           </g>
         </svg>
       </button>
+      }
     </div>
     <div
       id="readiness"

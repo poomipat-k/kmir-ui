@@ -91,6 +91,10 @@ export class PlanDetailsComponent implements OnInit {
     });
   }
 
+  toEditPage() {
+    this.router.navigate([`/plan/${this.planName()}/edit`]);
+  }
+
   computeScore() {
     // find avg score for each year
     const criteriaMap: { [key: number]: 'x' | 'y' } = {};
