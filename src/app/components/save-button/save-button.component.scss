@@ -1,0 +1,22 @@
+@import "../../../styles.scss";
+
+.button {
+  display: flex;
+  gap: 4px;
+  padding: 8px 16px 8px 20px;
+  border-radius: 99px;
+  font-family: $custom-font;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 26px;
+  color: #000;
+  cursor: pointer;
+  border: 1px solid #f47521f3;
+  background-color: #fff7df;
+  outline: none;
+
+  &__icon {
+    width: 22px;
+    height: 22px;
+  }
+}

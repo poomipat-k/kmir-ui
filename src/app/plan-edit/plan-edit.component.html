@@ -1,1 +1,40 @@
-<p>plan-edit works!</p>
+<div class="container mgt-54">
+  <nav class="sideNav">
+    <div class="sideNav__back" (click)="onBackToPlanDetailsPage()">
+      <img
+        src="/assets/arrow_back.svg"
+        alt="arrow back"
+        class="sideNav__back__icon"
+      />
+      <p class="sideNav__back__text">Back</p>
+    </div>
+  </nav>
+
+  <section class="content mgt-18 pdl-55">
+    <h1 class="header">{{ planName() }}</h1>
+    <div class="topicContainer">
+      <div>
+        <h2 class="topic">{{ planDetails().topic }}</h2>
+        <h2 class="topic">{{ planDetails().topicEn }}</h2>
+      </div>
+    </div>
+
+    <form [formGroup]="form()" class="mgt-117">
+      <div class="readiness__headerContainer">
+        <div class="readiness__headerContainer--left">
+          <h3 class="readiness__header">
+            Readiness and Willingness Assessment
+          </h3>
+          <app-com-icon-tooltip
+            [hasTooltip]="true"
+            tooltipText="Readiness and Willingness Assessment details"
+          ></app-com-icon-tooltip>
+        </div>
+        <!-- button -->
+        <app-com-save-button
+          (click)="onReadinessSaveClick()"
+        ></app-com-save-button>
+      </div>
+    </form>
+  </section>
+</div>
