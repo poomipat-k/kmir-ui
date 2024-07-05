@@ -1,7 +1,8 @@
 import { ViewportScroller } from '@angular/common';
 import { Component, OnInit, inject, input, signal } from '@angular/core';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CustomEditorComponent } from '../components/custom-editor/custom-editor.component';
 import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.component';
 import { SaveButtonComponent } from '../components/save-button/save-button.component';
 import { PlanService } from '../services/plan.service';
@@ -11,7 +12,12 @@ import { PlanDetails } from '../shared/models/plan-details';
 @Component({
   selector: 'app-plan-edit',
   standalone: true,
-  imports: [IconTooltipComponent, SaveButtonComponent, ReactiveFormsModule],
+  imports: [
+    IconTooltipComponent,
+    SaveButtonComponent,
+    ReactiveFormsModule,
+    CustomEditorComponent,
+  ],
   templateUrl: './plan-edit.component.html',
   styleUrl: './plan-edit.component.scss',
 })
@@ -19,7 +25,11 @@ export class PlanEditComponent implements OnInit {
   // url params
   protected planName = input<string>();
 
-  protected form = signal<FormGroup>(new FormGroup({}));
+  protected form = signal<FormGroup>(
+    new FormGroup({
+      readinessWillingness: new FormControl(null),
+    })
+  );
   protected planDetails = signal<PlanDetails>(new PlanDetails());
   protected scrollerOffset = signal<[number, number]>([0, 40]); // [x, y]
 
@@ -41,11 +51,15 @@ export class PlanEditComponent implements OnInit {
       });
   }
 
+  getControl(name: string): FormControl {
+    return this.form().get(name) as FormControl;
+  }
+
   onBackToPlanDetailsPage() {
     this.router.navigate([`/plan/${this.planName()}`]);
   }
 
   onReadinessSaveClick() {
-    console.log('==onReadinessSaveClick');
+    console.log('==onReadinessSaveClick form', this.form());
   }
 }
