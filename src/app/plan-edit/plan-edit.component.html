@@ -59,7 +59,11 @@
           ></app-com-save-button>
         </div>
         <div class="mgt-18">
-          <app-com-score-table [data]="scoreTableData()"></app-com-score-table>
+          <app-com-score-table
+            [data]="scoreTableData()"
+            [editMode]="true"
+            [form]="getScoreFormGroup()"
+          ></app-com-score-table>
         </div>
       </div>
     </form>

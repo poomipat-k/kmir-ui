@@ -7,7 +7,12 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { CustomEditorComponent } from '../components/custom-editor/custom-editor.component';
 import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.component';
@@ -38,6 +43,15 @@ export class PlanEditComponent implements OnInit {
   protected form = signal<FormGroup>(
     new FormGroup({
       readinessWillingness: new FormControl(null),
+      score: new FormGroup({
+        q1: new FormControl(null, Validators.required),
+        q2: new FormControl(null, Validators.required),
+        q3: new FormControl(null, Validators.required),
+        q4: new FormControl(null, Validators.required),
+        q5: new FormControl(null, Validators.required),
+        q6: new FormControl(null, Validators.required),
+        q7: new FormControl(null, Validators.required),
+      }),
     })
   );
   protected planDetails = signal<PlanDetails>(new PlanDetails());
@@ -61,6 +75,10 @@ export class PlanEditComponent implements OnInit {
           this.planDetails.set(planDetails);
         }
       });
+  }
+
+  getScoreFormGroup(): FormGroup {
+    return this.form().get('score') as FormGroup;
   }
 
   computedScoreTable(): ScoreTableRow[] {

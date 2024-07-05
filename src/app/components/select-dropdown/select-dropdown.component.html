@@ -1,0 +1,56 @@
+<div class="dropdown-component" [style]="{ width: width() }">
+  <div class="input-container" (click)="onInputClick($event)">
+    <input
+      #selectDropdownButton
+      type="text"
+      [readOnly]="true"
+      [disabled]="disabled()"
+      [ngClass]="{
+        input: true,
+        disabled: disabled()
+      }"
+      [placeholder]="placeholder()"
+    />
+
+    <img
+      #inputIcon
+      [ngClass]="{
+        input__icon: true,
+        'input__icon--flip': showDropdown(),
+        disabled: disabled()
+      }"
+      src="/assets/arrow_drop_down.svg"
+      alt="down arrow"
+      (click)="onInputIconClick()"
+    />
+  </div>
+
+  <!-- Dropdown Options -->
+  <!-- Don't use @If to hide options because radio functional will be broken -->
+  <div
+    [ngClass]="{
+      'radio-container': true,
+      'radio-container--show': showDropdown()
+    }"
+    [style]="{ width: width() }"
+    (change)="onRadioValueChange()"
+  >
+    @for (item of items(); track $index) {
+    <label
+      class="radio__label"
+      [style]="{ 'font-size': dropdownFontSize() }"
+      (click)="onDropdownClicked()"
+    >
+      <input
+        type="radio"
+        class="radio"
+        [formControl]="control()"
+        [value]="item.value"
+      />
+      {{ item.display }}
+    </label>
+    } @empty {
+    <p class="radio-container--empty">{{ emptyMessage() }}</p>
+    }
+  </div>
+</div>
