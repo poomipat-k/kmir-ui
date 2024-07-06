@@ -18,8 +18,10 @@ import { CustomEditorComponent } from '../components/custom-editor/custom-editor
 import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.component';
 import { SaveButtonComponent } from '../components/save-button/save-button.component';
 import { ScoreTableComponent } from '../components/score-table/score-table.component';
+import { SelectDropdownComponent } from '../components/select-dropdown/select-dropdown.component';
 import { PlanService } from '../services/plan.service';
 import { ThemeService } from '../services/theme.service';
+import { DropdownOption } from '../shared/models/dropdown-option';
 import { PlanDetails } from '../shared/models/plan-details';
 import { ScoreTableRow } from '../shared/models/score-table-row';
 
@@ -32,6 +34,7 @@ import { ScoreTableRow } from '../shared/models/score-table-row';
     ReactiveFormsModule,
     CustomEditorComponent,
     ScoreTableComponent,
+    SelectDropdownComponent,
   ],
   templateUrl: './plan-edit.component.html',
   styleUrl: './plan-edit.component.scss',
@@ -42,7 +45,7 @@ export class PlanEditComponent implements OnInit {
 
   protected form = signal<FormGroup>(
     new FormGroup({
-      readinessWillingness: new FormControl(null),
+      readinessWillingness: new FormControl(null, Validators.required),
       score: new FormGroup({
         q1: new FormControl(null, Validators.required),
         q2: new FormControl(null, Validators.required),
@@ -52,10 +55,34 @@ export class PlanEditComponent implements OnInit {
         q6: new FormControl(null, Validators.required),
         q7: new FormControl(null, Validators.required),
       }),
+      irGoalType: new FormControl(null, Validators.required),
+      irGoalDetails: new FormControl(null, Validators.required),
     })
   );
   protected planDetails = signal<PlanDetails>(new PlanDetails());
-  protected scrollerOffset = signal<[number, number]>([0, 40]); // [x, y]
+  protected scrollerOffset = signal<[number, number]>([0, 40]); // [x, y
+  protected irTypeOptions = signal<DropdownOption[]>([
+    {
+      value: 'type1',
+      display: 'Type 1',
+    },
+    {
+      value: 'type2',
+      display: 'Type 2',
+    },
+    {
+      value: 'type3',
+      display: 'Type 3',
+    },
+    {
+      value: 'type4',
+      display: 'Type 4',
+    },
+    {
+      value: 'type5',
+      display: 'Type 5',
+    },
+  ]);
 
   protected scoreTableData = computed(() => this.computedScoreTable());
 
@@ -118,5 +145,8 @@ export class PlanEditComponent implements OnInit {
   }
   onAssessmentScoresSaveClick() {
     console.log('==onAssessmentScoresSaveClick form', this.form());
+  }
+  onWorkGoalSaveClick() {
+    console.log('==onWorkGoalSaveClick form', this.form());
   }
 }

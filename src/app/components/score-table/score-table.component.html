@@ -4,11 +4,13 @@
   @for (item of data(); track $index) {
   <p class="question">{{ item.order + ". " + item.question }}</p>
   @if (editMode()) {
-  <app-com-select-dropdown
-    [control]="getScoreControl(item)"
-    [items]="scoreOptions()"
-    width="64px"
-  ></app-com-select-dropdown>
+  <div class="dropdown">
+    <app-com-select-dropdown
+      [control]="getScoreControl(item)"
+      [items]="scoreOptions()"
+      width="64px"
+    ></app-com-select-dropdown>
+  </div>
   } @else {
   <div class="score">{{ item.score }}</div>
   } }

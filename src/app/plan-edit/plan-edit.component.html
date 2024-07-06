@@ -66,6 +66,42 @@
           ></app-com-score-table>
         </div>
       </div>
+
+      <div class="hr--dashed mgt-73"></div>
+      <!-- IR work goal -->
+      <div class="mgt-80">
+        <div class="goal__header">
+          <h3>IR work goal</h3>
+          <img src="/assets/flag_circle_unfill.svg" alt="" class="goal__icon" />
+        </div>
+        <div class="goal__row mgt-2">
+          <div class="goal__type">
+            <div class="mgt-5">
+              <app-com-select-dropdown
+                [control]="getControl('irGoalType')"
+                [items]="irTypeOptions()"
+                width="89px"
+                height="38px"
+                fontSize="16px"
+                padding="0px 0px 0px 8px"
+              ></app-com-select-dropdown>
+            </div>
+            <app-com-icon-tooltip
+              [hasTooltip]="true"
+              tooltipText="assessment score details"
+            ></app-com-icon-tooltip>
+          </div>
+          <app-com-save-button
+            (click)="onReadinessSaveClick()"
+          ></app-com-save-button>
+        </div>
+        <div class="mgt-16">
+          <app-com-custom-editor
+            [control]="getControl('irGoalDetails')"
+            [height]="264"
+          ></app-com-custom-editor>
+        </div>
+      </div>
     </form>
   </section>
 </div>
