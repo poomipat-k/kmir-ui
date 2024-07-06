@@ -16,6 +16,7 @@ import {
 import { Router } from '@angular/router';
 import { CustomEditorComponent } from '../components/custom-editor/custom-editor.component';
 import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.component';
+import { SaveAndReturnButtonComponent } from '../components/save-and-return-button/save-and-return-button.component';
 import { SaveButtonComponent } from '../components/save-button/save-button.component';
 import { ScoreTableComponent } from '../components/score-table/score-table.component';
 import { SelectDropdownComponent } from '../components/select-dropdown/select-dropdown.component';
@@ -35,6 +36,7 @@ import { ScoreTableRow } from '../shared/models/score-table-row';
     CustomEditorComponent,
     ScoreTableComponent,
     SelectDropdownComponent,
+    SaveAndReturnButtonComponent,
   ],
   templateUrl: './plan-edit.component.html',
   styleUrl: './plan-edit.component.scss',
@@ -154,5 +156,13 @@ export class PlanEditComponent implements OnInit {
   }
   onProposedActivitySaveClick() {
     console.log('==onProposedActivitySaveClick form', this.form());
+  }
+
+  onSaveAndReturn() {
+    console.log('==onSaveAndReturn');
+  }
+
+  onSubmit() {
+    console.log('==[onSubmit]');
   }
 }
