@@ -102,6 +102,60 @@
           ></app-com-custom-editor>
         </div>
       </div>
+
+      <div class="hr--dashed mgt-41"></div>
+      <!-- Proposed activities -->
+      <div class="commonRow mgt-14">
+        <div class="commonRow__left">
+          <div class="commonRow__header">Proposed activities</div>
+          <img src="/assets/event_note.svg" alt="note icon" />
+        </div>
+        <app-com-save-button
+          (click)="onProposedActivitySaveClick()"
+        ></app-com-save-button>
+      </div>
+      <div class="mgt-12">
+        <app-com-custom-editor
+          [control]="getControl('proposedActivity')"
+          [height]="324"
+        ></app-com-custom-editor>
+      </div>
+
+      <div class="hr--dashed mgt-46"></div>
+      <!-- Notes -->
+      <div class="commonRow mgt-14">
+        <div class="commonRow__left">
+          <div class="commonRow__header">Notes</div>
+          <img src="/assets/speaker_notes.svg" alt="speaker notes" />
+        </div>
+        <app-com-save-button
+          (click)="onProposedActivitySaveClick()"
+        ></app-com-save-button>
+      </div>
+      <div class="mgt-24">
+        <app-com-custom-editor
+          [control]="getControl('planNote')"
+          [height]="324"
+        ></app-com-custom-editor>
+      </div>
+
+      <div class="hr mgt-48"></div>
+      <!-- Contact Person -->
+      <div class="commonRow mgt-14">
+        <div class="commonRow__left">
+          <div class="commonRow__header">Contact Person</div>
+          <img src="/assets/account_circle.svg" alt="account icon" />
+        </div>
+        <app-com-save-button
+          (click)="onProposedActivitySaveClick()"
+        ></app-com-save-button>
+      </div>
+      <div class="mgt-12">
+        <app-com-custom-editor
+          [control]="getControl('contactPerson')"
+          [height]="279"
+        ></app-com-custom-editor>
+      </div>
     </form>
   </section>
 </div>

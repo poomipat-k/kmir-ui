@@ -57,6 +57,9 @@ export class PlanEditComponent implements OnInit {
       }),
       irGoalType: new FormControl(null, Validators.required),
       irGoalDetails: new FormControl(null, Validators.required),
+      proposedActivity: new FormControl(null, Validators.required),
+      planNote: new FormControl(null, Validators.required),
+      contactPerson: new FormControl(null, Validators.required),
     })
   );
   protected planDetails = signal<PlanDetails>(new PlanDetails());
@@ -148,5 +151,8 @@ export class PlanEditComponent implements OnInit {
   }
   onWorkGoalSaveClick() {
     console.log('==onWorkGoalSaveClick form', this.form());
+  }
+  onProposedActivitySaveClick() {
+    console.log('==onProposedActivitySaveClick form', this.form());
   }
 }

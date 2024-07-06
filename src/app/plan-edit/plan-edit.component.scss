@@ -132,9 +132,28 @@
   }
 }
 
+.commonRow {
+  display: flex;
+  justify-content: space-between;
+
+  &__left {
+    display: flex;
+    gap: 10px;
+  }
+
+  &__header {
+    font-family: $custom-font;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 53px;
+    color: #000;
+  }
+}
+
 .hr {
+  border-top: 1px solid rgba(0, 0, 0, 0.18);
   &--dashed {
-    border: 1px dashed rgba(0, 0, 0, 0.36);
+    border-top: 1px dashed rgba(0, 0, 0, 0.36);
   }
 }
 
@@ -145,6 +164,12 @@
   &-5 {
     margin-top: 5px;
   }
+  &-12 {
+    margin-top: 12px;
+  }
+  &-14 {
+    margin-top: 14px;
+  }
   &-16 {
     margin-top: 16px;
   }
@@ -153,6 +178,18 @@
   }
   &-20 {
     margin-top: 20px;
+  }
+  &-24 {
+    margin-top: 24px;
+  }
+  &-41 {
+    margin-top: 41px;
+  }
+  &-46 {
+    margin-top: 46px;
+  }
+  &-48 {
+    margin-top: 48px;
   }
   &-54 {
     margin-top: 54px;
