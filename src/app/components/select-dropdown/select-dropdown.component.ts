@@ -28,7 +28,7 @@ export class SelectDropdownComponent {
   items = input.required<DropdownOption[]>();
   width = input('100%');
   height = input('30px');
-  padding = input('8px 8px 8px 20px');
+  padding = input('8px 32px 8px 0px');
   placeholder = input('');
   disabled = input(false);
   onChange = input<() => void>();
