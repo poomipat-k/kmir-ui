@@ -78,7 +78,8 @@
           <div class="goal__type">
             <div class="mgt-5">
               <app-com-select-dropdown
-                [control]="getControl('irGoalType')"
+                [form]="form()"
+                controlName="irGoalType"
                 [items]="irTypeOptions()"
                 width="89px"
                 height="38px"

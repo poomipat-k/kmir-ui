@@ -8,7 +8,7 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { DropdownOption } from '../../shared/models/dropdown-option';
 
@@ -23,7 +23,8 @@ export class SelectDropdownComponent {
   selectDropdownButton = viewChild<ElementRef>('selectDropdownButton');
   inputIcon = viewChild<ElementRef>('inputIcon');
 
-  control = input.required<FormControl>({});
+  form = input<FormGroup>(new FormGroup({}));
+  controlName = input<string>('');
   items = input.required<DropdownOption[]>();
   width = input('100%');
   height = input('30px');
@@ -58,16 +59,16 @@ export class SelectDropdownComponent {
       })
     );
 
-    this.subs.update((values) => {
-      values.push(
-        this.control().valueChanges.subscribe((val) => {
-          const match = this.items().find((item) => item.value === val);
-          const display = match?.display || '';
-          this.selectedDisplay.set(display);
-        })
-      );
-      return values;
-    });
+    // this.subs.update((values) => {
+    //   values.push(
+    //     this.control().valueChanges.subscribe((val) => {
+    //       const match = this.items().find((item) => item.value === val);
+    //       const display = match?.display || '';
+    //       this.selectedDisplay.set(display);
+    //     })
+    //   );
+    //   return values;
+    // });
   }
 
   ngOnDestroy(): void {

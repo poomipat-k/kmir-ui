@@ -1,36 +1,30 @@
-<div
-  class="dropdown-component"
-  [style]="{ width: width() }"
-  [formGroup]="form()"
->
+<div class="dropdown-component" [formGroup]="form" [style]="{ width: width }">
   <div class="input-container" (click)="onInputClick($event)">
     <input
       #selectDropdownButton
       type="text"
-      [readOnly]="true"
-      [disabled]="disabled()"
+      [readOnly]="!showDropdown"
+      [disabled]="disabled"
       [ngClass]="{
         input: true,
-        disabled: disabled()
+        'input--searching': showDropdown,
+        disabled: disabled
       }"
-      [placeholder]="placeholder()"
-      [value]="selectedDisplay()"
-      [style]="{
-        'font-size': fontSize(),
-        height: height(),
-        padding: padding()
-      }"
+      [placeholder]="placeholder"
+      [value]="inputValue"
+      (keyup)="onSearchChanged($event)"
     />
 
     <img
       #inputIcon
       [ngClass]="{
         input__icon: true,
-        'input__icon--flip': showDropdown(),
-        disabled: disabled()
+        'input__icon--flip': showDropdown,
+        disabled: disabled
       }"
       src="/assets/arrow_drop_down.svg"
       alt="down arrow"
+      (click)="onInputIconClick()"
     />
   </div>
 
@@ -39,27 +33,27 @@
   <div
     [ngClass]="{
       'radio-container': true,
-      'radio-container--show': showDropdown()
+      'radio-container--show': showDropdown
     }"
-    [style]="{ width: width() }"
+    [style]="{ width: width }"
     (change)="onRadioValueChange()"
   >
-    @for (item of items(); track $index) {
+    @for (item of filteredOptions; track item.id) {
     <label
       class="radio__label"
-      [style]="{ 'font-size': fontSize(), height: height() }"
+      [style]="{ 'font-size': dropdownFontSize }"
       (click)="onDropdownClicked()"
     >
       <input
         type="radio"
         class="radio"
+        [formControlName]="controlName"
         [value]="item.value"
-        [formControlName]="controlName()"
       />
       {{ item.display }}
     </label>
     } @empty {
-    <p class="radio-container--empty">{{ emptyMessage() }}</p>
+    <p class="radio-container--empty">{{ emptyMessage }}</p>
     }
   </div>
 </div>

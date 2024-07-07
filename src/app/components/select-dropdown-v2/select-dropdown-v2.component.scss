@@ -1,0 +1,127 @@
+@import "../../../styles.scss";
+
+.dropdown-component {
+  position: relative;
+}
+
+.input-container {
+  position: relative;
+  width: 100%;
+}
+
+.input {
+  border-radius: 8px;
+  border: 1px solid #d0d5dd;
+  background: #fff;
+  padding: 1rem 1.4rem;
+  height: 4.4rem;
+  width: 100%;
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+  cursor: pointer;
+
+  color: #344054;
+  font-family: $custom-font-looped;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2.4rem;
+
+  &:focus-visible {
+    outline: none;
+    border: 1px solid #d9dbe1;
+    box-shadow: 0px 0px 0px 4px #eaecf1, 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+  }
+
+  &::placeholder {
+    color: #8b909c;
+  }
+
+  &--searching {
+    cursor: text;
+  }
+
+  &__icon {
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+
+    border-radius: 8px;
+    padding: 1.2rem 8px 1.2rem 8px;
+
+    transition: transform 400ms;
+
+    &--flip {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.radio-container {
+  position: absolute;
+  background-color: #fff;
+  display: none;
+
+  max-height: 30rem;
+  overflow: auto;
+  border: 1px solid #d0d5dd;
+  border-radius: 8px;
+  z-index: 2;
+
+  &--show {
+    display: block;
+    min-height: 4.4rem;
+  }
+
+  &--empty {
+    color: #8b909c;
+    font-family: $custom-font-looped;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 2.4rem;
+    padding: 1rem 1.4rem;
+  }
+}
+
+.radio {
+  position: absolute;
+  opacity: 0;
+
+  &__label {
+    display: block;
+    height: 4.4rem;
+    border: 1px solid #d0d5dd;
+    padding: 1rem 1.4rem;
+    cursor: pointer;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    color: #344054;
+    font-family: $custom-font-looped;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 2.4rem;
+
+    &:first-child {
+      border-top-right-radius: 8px;
+      border-top-left-radius: 8px;
+    }
+
+    &:last-child {
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+    }
+
+    &:not(:first-child) {
+      border-top: 0;
+    }
+  }
+}
+
+.disabled {
+  cursor: not-allowed;
+}

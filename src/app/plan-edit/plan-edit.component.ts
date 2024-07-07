@@ -105,6 +105,15 @@ export class PlanEditComponent implements OnInit {
         console.log('==edit plan planDetails', planDetails);
         if (planDetails) {
           this.planDetails.set(planDetails);
+          // patch formValues
+          this.form().patchValue({
+            readinessWillingness: planDetails.readinessWillingness,
+            irGoalType: planDetails.irGoalType,
+            irGoalDetails: planDetails.irGoalDetails,
+            proposedActivity: planDetails.proposedActivity,
+            planNote: planDetails.planNote,
+            contactPerson: planDetails.contactPerson,
+          });
         }
       });
   }
@@ -134,6 +143,24 @@ export class PlanEditComponent implements OnInit {
         res[row.criteriaOrder - 1].score = row.score;
       }
     });
+
+    if (res) {
+      res.sort((a, b) => {
+        return a.order >= b.order ? 1 : -1;
+      });
+      console.log('==res', res);
+      this.form()?.patchValue({
+        score: {
+          q1: res[0],
+          q2: res[1],
+          q3: res[2],
+          q4: res[3],
+          q5: res[4],
+          q6: res[5],
+          q7: res[6],
+        },
+      });
+    }
     return res || [];
   }
 

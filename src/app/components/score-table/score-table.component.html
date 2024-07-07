@@ -6,7 +6,8 @@
   @if (editMode()) {
   <div class="dropdown">
     <app-com-select-dropdown
-      [control]="getScoreControl(item)"
+      [form]="form()"
+      [controlName]="getDropdownControlName(item)"
       [items]="scoreOptions()"
       width="64px"
     ></app-com-select-dropdown>

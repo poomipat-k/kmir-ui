@@ -14,7 +14,7 @@ import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.comp
 export class ScoreTableComponent {
   data = input<ScoreTableRow[]>([]);
   editMode = input(false);
-  form = input<FormGroup>();
+  form = input<FormGroup>(new FormGroup({}));
 
   protected scoreOptions = signal<DropdownOption[]>([
     {
@@ -61,5 +61,9 @@ export class ScoreTableComponent {
 
   getScoreControl(item: ScoreTableRow): FormControl {
     return this.form()?.get(`q${item.order}`) as FormControl;
+  }
+
+  getDropdownControlName(item: ScoreTableRow): string {
+    return `q${item.order}`;
   }
 }
