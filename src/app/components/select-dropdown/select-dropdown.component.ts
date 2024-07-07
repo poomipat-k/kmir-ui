@@ -59,16 +59,29 @@ export class SelectDropdownComponent {
       })
     );
 
-    // this.subs.update((values) => {
-    //   values.push(
-    //     this.control().valueChanges.subscribe((val) => {
-    //       const match = this.items().find((item) => item.value === val);
-    //       const display = match?.display || '';
-    //       this.selectedDisplay.set(display);
-    //     })
-    //   );
-    //   return values;
-    // });
+    // display initial value
+    const value = this.form().get(this.controlName())?.value;
+    const display = this.getDisplay(value);
+    this.selectedDisplay.set(display);
+
+    // Sub to values changes
+    this.subs.update((values) => {
+      values.push(
+        this.form().controls?.[this.controlName()].valueChanges.subscribe(
+          (val) => {
+            const display = this.getDisplay(val);
+            this.selectedDisplay.set(display);
+          }
+        )
+      );
+      return values;
+    });
+  }
+
+  getDisplay(value: any) {
+    const match = this.items().find((item) => item.value === value);
+    const display = match?.display || '';
+    return display;
   }
 
   ngOnDestroy(): void {

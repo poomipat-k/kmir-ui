@@ -151,13 +151,13 @@ export class PlanEditComponent implements OnInit {
       console.log('==res', res);
       this.form()?.patchValue({
         score: {
-          q1: res[0],
-          q2: res[1],
-          q3: res[2],
-          q4: res[3],
-          q5: res[4],
-          q6: res[5],
-          q7: res[6],
+          q1: res[0].score,
+          q2: res[1].score,
+          q3: res[2].score,
+          q4: res[3].score,
+          q5: res[4].score,
+          q6: res[5].score,
+          q7: res[6].score,
         },
       });
     }
