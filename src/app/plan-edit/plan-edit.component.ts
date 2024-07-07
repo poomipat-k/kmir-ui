@@ -68,23 +68,23 @@ export class PlanEditComponent implements OnInit {
   protected scrollerOffset = signal<[number, number]>([0, 40]); // [x, y
   protected irTypeOptions = signal<DropdownOption[]>([
     {
-      value: 'type1',
+      value: 'type_1',
       display: 'Type 1',
     },
     {
-      value: 'type2',
+      value: 'type_2',
       display: 'Type 2',
     },
     {
-      value: 'type3',
+      value: 'type_3',
       display: 'Type 3',
     },
     {
-      value: 'type4',
+      value: 'type_4',
       display: 'Type 4',
     },
     {
-      value: 'type5',
+      value: 'type_5',
       display: 'Type 5',
     },
   ]);
