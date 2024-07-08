@@ -14,6 +14,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+
 import { CustomEditorComponent } from '../components/custom-editor/custom-editor.component';
 import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.component';
 import { SaveAndReturnButtonComponent } from '../components/save-and-return-button/save-and-return-button.component';
@@ -24,6 +25,7 @@ import { PlanService } from '../services/plan.service';
 import { ThemeService } from '../services/theme.service';
 import { DropdownOption } from '../shared/models/dropdown-option';
 import { PlanDetails } from '../shared/models/plan-details';
+import { PlanFormValue } from '../shared/models/plan-form-value';
 import { ScoreTableRow } from '../shared/models/score-table-row';
 
 @Component({
@@ -64,6 +66,8 @@ export class PlanEditComponent implements OnInit {
       contactPerson: new FormControl(null, Validators.required),
     })
   );
+
+  protected originalForm = signal<PlanFormValue>(new PlanFormValue());
   protected planDetails = signal<PlanDetails>(new PlanDetails());
   protected scrollerOffset = signal<[number, number]>([0, 40]); // [x, y
   protected irTypeOptions = signal<DropdownOption[]>([
@@ -89,7 +93,9 @@ export class PlanEditComponent implements OnInit {
     },
   ]);
 
-  protected scoreTableData = computed(() => this.computedScoreTable());
+  protected scoreTableData = computed(() =>
+    this.computedScoreTableAndRefreshForm()
+  );
 
   protected readonly themeService: ThemeService = inject(ThemeService);
   private readonly planService: PlanService = inject(PlanService);
@@ -105,15 +111,8 @@ export class PlanEditComponent implements OnInit {
         console.log('==edit plan planDetails', planDetails);
         if (planDetails) {
           this.planDetails.set(planDetails);
-          // patch formValues
-          this.form().patchValue({
-            readinessWillingness: planDetails.readinessWillingness,
-            irGoalType: planDetails.irGoalType,
-            irGoalDetails: planDetails.irGoalDetails,
-            proposedActivity: planDetails.proposedActivity,
-            planNote: planDetails.planNote,
-            contactPerson: planDetails.contactPerson,
-          });
+          this.computedScoreTableAndRefreshForm();
+          this.originalForm.set(this.form().value);
         }
       });
   }
@@ -122,9 +121,9 @@ export class PlanEditComponent implements OnInit {
     return this.form().get('score') as FormGroup;
   }
 
-  computedScoreTable(): ScoreTableRow[] {
-    const plans = this.planDetails();
-    const res = plans.assessmentCriteria?.map((c) => {
+  computedScoreTableAndRefreshForm(): ScoreTableRow[] {
+    const plan = this.planDetails();
+    const res = plan.assessmentCriteria?.map((c) => {
       const row = new ScoreTableRow();
       row.order = c.orderNumber;
       row.question = c.display;
@@ -137,7 +136,7 @@ export class PlanEditComponent implements OnInit {
     const split = nowLocal.split('/');
     const year = +split[split.length - 1];
 
-    plans.assessmentScore?.forEach((row) => {
+    plan.assessmentScore?.forEach((row) => {
       // Only display score for current year and from the owner of the plan
       if (row.year === year && row.userRole === 'user') {
         res[row.criteriaOrder - 1].score = row.score;
@@ -148,8 +147,13 @@ export class PlanEditComponent implements OnInit {
       res.sort((a, b) => {
         return a.order >= b.order ? 1 : -1;
       });
-      console.log('==res', res);
-      this.form()?.patchValue({
+      this.form().patchValue({
+        readinessWillingness: plan.readinessWillingness,
+        irGoalType: plan.irGoalType,
+        irGoalDetails: plan.irGoalDetails,
+        proposedActivity: plan.proposedActivity,
+        planNote: plan.planNote,
+        contactPerson: plan.contactPerson,
         score: {
           q1: res[0].score,
           q2: res[1].score,
@@ -173,7 +177,10 @@ export class PlanEditComponent implements OnInit {
   }
 
   onReadinessSaveClick() {
-    console.log('==onReadinessSaveClick form', this.form());
+    const diff =
+      this.form().value.readinessWillingness !==
+      this.originalForm().readinessWillingness;
+    console.log('==diff', diff);
   }
   onAssessmentScoresSaveClick() {
     console.log('==onAssessmentScoresSaveClick form', this.form());
