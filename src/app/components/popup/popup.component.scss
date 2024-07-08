@@ -1,0 +1,50 @@
+@import "../../../styles.scss";
+
+.container {
+  width: 24rem;
+  height: 18.4rem;
+  padding: 32px;
+
+  border-radius: 10px;
+  border: 1px solid #16cb44;
+  background: #fff;
+  box-shadow: 0px 30px 50px 0px rgba(41, 46, 40, 0.29);
+
+  z-index: 10;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.check-container {
+  height: 6.3rem;
+  width: 6.3rem;
+  border-radius: 50%;
+  background-color: #34c759;
+  margin: auto;
+  position: relative;
+}
+
+.check {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.text {
+  color: #252525;
+  text-align: center;
+  font-family: $custom-font;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 2rem;
+}
+
+.mt {
+  &-26 {
+    margin-top: 2.6rem;
+  }
+}

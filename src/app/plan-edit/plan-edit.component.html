@@ -33,7 +33,7 @@
             ></app-com-icon-tooltip>
           </div>
           <app-com-save-button
-            (click)="onReadinessSaveClick()"
+            (click)="onSaveButtonClick('readinessWillingness')"
           ></app-com-save-button>
         </div>
         <div class="mgt-20">
@@ -55,7 +55,7 @@
             ></app-com-icon-tooltip>
           </div>
           <app-com-save-button
-            (click)="onAssessmentScoresSaveClick()"
+            (click)="onSaveButtonClick('assessmentScore')"
           ></app-com-save-button>
         </div>
         <div class="mgt-18">
@@ -68,7 +68,7 @@
       </div>
 
       <div class="hr--dashed mgt-73"></div>
-      <!-- IR work goal -->
+      <!-- IR goal type and goal details-->
       <div class="mgt-80">
         <div class="goal__header">
           <h3>IR work goal</h3>
@@ -92,7 +92,7 @@
             ></app-com-icon-tooltip>
           </div>
           <app-com-save-button
-            (click)="onReadinessSaveClick()"
+            (click)="onSaveButtonClick('irGoal')"
           ></app-com-save-button>
         </div>
         <div class="mgt-16">
@@ -111,7 +111,7 @@
           <img src="/assets/event_note.svg" alt="note icon" />
         </div>
         <app-com-save-button
-          (click)="onProposedActivitySaveClick()"
+          (click)="onSaveButtonClick('proposedActivity')"
         ></app-com-save-button>
       </div>
       <div class="mgt-12">
@@ -129,7 +129,7 @@
           <img src="/assets/speaker_notes.svg" alt="speaker notes" />
         </div>
         <app-com-save-button
-          (click)="onProposedActivitySaveClick()"
+          (click)="onSaveButtonClick('planNote')"
         ></app-com-save-button>
       </div>
       <div class="mgt-24">
@@ -147,7 +147,7 @@
           <img src="/assets/account_circle.svg" alt="account icon" />
         </div>
         <app-com-save-button
-          (click)="onProposedActivitySaveClick()"
+          (click)="onSaveButtonClick('contactPerson')"
         ></app-com-save-button>
       </div>
       <div class="mgt-12">
@@ -164,4 +164,11 @@
       </div>
     </form>
   </section>
+</div>
+
+<div class="popup">
+  <app-com-popup
+    [displayText]="updateSuccessText()"
+    [show]="showPopup()"
+  ></app-com-popup>
 </div>

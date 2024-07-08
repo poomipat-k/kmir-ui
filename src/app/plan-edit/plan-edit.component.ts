@@ -17,6 +17,7 @@ import { Router } from '@angular/router';
 
 import { CustomEditorComponent } from '../components/custom-editor/custom-editor.component';
 import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.component';
+import { PopupComponent } from '../components/popup/popup.component';
 import { SaveAndReturnButtonComponent } from '../components/save-and-return-button/save-and-return-button.component';
 import { SaveButtonComponent } from '../components/save-button/save-button.component';
 import { ScoreTableComponent } from '../components/score-table/score-table.component';
@@ -39,13 +40,14 @@ import { ScoreTableRow } from '../shared/models/score-table-row';
     ScoreTableComponent,
     SelectDropdownComponent,
     SaveAndReturnButtonComponent,
+    PopupComponent,
   ],
   templateUrl: './plan-edit.component.html',
   styleUrl: './plan-edit.component.scss',
 })
 export class PlanEditComponent implements OnInit {
   // url params
-  protected planName = input<string>();
+  protected planName = input<string>('');
 
   protected form = signal<FormGroup>(
     new FormGroup({
@@ -67,6 +69,8 @@ export class PlanEditComponent implements OnInit {
     })
   );
 
+  protected showPopup = signal(false);
+  protected updateSuccessText = signal('Update plan successfully');
   protected originalForm = signal<PlanFormValue>(new PlanFormValue());
   protected planDetails = signal<PlanDetails>(new PlanDetails());
   protected scrollerOffset = signal<[number, number]>([0, 40]); // [x, y
@@ -176,27 +180,70 @@ export class PlanEditComponent implements OnInit {
     this.router.navigate([`/plan/${this.planName()}`]);
   }
 
-  onReadinessSaveClick() {
-    const diff =
-      this.form().value.readinessWillingness !==
-      this.originalForm().readinessWillingness;
-    console.log('==diff', diff);
-  }
-  onAssessmentScoresSaveClick() {
-    console.log('==onAssessmentScoresSaveClick form', this.form());
-  }
-  onWorkGoalSaveClick() {
-    console.log('==onWorkGoalSaveClick form', this.form());
-  }
-  onProposedActivitySaveClick() {
-    console.log('==onProposedActivitySaveClick form', this.form());
+  onSaveButtonClick(name: string) {
+    const newPlanValue = new PlanFormValue();
+    if (name === 'full' || name === 'readinessWillingness') {
+      const newValue: string = this.form().value.readinessWillingness;
+      const diff = newValue !== this.originalForm().readinessWillingness;
+      if (diff) {
+        newPlanValue.readinessWillingness = newValue;
+      }
+    }
+
+    if (name === 'full' || name === 'irGoal') {
+      const newType: string = this.form().value.irGoalType;
+      const typeDiff = newType !== this.originalForm().irGoalType;
+      if (typeDiff) {
+        newPlanValue.irGoalType = newType;
+      }
+
+      const newDetails: string = this.form().value.irGoalDetails;
+      const detailsDiff = newDetails !== this.originalForm().irGoalDetails;
+      if (detailsDiff) {
+        newPlanValue.irGoalDetails = newDetails;
+      }
+    }
+
+    if (name === 'full' || name === 'proposedActivity') {
+      const newValue: string = this.form().value.proposedActivity;
+      const diff = newValue !== this.originalForm().proposedActivity;
+      if (diff) {
+        newPlanValue.proposedActivity = newValue;
+      }
+    }
+
+    if (name === 'full' || name === 'planNote') {
+      const newValue: string = this.form().value.planNote;
+      const diff = newValue !== this.originalForm().planNote;
+      if (diff) {
+        newPlanValue.planNote = newValue;
+      }
+    }
+
+    if (name === 'full' || name === 'contactPerson') {
+      const newValue: string = this.form().value.contactPerson;
+      const diff = newValue !== this.originalForm().contactPerson;
+      if (diff) {
+        newPlanValue.contactPerson = newValue;
+      }
+    }
+
+    console.log('==newPlanValue', newPlanValue);
+    this.planService
+      .editPlan(this.planName(), newPlanValue)
+      .subscribe((res) => {
+        if (res) {
+          this.showPopup.set(true);
+          console.log('==res', res);
+          setTimeout(() => {
+            this.showPopup.set(false);
+          }, 2000);
+        }
+      });
   }
 
   onSaveAndReturn() {
     console.log('==onSaveAndReturn');
-  }
-
-  onSubmit() {
-    console.log('==[onSubmit]');
+    this.onSaveButtonClick('full');
   }
 }

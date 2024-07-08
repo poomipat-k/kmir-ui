@@ -4,6 +4,7 @@ import { catchError, of, throwError } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { CommonSuccessResponse } from '../shared/models/common-success-response';
 import { PlanDetails } from '../shared/models/plan-details';
+import { PlanFormValue } from '../shared/models/plan-form-value';
 import { PreviewPlan } from '../shared/models/preview-plan';
 
 @Injectable({
@@ -48,6 +49,12 @@ export class PlanService {
   getPlanDetails(planName: string) {
     return this.http
       .get<PlanDetails>(`${this.baseApiUrl}/plan/details/${planName}`)
+      .pipe(catchError(this.handleError));
+  }
+
+  editPlan(planName: string, payload: PlanFormValue) {
+    return this.http
+      .patch<any>(`${this.baseApiUrl}/plan`, { ...payload, planName })
       .pipe(catchError(this.handleError));
   }
 
