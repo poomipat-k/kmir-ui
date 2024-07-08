@@ -47,14 +47,14 @@ export class HomeComponent implements OnInit {
 
     this.planService.getAllPreviewPlan().subscribe((res: PreviewPlan[]) => {
       if (res && res.length > 0) {
-        this.plans.set(
-          res.map((plan) => {
-            const item = new PlanCard();
-            item.data = plan;
-            item.open = false;
-            return item;
-          })
-        );
+        const plans = res.map((plan) => {
+          const item = new PlanCard();
+          item.data = plan;
+          item.open = false;
+          return item;
+        });
+        console.log('==plans', plans);
+        this.plans.set(plans);
       }
     });
   }

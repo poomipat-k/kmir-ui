@@ -20,6 +20,7 @@ import { IntersectionElementDirective } from '../shared/directives/intersection-
 import { MetricInput } from '../shared/models/metric-input';
 import { PlanDetails } from '../shared/models/plan-details';
 import { ScoreTableRow } from '../shared/models/score-table-row';
+import { SafeHtmlPipe } from '../shared/pipe/safe-html.pipe';
 
 @Component({
   selector: 'app-plan-details',
@@ -33,6 +34,7 @@ import { ScoreTableRow } from '../shared/models/score-table-row';
     BackToTopComponent,
     IntersectionElementDirective,
     RouterModule,
+    SafeHtmlPipe,
   ],
   templateUrl: './plan-details.component.html',
   styleUrl: './plan-details.component.scss',

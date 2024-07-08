@@ -128,9 +128,10 @@
         <app-com-updated-at
           [display]="getEditHistory('readinessWillingness')"
         ></app-com-updated-at>
-        <p class="mgt-8 metricAndWillingness__text">
-          {{ planDetails().readinessWillingness }}
-        </p>
+        <div
+          class="mgt-8 metricAndWillingness__text"
+          [innerHTML]="planDetails().readinessWillingness | safeHtml"
+        ></div>
       </div>
     </div>
 
@@ -186,7 +187,10 @@
             tooltipText="Type details"
           ></app-com-icon-tooltip>
         </div>
-        <p class="goal__details mgt-16">{{ planDetails().irGoalDetails }}</p>
+        <div
+          class="goal__details mgt-16"
+          [innerHTML]="planDetails().irGoalDetails ?? '' | safeHtml"
+        ></div>
       </div>
     </div>
     <div class="hr--dashed mgt-70"></div>
@@ -214,9 +218,10 @@
           ></app-com-updated-at>
         </div>
       </div>
-      <p class="commonTextSection__text mgt-20">
-        {{ planDetails().proposedActivity }}
-      </p>
+      <div
+        class="commonTextSection__text mgt-20"
+        [innerHTML]="planDetails().proposedActivity ?? '' | safeHtml"
+      ></div>
     </div>
     <div class="hr--dashed mgt-80"></div>
     <!-- Notes -->
@@ -243,9 +248,10 @@
           ></app-com-updated-at>
         </div>
       </div>
-      <p class="commonTextSection__text mgt-20">
-        {{ planDetails().planNote }}
-      </p>
+      <div
+        class="commonTextSection__text mgt-20"
+        [innerHTML]="planDetails().planNote ?? '' | safeHtml"
+      ></div>
     </div>
     <!-- Contact Person -->
     <div class="mgt-40">
@@ -271,9 +277,10 @@
           ></app-com-updated-at>
         </div>
       </div>
-      <p class="commonTextSection__text mgt-20">
-        {{ planDetails().contactPerson }}
-      </p>
+      <div
+        class="commonTextSection__text mgt-20"
+        [innerHTML]="planDetails().contactPerson ?? '' | safeHtml"
+      ></div>
     </div>
     <app-com-back-to-top></app-com-back-to-top>
   </section>
