@@ -193,9 +193,8 @@ export class PlanEditComponent implements OnInit {
     }
 
     if (name === 'full' || name === 'assessmentScore') {
-      const newValue = this.form().value.score;
+      const newValue = this.form().value.assessmentScore;
       const diff = !isEqual(newValue, this.originalForm().assessmentScore);
-      console.log('==diff', diff);
       if (diff) {
         newPlanValue.assessmentScore = newValue;
       }
