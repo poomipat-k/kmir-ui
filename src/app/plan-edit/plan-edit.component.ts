@@ -15,6 +15,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { isEqual } from 'lodash-es';
 import { CustomEditorComponent } from '../components/custom-editor/custom-editor.component';
 import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.component';
 import { PopupComponent } from '../components/popup/popup.component';
@@ -52,14 +53,14 @@ export class PlanEditComponent implements OnInit {
   protected form = signal<FormGroup>(
     new FormGroup({
       readinessWillingness: new FormControl(null, Validators.required),
-      score: new FormGroup({
-        q1: new FormControl(null, Validators.required),
-        q2: new FormControl(null, Validators.required),
-        q3: new FormControl(null, Validators.required),
-        q4: new FormControl(null, Validators.required),
-        q5: new FormControl(null, Validators.required),
-        q6: new FormControl(null, Validators.required),
-        q7: new FormControl(null, Validators.required),
+      assessmentScore: new FormGroup({
+        q_1: new FormControl(null, Validators.required),
+        q_2: new FormControl(null, Validators.required),
+        q_3: new FormControl(null, Validators.required),
+        q_4: new FormControl(null, Validators.required),
+        q_5: new FormControl(null, Validators.required),
+        q_6: new FormControl(null, Validators.required),
+        q_7: new FormControl(null, Validators.required),
       }),
       irGoalType: new FormControl(null, Validators.required),
       irGoalDetails: new FormControl(null, Validators.required),
@@ -122,13 +123,13 @@ export class PlanEditComponent implements OnInit {
       });
   }
 
-  getScoreFormGroup(): FormGroup {
-    return this.form().get('score') as FormGroup;
+  getAssessmentScoreFormGroup(): FormGroup {
+    return this.form().get('assessmentScore') as FormGroup;
   }
 
   computedScoreTableAndRefreshForm(): ScoreTableRow[] {
     const plan = this.planDetails();
-    const res = plan.assessmentCriteria?.map((c) => {
+    const scoreData = plan.assessmentCriteria?.map((c) => {
       const row = new ScoreTableRow();
       row.order = c.orderNumber;
       row.question = c.display;
@@ -144,12 +145,12 @@ export class PlanEditComponent implements OnInit {
     plan.assessmentScore?.forEach((row) => {
       // Only display score for current year and from the owner of the plan
       if (row.year === year && row.userRole === 'user') {
-        res[row.criteriaOrder - 1].score = row.score;
+        scoreData[row.criteriaOrder - 1].score = row.score;
       }
     });
 
-    if (res) {
-      res.sort((a, b) => {
+    if (scoreData) {
+      scoreData.sort((a, b) => {
         return a.order >= b.order ? 1 : -1;
       });
       this.form().patchValue({
@@ -159,18 +160,18 @@ export class PlanEditComponent implements OnInit {
         proposedActivity: plan.proposedActivity,
         planNote: plan.planNote,
         contactPerson: plan.contactPerson,
-        score: {
-          q1: res[0].score,
-          q2: res[1].score,
-          q3: res[2].score,
-          q4: res[3].score,
-          q5: res[4].score,
-          q6: res[5].score,
-          q7: res[6].score,
+        assessmentScore: {
+          q_1: scoreData[0].score,
+          q_2: scoreData[1].score,
+          q_3: scoreData[2].score,
+          q_4: scoreData[3].score,
+          q_5: scoreData[4].score,
+          q_6: scoreData[5].score,
+          q_7: scoreData[6].score,
         },
       });
     }
-    return res || [];
+    return scoreData || [];
   }
 
   getControl(name: string): FormControl {
@@ -188,6 +189,15 @@ export class PlanEditComponent implements OnInit {
       const diff = newValue !== this.originalForm().readinessWillingness;
       if (diff) {
         newPlanValue.readinessWillingness = newValue;
+      }
+    }
+
+    if (name === 'full' || name === 'assessmentScore') {
+      const newValue = this.form().value.score;
+      const diff = !isEqual(newValue, this.originalForm().assessmentScore);
+      console.log('==diff', diff);
+      if (diff) {
+        newPlanValue.assessmentScore = newValue;
       }
     }
 

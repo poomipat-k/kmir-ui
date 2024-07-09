@@ -1,5 +1,5 @@
 import { Component, input, signal } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { DropdownOption } from '../../shared/models/dropdown-option';
 import { ScoreTableRow } from '../../shared/models/score-table-row';
 import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.component';
@@ -59,11 +59,7 @@ export class ScoreTableComponent {
     },
   ]);
 
-  getScoreControl(item: ScoreTableRow): FormControl {
-    return this.form()?.get(`q${item.order}`) as FormControl;
-  }
-
   getDropdownControlName(item: ScoreTableRow): string {
-    return `q${item.order}`;
+    return `q_${item.order}`;
   }
 }

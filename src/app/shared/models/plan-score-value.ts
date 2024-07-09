@@ -1,11 +1,11 @@
 export class PlanScoreValue {
-  q1?: number;
-  q2?: number;
-  q3?: number;
-  q4?: number;
-  q5?: number;
-  q6?: number;
-  q7?: number;
+  q_1?: number;
+  q_2?: number;
+  q_3?: number;
+  q_4?: number;
+  q_5?: number;
+  q_6?: number;
+  q_7?: number;
 
   constructor() {}
 }
