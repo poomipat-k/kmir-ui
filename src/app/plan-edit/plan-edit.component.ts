@@ -239,6 +239,9 @@ export class PlanEditComponent implements OnInit {
           console.log('==res', res);
           setTimeout(() => {
             this.showPopup.set(false);
+            if (name === 'full') {
+              this.router.navigate([`/plan/${this.planName()}`]);
+            }
           }, 2000);
         }
       },
