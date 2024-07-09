@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, input, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { EditorComponent, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
@@ -5,7 +6,7 @@ import { EditorComponent, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 @Component({
   selector: 'app-com-custom-editor',
   standalone: true,
-  imports: [EditorComponent, ReactiveFormsModule],
+  imports: [EditorComponent, ReactiveFormsModule, CommonModule],
   providers: [
     { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' },
   ],
@@ -15,6 +16,7 @@ import { EditorComponent, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 export class CustomEditorComponent implements OnInit {
   control = input(new FormControl());
   height = input(326);
+  hasError = input(false);
 
   protected editorInit = signal<EditorComponent['init']>({});
   protected editorPlugins = signal(

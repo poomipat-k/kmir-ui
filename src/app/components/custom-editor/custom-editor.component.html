@@ -1,4 +1,4 @@
-<div>
+<div [ngClass]="{ 'editor--error': hasError() }">
   <editor
     #editor
     [formControl]="control()"

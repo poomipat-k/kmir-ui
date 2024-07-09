@@ -257,7 +257,7 @@ export class PlanEditComponent implements OnInit {
       error: (err) => {
         let message = '';
         if (err?.error?.name === 'no_changes') {
-          message = 'No changes found.';
+          message = 'ไม่พบการเปลี่ยนแปลงข้อมูล';
         } else {
           message = err?.error?.message;
         }
