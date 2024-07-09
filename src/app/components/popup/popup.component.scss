@@ -15,22 +15,41 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  &--error {
+    border: 1px solid #ff3300;
+  }
 }
 
-.check-container {
+.icon-container {
   height: 6.3rem;
   width: 6.3rem;
   border-radius: 50%;
   background-color: #34c759;
   margin: auto;
   position: relative;
+
+  &--error {
+    background-color: #ff3300;
+  }
 }
 
-.check {
+.icon {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  &__path {
+    fill: #fff;
+  }
+
+  &--error {
+    font-family: $custom-font;
+    color: #fff;
+    font-size: 40px;
+    line-height: 40px;
+  }
 }
 
 .text {

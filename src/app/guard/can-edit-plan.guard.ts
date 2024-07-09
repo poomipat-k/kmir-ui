@@ -7,7 +7,6 @@ export const canEditPlanGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   const planService = inject(PlanService);
   const planName = route.params?.['planName'];
-  console.log('===planName', planName);
   return planService.canEditPlan(planName).pipe(
     map((res) => {
       if (res.success) {

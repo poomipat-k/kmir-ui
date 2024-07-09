@@ -168,7 +168,8 @@
 
 <div class="popup">
   <app-com-popup
-    [displayText]="updateSuccessText()"
+    [displayText]="popupText()"
     [show]="showPopup()"
+    [error]="isPopupError()"
   ></app-com-popup>
 </div>

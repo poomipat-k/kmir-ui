@@ -53,7 +53,6 @@ export class HomeComponent implements OnInit {
           item.open = false;
           return item;
         });
-        console.log('==plans', plans);
         this.plans.set(plans);
       }
     });

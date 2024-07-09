@@ -70,7 +70,8 @@ export class PlanEditComponent implements OnInit {
   );
 
   protected showPopup = signal(false);
-  protected updateSuccessText = signal('Update plan successfully');
+  protected isPopupError = signal(false);
+  protected popupText = signal('Update plan successfully');
   protected originalForm = signal<PlanFormValue>(new PlanFormValue());
   protected planDetails = signal<PlanDetails>(new PlanDetails());
   protected scrollerOffset = signal<[number, number]>([0, 40]); // [x, y
@@ -229,17 +230,33 @@ export class PlanEditComponent implements OnInit {
     }
 
     console.log('==newPlanValue', newPlanValue);
-    this.planService
-      .editPlan(this.planName(), newPlanValue)
-      .subscribe((res) => {
+    this.planService.editPlan(this.planName(), newPlanValue).subscribe({
+      next: (res) => {
         if (res) {
+          this.popupText.set('Update plan successfully');
+          this.isPopupError.set(false);
           this.showPopup.set(true);
           console.log('==res', res);
           setTimeout(() => {
             this.showPopup.set(false);
           }, 2000);
         }
-      });
+      },
+      error: (err) => {
+        let message = '';
+        if (err?.error?.name === 'no_changes') {
+          message = 'No changes found.';
+        } else {
+          message = err?.error?.message;
+        }
+        this.isPopupError.set(true);
+        this.popupText.set(message);
+        this.showPopup.set(true);
+        setTimeout(() => {
+          this.showPopup.set(false);
+        }, 2000);
+      },
+    });
   }
 
   onSaveAndReturn() {

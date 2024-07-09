@@ -1,10 +1,11 @@
 import { animate, style, transition, trigger } from '@angular/animations';
+import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-com-popup',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './popup.component.html',
   styleUrl: './popup.component.scss',
   animations: [
@@ -48,5 +49,6 @@ import { Component, input } from '@angular/core';
 })
 export class PopupComponent {
   show = input.required<boolean>();
+  error = input(false);
   displayText = input('');
 }
