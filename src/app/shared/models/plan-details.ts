@@ -6,6 +6,7 @@ export class PlanDetails {
   name: string;
   topic: string;
   topicEn: string;
+  topicShort: string;
   readinessWillingness: string;
   readinessWillingnessUpdatedAt: string;
   readinessWillingnessUpdatedBy: string;

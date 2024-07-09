@@ -58,7 +58,7 @@ export class PlanDetailsComponent implements OnInit {
     }
     return 0;
   });
-  protected scoreDetails = computed(() => this.computeScore());
+
   protected metricData = computed(() => this.computeScore());
   protected scoreTableData = computed(() => this.computedScoreTable());
   protected baseLink = computed(() => `/plan/${this.planName()}`);
@@ -131,7 +131,7 @@ export class PlanDetailsComponent implements OnInit {
           Math.round(v.x / 2 / divideX),
           Math.round(v.y / 2 / divideY),
           +k,
-          this.planDetails().name
+          this.planDetails().topicShort
         )
       );
     }
