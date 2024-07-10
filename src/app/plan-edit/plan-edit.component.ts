@@ -15,7 +15,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { isEqual } from 'lodash-es';
+import { cloneDeep, isEqual } from 'lodash-es';
 import { CustomEditorComponent } from '../components/custom-editor/custom-editor.component';
 import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.component';
 import { PopupComponent } from '../components/popup/popup.component';
@@ -245,7 +245,33 @@ export class PlanEditComponent implements OnInit {
           this.popupText.set('Update plan successfully');
           this.isPopupError.set(false);
           this.showPopup.set(true);
-          console.log('==res', res);
+          this.originalForm.update((oldValue: PlanFormValue) => {
+            const updateValue = cloneDeep(oldValue);
+            if (newPlanValue.readinessWillingness) {
+              updateValue.readinessWillingness =
+                newPlanValue.readinessWillingness;
+            }
+            if (newPlanValue.assessmentScore) {
+              updateValue.assessmentScore = newPlanValue.assessmentScore;
+            }
+            if (newPlanValue.irGoalType) {
+              updateValue.irGoalType = newPlanValue.irGoalType;
+            }
+            if (newPlanValue.irGoalDetails) {
+              updateValue.irGoalDetails = newPlanValue.irGoalDetails;
+            }
+            if (newPlanValue.proposedActivity) {
+              updateValue.proposedActivity = newPlanValue.proposedActivity;
+            }
+            if (newPlanValue.planNote) {
+              updateValue.planNote = newPlanValue.planNote;
+            }
+            if (newPlanValue.contactPerson) {
+              updateValue.contactPerson = newPlanValue.contactPerson;
+            }
+
+            return updateValue;
+          });
           setTimeout(() => {
             this.showPopup.set(false);
             if (name === 'full') {
@@ -272,7 +298,6 @@ export class PlanEditComponent implements OnInit {
   }
 
   onSaveAndReturn() {
-    console.log('==onSaveAndReturn');
     this.onSaveButtonClick('full');
   }
 }
