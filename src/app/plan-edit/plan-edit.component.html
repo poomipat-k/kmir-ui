@@ -41,6 +41,14 @@
             [control]="getControl('readinessWillingness')"
             [height]="326"
           ></app-com-custom-editor>
+
+          @if (!getControl('readinessWillingness').valid &&
+          getControl('readinessWillingness').touched) {
+          <app-com-error-message
+            text="กรุณากรอก Readiness and Willingness Assessment"
+            marginTop="8px"
+          ></app-com-error-message>
+          }
         </div>
       </div>
 
@@ -64,6 +72,13 @@
             [editMode]="true"
             [form]="getAssessmentScoreFormGroup()"
           ></app-com-score-table>
+          @if (!getControl('assessmentScore').valid &&
+          getControl('assessmentScore').touched) {
+          <app-com-error-message
+            text="กรุณาตรวจสอบ Self-assessment Score ให้ถูกต้อง"
+            marginTop="8px"
+          ></app-com-error-message>
+          }
         </div>
       </div>
 
@@ -77,6 +92,7 @@
         <div class="goal__row mgt-2">
           <div class="goal__type">
             <div class="mgt-5">
+              <!-- Type -->
               <app-com-select-dropdown
                 [form]="form()"
                 controlName="irGoalType"
@@ -85,6 +101,13 @@
                 height="38px"
                 fontSize="16px"
               ></app-com-select-dropdown>
+              @if (!getControl('irGoalType').valid &&
+              getControl('irGoalType').touched) {
+              <app-com-error-message
+                text="กรุณาเลือก Type"
+                marginTop="8px"
+              ></app-com-error-message>
+              }
             </div>
             <app-com-icon-tooltip
               [hasTooltip]="true"
@@ -96,10 +119,18 @@
           ></app-com-save-button>
         </div>
         <div class="mgt-16">
+          <!-- Goal details -->
           <app-com-custom-editor
             [control]="getControl('irGoalDetails')"
             [height]="264"
           ></app-com-custom-editor>
+          @if (!getControl('irGoalDetails').valid &&
+          getControl('irGoalDetails').touched) {
+          <app-com-error-message
+            text="กรุณากรอก Goal details"
+            marginTop="8px"
+          ></app-com-error-message>
+          }
         </div>
       </div>
 
@@ -119,6 +150,13 @@
           [control]="getControl('proposedActivity')"
           [height]="324"
         ></app-com-custom-editor>
+        @if (!getControl('proposedActivity').valid &&
+        getControl('proposedActivity').touched) {
+        <app-com-error-message
+          text="กรุณากรอก Proposed activities"
+          marginTop="8px"
+        ></app-com-error-message>
+        }
       </div>
 
       <div class="hr--dashed mgt-46"></div>
@@ -137,6 +175,12 @@
           [control]="getControl('planNote')"
           [height]="324"
         ></app-com-custom-editor>
+        @if (!getControl('planNote').valid && getControl('planNote').touched) {
+        <app-com-error-message
+          text="กรุณากรอก Notes"
+          marginTop="8px"
+        ></app-com-error-message>
+        }
       </div>
 
       <div class="hr mgt-48"></div>
@@ -155,6 +199,13 @@
           [control]="getControl('contactPerson')"
           [height]="279"
         ></app-com-custom-editor>
+        @if (!getControl('contactPerson').valid &&
+        getControl('contactPerson').touched) {
+        <app-com-error-message
+          text="กรุณากรอก Contact Person"
+          marginTop="8px"
+        ></app-com-error-message>
+        }
       </div>
 
       <div class="saveAndReturn">

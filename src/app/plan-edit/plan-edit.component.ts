@@ -17,6 +17,7 @@ import { Router } from '@angular/router';
 
 import { cloneDeep, isEqual } from 'lodash-es';
 import { CustomEditorComponent } from '../components/custom-editor/custom-editor.component';
+import { ErrorMessageComponent } from '../components/error-message/error-message.component';
 import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.component';
 import { PopupComponent } from '../components/popup/popup.component';
 import { SaveAndReturnButtonComponent } from '../components/save-and-return-button/save-and-return-button.component';
@@ -42,6 +43,7 @@ import { ScoreTableRow } from '../shared/models/score-table-row';
     SelectDropdownComponent,
     SaveAndReturnButtonComponent,
     PopupComponent,
+    ErrorMessageComponent,
   ],
   templateUrl: './plan-edit.component.html',
   styleUrl: './plan-edit.component.scss',
@@ -190,6 +192,7 @@ export class PlanEditComponent implements OnInit {
       if (diff) {
         newPlanValue.readinessWillingness = newValue;
       }
+      this.getControl('readinessWillingness').markAsTouched({ onlySelf: true });
     }
 
     if (name === 'full' || name === 'assessmentScore') {
@@ -198,6 +201,7 @@ export class PlanEditComponent implements OnInit {
       if (diff) {
         newPlanValue.assessmentScore = newValue;
       }
+      this.getControl('assessmentScore').markAllAsTouched();
     }
 
     if (name === 'full' || name === 'irGoal') {
@@ -212,6 +216,8 @@ export class PlanEditComponent implements OnInit {
       if (detailsDiff) {
         newPlanValue.irGoalDetails = newDetails;
       }
+      this.getControl('irGoalType').markAsTouched({ onlySelf: true });
+      this.getControl('irGoalDetails').markAsTouched({ onlySelf: true });
     }
 
     if (name === 'full' || name === 'proposedActivity') {
@@ -220,6 +226,7 @@ export class PlanEditComponent implements OnInit {
       if (diff) {
         newPlanValue.proposedActivity = newValue;
       }
+      this.getControl('proposedActivity').markAsTouched({ onlySelf: true });
     }
 
     if (name === 'full' || name === 'planNote') {
@@ -228,6 +235,7 @@ export class PlanEditComponent implements OnInit {
       if (diff) {
         newPlanValue.planNote = newValue;
       }
+      this.getControl('planNote').markAsTouched({ onlySelf: true });
     }
 
     if (name === 'full' || name === 'contactPerson') {
@@ -236,6 +244,7 @@ export class PlanEditComponent implements OnInit {
       if (diff) {
         newPlanValue.contactPerson = newValue;
       }
+      this.getControl('contactPerson').markAsTouched({ onlySelf: true });
     }
 
     console.log('==newPlanValue', newPlanValue);
@@ -269,9 +278,9 @@ export class PlanEditComponent implements OnInit {
             if (newPlanValue.contactPerson) {
               updateValue.contactPerson = newPlanValue.contactPerson;
             }
-
             return updateValue;
           });
+          console.log('===origin', this.originalForm());
           setTimeout(() => {
             this.showPopup.set(false);
             if (name === 'full') {
