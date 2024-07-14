@@ -307,6 +307,66 @@ export class PlanEditComponent implements OnInit {
   }
 
   onSaveAndReturn() {
+    if (!this.validToSubmit()) {
+      console.error('form is not valid');
+      return;
+    }
     this.onSaveButtonClick('full');
+  }
+
+  validToSubmit(): boolean {
+    if (!this.isFormValid()) {
+      this.markFieldsTouched();
+      return false;
+    }
+    return true;
+  }
+
+  private isFormValid(): boolean {
+    return this.form()?.valid ?? false;
+  }
+
+  private markFieldsTouched() {
+    const formGroup = this.form();
+    if (formGroup) {
+      formGroup.markAllAsTouched();
+    }
+
+    const errorId = this.getFirstErrorIdWithPrefix(formGroup, '');
+    console.error('errorId:', errorId);
+    if (errorId) {
+      if (errorId.includes('assessmentScore')) {
+        this.scrollToId('assessmentScore');
+        return;
+      }
+      this.scrollToId(errorId);
+    }
+  }
+
+  private getFirstErrorIdWithPrefix(
+    rootGroup: FormGroup,
+    prefix: string
+  ): string {
+    const keys = Object.keys(rootGroup.controls);
+    for (const k of keys) {
+      if ((rootGroup.controls[k] as FormGroup)?.controls) {
+        const val = this.getFirstErrorIdWithPrefix(
+          rootGroup.controls[k] as FormGroup,
+          prefix ? `${prefix}.${k}` : k
+        );
+        if (val) {
+          return val;
+        }
+      }
+      if (!rootGroup.controls[k].valid) {
+        return prefix ? `${prefix}.${k}` : k;
+      }
+    }
+    return '';
+  }
+
+  private scrollToId(id: string) {
+    this.scroller.setOffset([0, 100]);
+    this.scroller.scrollToAnchor(id);
   }
 }
