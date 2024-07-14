@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { catchError, of, throwError } from 'rxjs';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment';
 import { CommonSuccessResponse } from '../shared/models/common-success-response';
 import { PlanDetails } from '../shared/models/plan-details';
 import { PlanFormValue } from '../shared/models/plan-form-value';
