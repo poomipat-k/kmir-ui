@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { adminGuard } from './guard/admin.guard';
 import { authGuard } from './guard/auth.guard';
 import { canEditPlanGuard } from './guard/can-edit-plan.guard';
 import { accessPlanDetailsGuard } from './guard/plan-details.guard';
@@ -34,6 +35,15 @@ export const routes: Routes = [
       ),
     title: 'แก้ไขรายละเอียดแผน',
     canActivate: [authGuard, canEditPlanGuard],
+  },
+  {
+    path: 'admin/dashboard',
+    loadComponent: () =>
+      import('./admin-dashboard/admin-dashboard.component').then(
+        (mod) => mod.AdminDashboardComponent
+      ),
+    title: 'admin dashboard',
+    canActivate: [adminGuard],
   },
   {
     path: '**',

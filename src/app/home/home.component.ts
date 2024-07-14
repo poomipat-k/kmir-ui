@@ -80,6 +80,11 @@ export class HomeComponent implements OnInit {
   goToPlanDetailsPage(e: MouseEvent, index: number) {
     if (this.canAccessPlanDetails(index)) {
       e.stopImmediatePropagation();
+      const planName = this.plans()[index]?.data?.name;
+      if (planName.toLocaleLowerCase() === 'admin') {
+        this.router.navigate(['admin/dashboard']);
+        return;
+      }
       this.router.navigate([`plan/${this.plans()[index].data.name}`]);
     }
   }
