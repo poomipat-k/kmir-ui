@@ -1,1 +1,271 @@
-<p>admin-dashboard works!</p>
+<div class="container mgt-54">
+  <nav class="sideNav">
+    <div class="sideNav__back" (click)="onBackToHomePage()">
+      <img
+        src="/assets/arrow_back.svg"
+        alt="arrow back"
+        class="sideNav__back__icon"
+      />
+      <p class="sideNav__back__text">Back</p>
+    </div>
+    <a
+      [ngClass]="{
+        sideNav__item: true,
+        'sideNav__item--active': navActiveIndex() === 0
+      }"
+      (click)="onNavItemClick(0)"
+      [routerLink]="baseLink()"
+      fragment="readiness"
+    >
+      Readiness and Willingness Assessment
+    </a>
+    <a
+      [ngClass]="{
+        sideNav__item: true,
+        'sideNav__item--active': navActiveIndex() === 1
+      }"
+      (click)="onNavItemClick(1)"
+      [routerLink]="baseLink()"
+      fragment="irGoal"
+    >
+      IR work goal
+    </a>
+    <a
+      [ngClass]="{
+        sideNav__item: true,
+        'sideNav__item--active': navActiveIndex() === 2
+      }"
+      (click)="onNavItemClick(2)"
+      [routerLink]="baseLink()"
+      fragment="proposedActivity"
+    >
+      Proposed activities
+    </a>
+    <a
+      [ngClass]="{
+        sideNav__item: true,
+        'sideNav__item--active': navActiveIndex() === 3
+      }"
+      (click)="onNavItemClick(3)"
+      [routerLink]="baseLink()"
+      fragment="planNote"
+    >
+      Note
+    </a>
+    <a
+      [ngClass]="{
+        sideNav__item: true,
+        'sideNav__item--active': navActiveIndex() === 4
+      }"
+      (click)="onNavItemClick(4)"
+      [routerLink]="baseLink()"
+      fragment="contactPerson"
+    >
+      Contact Person
+    </a>
+  </nav>
+  <section class="content mgt-18 pdl-55">
+    <h1 class="header">{{ planName() }}</h1>
+    <div class="topicContainer">
+      <div>
+        <h2 class="topic">{{ planDetails().topic }}</h2>
+        <h2 class="topic">{{ planDetails().topicEn }}</h2>
+      </div>
+      @if (userService.currentUser().userRole === 'user') {
+      <button class="editButton mgt-58" (click)="toEditPage()">
+        <p class="editButton__text">แก้ไขข้อมูล</p>
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 20 20"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <mask
+            id="mask0_404_824"
+            style="mask-type: alpha"
+            maskUnits="userSpaceOnUse"
+            x="0"
+            y="0"
+            width="20"
+            height="20"
+          >
+            <rect width="20" height="20" fill="#D9D9D9" />
+          </mask>
+          <g mask="url(#mask0_404_824)">
+            <path
+              d="M13.125 10.75H4V9.25H13.125L8.9375 5.0625L10 4L16 10L10 16L8.9375 14.9375L13.125 10.75Z"
+              fill="#F47521"
+              fill-opacity="0.952941"
+            />
+          </g>
+        </svg>
+      </button>
+      }
+    </div>
+    <div
+      id="readiness"
+      class="metricAndWillingness mgt-80"
+      appIntersectionElement
+      (isIntersecting)="isIntersecting($event, 0)"
+      [isContinuous]="true"
+      [threshold]="0"
+      [debounceTime]="0"
+      [rootMargin]="intersectionRootMargin()"
+    >
+      <app-com-metric [data]="metricData()"></app-com-metric>
+    </div>
+
+    <div class="mgt-45">
+      <div class="assessment__header">
+        <div class="assessment__header__textContainer">
+          <h3 class="assessment__header__text">Self-assessment Score</h3>
+          <div class="mgt-15">
+            <app-com-icon-tooltip
+              [hasTooltip]="true"
+              tooltipText="Test tooltip text"
+            ></app-com-icon-tooltip>
+          </div>
+        </div>
+        <div class="mgt-15">
+          <app-com-updated-at
+            [display]="getEditHistory('assessmentScore')"
+          ></app-com-updated-at>
+        </div>
+      </div>
+
+      <!-- Table -->
+      <app-com-score-table [data]="scoreTableData()"></app-com-score-table>
+      <div class="hr--dashed mgt-114 mgr-6"></div>
+      <!-- IR work goal -->
+      <div class="mgt-39">
+        <div class="goal__headerSection">
+          <div class="goal__headerBox">
+            <h3
+              id="irGoal"
+              class="goal__headerText"
+              appIntersectionElement
+              (isIntersecting)="isIntersecting($event, 1)"
+              [isContinuous]="true"
+              [threshold]="0"
+              [debounceTime]="0"
+              [rootMargin]="intersectionRootMargin()"
+            >
+              IR work goal
+            </h3>
+            <img src="/assets/flag_circle_unfill.svg" alt="" />
+          </div>
+          <div class="mgt-15">
+            <app-com-updated-at
+              [display]="getEditHistory('irGoal')"
+            ></app-com-updated-at>
+          </div>
+        </div>
+        <div class="goal__type mgt-8">
+          <h4 class="goal__type__text">{{ planDetails().irGoalType }}</h4>
+          <app-com-icon-tooltip
+            [hasTooltip]="true"
+            tooltipText="Type details"
+          ></app-com-icon-tooltip>
+        </div>
+        <div
+          class="goal__details mgt-16"
+          [innerHTML]="planDetails().irGoalDetails ?? '' | safeHtml"
+        ></div>
+      </div>
+    </div>
+    <div class="hr--dashed mgt-70"></div>
+    <!-- Proposed activities -->
+    <div class="mgt-14">
+      <div class="commonTextSection__headerSection">
+        <div class="commonTextSection__headerBox">
+          <h3
+            id="proposedActivity"
+            class="commonTextSection__headerText"
+            appIntersectionElement
+            (isIntersecting)="isIntersecting($event, 2)"
+            [isContinuous]="true"
+            [threshold]="0"
+            [debounceTime]="0"
+            [rootMargin]="intersectionRootMargin()"
+          >
+            Proposed activities
+          </h3>
+          <img src="/assets/event_note.svg" alt="note icon" />
+        </div>
+        <div class="mgt-15">
+          <app-com-updated-at
+            [display]="getEditHistory('proposedActivity')"
+          ></app-com-updated-at>
+        </div>
+      </div>
+      <div
+        class="commonTextSection__text mgt-20"
+        [innerHTML]="planDetails().proposedActivity ?? '' | safeHtml"
+      ></div>
+    </div>
+    <div class="hr--dashed mgt-80"></div>
+    <!-- Notes -->
+    <div class="mgt-45">
+      <div class="commonTextSection__headerSection">
+        <div class="commonTextSection__headerBox">
+          <h3
+            id="planNote"
+            class="commonTextSection__headerText"
+            appIntersectionElement
+            (isIntersecting)="isIntersecting($event, 3)"
+            [isContinuous]="true"
+            [threshold]="0"
+            [debounceTime]="0"
+            [rootMargin]="intersectionRootMargin()"
+          >
+            Notes
+          </h3>
+          <img src="/assets/speaker_notes.svg" alt="speaker notes" />
+        </div>
+        <div class="mgt-15">
+          <app-com-updated-at
+            [display]="getEditHistory('planNote')"
+          ></app-com-updated-at>
+        </div>
+      </div>
+      <div
+        class="commonTextSection__text mgt-20"
+        [innerHTML]="planDetails().planNote ?? '' | safeHtml"
+      ></div>
+    </div>
+    <!-- Contact Person -->
+    <div class="mgt-40">
+      <div class="commonTextSection__headerSection">
+        <div class="commonTextSection__headerBox">
+          <h3
+            id="contactPerson"
+            class="commonTextSection__headerText"
+            appIntersectionElement
+            (isIntersecting)="isIntersecting($event, 4)"
+            [isContinuous]="true"
+            [threshold]="0"
+            [debounceTime]="0"
+            [rootMargin]="intersectionRootMargin()"
+          >
+            Contact Person
+          </h3>
+          <img src="/assets/account_circle.svg" alt="account icon" />
+        </div>
+        <div class="mgt-15">
+          <app-com-updated-at
+            [display]="getEditHistory('contactPerson')"
+          ></app-com-updated-at>
+        </div>
+      </div>
+      <div
+        class="commonTextSection__text mgt-20"
+        [innerHTML]="planDetails().contactPerson ?? '' | safeHtml"
+      ></div>
+    </div>
+    <app-com-back-to-top></app-com-back-to-top>
+  </section>
+</div>
+
+<!-- For intersection API debugging -->
+<!-- <div class="intersectionBox"></div> -->

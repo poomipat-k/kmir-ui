@@ -1,0 +1,302 @@
+@import "../../styles.scss";
+
+.container {
+  padding-top: 14px;
+  padding-left: 80px;
+  padding-right: 173px;
+  display: flex;
+  padding-bottom: 135px;
+}
+
+.sideNav {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  position: sticky;
+  top: 60px;
+
+  &__back {
+    display: flex;
+    gap: 8px;
+    padding: 10px 0;
+    align-items: center;
+    cursor: pointer;
+
+    &__text {
+      font-family: $custom-font;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 23px;
+    }
+
+    &__icon {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &__item {
+    padding: 10px 0;
+    width: 125px;
+    cursor: pointer;
+    font-family: $custom-font;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 23px;
+    color: #1c1b1f;
+    text-decoration: none;
+
+    &--active {
+      font-weight: 600;
+      color: #e76f51;
+    }
+  }
+}
+
+.content {
+  width: 100%;
+  position: relative;
+}
+
+.header {
+  font-family: $custom-font;
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 106px;
+  color: #1c1b1f;
+}
+
+.topic {
+  &Container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  font-family: $custom-font;
+  font-weight: 500;
+  font-size: 44px;
+  line-height: 56px;
+  color: #1c1b1f;
+}
+
+.metricAndWillingness {
+  display: flex;
+  gap: 7px;
+
+  &__text {
+    font-family: $custom-font-looped;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 23px;
+    color: #000;
+    white-space: pre-wrap;
+
+    max-height: 170px;
+    overflow: scroll;
+  }
+}
+
+.assessment {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+
+    &__textContainer {
+      display: flex;
+      gap: 3px;
+    }
+    &__text {
+      font-family: $custom-font;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 59px;
+      color: #1c1b1f;
+    }
+  }
+}
+
+.goal {
+  &__headerSection {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__headerBox {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  &__headerText {
+    font-family: $custom-font;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 53px;
+    color: #000;
+  }
+
+  &__icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  &__type {
+    display: flex;
+    gap: 9px;
+    align-items: center;
+
+    &__text {
+      font-family: $custom-font;
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 24px;
+      color: #f0b358;
+    }
+  }
+
+  &__details {
+    font-family: $custom-font;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 30px;
+    white-space: pre-wrap;
+  }
+}
+
+.commonTextSection {
+  &__headerSection {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__headerBox {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  &__headerText {
+    font-family: $custom-font;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 53px;
+    color: #000;
+  }
+
+  &__icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  &__text {
+    font-family: $custom-font-looped;
+    font-weight: 400;
+    font-size: 14;
+    line-height: 23px;
+    white-space: pre-wrap;
+    max-height: 280px;
+    overflow: scroll;
+    border-bottom: 0.5px solid rgba(192, 195, 203, 0.5);
+  }
+}
+
+.editButton {
+  height: 46px;
+  min-width: 160px;
+  display: flex;
+  gap: 4px;
+  padding: 8px 10px 8px 20px;
+  background-color: #fff7df;
+  border: 1px solid #f47521f3;
+  border-radius: 46px;
+  align-items: center;
+  cursor: pointer;
+
+  &__text {
+    font-family: $custom-font;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 30px;
+    color: #000;
+  }
+
+  &__icon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.hr {
+  &--dashed {
+    border: 1px dashed rgba(0, 0, 0, 0.36);
+  }
+}
+
+.mgt {
+  &-8 {
+    margin-top: 8px;
+  }
+  &-13 {
+    margin-top: 13px;
+  }
+  &-14 {
+    margin-top: 14px;
+  }
+  &-15 {
+    margin-top: 15px;
+  }
+  &-16 {
+    margin-top: 16px;
+  }
+  &-18 {
+    margin-top: 18px;
+  }
+  &-20 {
+    margin-top: 20px;
+  }
+  &-39 {
+    margin-top: 39px;
+  }
+  &-40 {
+    margin-top: 40px;
+  }
+  &-45 {
+    margin-top: 45px;
+  }
+  &-54 {
+    margin-top: 54px;
+  }
+  &-58 {
+    margin-top: 58px;
+  }
+  &-70 {
+    margin-top: 70px;
+  }
+  &-80 {
+    margin-top: 80px;
+  }
+  &-114 {
+    margin-top: 114px;
+  }
+}
+
+.mgr {
+  &-6 {
+    margin-right: 6px;
+  }
+}
+.pdl {
+  &-55 {
+    padding-left: 55px;
+  }
+}
+
+// For intersection API debugging purpose
+.intersectionBox {
+  position: fixed;
+  top: 0%;
+  right: 0;
+  width: 82vw;
+  height: calc(50%);
+  border: 1px solid blue;
+}
