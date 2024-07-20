@@ -15,6 +15,7 @@ export class MetricComponent {
   xLabel = input<string>('Willingness');
   yLabel = input<string>('Capacity');
   data = input<MetricInput[]>([]);
+  size = input('small');
 
   protected gridItems = computed(() => this.handleDataChanged());
   private readonly originalGridPos = [

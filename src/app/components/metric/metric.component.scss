@@ -11,6 +11,11 @@ $grid-item-large: 54px;
   height: calc(10 * $grid-item-small + 13px);
   position: relative;
 
+  &--large {
+    width: calc(10 * $grid-item-large + 12px);
+    height: calc(10 * $grid-item-large + 13px);
+  }
+
   &__label {
     font-family: $custom-font;
     font-weight: 400;
@@ -57,6 +62,53 @@ $grid-item-large: 54px;
       transform: rotate(-90deg) translate(-207px, -235px);
     }
   }
+
+  &__label-large {
+    font-family: $custom-font;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 25px;
+    color: #000;
+    position: absolute;
+
+    &--y {
+      top: -38px;
+      left: -32px;
+    }
+    &--x {
+      bottom: -28px;
+      left: 99.5%;
+    }
+    &--xLow {
+      bottom: -28px;
+      left: 11.5%;
+    }
+    &--xMed {
+      bottom: -28px;
+      left: 39%;
+    }
+    &--xHigh {
+      bottom: -28px;
+      left: 75%;
+    }
+
+    &--10 {
+      bottom: -28px;
+      left: 94.5%;
+      &-y {
+        transform: rotate(90deg) translateY(-8px);
+      }
+    }
+
+    &--0 {
+      bottom: -28px;
+      left: -17px;
+    }
+
+    &-rotate {
+      transform: rotate(-90deg) translate(-273px, -310px);
+    }
+  }
 }
 
 .grid {
@@ -64,6 +116,11 @@ $grid-item-large: 54px;
   grid-template-columns: repeat(10, $grid-item-small);
   grid-template-rows: repeat(10, $grid-item-small);
   transform: translateY(12.2px);
+
+  &--large {
+    grid-template-columns: repeat(10, $grid-item-large);
+    grid-template-rows: repeat(10, $grid-item-large);
+  }
 }
 
 .item {
