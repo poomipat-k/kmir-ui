@@ -33,6 +33,7 @@ export class SelectDropdownComponent {
   disabled = input(false);
   onChange = input<() => void>();
   fontSize = input('20px');
+  color = input('#000');
   emptyMessage = input('');
 
   selectedDisplay = signal<string | number>('');

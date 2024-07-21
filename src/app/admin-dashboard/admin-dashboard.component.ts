@@ -1,15 +1,19 @@
 import { CommonModule, ViewportScroller } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { BackToTopComponent } from '../components/back-to-top/back-to-top.component';
 import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.component';
 import { MetricComponent } from '../components/metric/metric.component';
 import { ScoreTableComponent } from '../components/score-table/score-table.component';
+import { SelectDropdownComponent } from '../components/select-dropdown/select-dropdown.component';
 import { UpdatedAtComponent } from '../components/updated-at/updated-at.component';
+import { DateService } from '../services/date.service';
 import { PlanService } from '../services/plan.service';
 import { ThemeService } from '../services/theme.service';
 import { UserService } from '../services/user.service';
 import { IntersectionElementDirective } from '../shared/directives/intersection-element.directive';
+import { DropdownOption } from '../shared/models/dropdown-option';
 import { MetricInput } from '../shared/models/metric-input';
 import { PlanDetails } from '../shared/models/plan-details';
 import { ScoreTableRow } from '../shared/models/score-table-row';
@@ -28,6 +32,7 @@ import { SafeHtmlPipe } from '../shared/pipe/safe-html.pipe';
     IntersectionElementDirective,
     RouterModule,
     SafeHtmlPipe,
+    SelectDropdownComponent,
   ],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.scss',
@@ -40,6 +45,15 @@ export class AdminDashboardComponent {
   protected ignoreIntersection = signal(false);
   protected releaseIgnoreIntersectionTimeoutId = signal<any>(undefined);
   protected baseLink = signal('admin/dashboard');
+  protected metricForm = signal(
+    new FormGroup({
+      fromYear: new FormControl(null, Validators.required),
+      toYear: new FormControl(null, Validators.required),
+      selectedPlan: new FormControl(null),
+    })
+  );
+  protected minYear = signal(2024);
+  protected metricYearOptions = signal<DropdownOption[]>([]);
 
   protected navActiveIndex = computed<number>(() => {
     const list = this.navActiveList();
@@ -59,6 +73,7 @@ export class AdminDashboardComponent {
   private readonly router: Router = inject(Router);
   protected readonly userService: UserService = inject(UserService);
   private readonly scroller: ViewportScroller = inject(ViewportScroller);
+  private readonly dateService = inject(DateService);
 
   ngOnInit(): void {
     this.themeService.changeTheme('silver');
@@ -74,6 +89,15 @@ export class AdminDashboardComponent {
       newList[index] = intersecting;
       return newList;
     });
+  }
+
+  getYearOptions() {
+    const [year, month, day] = this.dateService.getYearMonthDay(new Date());
+    const options: DropdownOption[] = [];
+    for (let y = this.minYear(); y <= year; y++) {
+      options.push(new DropdownOption(y, y));
+    }
+    return options;
   }
 
   toEditPage() {

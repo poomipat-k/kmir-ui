@@ -87,20 +87,39 @@
   color: #1c1b1f;
 }
 
-.metricAndWillingness {
+.metric {
   display: flex;
-  gap: 7px;
+  gap: 87px;
+  border: 1px solid red;
 
-  &__text {
-    font-family: $custom-font-looped;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 23px;
-    color: #000;
-    white-space: pre-wrap;
+  &__control {
+    &__container {
+      display: flex;
+      flex-direction: column;
+      gap: 21px;
+    }
 
-    max-height: 170px;
-    overflow: scroll;
+    &__label {
+      font-family: $custom-font;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 16px;
+      color: #000;
+
+      &--to {
+        font-family: $custom-font;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 33px;
+        color: #000;
+      }
+    }
+
+    &__content {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
   }
 }
 
@@ -207,6 +226,9 @@
   }
   &-20 {
     margin-top: 20px;
+  }
+  &-34 {
+    margin-top: 34px;
   }
   &-45 {
     margin-top: 45px;

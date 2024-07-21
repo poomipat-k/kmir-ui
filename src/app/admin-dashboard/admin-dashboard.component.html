@@ -109,7 +109,7 @@
       <h2 class="header__readiness">Readiness and Willingness Assessment</h2>
       <div
         id="readiness"
-        class="metricAndWillingness pdl-32 mgt-67"
+        class="metric pdl-32 mgt-67"
         appIntersectionElement
         (isIntersecting)="isIntersecting($event, 0)"
         [isContinuous]="true"
@@ -118,6 +118,49 @@
         [rootMargin]="intersectionRootMargin()"
       >
         <app-com-metric [data]="metricData()" size="large"></app-com-metric>
+        <div class="metric__control__container mgt-34">
+          <div>
+            <p class="metric__control__label">Select Year</p>
+            <div class="metric__control__content mgt-18">
+              <div>
+                <app-com-select-dropdown
+                  [form]="metricForm()"
+                  controlName="fromYear"
+                  [items]="getYearOptions()"
+                  width="107px"
+                  height="46px"
+                  placeholder="Year 1"
+                ></app-com-select-dropdown>
+              </div>
+              <p class="metric__control__label--to">To</p>
+              <div>
+                <app-com-select-dropdown
+                  [form]="metricForm()"
+                  controlName="toYear"
+                  [items]="getYearOptions()"
+                  width="107px"
+                  height="46px"
+                  placeholder="Year 2"
+                ></app-com-select-dropdown>
+              </div>
+            </div>
+          </div>
+          <div>
+            <p class="metric__control__label">Select Plan</p>
+            <div class="metric__control__content mgt-18">
+              <div>
+                <app-com-select-dropdown
+                  [form]="metricForm()"
+                  controlName="selectedPlan"
+                  [items]="getYearOptions()"
+                  width="120px"
+                  height="46px"
+                  color="#4D54AB"
+                ></app-com-select-dropdown>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
