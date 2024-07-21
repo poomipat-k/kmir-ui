@@ -49,11 +49,12 @@ export class AdminDashboardComponent {
     new FormGroup({
       fromYear: new FormControl(null, Validators.required),
       toYear: new FormControl(null, Validators.required),
-      selectedPlan: new FormControl(null),
+      selectedPlan: new FormControl('all'),
     })
   );
   protected minYear = signal(2023);
   protected metricYearOptions = signal<DropdownOption[]>([]);
+  protected plans = signal<any[]>([]);
 
   protected navActiveIndex = computed<number>(() => {
     const list = this.navActiveList();
@@ -63,6 +64,17 @@ export class AdminDashboardComponent {
       }
     }
     return 0;
+  });
+  protected planOptions = computed(() => {
+    const options: DropdownOption[] = this.plans()?.map((p) => ({
+      value: p.name,
+      display: p.name,
+    }));
+    options.unshift({
+      value: 'all',
+      display: 'All Plan',
+    });
+    return options;
   });
 
   protected metricData = computed(() => this.computeScore());
@@ -78,6 +90,13 @@ export class AdminDashboardComponent {
   ngOnInit(): void {
     this.themeService.changeTheme('silver');
     this.scroller.setOffset(this.scrollerOffset());
+
+    this.planService.getAllPlansDetails().subscribe((res) => {
+      console.log('==res', res);
+      if (res?.length > 0) {
+        this.plans.set(res);
+      }
+    });
   }
 
   isIntersecting(intersecting: boolean, index: number) {
@@ -92,7 +111,7 @@ export class AdminDashboardComponent {
   }
 
   getYearOptions() {
-    const [year, month, day] = this.dateService.getYearMonthDay(new Date());
+    const [year] = this.dateService.getYearMonthDay(new Date());
     const options: DropdownOption[] = [];
     for (let y = this.minYear(); y <= year; y++) {
       options.push(new DropdownOption(y, y));

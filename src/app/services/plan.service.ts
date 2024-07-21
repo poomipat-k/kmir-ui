@@ -52,6 +52,12 @@ export class PlanService {
       .pipe(catchError(this.handleError));
   }
 
+  getAllPlansDetails() {
+    return this.http
+      .get<any>(`${this.baseApiUrl}/admin/plans`)
+      .pipe(catchError(this.handleError));
+  }
+
   editPlan(planName: string, payload: PlanFormValue) {
     return this.http
       .patch<any>(`${this.baseApiUrl}/plan`, { ...payload, planName })
