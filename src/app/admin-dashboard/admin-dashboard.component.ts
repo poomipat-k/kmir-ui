@@ -22,6 +22,7 @@ import { PlanService } from '../services/plan.service';
 import { ThemeService } from '../services/theme.service';
 import { UserService } from '../services/user.service';
 import { IntersectionElementDirective } from '../shared/directives/intersection-element.directive';
+import { AssessmentScore } from '../shared/models/assessment-score';
 import { DropdownOption } from '../shared/models/dropdown-option';
 import { MetricInput } from '../shared/models/metric-input';
 import { PlanDetails } from '../shared/models/plan-details';
@@ -60,6 +61,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
   protected minYear = signal(2023);
   protected metricYearOptions = signal<DropdownOption[]>([]);
   protected plans = signal<any[]>([]);
+  protected metricScores = signal<AssessmentScore[]>([]);
 
   protected navActiveIndex = computed<number>(() => {
     const list = this.navActiveList();
@@ -82,8 +84,9 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     return options;
   });
 
-  protected metricData = computed(() => this.computeScore());
+  protected metricData = computed(() => this.computeScoreMetic());
   protected scoreTableData = computed(() => this.computedScoreTable());
+  protected topicShortMap = computed(() => this.computeTopicShortMap());
 
   protected readonly themeService: ThemeService = inject(ThemeService);
   private readonly planService: PlanService = inject(PlanService);
@@ -99,17 +102,34 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     this.scroller.setOffset(this.scrollerOffset());
     this.initMetricControlValue();
 
-    this.planService.getAllPlansDetails().subscribe((res) => {
-      console.log('==res', res);
-      if (res?.length > 0) {
-        this.plans.set(res);
+    this.planService.getAllPlansDetails().subscribe((plans) => {
+      console.log('==plans', plans);
+      if (plans?.length > 0) {
+        this.plans.set(plans);
       }
     });
 
+    this.refreshMetric();
+
     this.metricFormGroup().valueChanges.subscribe((values) => {
-      console.log('==values', values);
+      console.log('==valuesChanged', values);
+      this.refreshMetric();
       // fetch new metric data
     });
+  }
+
+  refreshMetric() {
+    const controls = this.metricFormGroup().controls;
+    this.planService
+      .adminGetScores(
+        controls['fromYear']?.value,
+        controls['toYear']?.value,
+        controls['plan']?.value
+      )
+      .subscribe((scores) => {
+        console.log('==scores', scores);
+        this.metricScores.set(scores || []);
+      });
   }
 
   ngOnDestroy(): void {
@@ -151,45 +171,63 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     this.router.navigate([`/admin/dashboard/edit`]);
   }
 
-  computeScore() {
+  private computeScoreMetic() {
     // find avg score for each year
-    const criteriaMap: { [key: number]: 'x' | 'y' } = {};
-    this.planDetails()?.assessmentCriteria?.forEach((cri) => {
-      criteriaMap[cri.orderNumber] = cri.category === 'willingness' ? 'x' : 'y';
-    });
     const scoreData: MetricInput[] = [];
-    const sumScoreByYear: { [key: number]: { x: number; y: number } } = {};
-    this.planDetails()?.assessmentScore?.forEach((row) => {
-      const axis: 'x' | 'y' = criteriaMap[row.criteriaOrder];
-      if (!sumScoreByYear[row.year]) {
-        sumScoreByYear[row.year] = { x: 0, y: 0 };
-      }
-      sumScoreByYear[row.year][axis] += row.score;
-    });
-    let divideX = 0;
-    let divideY = 0;
-    for (const [_, v] of Object.entries(criteriaMap)) {
-      if (v === 'x') {
-        divideX += 1;
-      } else {
-        divideY += 1;
+    /*
+    {
+      Alcohol: {
+        2024: 
+        {
+          x: 5,
+          y: 8
+        }
       }
     }
+    */
+    const sumScoreObj: {
+      [topicShort: string]: { [year: number]: { x: number; y: number } };
+    } = {};
+    this.metricScores()?.forEach((row) => {
+      const axis: 'x' | 'y' =
+        row.criteriaCategory === 'willingness' ? 'x' : 'y';
+      const topicShort = this.topicShortMap()[row.planId];
+      if (!sumScoreObj[topicShort]) {
+        sumScoreObj[topicShort] = {};
+      }
+      if (!sumScoreObj[topicShort][row.year]) {
+        sumScoreObj[topicShort][row.year] = { x: 0, y: 0 };
+      }
+      sumScoreObj[topicShort][row.year][axis] += row.score;
+    });
+    // Todo: try refactor and remove hard code
+    let divideX = 3;
+    let divideY = 4;
     if (divideX === 0 || divideY === 0) {
       return [];
     }
-    for (const [k, v] of Object.entries(sumScoreByYear)) {
-      // Divide by 2 is for admin and plan owner
-      scoreData.push(
-        new MetricInput(
-          Math.round(v.x / 2 / divideX),
-          Math.round(v.y / 2 / divideY),
-          +k,
-          this.planDetails().topicShort
-        )
-      );
+    for (const topic of Object.keys(sumScoreObj)) {
+      for (const [year, v] of Object.entries(sumScoreObj[topic])) {
+        // Divide by 2 is for admin and plan owner
+        scoreData.push(
+          new MetricInput(
+            Math.round(v.x / 2 / divideX),
+            Math.round(v.y / 2 / divideY),
+            +year,
+            topic
+          )
+        );
+      }
     }
     return scoreData || [];
+  }
+
+  private computeTopicShortMap() {
+    const map: { [key: number]: string } = {};
+    this.plans()?.forEach((p) => {
+      map[p.planId] = p.topicShort;
+    });
+    return map;
   }
 
   computedScoreTable(): ScoreTableRow[] {
@@ -213,6 +251,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
         res[row.criteriaOrder - 1].score = row.score;
       }
     });
+    console.log('==metric', res);
     return res || [];
   }
 

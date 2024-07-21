@@ -58,6 +58,16 @@ export class PlanService {
       .pipe(catchError(this.handleError));
   }
 
+  adminGetScores(fromYear: number, toYear: number, plan: string) {
+    return this.http
+      .post<any>(`${this.baseApiUrl}/admin/scores`, {
+        fromYear,
+        toYear,
+        plan,
+      })
+      .pipe(catchError(this.handleError));
+  }
+
   editPlan(planName: string, payload: PlanFormValue) {
     return this.http
       .patch<any>(`${this.baseApiUrl}/plan`, { ...payload, planName })
