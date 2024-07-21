@@ -186,19 +186,20 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     }
     */
     const sumScoreObj: {
-      [topicShort: string]: { [year: number]: { x: number; y: number } };
+      [planId: number]: { [year: number]: { x: number; y: number } };
     } = {};
     this.metricScores()?.forEach((row) => {
       const axis: 'x' | 'y' =
         row.criteriaCategory === 'willingness' ? 'x' : 'y';
-      const topicShort = this.topicShortMap()[row.planId];
-      if (!sumScoreObj[topicShort]) {
-        sumScoreObj[topicShort] = {};
+      // const topicShort = this.topicShortMap()[row.planId];
+      const planId = row.planId;
+      if (!sumScoreObj[planId]) {
+        sumScoreObj[planId] = {};
       }
-      if (!sumScoreObj[topicShort][row.year]) {
-        sumScoreObj[topicShort][row.year] = { x: 0, y: 0 };
+      if (!sumScoreObj[planId][row.year]) {
+        sumScoreObj[planId][row.year] = { x: 0, y: 0 };
       }
-      sumScoreObj[topicShort][row.year][axis] += row.score;
+      sumScoreObj[planId][row.year][axis] += row.score;
     });
     // Todo: try refactor and remove hard code
     let divideX = 3;
@@ -206,15 +207,15 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     if (divideX === 0 || divideY === 0) {
       return [];
     }
-    for (const topic of Object.keys(sumScoreObj)) {
-      for (const [year, v] of Object.entries(sumScoreObj[topic])) {
+    for (const planId of Object.keys(sumScoreObj)) {
+      for (const [year, v] of Object.entries(sumScoreObj[+planId])) {
         // Divide by 2 is for admin and plan owner
         scoreData.push(
           new MetricInput(
             Math.round(v.x / 2 / divideX),
             Math.round(v.y / 2 / divideY),
             +year,
-            topic
+            this.topicShortMap()[+planId]
           )
         );
       }
