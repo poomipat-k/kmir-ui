@@ -3,9 +3,9 @@
 .container {
   padding-top: 14px;
   padding-left: 80px;
-  padding-right: 173px;
+  padding-right: 80px;
   display: flex;
-  padding-bottom: 135px;
+  padding-bottom: 105px;
 }
 
 .sideNav {
@@ -265,6 +265,12 @@
   &-55 {
     padding-left: 55px;
   }
+}
+
+.backToTop {
+  position: absolute;
+  bottom: -100px;
+  right: -22px;
 }
 
 // For intersection API debugging purpose

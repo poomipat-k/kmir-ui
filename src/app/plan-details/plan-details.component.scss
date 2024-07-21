@@ -312,6 +312,12 @@
   }
 }
 
+.backToTop {
+  position: absolute;
+  bottom: -8px;
+  right: -100px;
+}
+
 // For intersection API debugging purpose
 .intersectionBox {
   position: fixed;

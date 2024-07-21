@@ -52,7 +52,7 @@ export class AdminDashboardComponent {
       selectedPlan: new FormControl(null),
     })
   );
-  protected minYear = signal(2024);
+  protected minYear = signal(2023);
   protected metricYearOptions = signal<DropdownOption[]>([]);
 
   protected navActiveIndex = computed<number>(() => {
@@ -73,7 +73,7 @@ export class AdminDashboardComponent {
   private readonly router: Router = inject(Router);
   protected readonly userService: UserService = inject(UserService);
   private readonly scroller: ViewportScroller = inject(ViewportScroller);
-  private readonly dateService = inject(DateService);
+  private readonly dateService: DateService = inject(DateService);
 
   ngOnInit(): void {
     this.themeService.changeTheme('silver');
