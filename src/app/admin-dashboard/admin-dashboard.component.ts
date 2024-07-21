@@ -3,11 +3,14 @@ import {
   Component,
   computed,
   inject,
+  OnDestroy,
+  OnInit,
   signal,
   WritableSignal,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { BackToTopComponent } from '../components/back-to-top/back-to-top.component';
 import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.component';
 import { MetricComponent } from '../components/metric/metric.component';
@@ -43,7 +46,7 @@ import { SafeHtmlPipe } from '../shared/pipe/safe-html.pipe';
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.scss',
 })
-export class AdminDashboardComponent {
+export class AdminDashboardComponent implements OnInit, OnDestroy {
   protected planDetails = signal<PlanDetails>(new PlanDetails());
   protected intersectionRootMargin = signal('0px 0px -50% 0px');
   protected navActiveList = signal([true, false, false, false, false]);
@@ -89,6 +92,8 @@ export class AdminDashboardComponent {
   private readonly scroller: ViewportScroller = inject(ViewportScroller);
   private readonly dateService: DateService = inject(DateService);
 
+  private readonly subs: Subscription[] = [];
+
   ngOnInit(): void {
     this.themeService.changeTheme('silver');
     this.scroller.setOffset(this.scrollerOffset());
@@ -100,15 +105,24 @@ export class AdminDashboardComponent {
         this.plans.set(res);
       }
     });
+
+    this.metricFormGroup().valueChanges.subscribe((values) => {
+      console.log('==values', values);
+      // fetch new metric data
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.subs.forEach((s) => s.unsubscribe());
   }
 
   initMetricControlValue() {
     const [currentYear] = this.dateService.getYearMonthDay(new Date());
     this.metricFormGroup.set(
       new FormGroup({
-        fromYear: new FormControl(currentYear, Validators.required),
+        fromYear: new FormControl(this.minYear(), Validators.required),
         toYear: new FormControl(currentYear, Validators.required),
-        selectedPlan: new FormControl('all'),
+        plan: new FormControl('all', Validators.required),
       })
     );
   }
