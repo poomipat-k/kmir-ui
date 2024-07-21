@@ -1,5 +1,11 @@
 import { CommonModule, ViewportScroller } from '@angular/common';
-import { Component, computed, inject, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { BackToTopComponent } from '../components/back-to-top/back-to-top.component';
@@ -45,12 +51,8 @@ export class AdminDashboardComponent {
   protected ignoreIntersection = signal(false);
   protected releaseIgnoreIntersectionTimeoutId = signal<any>(undefined);
   protected baseLink = signal('admin/dashboard');
-  protected metricForm = signal(
-    new FormGroup({
-      fromYear: new FormControl(null, Validators.required),
-      toYear: new FormControl(null, Validators.required),
-      selectedPlan: new FormControl('all'),
-    })
+  protected metricFormGroup: WritableSignal<FormGroup> = signal(
+    new FormGroup({})
   );
   protected minYear = signal(2023);
   protected metricYearOptions = signal<DropdownOption[]>([]);
@@ -90,6 +92,7 @@ export class AdminDashboardComponent {
   ngOnInit(): void {
     this.themeService.changeTheme('silver');
     this.scroller.setOffset(this.scrollerOffset());
+    this.initMetricControlValue();
 
     this.planService.getAllPlansDetails().subscribe((res) => {
       console.log('==res', res);
@@ -97,6 +100,17 @@ export class AdminDashboardComponent {
         this.plans.set(res);
       }
     });
+  }
+
+  initMetricControlValue() {
+    const [currentYear] = this.dateService.getYearMonthDay(new Date());
+    this.metricFormGroup.set(
+      new FormGroup({
+        fromYear: new FormControl(currentYear, Validators.required),
+        toYear: new FormControl(currentYear, Validators.required),
+        selectedPlan: new FormControl('all'),
+      })
+    );
   }
 
   isIntersecting(intersecting: boolean, index: number) {

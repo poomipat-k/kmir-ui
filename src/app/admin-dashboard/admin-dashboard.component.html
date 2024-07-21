@@ -124,7 +124,7 @@
             <div class="metric__control__content mgt-18">
               <div>
                 <app-com-select-dropdown
-                  [form]="metricForm()"
+                  [form]="metricFormGroup()"
                   controlName="fromYear"
                   [items]="getYearOptions()"
                   width="107px"
@@ -135,7 +135,7 @@
               <p class="metric__control__label--to">To</p>
               <div>
                 <app-com-select-dropdown
-                  [form]="metricForm()"
+                  [form]="metricFormGroup()"
                   controlName="toYear"
                   [items]="getYearOptions()"
                   width="107px"
@@ -150,7 +150,7 @@
             <div class="metric__control__content mgt-18">
               <div>
                 <app-com-select-dropdown
-                  [form]="metricForm()"
+                  [form]="metricFormGroup()"
                   controlName="selectedPlan"
                   [items]="planOptions()"
                   width="120px"
