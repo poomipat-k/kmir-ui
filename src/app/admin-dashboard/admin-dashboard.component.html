@@ -65,13 +65,15 @@
     </a>
   </nav>
   <section class="content mgt-18 pdl-55">
-    <h1 class="header">{{ planName() }}</h1>
+    <h1 class="header">Admin IR</h1>
     <div class="topicContainer">
       <div>
-        <h2 class="topic">{{ planDetails().topic }}</h2>
+        <h2 class="topic">
+          Forem ipsum dolor sit amet, consectetur adipiscing elit.
+        </h2>
         <h2 class="topic">{{ planDetails().topicEn }}</h2>
       </div>
-      @if (userService.currentUser().userRole === 'user') {
+
       <button class="editButton mgt-58" (click)="toEditPage()">
         <p class="editButton__text">แก้ไขข้อมูล</p>
         <svg
@@ -101,19 +103,22 @@
           </g>
         </svg>
       </button>
-      }
     </div>
-    <div
-      id="readiness"
-      class="metricAndWillingness mgt-80"
-      appIntersectionElement
-      (isIntersecting)="isIntersecting($event, 0)"
-      [isContinuous]="true"
-      [threshold]="0"
-      [debounceTime]="0"
-      [rootMargin]="intersectionRootMargin()"
-    >
-      <app-com-metric [data]="metricData()" size="large"></app-com-metric>
+    <!-- Metric -->
+    <div class="mgt-94">
+      <h2 class="header__readiness">Readiness and Willingness Assessment</h2>
+      <div
+        id="readiness"
+        class="metricAndWillingness pdl-32 mgt-67"
+        appIntersectionElement
+        (isIntersecting)="isIntersecting($event, 0)"
+        [isContinuous]="true"
+        [threshold]="0"
+        [debounceTime]="0"
+        [rootMargin]="intersectionRootMargin()"
+      >
+        <app-com-metric [data]="metricData()" size="large"></app-com-metric>
+      </div>
     </div>
 
     <div class="mgt-45">
@@ -136,43 +141,6 @@
 
       <!-- Table -->
       <app-com-score-table [data]="scoreTableData()"></app-com-score-table>
-      <div class="hr--dashed mgt-114 mgr-6"></div>
-      <!-- IR work goal -->
-      <div class="mgt-39">
-        <div class="goal__headerSection">
-          <div class="goal__headerBox">
-            <h3
-              id="irGoal"
-              class="goal__headerText"
-              appIntersectionElement
-              (isIntersecting)="isIntersecting($event, 1)"
-              [isContinuous]="true"
-              [threshold]="0"
-              [debounceTime]="0"
-              [rootMargin]="intersectionRootMargin()"
-            >
-              IR work goal
-            </h3>
-            <img src="/assets/flag_circle_unfill.svg" alt="" />
-          </div>
-          <div class="mgt-15">
-            <app-com-updated-at
-              [display]="getEditHistory('irGoal')"
-            ></app-com-updated-at>
-          </div>
-        </div>
-        <div class="goal__type mgt-8">
-          <h4 class="goal__type__text">{{ planDetails().irGoalType }}</h4>
-          <app-com-icon-tooltip
-            [hasTooltip]="true"
-            tooltipText="Type details"
-          ></app-com-icon-tooltip>
-        </div>
-        <div
-          class="goal__details mgt-16"
-          [innerHTML]="planDetails().irGoalDetails ?? '' | safeHtml"
-        ></div>
-      </div>
     </div>
     <div class="hr--dashed mgt-70"></div>
     <!-- Proposed activities -->
@@ -219,7 +187,7 @@
             [debounceTime]="0"
             [rootMargin]="intersectionRootMargin()"
           >
-            Notes
+            Note of Plan
           </h3>
           <img src="/assets/speaker_notes.svg" alt="speaker notes" />
         </div>
@@ -234,35 +202,7 @@
         [innerHTML]="planDetails().planNote ?? '' | safeHtml"
       ></div>
     </div>
-    <!-- Contact Person -->
-    <div class="mgt-40">
-      <div class="commonTextSection__headerSection">
-        <div class="commonTextSection__headerBox">
-          <h3
-            id="contactPerson"
-            class="commonTextSection__headerText"
-            appIntersectionElement
-            (isIntersecting)="isIntersecting($event, 4)"
-            [isContinuous]="true"
-            [threshold]="0"
-            [debounceTime]="0"
-            [rootMargin]="intersectionRootMargin()"
-          >
-            Contact Person
-          </h3>
-          <img src="/assets/account_circle.svg" alt="account icon" />
-        </div>
-        <div class="mgt-15">
-          <app-com-updated-at
-            [display]="getEditHistory('contactPerson')"
-          ></app-com-updated-at>
-        </div>
-      </div>
-      <div
-        class="commonTextSection__text mgt-20"
-        [innerHTML]="planDetails().contactPerson ?? '' | safeHtml"
-      ></div>
-    </div>
+
     <app-com-back-to-top></app-com-back-to-top>
   </section>
 </div>

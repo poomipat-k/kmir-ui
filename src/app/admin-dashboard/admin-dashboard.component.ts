@@ -1,5 +1,5 @@
 import { CommonModule, ViewportScroller } from '@angular/common';
-import { Component, computed, inject, input, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { BackToTopComponent } from '../components/back-to-top/back-to-top.component';
 import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.component';
@@ -33,14 +33,13 @@ import { SafeHtmlPipe } from '../shared/pipe/safe-html.pipe';
   styleUrl: './admin-dashboard.component.scss',
 })
 export class AdminDashboardComponent {
-  protected planName = input<string>();
-
   protected planDetails = signal<PlanDetails>(new PlanDetails());
   protected intersectionRootMargin = signal('0px 0px -50% 0px');
   protected navActiveList = signal([true, false, false, false, false]);
   protected scrollerOffset = signal<[number, number]>([0, 40]); // [x, y]
   protected ignoreIntersection = signal(false);
   protected releaseIgnoreIntersectionTimeoutId = signal<any>(undefined);
+  protected baseLink = signal('admin/dashboard');
 
   protected navActiveIndex = computed<number>(() => {
     const list = this.navActiveList();
@@ -54,7 +53,6 @@ export class AdminDashboardComponent {
 
   protected metricData = computed(() => this.computeScore());
   protected scoreTableData = computed(() => this.computedScoreTable());
-  protected baseLink = computed(() => `/plan/${this.planName()}`);
 
   protected readonly themeService: ThemeService = inject(ThemeService);
   private readonly planService: PlanService = inject(PlanService);
@@ -65,14 +63,6 @@ export class AdminDashboardComponent {
   ngOnInit(): void {
     this.themeService.changeTheme('silver');
     this.scroller.setOffset(this.scrollerOffset());
-    this.planService
-      .getPlanDetails(this.planName() || '')
-      .subscribe((planDetails) => {
-        console.log('==plan planDetails', planDetails);
-        if (planDetails) {
-          this.planDetails.set(planDetails);
-        }
-      });
   }
 
   isIntersecting(intersecting: boolean, index: number) {
@@ -87,7 +77,7 @@ export class AdminDashboardComponent {
   }
 
   toEditPage() {
-    this.router.navigate([`/plan/${this.planName()}/edit`]);
+    this.router.navigate([`/admin/dashboard/edit`]);
   }
 
   computeScore() {
