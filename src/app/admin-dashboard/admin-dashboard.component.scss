@@ -66,6 +66,11 @@
   color: #1c1b1f;
 
   &__readiness {
+    &Container {
+      display: flex;
+      gap: 13px;
+    }
+
     font-family: $custom-font;
     font-weight: 600;
     font-size: 44px;
@@ -213,6 +218,9 @@
 .mgt {
   &-8 {
     margin-top: 8px;
+  }
+  &-12 {
+    margin-top: 12px;
   }
   &-14 {
     margin-top: 14px;

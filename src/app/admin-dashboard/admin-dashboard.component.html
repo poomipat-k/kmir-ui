@@ -106,7 +106,15 @@
     </div>
     <!-- Metric -->
     <div class="mgt-94">
-      <h2 class="header__readiness">Readiness and Willingness Assessment</h2>
+      <div class="header__readinessContainer">
+        <h2 class="header__readiness">Readiness and Willingness Assessment</h2>
+        <div class="mgt-12">
+          <app-com-icon-tooltip
+            [hasTooltip]="true"
+            tooltipText="Test readiness tooltip"
+          ></app-com-icon-tooltip>
+        </div>
+      </div>
       <div
         id="readiness"
         class="metric pdl-32 mgt-67"

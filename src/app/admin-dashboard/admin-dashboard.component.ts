@@ -58,7 +58,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
   protected metricFormGroup: WritableSignal<FormGroup> = signal(
     new FormGroup({})
   );
-  protected minYear = signal(2023);
+  protected minYear = signal(2022);
   protected metricYearOptions = signal<DropdownOption[]>([]);
   protected plans = signal<any[]>([]);
   protected metricScores = signal<AssessmentScore[]>([]);
@@ -112,7 +112,6 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     this.refreshMetric();
 
     this.metricFormGroup().valueChanges.subscribe((values) => {
-      console.log('==valuesChanged', values);
       this.refreshMetric();
       // fetch new metric data
     });
@@ -127,7 +126,6 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
         controls['plan']?.value
       )
       .subscribe((scores) => {
-        console.log('==scores', scores);
         this.metricScores.set(scores || []);
       });
   }
@@ -176,7 +174,8 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     const scoreData: MetricInput[] = [];
     /*
     {
-      Alcohol: {
+      // planId
+      1: {
         2024: 
         {
           x: 5,
@@ -252,7 +251,6 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
         res[row.criteriaOrder - 1].score = row.score;
       }
     });
-    console.log('==metric', res);
     return res || [];
   }
 
