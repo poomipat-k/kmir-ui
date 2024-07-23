@@ -13,6 +13,7 @@ import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.co
 import { MetricComponent } from '../components/metric/metric.component';
 import { ScoreTableComponent } from '../components/score-table/score-table.component';
 import { UpdatedAtComponent } from '../components/updated-at/updated-at.component';
+import { DateService } from '../services/date.service';
 import { PlanService } from '../services/plan.service';
 import { ThemeService } from '../services/theme.service';
 import { UserService } from '../services/user.service';
@@ -68,6 +69,7 @@ export class PlanDetailsComponent implements OnInit {
   private readonly router: Router = inject(Router);
   protected readonly userService: UserService = inject(UserService);
   private readonly scroller: ViewportScroller = inject(ViewportScroller);
+  private readonly dateService: DateService = inject(DateService);
 
   ngOnInit(): void {
     this.themeService.changeTheme('silver');
@@ -147,11 +149,7 @@ export class PlanDetailsComponent implements OnInit {
       return row;
     });
     const now = new Date();
-    const nowLocal = now.toLocaleDateString('en-GB', {
-      timeZone: 'Asia/bangkok',
-    });
-    const split = nowLocal.split('/');
-    const year = +split[split.length - 1];
+    const [year] = this.dateService.getYearMonthDay(now);
 
     plans.assessmentScore?.forEach((row) => {
       // Only display score for current year and from the owner of the plan
@@ -159,6 +157,7 @@ export class PlanDetailsComponent implements OnInit {
         res[row.criteriaOrder - 1].score = row.score;
       }
     });
+    console.log('==score table:', res);
     return res || [];
   }
 

@@ -239,11 +239,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
       return row;
     });
     const now = new Date();
-    const nowLocal = now.toLocaleDateString('en-GB', {
-      timeZone: 'Asia/bangkok',
-    });
-    const split = nowLocal.split('/');
-    const year = +split[split.length - 1];
+    const [year] = this.dateService.getYearMonthDay(now);
 
     plans.assessmentScore?.forEach((row) => {
       // Only display score for current year and from the owner of the plan
