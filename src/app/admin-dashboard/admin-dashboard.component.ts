@@ -74,7 +74,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     return 0;
   });
   protected planOptions = computed(() => {
-    console.log('==this.plans()', this.plans());
+    console.log('==[planOptions]', this.plans());
     const options: DropdownOption[] =
       this.plans()?.map((p: any) => ({
         value: p.name,
@@ -89,6 +89,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
 
   protected metricData = computed(() => this.computeScoreMetic());
   protected topicShortMap = computed(() => this.computeTopicShortMap());
+  protected topicShortList = computed(() => this.computeTopicShortList());
 
   protected readonly themeService: ThemeService = inject(ThemeService);
   private readonly planService: PlanService = inject(PlanService);
@@ -232,6 +233,13 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
       map[p.planId] = p.topicShort;
     });
     return map;
+  }
+
+  private computeTopicShortList(): string[] {
+    console.log('==topicShortList');
+    const list = this.plans()?.map((p: any) => p.topicShort);
+    console.log('==list', list);
+    return list;
   }
 
   getEditHistory(name: string): string {

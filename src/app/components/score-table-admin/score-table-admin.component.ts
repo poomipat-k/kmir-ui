@@ -1,5 +1,6 @@
 import { Component, input, signal } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { TooltipDirective } from '../../shared/directives/tooltip.directive';
 import { AssessmentCriteria } from '../../shared/models/assessment-criteria';
 import { DropdownOption } from '../../shared/models/dropdown-option';
 import { ScoreTableRow } from '../../shared/models/score-table-row';
@@ -8,17 +9,16 @@ import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.comp
 @Component({
   selector: 'app-com-score-table-admin',
   standalone: true,
-  imports: [SelectDropdownComponent],
+  imports: [SelectDropdownComponent, TooltipDirective],
   templateUrl: './score-table-admin.component.html',
   styleUrl: './score-table-admin.component.scss',
 })
 export class ScoreTableAdminComponent {
+  shortNames = input<string[]>([]);
   criteria = input<AssessmentCriteria[]>([]);
   data = input<ScoreTableRow[][]>([]);
   editMode = input(false);
   form = input<FormGroup>(new FormGroup({}));
-
-  totalQuestion = signal([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]);
 
   protected scoreOptions = signal<DropdownOption[]>([
     {
@@ -63,7 +63,8 @@ export class ScoreTableAdminComponent {
     },
   ]);
 
-  getDropdownControlName(item: ScoreTableRow): string {
-    return `q_${item.order}`;
+  getPlanText(index: number) {
+    const num = index >= 12 ? index + 2 : index + 1;
+    return `P.${num}`;
   }
 }

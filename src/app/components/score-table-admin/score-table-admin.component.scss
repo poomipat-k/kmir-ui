@@ -3,9 +3,9 @@
 .grid {
   display: grid;
   grid-template-rows: 30px repeat(7, auto);
-  grid-template-columns: 37px 150px repeat(14, auto);
+  grid-template-columns: 37px 1fr repeat(14, 50px);
   grid-template-areas:
-    ".    as . . . . . . . . . . . . . ."
+    "as   as . . . . . . . . . . . . . ."
     "will  . . . . . . . . . . . . . . ."
     "will  . . . . . . . . . . . . . . ."
     "will  . . . . . . . . . . . . . . ."
@@ -25,6 +25,25 @@
   color: #000;
 }
 
+.assessment {
+  font-family: $custom-font;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 23px;
+  text-align: center;
+  color: #000;
+}
+
+.planLabel {
+  font-family: $custom-font;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 23px;
+  text-align: center;
+  color: #000;
+  position: relative;
+}
+
 .border {
   border-top: 1px solid rgba(0, 0, 0, 0.2);
 
@@ -36,14 +55,13 @@
 .score {
   font-family: $custom-font;
   font-weight: 600;
-  font-size: 20px;
-  line-height: 33px;
-  padding: 10px 10px 10px 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
-  text-align: right;
-  &:last-of-type {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  }
+  font-size: 18px;
+  line-height: 30px;
+  text-align: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .dropdown {
