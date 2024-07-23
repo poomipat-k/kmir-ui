@@ -193,7 +193,9 @@
       </div>
 
       <!-- Table -->
-      <app-com-score-table [data]="scoreTableData()"></app-com-score-table>
+      <app-com-score-table-admin
+        [criteria]="criteriaList()"
+      ></app-com-score-table-admin>
     </div>
     <div class="hr--dashed mgt-70"></div>
     <!-- Proposed activities -->

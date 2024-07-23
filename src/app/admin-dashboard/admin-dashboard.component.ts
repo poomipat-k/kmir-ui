@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
 import { BackToTopComponent } from '../components/back-to-top/back-to-top.component';
 import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.component';
 import { MetricComponent } from '../components/metric/metric.component';
-import { ScoreTableComponent } from '../components/score-table/score-table.component';
+import { ScoreTableAdminComponent } from '../components/score-table-admin/score-table-admin.component';
 import { SelectDropdownComponent } from '../components/select-dropdown/select-dropdown.component';
 import { UpdatedAtComponent } from '../components/updated-at/updated-at.component';
 import { DateService } from '../services/date.service';
@@ -22,11 +22,11 @@ import { PlanService } from '../services/plan.service';
 import { ThemeService } from '../services/theme.service';
 import { UserService } from '../services/user.service';
 import { IntersectionElementDirective } from '../shared/directives/intersection-element.directive';
+import { AssessmentCriteria } from '../shared/models/assessment-criteria';
 import { AssessmentScore } from '../shared/models/assessment-score';
 import { DropdownOption } from '../shared/models/dropdown-option';
 import { MetricInput } from '../shared/models/metric-input';
 import { PlanDetails } from '../shared/models/plan-details';
-import { ScoreTableRow } from '../shared/models/score-table-row';
 import { SafeHtmlPipe } from '../shared/pipe/safe-html.pipe';
 
 @Component({
@@ -36,13 +36,13 @@ import { SafeHtmlPipe } from '../shared/pipe/safe-html.pipe';
     CommonModule,
     MetricComponent,
     UpdatedAtComponent,
-    ScoreTableComponent,
     IconTooltipComponent,
     BackToTopComponent,
     IntersectionElementDirective,
     RouterModule,
     SafeHtmlPipe,
     SelectDropdownComponent,
+    ScoreTableAdminComponent,
   ],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.scss',
@@ -60,6 +60,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
   );
   protected minYear = signal(2022);
   protected metricYearOptions = signal<DropdownOption[]>([]);
+  protected criteriaList = signal<AssessmentCriteria[]>([]);
   protected plans = signal<any[]>([]);
   protected metricScores = signal<AssessmentScore[]>([]);
 
@@ -73,10 +74,12 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     return 0;
   });
   protected planOptions = computed(() => {
-    const options: DropdownOption[] = this.plans()?.map((p) => ({
-      value: p.name,
-      display: p.name,
-    }));
+    console.log('==this.plans()', this.plans());
+    const options: DropdownOption[] =
+      this.plans()?.map((p: any) => ({
+        value: p.name,
+        display: p.name,
+      })) || [];
     options.unshift({
       value: 'all',
       display: 'All Plan',
@@ -85,7 +88,6 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
   });
 
   protected metricData = computed(() => this.computeScoreMetic());
-  protected scoreTableData = computed(() => this.computedScoreTable());
   protected topicShortMap = computed(() => this.computeTopicShortMap());
 
   protected readonly themeService: ThemeService = inject(ThemeService);
@@ -102,10 +104,13 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     this.scroller.setOffset(this.scrollerOffset());
     this.initMetricControlValue();
 
-    this.planService.getAllPlansDetails().subscribe((plans) => {
-      console.log('==plans', plans);
-      if (plans?.length > 0) {
-        this.plans.set(plans);
+    this.planService.getAllPlansDetails().subscribe((res) => {
+      console.log('==res', res);
+      if (res?.assessmentCriteria?.length > 0) {
+        this.criteriaList.set(res.assessmentCriteria);
+      }
+      if (res?.planDetails?.length > 0) {
+        this.plans.set(res.planDetails);
       }
     });
 
@@ -113,7 +118,6 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
 
     this.metricFormGroup().valueChanges.subscribe((values) => {
       this.refreshMetric();
-      // fetch new metric data
     });
   }
 
@@ -224,30 +228,10 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
 
   private computeTopicShortMap() {
     const map: { [key: number]: string } = {};
-    this.plans()?.forEach((p) => {
+    this.plans()?.forEach((p: any) => {
       map[p.planId] = p.topicShort;
     });
     return map;
-  }
-
-  computedScoreTable(): ScoreTableRow[] {
-    const plans = this.planDetails();
-    const res = plans.assessmentCriteria?.map((c) => {
-      const row = new ScoreTableRow();
-      row.order = c.orderNumber;
-      row.question = c.display;
-      return row;
-    });
-    const now = new Date();
-    const [year] = this.dateService.getYearMonthDay(now);
-
-    plans.assessmentScore?.forEach((row) => {
-      // Only display score for current year and from the owner of the plan
-      if (row.year === year && row.userRole === 'user') {
-        res[row.criteriaOrder - 1].score = row.score;
-      }
-    });
-    return res || [];
   }
 
   getEditHistory(name: string): string {

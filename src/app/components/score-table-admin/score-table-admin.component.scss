@@ -1,0 +1,88 @@
+@import "../../../styles.scss";
+
+.grid {
+  display: grid;
+  grid-template-rows: 30px repeat(7, auto);
+  grid-template-columns: 37px 150px repeat(14, auto);
+  grid-template-areas:
+    ".    as . . . . . . . . . . . . . ."
+    "will  . . . . . . . . . . . . . . ."
+    "will  . . . . . . . . . . . . . . ."
+    "will  . . . . . . . . . . . . . . ."
+    "cap   . . . . . . . . . . . . . . ."
+    "cap   . . . . . . . . . . . . . . ."
+    "cap   . . . . . . . . . . . . . . ."
+    "cap   . . . . . . . . . . . . . . .";
+}
+
+.question {
+  padding: 10px;
+  padding-right: 0;
+  font-family: $custom-font;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 23px;
+  color: #000;
+}
+
+.border {
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+
+  &:last-of-type {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  }
+}
+
+.score {
+  font-family: $custom-font;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 33px;
+  padding: 10px 10px 10px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  text-align: right;
+  &:last-of-type {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  }
+}
+
+.dropdown {
+  padding-top: 12px;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  &:last-of-type {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  }
+}
+
+.willingness {
+  grid-area: will;
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+  text-align: center;
+  background-color: #e4e7f7;
+  font-family: $custom-font;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 31px;
+  color: #000;
+  border-radius: 4px;
+  margin-bottom: 4px;
+  margin-right: 7px;
+  width: 31px;
+}
+.capacity {
+  grid-area: cap;
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+  text-align: center;
+  background-color: #d0d6f4;
+  border-radius: 4px;
+  margin-top: 2px;
+  font-family: $custom-font;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 31px;
+  color: #000;
+  margin-right: 7px;
+  width: 31px;
+}

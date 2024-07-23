@@ -1,0 +1,26 @@
+<div class="grid">
+  <p>&nbsp;</p>
+  <p class="assessment">Assessment</p>
+  <p>P.1</p>
+  <p>P.2</p>
+  <p>P.3</p>
+  <p>P.4</p>
+  <p>P.5</p>
+  <p>P.6</p>
+  <p>P.7</p>
+  <p>P.8</p>
+  <p>P.9</p>
+  <p>P.10</p>
+  <p>P.11</p>
+  <p>P.12</p>
+  <p>P.14</p>
+  <p>P.15</p>
+  <div class="willingness">Willingness</div>
+  <div class="capacity">Capacity</div>
+
+  @for (c of criteria(); track $index; let i = $index) {
+  <p class="question border">{{ c.orderNumber + ". " + c.display }}</p>
+  @for (ind of totalQuestion(); track $index;) {
+  <p class="border">{{ data()?.[ind]?.[i] || "-" }}</p>
+  } }
+</div>
