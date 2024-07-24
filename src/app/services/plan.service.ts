@@ -70,7 +70,10 @@ export class PlanService {
 
   editPlan(planName: string, payload: PlanFormValue) {
     return this.http
-      .patch<any>(`${this.baseApiUrl}/plan`, { ...payload, planName })
+      .patch<CommonSuccessResponse>(`${this.baseApiUrl}/plan`, {
+        ...payload,
+        planName,
+      })
       .pipe(catchError(this.handleError));
   }
 

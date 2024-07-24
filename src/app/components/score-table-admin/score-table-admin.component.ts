@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, input, signal } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { TooltipDirective } from '../../shared/directives/tooltip.directive';
@@ -9,7 +10,7 @@ import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.comp
 @Component({
   selector: 'app-com-score-table-admin',
   standalone: true,
-  imports: [SelectDropdownComponent, TooltipDirective],
+  imports: [SelectDropdownComponent, TooltipDirective, CommonModule],
   templateUrl: './score-table-admin.component.html',
   styleUrl: './score-table-admin.component.scss',
 })

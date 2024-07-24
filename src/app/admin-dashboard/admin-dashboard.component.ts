@@ -74,7 +74,6 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     return 0;
   });
   protected planOptions = computed(() => {
-    console.log('==[planOptions]', this.plans());
     const options: DropdownOption[] =
       this.plans()?.map((p: any) => ({
         value: p.name,
@@ -90,6 +89,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
   protected metricData = computed(() => this.computeScoreMetic());
   protected topicShortMap = computed(() => this.computeTopicShortMap());
   protected topicShortList = computed(() => this.computeTopicShortList());
+  protected assessmentData = computed(() => this.computeAssessmentData());
 
   protected readonly themeService: ThemeService = inject(ThemeService);
   private readonly planService: PlanService = inject(PlanService);
@@ -119,6 +119,13 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
 
     this.metricFormGroup().valueChanges.subscribe((values) => {
       this.refreshMetric();
+    });
+  }
+
+  private computeAssessmentData() {
+    const plans = this.plans();
+    const scoreData = plans.map((plan) => {
+      const scores = [];
     });
   }
 
@@ -236,9 +243,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
   }
 
   private computeTopicShortList(): string[] {
-    console.log('==topicShortList');
     const list = this.plans()?.map((p: any) => p.topicShort);
-    console.log('==list', list);
     return list;
   }
 
