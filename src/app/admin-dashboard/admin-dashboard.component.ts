@@ -27,6 +27,7 @@ import { AssessmentScore } from '../shared/models/assessment-score';
 import { DropdownOption } from '../shared/models/dropdown-option';
 import { MetricInput } from '../shared/models/metric-input';
 import { PlanDetails } from '../shared/models/plan-details';
+import { ScoreTableRow } from '../shared/models/score-table-row';
 import { SafeHtmlPipe } from '../shared/pipe/safe-html.pipe';
 
 @Component({
@@ -61,7 +62,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
   protected minYear = signal(2022);
   protected metricYearOptions = signal<DropdownOption[]>([]);
   protected criteriaList = signal<AssessmentCriteria[]>([]);
-  protected plans = signal<any[]>([]);
+  protected plans = signal<PlanDetails[]>([]);
   protected metricScores = signal<AssessmentScore[]>([]);
 
   protected navActiveIndex = computed<number>(() => {
@@ -75,7 +76,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
   });
   protected planOptions = computed(() => {
     const options: DropdownOption[] =
-      this.plans()?.map((p: any) => ({
+      this.plans()?.map((p) => ({
         value: p.name,
         display: p.name,
       })) || [];
@@ -89,7 +90,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
   protected metricData = computed(() => this.computeScoreMetic());
   protected topicShortMap = computed(() => this.computeTopicShortMap());
   protected topicShortList = computed(() => this.computeTopicShortList());
-  protected assessmentData = computed(() => this.computeAssessmentData());
+  protected assessmentScoreData = computed(() => this.computeAssessmentData());
 
   protected readonly themeService: ThemeService = inject(ThemeService);
   private readonly planService: PlanService = inject(PlanService);
@@ -124,9 +125,14 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
 
   private computeAssessmentData() {
     const plans = this.plans();
-    const scoreData = plans.map((plan) => {
-      const scores = [];
+    const scoreData = plans?.map((plan) => {
+      return (
+        plan?.assessmentScore?.map(
+          (s) => new ScoreTableRow(s.criteriaOrder, s.score)
+        ) || []
+      );
     });
+    return scoreData || [];
   }
 
   refreshMetric() {
@@ -236,14 +242,14 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
 
   private computeTopicShortMap() {
     const map: { [key: number]: string } = {};
-    this.plans()?.forEach((p: any) => {
+    this.plans()?.forEach((p) => {
       map[p.planId] = p.topicShort;
     });
     return map;
   }
 
   private computeTopicShortList(): string[] {
-    const list = this.plans()?.map((p: any) => p.topicShort);
+    const list = this.plans()?.map((p) => p.topicShort);
     return list;
   }
 

@@ -15,7 +15,7 @@
   </p>
   @for (name of shortNames(); track $index; let j = $index) {
   <p [ngClass]="{ score: true, border: true, 'border--bottom': i === 6 }">
-    {{ data()?.[j]?.[i] || "-" }}
+    {{ data()?.[j]?.[i]?.score || '-'}}
   </p>
   } }
 </div>

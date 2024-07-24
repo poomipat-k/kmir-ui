@@ -2,6 +2,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { catchError, of, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { AdminAllPlans } from '../shared/models/admin-all-plans';
+import { AssessmentScore } from '../shared/models/assessment-score';
 import { CommonSuccessResponse } from '../shared/models/common-success-response';
 import { PlanDetails } from '../shared/models/plan-details';
 import { PlanFormValue } from '../shared/models/plan-form-value';
@@ -54,13 +56,13 @@ export class PlanService {
 
   getAllPlansDetails() {
     return this.http
-      .get<any>(`${this.baseApiUrl}/admin/plans`)
+      .get<AdminAllPlans>(`${this.baseApiUrl}/admin/plans`)
       .pipe(catchError(this.handleError));
   }
 
   adminGetScores(fromYear: number, toYear: number, plan: string) {
     return this.http
-      .post<any>(`${this.baseApiUrl}/admin/scores`, {
+      .post<AssessmentScore[]>(`${this.baseApiUrl}/admin/scores`, {
         fromYear,
         toYear,
         plan,

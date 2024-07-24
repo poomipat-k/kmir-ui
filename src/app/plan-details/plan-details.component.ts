@@ -142,12 +142,9 @@ export class PlanDetailsComponent implements OnInit {
 
   computedScoreTable(): ScoreTableRow[] {
     const plans = this.planDetails();
-    const res = plans.assessmentCriteria?.map((c) => {
-      const row = new ScoreTableRow();
-      row.order = c.orderNumber;
-      row.question = c.display;
-      return row;
-    });
+    const res = plans.assessmentCriteria?.map(
+      (c) => new ScoreTableRow(c.orderNumber, undefined, c.display)
+    );
     const now = new Date();
     const [year] = this.dateService.getYearMonthDay(now);
 

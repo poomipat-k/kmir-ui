@@ -131,12 +131,9 @@ export class PlanEditComponent implements OnInit {
 
   computedScoreTableAndRefreshForm(): ScoreTableRow[] {
     const plan = this.planDetails();
-    const scoreData = plan.assessmentCriteria?.map((c) => {
-      const row = new ScoreTableRow();
-      row.order = c.orderNumber;
-      row.question = c.display;
-      return row;
-    });
+    const scoreData = plan.assessmentCriteria?.map(
+      (c) => new ScoreTableRow(c.orderNumber, undefined, c.display)
+    );
     const now = new Date();
     const nowLocal = now.toLocaleDateString('en-GB', {
       timeZone: 'Asia/bangkok',
