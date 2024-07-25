@@ -13,6 +13,7 @@ import { Router, RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AdminNoteComponent } from '../components/admin-note/admin-note.component';
 import { BackToTopComponent } from '../components/back-to-top/back-to-top.component';
+import { ChangeLogComponent } from '../components/change-log/change-log.component';
 import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.component';
 import { MetricComponent } from '../components/metric/metric.component';
 import { PlanNoteComponent } from '../components/plan-note/plan-note.component';
@@ -50,12 +51,12 @@ import { SafeHtmlPipe } from '../shared/pipe/safe-html.pipe';
     ProposedActivitiesComponent,
     PlanNoteComponent,
     AdminNoteComponent,
+    ChangeLogComponent,
   ],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.scss',
 })
 export class AdminDashboardComponent implements OnInit, OnDestroy {
-  protected planDetails = signal<PlanDetails>(new PlanDetails());
   protected intersectionRootMargin = signal('0px 0px -50% 0px');
   protected navActiveList = signal([true, false, false, false, false]);
   protected scrollerOffset = signal<[number, number]>([0, 40]); // [x, y]
@@ -125,8 +126,8 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     });
     // Todo: remove this
     setTimeout(() => {
-      this.scroller.scrollToPosition([0, 17000]);
-    }, 10);
+      this.scroller.scrollToPosition([0, 3700]);
+    }, 100);
 
     this.refreshMetric();
 
@@ -220,7 +221,6 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     this.metricScores()?.forEach((row) => {
       const axis: 'x' | 'y' =
         row.criteriaCategory === 'willingness' ? 'x' : 'y';
-      // const topicShort = this.topicShortMap()[row.planId];
       const planId = row.planId;
       if (!sumScoreObj[planId]) {
         sumScoreObj[planId] = {};
@@ -265,8 +265,8 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     return list;
   }
 
-  getEditHistory(name: string): string {
-    const plan = this.planDetails();
+  getEditHistory(name: string, index: number): string {
+    const plan = this.plans()[index];
     if (name === 'readinessWillingness') {
       const updatedAt = plan.readinessWillingnessUpdatedAt;
       const updatedBy = plan.readinessWillingnessUpdatedBy;

@@ -13,4 +13,12 @@ export class DateService {
     const [month, day, year] = localeDate?.split('/').map((s) => +s);
     return [year, month, day];
   }
+
+  getDateAndTime(date: Date): string[] {
+    const localeDate = date.toLocaleString('en-GB', {
+      timeZone: 'Asia/bangkok',
+    });
+    // console.log('==localeDate', localeDate);
+    return localeDate.split(', ');
+  }
 }

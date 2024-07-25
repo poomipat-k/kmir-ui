@@ -71,7 +71,6 @@
         <h2 class="topic">
           Forem ipsum dolor sit amet, consectetur adipiscing elit.
         </h2>
-        <h2 class="topic">{{ planDetails().topicEn }}</h2>
       </div>
 
       <button class="editButton mgt-58" (click)="toEditPage()">
@@ -186,9 +185,7 @@
           </div>
         </div>
         <div class="mgt-15">
-          <app-com-updated-at
-            [display]="getEditHistory('assessmentScore')"
-          ></app-com-updated-at>
+          <app-com-updated-at [display]="'Todo'"></app-com-updated-at>
         </div>
       </div>
 
@@ -256,7 +253,7 @@
       <div class="commonTextSection__headerSection">
         <div class="commonTextSection__headerBox">
           <h3
-            id="planNote"
+            id="adminNote"
             class="commonTextSection__headerText"
             appIntersectionElement
             (isIntersecting)="isIntersecting($event, 3)"
@@ -272,6 +269,33 @@
       </div>
       <div class="mgt-20">
         <app-com-admin-note [text]="adminNote()"></app-com-admin-note>
+      </div>
+    </div>
+
+    <!-- Log activities -->
+    <div class="mgt-109">
+      <div class="commonTextSection__headerSection">
+        <div class="commonTextSection__headerBox">
+          <h3
+            id="changeLog"
+            class="commonTextSection__headerText"
+            appIntersectionElement
+            (isIntersecting)="isIntersecting($event, 3)"
+            [isContinuous]="true"
+            [threshold]="0"
+            [debounceTime]="0"
+            [rootMargin]="intersectionRootMargin()"
+          >
+            Log activities
+          </h3>
+          <img
+            src="/assets/event_note_log.svg"
+            alt="event note for log activities"
+          />
+        </div>
+      </div>
+      <div class="mgt-10">
+        <app-com-change-log [plans]="plans()"></app-com-change-log>
       </div>
     </div>
 
