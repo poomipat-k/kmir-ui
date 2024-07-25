@@ -21,7 +21,9 @@
       <p>{{ plans()[activeIndex()].topic }}</p>
       <p>{{ plans()[activeIndex()].topicEn }}</p>
     </div>
-    <app-com-updated-at [display]="'Todo'"></app-com-updated-at>
+    <div class="meta__update">
+      <app-com-updated-at [display]="updatedText()"></app-com-updated-at>
+    </div>
   </div>
 
   <div

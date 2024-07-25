@@ -31,9 +31,6 @@
 }
 
 .meta {
-  display: flex;
-  justify-content: space-between;
-
   &__name {
     display: flex;
     gap: 10px;
@@ -49,6 +46,10 @@
       line-height: 33px;
       font-weight: 600;
     }
+  }
+
+  &__update {
+    text-align: right;
   }
 }
 

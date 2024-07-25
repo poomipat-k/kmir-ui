@@ -330,7 +330,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
       hourCycle: 'h24',
       timeZone: 'Asia/bangkok',
     });
-    return `last edited by ${who} ${local}`;
+    return `latest edit by ${who} ${local}`;
   }
 
   onBackToHomePage() {

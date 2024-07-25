@@ -31,9 +31,6 @@
 }
 
 .meta {
-  display: flex;
-  justify-content: space-between;
-
   &__name {
     display: flex;
     gap: 10px;
@@ -48,11 +45,16 @@
     &--bold {
       line-height: 33px;
       font-weight: 600;
+      min-width: 149px;
     }
 
     &--cyan {
       color: #4a859f;
     }
+  }
+
+  &__update {
+    text-align: right;
   }
 }
 

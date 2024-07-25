@@ -15,6 +15,16 @@ export class PlanNoteComponent {
   plans = input.required<PlanDetails[]>();
 
   activeIndex = signal(0);
+  updatedText = computed(() => {
+    const selectedPlan = this.plans()[this.activeIndex()];
+    const who = selectedPlan.planNoteUpdatedBy;
+    const date = new Date(selectedPlan.planNoteUpdatedAt ?? 0);
+    const local = date.toLocaleString('en-GB', {
+      hourCycle: 'h24',
+      timeZone: 'Asia/bangkok',
+    });
+    return `latest edit by ${who} ${local}`;
+  });
 
   buttons = computed(() => {
     return this.plans().map((p) => p.name.replace('PLAN', 'P.'));

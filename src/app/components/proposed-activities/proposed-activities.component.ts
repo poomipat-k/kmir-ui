@@ -20,6 +20,17 @@ export class ProposedActivitiesComponent {
     return this.plans().map((p) => p.name.replace('PLAN', 'P.'));
   });
 
+  updatedText = computed(() => {
+    const selectedPlan = this.plans()[this.activeIndex()];
+    const who = selectedPlan.proposedActivityUpdatedBy;
+    const date = new Date(selectedPlan.proposedActivityUpdatedAt ?? 0);
+    const local = date.toLocaleString('en-GB', {
+      hourCycle: 'h24',
+      timeZone: 'Asia/bangkok',
+    });
+    return `latest edit by ${who} ${local}`;
+  });
+
   onPlanButtonClick(index: number) {
     this.activeIndex.set(index);
   }
