@@ -14,6 +14,8 @@ import { Subscription } from 'rxjs';
 import { BackToTopComponent } from '../components/back-to-top/back-to-top.component';
 import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.component';
 import { MetricComponent } from '../components/metric/metric.component';
+import { PlanNoteComponent } from '../components/plan-note/plan-note.component';
+import { ProposedActivitiesComponent } from '../components/proposed-activities/proposed-activities.component';
 import { ScoreTableAdminComponent } from '../components/score-table-admin/score-table-admin.component';
 import { SelectDropdownComponent } from '../components/select-dropdown/select-dropdown.component';
 import { UpdatedAtComponent } from '../components/updated-at/updated-at.component';
@@ -44,6 +46,8 @@ import { SafeHtmlPipe } from '../shared/pipe/safe-html.pipe';
     SafeHtmlPipe,
     SelectDropdownComponent,
     ScoreTableAdminComponent,
+    ProposedActivitiesComponent,
+    PlanNoteComponent,
   ],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.scss',
@@ -117,12 +121,13 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     });
     // Todo: remove this
     setTimeout(() => {
-      this.scroller.scrollToAnchor('pin');
-    }, 0);
+      // this.scroller.scrollToAnchor('test');
+      this.scroller.scrollToPosition([0, 17000]);
+    }, 10);
 
     this.refreshMetric();
 
-    this.metricFormGroup().valueChanges.subscribe((values) => {
+    this.metricFormGroup().valueChanges.subscribe(() => {
       this.refreshMetric();
     });
   }

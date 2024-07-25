@@ -202,7 +202,7 @@
 
     <!-- Proposed activities -->
     <div class="hr--dashed mgt-82"></div>
-    <div id="pin" class="mgt-14">
+    <div class="mgt-14">
       <div class="commonTextSection__headerSection">
         <div class="commonTextSection__headerBox">
           <h3
@@ -220,13 +220,15 @@
           <img src="/assets/event_note_blue.svg" alt="note icon" />
         </div>
       </div>
-      <div
-        class="commonTextSection__text mgt-20"
-        [innerHTML]="planDetails().proposedActivity ?? '' | safeHtml"
-      ></div>
+      <div class="mgt-39">
+        <app-com-proposed-activities
+          [plans]="plans()"
+        ></app-com-proposed-activities>
+      </div>
     </div>
     <!-- Notes -->
-    <div class="mgt-45">
+    <div class="hr--dashed mgt-78"></div>
+    <div class="mgt-52">
       <div class="commonTextSection__headerSection">
         <div class="commonTextSection__headerBox">
           <h3
@@ -243,16 +245,10 @@
           </h3>
           <img src="/assets/speaker_notes.svg" alt="speaker notes" />
         </div>
-        <div class="mgt-15">
-          <app-com-updated-at
-            [display]="getEditHistory('planNote')"
-          ></app-com-updated-at>
-        </div>
       </div>
-      <div
-        class="commonTextSection__text mgt-20"
-        [innerHTML]="planDetails().planNote ?? '' | safeHtml"
-      ></div>
+      <div class="mgt-39">
+        <app-com-plan-note [plans]="plans()"></app-com-plan-note>
+      </div>
     </div>
 
     <div class="backToTop">

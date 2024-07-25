@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="buttons">
+    @for (name of buttons(); track $index) {
+    <div
+      [ngClass]="{
+        buttons__button: true,
+        'buttons__button--active': activeIndex() === $index
+      }"
+      (click)="onPlanButtonClick($index)"
+    >
+      {{ name }}
+    </div>
+    }
+  </div>
+  @if (plans().length > 0) {
+  <div class="meta">
+    <div class="meta__name">
+      <p class="meta__name--bold">
+        <span class="meta__name--cyan">Note of : </span
+        >{{ plans()[activeIndex()].name | titlecase }}
+      </p>
+      <p>{{ plans()[activeIndex()].topic }}</p>
+      <p>{{ plans()[activeIndex()].topicEn }}</p>
+    </div>
+    <app-com-updated-at [display]="'Todo'"></app-com-updated-at>
+  </div>
+
+  <div
+    class="display"
+    [innerHTML]="plans()[activeIndex()].planNote ?? '' | safeHtml"
+  ></div>
+  }
+</div>
