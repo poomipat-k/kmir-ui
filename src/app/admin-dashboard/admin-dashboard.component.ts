@@ -11,6 +11,7 @@ import {
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AdminNoteComponent } from '../components/admin-note/admin-note.component';
 import { BackToTopComponent } from '../components/back-to-top/back-to-top.component';
 import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.component';
 import { MetricComponent } from '../components/metric/metric.component';
@@ -48,6 +49,7 @@ import { SafeHtmlPipe } from '../shared/pipe/safe-html.pipe';
     ScoreTableAdminComponent,
     ProposedActivitiesComponent,
     PlanNoteComponent,
+    AdminNoteComponent,
   ],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.scss',
@@ -68,6 +70,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
   protected criteriaList = signal<AssessmentCriteria[]>([]);
   protected plans = signal<PlanDetails[]>([]);
   protected metricScores = signal<AssessmentScore[]>([]);
+  protected adminNote = signal('');
 
   protected navActiveIndex = computed<number>(() => {
     const list = this.navActiveList();
@@ -118,10 +121,10 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
       if (res?.planDetails?.length > 0) {
         this.plans.set(res.planDetails);
       }
+      this.adminNote.set(res.adminNote);
     });
     // Todo: remove this
     setTimeout(() => {
-      // this.scroller.scrollToAnchor('test');
       this.scroller.scrollToPosition([0, 17000]);
     }, 10);
 

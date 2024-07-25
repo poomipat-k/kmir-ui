@@ -250,7 +250,32 @@
         <app-com-plan-note [plans]="plans()"></app-com-plan-note>
       </div>
     </div>
+    <!-- Admin Notes -->
+    <div class="hr--dashed mgt-78"></div>
+    <div class="mgt-52">
+      <div class="commonTextSection__headerSection">
+        <div class="commonTextSection__headerBox">
+          <h3
+            id="planNote"
+            class="commonTextSection__headerText"
+            appIntersectionElement
+            (isIntersecting)="isIntersecting($event, 3)"
+            [isContinuous]="true"
+            [threshold]="0"
+            [debounceTime]="0"
+            [rootMargin]="intersectionRootMargin()"
+          >
+            Notes of Admin
+          </h3>
+          <img src="/assets/speaker_notes_red.svg" alt="speaker notes" />
+        </div>
+      </div>
+      <div class="mgt-20">
+        <app-com-admin-note [text]="adminNote()"></app-com-admin-note>
+      </div>
+    </div>
 
+    <!-- Back to top button -->
     <div class="backToTop">
       <app-com-back-to-top></app-com-back-to-top>
     </div>
