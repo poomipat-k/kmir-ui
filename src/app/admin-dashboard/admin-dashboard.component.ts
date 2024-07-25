@@ -115,6 +115,10 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
         this.plans.set(res.planDetails);
       }
     });
+    // Todo: remove this
+    setTimeout(() => {
+      this.scroller.scrollToAnchor('pin');
+    }, 0);
 
     this.refreshMetric();
 

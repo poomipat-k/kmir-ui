@@ -172,7 +172,7 @@
       </div>
     </div>
 
-    <!-- Self assignment -->
+    <!-- Admin assessment -->
     <div class="hr--dashed mgt-143"></div>
     <div class="mgt-45">
       <div class="assessment__header">
@@ -199,9 +199,10 @@
         [data]="assessmentScoreData()"
       ></app-com-score-table-admin>
     </div>
-    <div class="hr--dashed mgt-70"></div>
+
     <!-- Proposed activities -->
-    <div class="mgt-14">
+    <div class="hr--dashed mgt-82"></div>
+    <div id="pin" class="mgt-14">
       <div class="commonTextSection__headerSection">
         <div class="commonTextSection__headerBox">
           <h3
@@ -216,12 +217,7 @@
           >
             Proposed activities
           </h3>
-          <img src="/assets/event_note.svg" alt="note icon" />
-        </div>
-        <div class="mgt-15">
-          <app-com-updated-at
-            [display]="getEditHistory('proposedActivity')"
-          ></app-com-updated-at>
+          <img src="/assets/event_note_blue.svg" alt="note icon" />
         </div>
       </div>
       <div
@@ -229,7 +225,6 @@
         [innerHTML]="planDetails().proposedActivity ?? '' | safeHtml"
       ></div>
     </div>
-    <div class="hr--dashed mgt-80"></div>
     <!-- Notes -->
     <div class="mgt-45">
       <div class="commonTextSection__headerSection">
