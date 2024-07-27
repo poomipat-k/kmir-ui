@@ -15,6 +15,28 @@ export class ChangeLogComponent {
   latestScores = input.required<LatestScore[]>();
 
   // computed signals
+  editItemList = computed(() => this.computeEditItemList());
+
+  editByList = computed(() => {
+    return this.plans().map((plan) => {
+      if (!plan.updatedBy) {
+        return '';
+      }
+      const ts1 = plan.updatedAt!;
+      const latestScore = this.latestScores().find((s) => {
+        return s.planId === plan.planId;
+      });
+      const ts2 = latestScore?.createdAt;
+
+      let ts = ts1;
+      if (ts2 && new Date(ts2) >= new Date(ts1)) {
+        ts = ts2;
+        return latestScore?.userRole;
+      }
+      return plan.updatedBy;
+    });
+  });
+
   dateAndTimeList = computed(() => {
     return this.plans().map((plan) => {
       if (!plan.updatedAt) {
@@ -33,8 +55,6 @@ export class ChangeLogComponent {
       return [date, time];
     });
   });
-
-  editItemList = computed(() => this.computeEditItemList());
 
   private readonly dateService: DateService = inject(DateService);
 

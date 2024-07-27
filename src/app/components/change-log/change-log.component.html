@@ -12,7 +12,7 @@
     <p class="cell cell__remainSpace">
       {{ editItemList()[$index] }}
     </p>
-    <p class="cell cell__by">{{ plan.updatedBy }}</p>
+    <p class="cell cell__by">{{ editByList()[$index] }}</p>
     <div class="cell cell__time">
       @if (plan.updatedAt) {
       <p>{{ dateAndTimeList()[$index][0] }}</p>
