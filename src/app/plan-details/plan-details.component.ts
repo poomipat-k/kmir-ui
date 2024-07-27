@@ -81,7 +81,6 @@ export class PlanDetailsComponent implements OnInit {
     this.planService
       .getPlanDetails(this.planName() || '')
       .subscribe((planDetails) => {
-        console.log('==plan planDetails', planDetails);
         if (planDetails) {
           this.planDetails.set(planDetails);
         }
@@ -179,7 +178,6 @@ export class PlanDetailsComponent implements OnInit {
         res[row.criteriaOrder - 1].score = row.score;
       }
     });
-    console.log('==score table:', res);
     return res || [];
   }
 

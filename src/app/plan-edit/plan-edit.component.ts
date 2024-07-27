@@ -244,7 +244,6 @@ export class PlanEditComponent implements OnInit {
       this.getControl('contactPerson').markAsTouched({ onlySelf: true });
     }
 
-    console.log('==newPlanValue', newPlanValue);
     this.planService.editPlan(this.planName(), newPlanValue).subscribe({
       next: (res) => {
         if (res) {
@@ -277,7 +276,6 @@ export class PlanEditComponent implements OnInit {
             }
             return updateValue;
           });
-          console.log('===origin', this.originalForm());
           setTimeout(() => {
             this.showPopup.set(false);
             if (name === 'full') {

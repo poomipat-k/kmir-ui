@@ -18,7 +18,6 @@ export class DateService {
     const localeDate = date.toLocaleString('en-GB', {
       timeZone: 'Asia/bangkok',
     });
-    // console.log('==localeDate', localeDate);
     return localeDate.split(', ');
   }
 }

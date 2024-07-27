@@ -47,8 +47,6 @@ export class HomeComponent implements OnInit {
     this.themeService.changeTheme('gold');
 
     this.planService.getAllPreviewPlan().subscribe((res: PreviewPlan[]) => {
-      console.log('==res', res);
-
       if (res && res.length > 0) {
         const curUser = this.getCurrentUser();
         const myPlan = res.find((plan) => plan.userId === curUser.id);
