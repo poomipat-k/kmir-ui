@@ -15,8 +15,8 @@
     <p class="cell cell__by">{{ plan.updatedBy }}</p>
     <div class="cell cell__time">
       @if (plan.updatedAt) {
-      <p>{{ getDateAndTime(plan.updatedAt)[0] }}</p>
-      <p>{{ getDateAndTime(plan.updatedAt)[1] }}</p>
+      <p>{{ dateAndTimeList()[$index][0] }}</p>
+      <p>{{ dateAndTimeList()[$index][1] }}</p>
       }
     </div>
   </div>

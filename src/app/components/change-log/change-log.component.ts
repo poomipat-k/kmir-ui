@@ -1,4 +1,4 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { DateService } from '../../services/date.service';
 import { LatestScore } from '../../shared/models/latest-score';
 import { PlanDetails } from '../../shared/models/plan-details';
@@ -13,6 +13,19 @@ import { PlanDetails } from '../../shared/models/plan-details';
 export class ChangeLogComponent {
   plans = input.required<PlanDetails[]>();
   latestScores = input.required<LatestScore[]>();
+
+  dateAndTimeList = computed(() => {
+    console.log('==[dateAndTimeList]');
+    return this.plans().map((p) => {
+      if (!p.updatedAt) {
+        return ['', ''];
+      }
+      const [date, time] = this.dateService.getDateAndTime(
+        new Date(p.updatedAt)
+      );
+      return [date, time];
+    });
+  });
 
   private readonly dateService: DateService = inject(DateService);
 
@@ -44,11 +57,11 @@ export class ChangeLogComponent {
     return list;
   }
 
-  getDateAndTime(dateStr: string) {
-    if (!dateStr) {
-      return '';
-    }
-    const [date, time] = this.dateService.getDateAndTime(new Date(dateStr));
-    return [date, time];
-  }
+  // getDateAndTime(dateStr: string) {
+  //   if (!dateStr) {
+  //     return '';
+  //   }
+  //   const [date, time] = this.dateService.getDateAndTime(new Date(dateStr));
+  //   return [date, time];
+  // }
 }
