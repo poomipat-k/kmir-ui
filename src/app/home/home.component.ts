@@ -2,6 +2,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { BackToTopComponent } from '../components/back-to-top/back-to-top.component';
 import { PlanService } from '../services/plan.service';
 import { ThemeService } from '../services/theme.service';
 import { UserService } from '../services/user.service';
@@ -12,7 +13,7 @@ import { User } from '../shared/models/user';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, BackToTopComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
   animations: [
