@@ -46,6 +46,15 @@ export const routes: Routes = [
     canActivate: [adminGuard],
   },
   {
+    path: 'admin/dashboard/edit',
+    loadComponent: () =>
+      import('./admin-dashboard-edit/admin-dashboard-edit.component').then(
+        (mod) => mod.AdminDashboardEditComponent
+      ),
+    title: 'admin dashboard edit',
+    canActivate: [adminGuard],
+  },
+  {
     path: '**',
     redirectTo: '',
   },

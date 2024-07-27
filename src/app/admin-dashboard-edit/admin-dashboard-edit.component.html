@@ -1,0 +1,46 @@
+<div class="container mgt-54">
+  <nav class="sideNav">
+    <div class="sideNav__back" (click)="onBackToDashboardPage()">
+      <img
+        src="/assets/arrow_back.svg"
+        alt="arrow back"
+        class="sideNav__back__icon"
+      />
+      <p class="sideNav__back__text">Back</p>
+    </div>
+  </nav>
+
+  <section class="content mgt-30 pdl-46">
+    <h1 class="header">{{ "header" }}</h1>
+    <div class="topicContainer">
+      <div>
+        <h2 class="topic">{{ "topic" }}</h2>
+        <h2 class="topic">{{ "topicEn" }}</h2>
+      </div>
+    </div>
+
+    <!-- Admin assessment Score -->
+    <div class="mgt-81">
+      <div class="assessment">
+        <div class="assessment__left">
+          <h3 class="assessment__header">Admin assessment Score</h3>
+          <app-com-icon-tooltip
+            [hasTooltip]="true"
+            tooltipText="Admin assessment Score"
+          ></app-com-icon-tooltip>
+        </div>
+        <app-com-save-button
+          (click)="onSaveButtonClick('assessmentScore')"
+        ></app-com-save-button>
+      </div>
+
+      <div class="mgt-17">
+        <app-com-score-table-admin
+          [shortNames]="topicShortList()"
+          [criteria]="criteriaList()"
+          [data]="assessmentScoreData()"
+        ></app-com-score-table-admin>
+      </div>
+    </div>
+  </section>
+</div>
