@@ -115,7 +115,21 @@
     white-space: pre-wrap;
 
     max-height: 170px;
-    overflow: scroll;
+    overflow-y: scroll;
+
+    // &::-webkit-scrollbar {
+    //   width: 4px;
+    // }
+
+    // &::-webkit-scrollbar-track {
+    //   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    //   border-radius: 10px;
+    // }
+
+    // &::-webkit-scrollbar-thumb {
+    //   border-radius: 10px;
+    //   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+    // }
   }
 }
 
@@ -218,7 +232,7 @@
     line-height: 23px;
     white-space: pre-wrap;
     max-height: 280px;
-    overflow: scroll;
+    overflow-y: scroll;
     border-bottom: 0.5px solid rgba(192, 195, 203, 0.5);
   }
 }
