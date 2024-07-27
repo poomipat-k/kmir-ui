@@ -171,7 +171,7 @@
       </div>
     </div>
 
-    <!-- Admin assessment -->
+    <!-- Admin assessment scores -->
     <div class="hr--dashed mgt-143"></div>
     <div class="mgt-45">
       <div class="assessment__header">
@@ -185,7 +185,9 @@
           </div>
         </div>
         <div class="mgt-15">
-          <app-com-updated-at [display]="'Todo'"></app-com-updated-at>
+          <app-com-updated-at
+            [display]="scoreTableLatestUpdateText()"
+          ></app-com-updated-at>
         </div>
       </div>
 

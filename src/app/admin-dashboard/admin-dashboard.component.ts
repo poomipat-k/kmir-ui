@@ -101,6 +101,9 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
   protected topicShortMap = computed(() => this.computeTopicShortMap());
   protected topicShortList = computed(() => this.computeTopicShortList());
   protected assessmentScoreData = computed(() => this.computeAssessmentData());
+  protected scoreTableLatestUpdateText = computed(() =>
+    this.computedScoreTableLatestUpdateText()
+  );
 
   protected readonly themeService: ThemeService = inject(ThemeService);
   private readonly planService: PlanService = inject(PlanService);
@@ -129,16 +132,20 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
       }
       this.adminNote.set(res.adminNote);
     });
-    // Todo: remove this
-    setTimeout(() => {
-      this.scroller.scrollToPosition([0, 3700]);
-    }, 100);
+    // // Todo: remove this
+    // setTimeout(() => {
+    //   this.scroller.scrollToPosition([0, 1400]);
+    // }, 100);
 
     this.refreshMetric();
 
     this.metricFormGroup().valueChanges.subscribe(() => {
       this.refreshMetric();
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subs.forEach((s) => s.unsubscribe());
   }
 
   private computeAssessmentData() {
@@ -166,8 +173,22 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnDestroy(): void {
-    this.subs.forEach((s) => s.unsubscribe());
+  private computedScoreTableLatestUpdateText() {
+    let latestScore = new AssessmentScore();
+    let maxDate = new Date(0);
+    this.plans().forEach((plan) => {
+      const newDate = new Date(plan.assessmentScore?.[0]?.createdAt);
+      if (plan?.assessmentScore?.[0]?.createdAt && newDate > maxDate) {
+        maxDate = newDate;
+        latestScore = plan?.assessmentScore?.[0];
+      }
+    });
+    const date = new Date(latestScore.createdAt ?? 0);
+    const localDateTime = date.toLocaleString('en-GB', {
+      hourCycle: 'h24',
+      timeZone: 'Asia/bangkok',
+    });
+    return `latest edit by Admin ${localDateTime}`;
   }
 
   initMetricControlValue() {
@@ -272,11 +293,6 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
 
   getEditHistory(name: string, index: number): string {
     const plan = this.plans()[index];
-    if (name === 'readinessWillingness') {
-      const updatedAt = plan.readinessWillingnessUpdatedAt;
-      const updatedBy = plan.readinessWillingnessUpdatedBy;
-      return this.generateUpdatedAtString(updatedAt, updatedBy);
-    }
     if (name === 'assessmentScore') {
       let latestUpdateIndex = -1;
       let date = new Date(0);
@@ -295,19 +311,6 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
         plan.assessmentScore[latestUpdateIndex].userRole
       );
     }
-    if (name === 'irGoal') {
-      const typeUpdatedAt = new Date(plan.irGoalTypeUpdatedAt || 0);
-      const detailsUpdatedAt = new Date(plan.irGoalDetailsUpdatedAt || 0);
-      const updatedAt =
-        typeUpdatedAt > detailsUpdatedAt
-          ? plan.irGoalTypeUpdatedAt
-          : plan.irGoalDetailsUpdatedAt;
-      const updatedBy =
-        typeUpdatedAt > detailsUpdatedAt
-          ? plan.irGoalTypeUpdatedBy
-          : plan.irGoalDetailsUpdatedBy;
-      return this.generateUpdatedAtString(updatedAt || '', updatedBy || '');
-    }
     if (name === 'proposedActivity') {
       const updatedAt = plan.proposedActivityUpdatedAt;
       const updatedBy = plan.proposedActivityUpdatedBy;
@@ -316,11 +319,6 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     if (name === 'planNote') {
       const updatedAt = plan.planNoteUpdatedAt;
       const updatedBy = plan.planNoteUpdatedBy;
-      return this.generateUpdatedAtString(updatedAt || '', updatedBy || '');
-    }
-    if (name === 'contactPerson') {
-      const updatedAt = plan.contactPersonUpdatedAt;
-      const updatedBy = plan.contactPersonUpdatedBy;
       return this.generateUpdatedAtString(updatedAt || '', updatedBy || '');
     }
     return 'Something wrong';
