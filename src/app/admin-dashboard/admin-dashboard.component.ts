@@ -124,8 +124,8 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
       if (res?.planDetails?.length > 0) {
         this.plans.set(res.planDetails);
       }
-      if (res?.latestScore) {
-        this.latestScores.set(res.latestScore);
+      if (res?.latestScores) {
+        this.latestScores.set(res.latestScores);
       }
       this.adminNote.set(res.adminNote);
     });

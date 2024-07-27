@@ -16,13 +16,20 @@ export class ChangeLogComponent {
 
   // computed signals
   dateAndTimeList = computed(() => {
-    return this.plans().map((p) => {
-      if (!p.updatedAt) {
+    return this.plans().map((plan) => {
+      if (!plan.updatedAt) {
         return ['', ''];
       }
-      const [date, time] = this.dateService.getDateAndTime(
-        new Date(p.updatedAt)
-      );
+      const ts1 = plan.updatedAt!;
+      const ts2 = this.latestScores().find((s) => {
+        return s.planId === plan.planId;
+      })?.createdAt;
+
+      let ts = ts1;
+      if (ts2 && new Date(ts2) >= new Date(ts1)) {
+        ts = ts2;
+      }
+      const [date, time] = this.dateService.getDateAndTime(new Date(ts));
       return [date, time];
     });
   });
@@ -35,9 +42,9 @@ export class ChangeLogComponent {
     return this.plans().map((plan) => {
       const list = [];
       const ts1 = plan.updatedAt!;
-      const ts2 = this.latestScores().find(
-        (s) => s.planId === plan.planId
-      )?.createdAt;
+      const ts2 = this.latestScores().find((s) => {
+        return s.planId === plan.planId;
+      })?.createdAt;
 
       let ts = ts1;
       if (ts2 && new Date(ts2) >= new Date(ts1)) {
@@ -49,24 +56,24 @@ export class ChangeLogComponent {
         list.push('readiness');
       }
       if (plan.irGoalTypeUpdatedAt === ts) {
-        list.push('ir work goal type');
+        list.push('irWorkGoalType');
       }
       if (plan.irGoalDetailsUpdatedAt === ts) {
-        list.push('ir work goal type');
+        list.push('irWorkGoalDetails');
       }
       if (plan.proposedActivityUpdatedAt === ts) {
-        list.push('proposed activity');
+        list.push('proposedActivity');
       }
       if (plan.planNoteUpdatedAt === ts) {
-        list.push('plan note');
+        list.push('planNote');
       }
       if (plan.contactPersonUpdatedAt === ts) {
-        list.push('contact person');
+        list.push('contactPerson');
       }
       if (plan.assessmentScore?.[0]?.createdAt === ts) {
-        list.push('assessment score');
+        list.push('assessmentScore');
       }
-      return list;
+      return list.join(', ');
     });
   }
 }

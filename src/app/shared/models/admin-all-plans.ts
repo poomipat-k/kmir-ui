@@ -6,7 +6,7 @@ export class AdminAllPlans {
   assessmentCriteria: AssessmentCriteria[];
   planDetails: PlanDetails[];
   adminNote: string;
-  latestScore: LatestScore[];
+  latestScores: LatestScore[];
 
   constructor() {}
 }
