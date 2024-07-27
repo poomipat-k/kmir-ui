@@ -14,8 +14,8 @@ export class ChangeLogComponent {
   plans = input.required<PlanDetails[]>();
   latestScores = input.required<LatestScore[]>();
 
+  // computed signals
   dateAndTimeList = computed(() => {
-    console.log('==[dateAndTimeList]');
     return this.plans().map((p) => {
       if (!p.updatedAt) {
         return ['', ''];
@@ -27,41 +27,46 @@ export class ChangeLogComponent {
     });
   });
 
+  editItemList = computed(() => this.computeEditItemList());
+
   private readonly dateService: DateService = inject(DateService);
 
-  getEditedItemList(plan: PlanDetails): string[] {
-    const list = [];
-    const ts1 = plan.updatedAt;
+  private computeEditItemList() {
+    return this.plans().map((plan) => {
+      const list = [];
+      const ts1 = plan.updatedAt!;
+      const ts2 = this.latestScores().find(
+        (s) => s.planId === plan.planId
+      )?.createdAt;
 
-    if (plan.readinessWillingnessUpdatedAt === ts1) {
-      list.push('readiness');
-    }
-    if (plan.irGoalTypeUpdatedAt === ts1) {
-      list.push('ir work goal type');
-    }
-    if (plan.irGoalDetailsUpdatedAt === ts1) {
-      list.push('ir work goal type');
-    }
-    if (plan.proposedActivityUpdatedAt === ts1) {
-      list.push('proposed activity');
-    }
-    if (plan.planNoteUpdatedAt === ts1) {
-      list.push('plan note');
-    }
-    if (plan.contactPersonUpdatedAt === ts1) {
-      list.push('contact person');
-    }
-    if (plan.assessmentScore?.[0]?.createdAt === ts1) {
-      list.push('assessment score');
-    }
-    return list;
+      let ts = ts1;
+      if (ts2 && new Date(ts2) >= new Date(ts1)) {
+        ts = ts2;
+        list.push('assessment score');
+      }
+
+      if (plan.readinessWillingnessUpdatedAt === ts) {
+        list.push('readiness');
+      }
+      if (plan.irGoalTypeUpdatedAt === ts) {
+        list.push('ir work goal type');
+      }
+      if (plan.irGoalDetailsUpdatedAt === ts) {
+        list.push('ir work goal type');
+      }
+      if (plan.proposedActivityUpdatedAt === ts) {
+        list.push('proposed activity');
+      }
+      if (plan.planNoteUpdatedAt === ts) {
+        list.push('plan note');
+      }
+      if (plan.contactPersonUpdatedAt === ts) {
+        list.push('contact person');
+      }
+      if (plan.assessmentScore?.[0]?.createdAt === ts) {
+        list.push('assessment score');
+      }
+      return list;
+    });
   }
-
-  // getDateAndTime(dateStr: string) {
-  //   if (!dateStr) {
-  //     return '';
-  //   }
-  //   const [date, time] = this.dateService.getDateAndTime(new Date(dateStr));
-  //   return [date, time];
-  // }
 }

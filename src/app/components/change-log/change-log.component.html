@@ -10,7 +10,7 @@
   <div class="row">
     <p class="cell cell__plan">{{ plan.name }}</p>
     <p class="cell cell__remainSpace">
-      {{ getEditedItemList(plan) }}
+      {{ editItemList()[$index] }}
     </p>
     <p class="cell cell__by">{{ plan.updatedBy }}</p>
     <div class="cell cell__time">
