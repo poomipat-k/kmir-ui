@@ -26,9 +26,9 @@
       }"
       (click)="onNavItemClick(1)"
       [routerLink]="baseLink()"
-      fragment="irGoal"
+      fragment="adminAssessmentScore"
     >
-      IR work goal
+      Admin Assessment Score
     </a>
     <a
       [ngClass]="{
@@ -50,18 +50,7 @@
       [routerLink]="baseLink()"
       fragment="planNote"
     >
-      Note
-    </a>
-    <a
-      [ngClass]="{
-        sideNav__item: true,
-        'sideNav__item--active': navActiveIndex() === 4
-      }"
-      (click)="onNavItemClick(4)"
-      [routerLink]="baseLink()"
-      fragment="contactPerson"
-    >
-      Contact Person
+      Notes
     </a>
   </nav>
   <section class="content mgt-18 pdl-55">
@@ -106,7 +95,18 @@
     <!-- Metric -->
     <div class="mgt-94">
       <div class="header__readinessContainer">
-        <h2 class="header__readiness">Readiness and Willingness Assessment</h2>
+        <h2
+          class="header__readiness"
+          id="readiness"
+          appIntersectionElement
+          (isIntersecting)="isIntersecting($event, 0)"
+          [isContinuous]="true"
+          [threshold]="0"
+          [debounceTime]="0"
+          [rootMargin]="intersectionRootMargin()"
+        >
+          Readiness and Willingness Assessment
+        </h2>
         <div class="mgt-12">
           <app-com-icon-tooltip
             [hasTooltip]="true"
@@ -114,16 +114,7 @@
           ></app-com-icon-tooltip>
         </div>
       </div>
-      <div
-        id="readiness"
-        class="metric pdl-32 mgt-67"
-        appIntersectionElement
-        (isIntersecting)="isIntersecting($event, 0)"
-        [isContinuous]="true"
-        [threshold]="0"
-        [debounceTime]="0"
-        [rootMargin]="intersectionRootMargin()"
-      >
+      <div class="metric pdl-32 mgt-67">
         <app-com-metric [data]="metricData()" size="large"></app-com-metric>
         <div class="metric__control__container mgt-34">
           <div>
@@ -176,7 +167,18 @@
     <div class="mgt-45">
       <div class="assessment__header">
         <div class="assessment__header__textContainer">
-          <h3 class="assessment__header__text">Admin assessment Score</h3>
+          <h3
+            id="adminAssessmentScore"
+            class="assessment__header__text"
+            appIntersectionElement
+            (isIntersecting)="isIntersecting($event, 1)"
+            [isContinuous]="true"
+            [threshold]="0"
+            [debounceTime]="0"
+            [rootMargin]="intersectionRootMargin()"
+          >
+            Admin assessment Score
+          </h3>
           <div class="mgt-15">
             <app-com-icon-tooltip
               [hasTooltip]="true"
@@ -254,16 +256,7 @@
     <div class="mgt-52">
       <div class="commonTextSection__headerSection">
         <div class="commonTextSection__headerBox">
-          <h3
-            id="adminNote"
-            class="commonTextSection__headerText"
-            appIntersectionElement
-            (isIntersecting)="isIntersecting($event, 3)"
-            [isContinuous]="true"
-            [threshold]="0"
-            [debounceTime]="0"
-            [rootMargin]="intersectionRootMargin()"
-          >
+          <h3 id="adminNote" class="commonTextSection__headerText">
             Notes of Admin
           </h3>
           <img src="/assets/speaker_notes_red.svg" alt="speaker notes" />
@@ -278,16 +271,7 @@
     <div class="mgt-109">
       <div class="commonTextSection__headerSection">
         <div class="commonTextSection__headerBox">
-          <h3
-            id="changeLog"
-            class="commonTextSection__headerText"
-            appIntersectionElement
-            (isIntersecting)="isIntersecting($event, 3)"
-            [isContinuous]="true"
-            [threshold]="0"
-            [debounceTime]="0"
-            [rootMargin]="intersectionRootMargin()"
-          >
+          <h3 id="changeLog" class="commonTextSection__headerText">
             Log activities
           </h3>
           <img
