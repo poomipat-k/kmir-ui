@@ -29,6 +29,7 @@ import { IntersectionElementDirective } from '../shared/directives/intersection-
 import { AssessmentCriteria } from '../shared/models/assessment-criteria';
 import { AssessmentScore } from '../shared/models/assessment-score';
 import { DropdownOption } from '../shared/models/dropdown-option';
+import { LatestScore } from '../shared/models/latest-score';
 import { MetricInput } from '../shared/models/metric-input';
 import { PlanDetails } from '../shared/models/plan-details';
 import { ScoreTableRow } from '../shared/models/score-table-row';
@@ -72,6 +73,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
   protected plans = signal<PlanDetails[]>([]);
   protected metricScores = signal<AssessmentScore[]>([]);
   protected adminNote = signal('');
+  protected latestScores = signal<LatestScore[]>([]);
 
   protected navActiveIndex = computed<number>(() => {
     const list = this.navActiveList();
@@ -121,6 +123,9 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
       }
       if (res?.planDetails?.length > 0) {
         this.plans.set(res.planDetails);
+      }
+      if (res?.latestScore) {
+        this.latestScores.set(res.latestScore);
       }
       this.adminNote.set(res.adminNote);
     });

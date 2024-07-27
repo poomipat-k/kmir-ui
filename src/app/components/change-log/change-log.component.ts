@@ -1,5 +1,6 @@
 import { Component, inject, input } from '@angular/core';
 import { DateService } from '../../services/date.service';
+import { LatestScore } from '../../shared/models/latest-score';
 import { PlanDetails } from '../../shared/models/plan-details';
 
 @Component({
@@ -11,31 +12,33 @@ import { PlanDetails } from '../../shared/models/plan-details';
 })
 export class ChangeLogComponent {
   plans = input.required<PlanDetails[]>();
+  latestScores = input.required<LatestScore[]>();
 
   private readonly dateService: DateService = inject(DateService);
 
   getEditedItemList(plan: PlanDetails): string[] {
     const list = [];
-    const ts = plan.updatedAt;
-    if (plan.readinessWillingnessUpdatedAt === ts) {
+    const ts1 = plan.updatedAt;
+
+    if (plan.readinessWillingnessUpdatedAt === ts1) {
       list.push('readiness');
     }
-    if (plan.irGoalTypeUpdatedAt === ts) {
+    if (plan.irGoalTypeUpdatedAt === ts1) {
       list.push('ir work goal type');
     }
-    if (plan.irGoalDetailsUpdatedAt === ts) {
+    if (plan.irGoalDetailsUpdatedAt === ts1) {
       list.push('ir work goal type');
     }
-    if (plan.proposedActivityUpdatedAt === ts) {
+    if (plan.proposedActivityUpdatedAt === ts1) {
       list.push('proposed activity');
     }
-    if (plan.planNoteUpdatedAt === ts) {
+    if (plan.planNoteUpdatedAt === ts1) {
       list.push('plan note');
     }
-    if (plan.contactPersonUpdatedAt === ts) {
+    if (plan.contactPersonUpdatedAt === ts1) {
       list.push('contact person');
     }
-    if (plan.assessmentScore?.[0]?.createdAt === ts) {
+    if (plan.assessmentScore?.[0]?.createdAt === ts1) {
       list.push('assessment score');
     }
     return list;
