@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, input, signal } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormArray, FormGroup } from '@angular/forms';
 import { TooltipDirective } from '../../shared/directives/tooltip.directive';
 import { AssessmentCriteria } from '../../shared/models/assessment-criteria';
 import { DropdownOption } from '../../shared/models/dropdown-option';
@@ -10,7 +10,12 @@ import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.comp
 @Component({
   selector: 'app-com-score-table-admin',
   standalone: true,
-  imports: [SelectDropdownComponent, TooltipDirective, CommonModule],
+  imports: [
+    SelectDropdownComponent,
+    TooltipDirective,
+    CommonModule,
+    SelectDropdownComponent,
+  ],
   templateUrl: './score-table-admin.component.html',
   styleUrl: './score-table-admin.component.scss',
 })
@@ -19,7 +24,7 @@ export class ScoreTableAdminComponent {
   criteria = input<AssessmentCriteria[]>([]);
   data = input<ScoreTableRow[][]>([]);
   editMode = input(false);
-  form = input<FormGroup>(new FormGroup({}));
+  formArray = input<FormArray>();
 
   protected scoreOptions = signal<DropdownOption[]>([
     {
@@ -67,5 +72,9 @@ export class ScoreTableAdminComponent {
   getPlanText(index: number) {
     const num = index >= 12 ? index + 2 : index + 1;
     return `P.${num}`;
+  }
+
+  getFormGroup(index: number) {
+    return this.formArray()?.at(index) as FormGroup;
   }
 }

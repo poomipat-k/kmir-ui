@@ -13,6 +13,11 @@
     "cap   . . . . . . . . . . . . . . ."
     "cap   . . . . . . . . . . . . . . ."
     "cap   . . . . . . . . . . . . . . .";
+
+  &--editMode {
+    grid-template-columns: 37px 1fr repeat(14, 46px);
+    column-gap: 16px;
+  }
 }
 
 .question {
@@ -49,6 +54,17 @@
 
   &--bottom {
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  }
+}
+
+.editCell {
+  &__label {
+    text-align: center;
+    font-family: $custom-font;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+    color: #989898;
   }
 }
 

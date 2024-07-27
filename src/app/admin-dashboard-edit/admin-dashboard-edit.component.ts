@@ -1,4 +1,5 @@
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.component';
 import { SaveButtonComponent } from '../components/save-button/save-button.component';
@@ -23,8 +24,18 @@ export class AdminDashboardEditComponent implements OnInit {
   private readonly router: Router = inject(Router);
   private readonly planService: PlanService = inject(PlanService);
 
+  // signals
   protected plans = signal<PlanDetails[]>([]);
   protected criteriaList = signal<AssessmentCriteria[]>([]);
+
+  protected form = signal<FormGroup>(
+    new FormGroup({
+      assessmentScore: new FormArray([]),
+      proposedActivity: new FormArray([]),
+      planNote: new FormArray([]),
+      adminNote: new FormControl(null),
+    })
+  );
 
   // Computed signals
   protected topicShortList = computed(() => this.computeTopicShortList());
@@ -43,7 +54,31 @@ export class AdminDashboardEditComponent implements OnInit {
       //   this.latestScores.set(res.latestScores);
       // }
       // this.adminNote.set(res.adminNote);
+      this.initForm();
     });
+  }
+
+  private initForm() {
+    const assessmentFormArray = this.plans().map(
+      (_) =>
+        new FormGroup({
+          q_1: new FormControl(null, Validators.required),
+          q_2: new FormControl(null, Validators.required),
+          q_3: new FormControl(null, Validators.required),
+          q_4: new FormControl(null, Validators.required),
+          q_5: new FormControl(null, Validators.required),
+          q_6: new FormControl(null, Validators.required),
+          q_7: new FormControl(null, Validators.required),
+        })
+    );
+    this.form.set(
+      new FormGroup({
+        assessmentScore: new FormArray(assessmentFormArray),
+        proposedActivity: new FormArray([]),
+        planNote: new FormArray([]),
+        adminNote: new FormControl(null),
+      })
+    );
   }
 
   onBackToDashboardPage() {
@@ -52,6 +87,10 @@ export class AdminDashboardEditComponent implements OnInit {
 
   onSaveButtonClick(name: string) {
     console.log('==onSaveButtonClick', name);
+  }
+
+  getAssessmentScoreFormArray(): FormArray {
+    return this.form().get('assessmentScore') as FormArray;
   }
 
   private computeTopicShortList(): string[] {
