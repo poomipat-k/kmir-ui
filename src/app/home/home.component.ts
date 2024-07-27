@@ -46,14 +46,28 @@ export class HomeComponent implements OnInit {
     this.themeService.changeTheme('gold');
 
     this.planService.getAllPreviewPlan().subscribe((res: PreviewPlan[]) => {
+      console.log('==res', res);
+
       if (res && res.length > 0) {
-        const plans = res.map((plan) => {
-          const item = new PlanCard();
-          item.data = plan;
-          item.open = false;
-          return item;
+        const curUser = this.getCurrentUser();
+        const myPlan = res.find((plan) => plan.userId === curUser.id);
+        if (!myPlan) {
+          return;
+        }
+        const firstPlanCard = new PlanCard();
+        firstPlanCard.data = myPlan;
+        firstPlanCard.open = false;
+        const sortedPlan = [firstPlanCard];
+
+        res.forEach((plan) => {
+          if (plan.id !== myPlan.id) {
+            const item = new PlanCard();
+            item.data = plan;
+            item.open = false;
+            sortedPlan.push(item);
+          }
         });
-        this.plans.set(plans);
+        this.plans.set(sortedPlan);
       }
     });
   }
