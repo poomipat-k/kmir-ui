@@ -83,7 +83,6 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
 
   protected navActiveIndex = computed<number>(() => {
     const list = this.navActiveList();
-    console.log('==list', list);
     for (let i = list.length - 1; i >= 0; i--) {
       if (list[i] > 0) {
         return i;

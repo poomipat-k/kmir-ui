@@ -45,7 +45,12 @@ export class PlanDetailsComponent implements OnInit {
 
   protected planDetails = signal<PlanDetails>(new PlanDetails());
   protected intersectionRootMargin = signal('0px 0px -50% 0px');
-  protected navActiveList = signal([true, false, false, false, false]);
+  /*
+  0: inactive
+  1: temp (last active item before goes out of intersection area)
+  2: active
+  */
+  protected navActiveList = signal([2, 0, 0, 0, 0]);
   protected scrollerOffset = signal<[number, number]>([0, 40]); // [x, y]
   protected ignoreIntersection = signal(false);
   protected releaseIgnoreIntersectionTimeoutId = signal<any>(undefined);
@@ -53,13 +58,12 @@ export class PlanDetailsComponent implements OnInit {
   protected navActiveIndex = computed<number>(() => {
     const list = this.navActiveList();
     for (let i = list.length - 1; i >= 0; i--) {
-      if (list[i]) {
+      if (list[i] > 0) {
         return i;
       }
     }
     return 0;
   });
-
   protected metricData = computed(() => this.computeScore());
   protected scoreTableData = computed(() => this.computedScoreTable());
   protected baseLink = computed(() => `/plan/${this.planName()}`);
@@ -90,7 +94,28 @@ export class PlanDetailsComponent implements OnInit {
     }
     this.navActiveList.update((oldList) => {
       const newList = [...oldList];
-      newList[index] = intersecting;
+      if (intersecting) {
+        newList[index] = 2;
+        // clear all temp when has new intersection
+        for (let i = 0; i < newList.length; i++) {
+          if (newList[i] === 1) {
+            newList[i] = 0;
+          }
+        }
+      } else {
+        newList[index] = 0;
+        const sum = newList.reduce((acc: number, a: number) => {
+          return acc + a;
+        }, 0);
+        if (sum === 0) {
+          for (let i = newList.length - 1; i >= 0; i--) {
+            if (oldList[i] > 0) {
+              newList[i] = 1;
+              break;
+            }
+          }
+        }
+      }
       return newList;
     });
   }
@@ -235,8 +260,8 @@ export class PlanDetailsComponent implements OnInit {
 
   onNavItemClick(index: number) {
     this.ignoreIntersection.set(true);
-    const newList = [false, false, false, false, false];
-    newList[index] = true;
+    const newList = [0, 0, 0, 0, 0];
+    newList[index] = 2;
     this.navActiveList.set(newList);
     this.resetReleaseIgnoreIntersectionTimer();
   }
