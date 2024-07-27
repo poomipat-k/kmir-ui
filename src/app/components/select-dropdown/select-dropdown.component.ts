@@ -34,6 +34,8 @@ export class SelectDropdownComponent {
   onChange = input<() => void>();
   fontSize = input('20px');
   color = input('#000');
+  iconWidth = input('14px');
+  iconFromRight = input('8px');
   emptyMessage = input('');
 
   selectedDisplay = signal<string | number>('');

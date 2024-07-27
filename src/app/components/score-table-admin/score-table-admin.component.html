@@ -17,15 +17,17 @@
   {
   <div>
     <p class="editCell__label">{{ getPlanText($index) }}</p>
-    @if (formArray()?.at(i)) {
+    @if (formArray()?.at($index)) {
     <app-com-select-dropdown
-      [form]="getFormGroup(i)"
+      [form]="getFormGroup($index)"
       [controlName]="'q_' + (i + 1)"
       [items]="scoreOptions()"
       width="46px"
       height="28px"
       fontSize="15px"
-      placeholder=""
+      iconWidth="12px"
+      padding="8px 22px 8px 0"
+      iconFromRight="6px"
     ></app-com-select-dropdown>
     }
   </div>
