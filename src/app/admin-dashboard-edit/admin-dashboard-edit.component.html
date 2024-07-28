@@ -51,9 +51,7 @@
       <div class="mgt-44">
         <div class="commonRow">
           <div class="commonRow__left">
-            <h3 class="commonRow__header" id="proposedActivity">
-              Proposed activities
-            </h3>
+            <h3 class="commonRow__header">Proposed activities</h3>
             <img src="/assets/event_note_blue.svg" alt="note icon" />
           </div>
           <app-com-save-button
@@ -75,7 +73,7 @@
       <div class="mgt-44">
         <div class="commonRow">
           <div class="commonRow__left">
-            <h3 class="commonRow__header" id="planNote">Note of Plan</h3>
+            <h3 class="commonRow__header">Note of Plan</h3>
             <img src="/assets/speaker_notes.svg" alt="note icon" />
           </div>
           <app-com-save-button
@@ -89,6 +87,26 @@
             [formArray]="getPlanNoteFormArray()"
           >
           </app-com-plan-note>
+        </div>
+      </div>
+
+      <!-- Admin note -->
+      <div class="hr--dashed mgt-76"></div>
+      <div class="mgt-62">
+        <div class="commonRow">
+          <div class="commonRow__left">
+            <h3 class="commonRow__header">Notes of Admin</h3>
+            <img src="/assets/speaker_notes_red.svg" alt="note icon red" />
+          </div>
+          <app-com-save-button
+            (click)="onSaveButtonClick('adminNote')"
+          ></app-com-save-button>
+        </div>
+        <div class="mgt-22">
+          <app-com-admin-note
+            [editMode]="true"
+            [control]="getAdminNoteFormControl()"
+          ></app-com-admin-note>
         </div>
       </div>
     </form>

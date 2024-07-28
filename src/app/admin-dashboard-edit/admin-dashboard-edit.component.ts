@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AdminNoteComponent } from '../components/admin-note/admin-note.component';
 import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.component';
 import { PlanNoteComponent } from '../components/plan-note/plan-note.component';
 import { ProposedActivitiesComponent } from '../components/proposed-activities/proposed-activities.component';
@@ -27,6 +28,7 @@ import { ScoreTableRow } from '../shared/models/score-table-row';
     ProposedActivitiesComponent,
     ReactiveFormsModule,
     PlanNoteComponent,
+    AdminNoteComponent,
   ],
   templateUrl: './admin-dashboard-edit.component.html',
   styleUrl: './admin-dashboard-edit.component.scss',
@@ -38,6 +40,7 @@ export class AdminDashboardEditComponent implements OnInit {
   // signals
   protected plans = signal<PlanDetails[]>([]);
   protected criteriaList = signal<AssessmentCriteria[]>([]);
+  protected adminNote = signal('');
 
   protected form = signal<FormGroup>(
     new FormGroup({
@@ -61,10 +64,7 @@ export class AdminDashboardEditComponent implements OnInit {
       if (res?.planDetails?.length > 0) {
         this.plans.set(res.planDetails);
       }
-      // if (res?.latestScores) {
-      //   this.latestScores.set(res.latestScores);
-      // }
-      // this.adminNote.set(res.adminNote);
+      this.adminNote.set(res.adminNote);
       this.initForm();
     });
   }
@@ -117,12 +117,13 @@ export class AdminDashboardEditComponent implements OnInit {
       // planNote
       pnFormArray.push(new FormControl(plan.planNote, Validators.required));
     }
+
     this.form.set(
       new FormGroup({
         assessmentScore: new FormArray(assessmentFormArray),
         proposedActivity: new FormArray(paFormArray),
         planNote: new FormArray(pnFormArray),
-        adminNote: new FormControl(),
+        adminNote: new FormControl(this.adminNote()),
       })
     );
   }
@@ -146,6 +147,10 @@ export class AdminDashboardEditComponent implements OnInit {
 
   getPlanNoteFormArray(): FormArray {
     return this.form().get('planNote') as FormArray;
+  }
+
+  getAdminNoteFormControl(): FormControl {
+    return this.form().get('adminNote') as FormControl;
   }
 
   private computeTopicShortList(): string[] {
