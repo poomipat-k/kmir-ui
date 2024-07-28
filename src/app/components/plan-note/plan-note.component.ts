@@ -44,7 +44,7 @@ export class PlanNoteComponent {
     this.activeIndex.set(index);
   }
 
-  getFormControl() {
-    return this.formArray()?.at(this.activeIndex()) as FormControl;
+  getFormControlAt(index: number) {
+    return this.formArray()?.at(index) as FormControl;
   }
 }

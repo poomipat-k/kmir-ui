@@ -41,8 +41,8 @@ export class ProposedActivitiesComponent {
     return `latest edit by ${who} ${local}`;
   });
 
-  getFormControl() {
-    return this.formArray()?.at(this.activeIndex()) as FormControl;
+  getFormControlAt(index: number) {
+    return this.formArray()?.at(index) as FormControl;
   }
 
   onPlanButtonClick(index: number) {

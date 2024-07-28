@@ -29,12 +29,13 @@
     }
   </div>
 
-  @if (editMode()) {
+  @if (editMode()) { @for (item of plans(); track $index) { @if ($index ===
+  activeIndex()) {
   <app-com-custom-editor
-    [control]="getFormControl()"
+    [control]="getFormControlAt($index)"
     [height]="410"
   ></app-com-custom-editor>
-  } @else {
+  } } } @else {
   <div
     class="display"
     [innerHTML]="plans()[activeIndex()].proposedActivity ?? '' | safeHtml"
