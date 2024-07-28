@@ -15,14 +15,31 @@
     "cap   . . . . . . . . . . . . . . .";
 
   &--editMode {
-    grid-template-columns: 37px 1fr repeat(14, 46px);
-    column-gap: 16px;
+    grid-template-columns: 37px 1fr repeat(14, 60px);
+    justify-items: stretch;
   }
+}
+
+.editCell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.editDropdown {
+  display: flex;
+  justify-content: center;
+}
+
+.h-20 {
+  width: 100%;
+  height: 20px;
+  visibility: hidden;
 }
 
 .question {
   padding: 10px;
-  padding-right: 0;
+  padding-right: 9px;
   font-family: $custom-font;
   font-weight: 400;
   font-size: 14px;
@@ -119,4 +136,10 @@
   color: #000;
   margin-right: 7px;
   width: 31px;
+}
+
+.pdr {
+  &-10 {
+    padding-right: 10px;
+  }
 }

@@ -87,6 +87,7 @@ export class AdminDashboardEditComponent implements OnInit {
 
   onSaveButtonClick(name: string) {
     console.log('==onSaveButtonClick', name);
+    console.log(this.form());
   }
 
   getAssessmentScoreFormArray(): FormArray {
