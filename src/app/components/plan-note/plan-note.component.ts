@@ -1,18 +1,28 @@
 import { CommonModule, TitleCasePipe } from '@angular/common';
 import { Component, computed, input, signal } from '@angular/core';
+import { FormArray, FormControl } from '@angular/forms';
 import { PlanDetails } from '../../shared/models/plan-details';
 import { SafeHtmlPipe } from '../../shared/pipe/safe-html.pipe';
+import { CustomEditorComponent } from '../custom-editor/custom-editor.component';
 import { UpdatedAtComponent } from '../updated-at/updated-at.component';
 
 @Component({
   selector: 'app-com-plan-note',
   standalone: true,
-  imports: [CommonModule, UpdatedAtComponent, SafeHtmlPipe, TitleCasePipe],
+  imports: [
+    CommonModule,
+    UpdatedAtComponent,
+    SafeHtmlPipe,
+    TitleCasePipe,
+    CustomEditorComponent,
+  ],
   templateUrl: './plan-note.component.html',
   styleUrl: './plan-note.component.scss',
 })
 export class PlanNoteComponent {
   plans = input.required<PlanDetails[]>();
+  editMode = input(false);
+  formArray = input<FormArray>();
 
   activeIndex = signal(0);
   updatedText = computed(() => {
@@ -32,5 +42,9 @@ export class PlanNoteComponent {
 
   onPlanButtonClick(index: number) {
     this.activeIndex.set(index);
+  }
+
+  getFormControl() {
+    return this.formArray()?.at(this.activeIndex()) as FormControl;
   }
 }

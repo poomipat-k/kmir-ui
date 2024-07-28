@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.component';
+import { PlanNoteComponent } from '../components/plan-note/plan-note.component';
 import { ProposedActivitiesComponent } from '../components/proposed-activities/proposed-activities.component';
 import { SaveButtonComponent } from '../components/save-button/save-button.component';
 import { ScoreTableAdminComponent } from '../components/score-table-admin/score-table-admin.component';
@@ -25,6 +26,7 @@ import { ScoreTableRow } from '../shared/models/score-table-row';
     ScoreTableAdminComponent,
     ProposedActivitiesComponent,
     ReactiveFormsModule,
+    PlanNoteComponent,
   ],
   templateUrl: './admin-dashboard-edit.component.html',
   styleUrl: './admin-dashboard-edit.component.scss',
@@ -68,27 +70,59 @@ export class AdminDashboardEditComponent implements OnInit {
   }
 
   private initForm() {
-    const assessmentFormArray = this.plans().map(
-      (_) =>
+    const assessmentFormArray: FormGroup[] = [];
+    const paFormArray: FormControl[] = [];
+    const pnFormArray: FormControl[] = [];
+    for (let i = 0; i < this.plans().length; i++) {
+      const plan: PlanDetails = this.plans()[i];
+      // scores
+      assessmentFormArray.push(
         new FormGroup({
-          q_1: new FormControl(null, Validators.required),
-          q_2: new FormControl(null, Validators.required),
-          q_3: new FormControl(null, Validators.required),
-          q_4: new FormControl(null, Validators.required),
-          q_5: new FormControl(null, Validators.required),
-          q_6: new FormControl(null, Validators.required),
-          q_7: new FormControl(null, Validators.required),
+          q_1: new FormControl(
+            plan?.assessmentScore?.[0]?.score,
+            Validators.required
+          ),
+          q_2: new FormControl(
+            plan?.assessmentScore?.[1]?.score,
+            Validators.required
+          ),
+          q_3: new FormControl(
+            plan?.assessmentScore?.[2]?.score,
+            Validators.required
+          ),
+          q_4: new FormControl(
+            plan?.assessmentScore?.[3]?.score,
+            Validators.required
+          ),
+          q_5: new FormControl(
+            plan?.assessmentScore?.[4]?.score,
+            Validators.required
+          ),
+          q_6: new FormControl(
+            plan?.assessmentScore?.[5]?.score,
+            Validators.required
+          ),
+          q_7: new FormControl(
+            plan?.assessmentScore?.[6]?.score,
+            Validators.required
+          ),
         })
-    );
-    const paFormArray = this.plans().map(
-      (_) => new FormControl(null, Validators.required)
-    );
+      );
+
+      // proposedActivity
+      paFormArray.push(
+        new FormControl(plan.proposedActivity, Validators.required)
+      );
+
+      // planNote
+      pnFormArray.push(new FormControl(plan.planNote, Validators.required));
+    }
     this.form.set(
       new FormGroup({
         assessmentScore: new FormArray(assessmentFormArray),
         proposedActivity: new FormArray(paFormArray),
-        planNote: new FormArray([]),
-        adminNote: new FormControl(null),
+        planNote: new FormArray(pnFormArray),
+        adminNote: new FormControl(),
       })
     );
   }
@@ -108,6 +142,10 @@ export class AdminDashboardEditComponent implements OnInit {
 
   getProposedActivitiesFormArray(): FormArray {
     return this.form().get('proposedActivity') as FormArray;
+  }
+
+  getPlanNoteFormArray(): FormArray {
+    return this.form().get('planNote') as FormArray;
   }
 
   private computeTopicShortList(): string[] {
