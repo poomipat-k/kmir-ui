@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { pick } from 'lodash-es';
 import { AdminNoteComponent } from '../components/admin-note/admin-note.component';
 import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.component';
 import { PlanNoteComponent } from '../components/plan-note/plan-note.component';
@@ -137,6 +138,22 @@ export class AdminDashboardEditComponent implements OnInit {
   onSave(name: string) {
     console.log('==onSave', name);
     console.log(this.form());
+    let payload: any;
+    if (name === 'full') {
+      payload = this.form().value;
+    } else if (name === 'assessmentScore') {
+      payload = pick(this.form().value, 'assessmentScore');
+    } else if (name === 'proposedActivity') {
+      payload = pick(this.form().value, 'proposedActivity');
+    } else if (name === 'planNote') {
+      payload = pick(this.form().value, 'planNote');
+    } else if (name === 'adminNote') {
+      payload = pick(this.form().value, 'adminNote');
+    }
+
+    this.planService.adminEdit(payload).subscribe((result) => {
+      console.log('==result', result);
+    });
   }
 
   onSaveAndReturn() {

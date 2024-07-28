@@ -79,6 +79,15 @@ export class PlanService {
       .pipe(catchError(this.handleError));
   }
 
+  adminEdit(payload: any) {
+    return this.http
+      .patch<CommonSuccessResponse>(
+        `${this.baseApiUrl}/admin/dashboard`,
+        payload
+      )
+      .pipe(catchError(this.handleError));
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.
