@@ -1,11 +1,11 @@
 @import "../../styles.scss";
 
 .container {
+  display: flex;
   padding-top: 14px;
   padding-left: 80px;
   padding-right: 173px;
-  display: flex;
-  padding-bottom: 135px;
+  padding-bottom: 93px;
 }
 
 .sideNav {
@@ -98,6 +98,11 @@
   }
 }
 
+.saveAndReturn {
+  display: flex;
+  justify-content: center;
+}
+
 .hr {
   &--dashed {
     border-top: 1px dashed rgba(0, 0, 0, 0.36);
@@ -143,5 +148,8 @@
   }
   &-81 {
     margin-top: 81px;
+  }
+  &-93 {
+    margin-top: 93px;
   }
 }

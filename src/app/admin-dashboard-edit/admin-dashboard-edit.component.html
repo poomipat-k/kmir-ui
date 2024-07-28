@@ -31,7 +31,7 @@
             ></app-com-icon-tooltip>
           </div>
           <app-com-save-button
-            (click)="onSaveButtonClick('assessmentScore')"
+            (click)="onSave('assessmentScore')"
           ></app-com-save-button>
         </div>
 
@@ -55,7 +55,7 @@
             <img src="/assets/event_note_blue.svg" alt="note icon" />
           </div>
           <app-com-save-button
-            (click)="onSaveButtonClick('proposedActivity')"
+            (click)="onSave('proposedActivity')"
           ></app-com-save-button>
         </div>
         <div class="mgt-34">
@@ -77,7 +77,7 @@
             <img src="/assets/speaker_notes.svg" alt="note icon" />
           </div>
           <app-com-save-button
-            (click)="onSaveButtonClick('planNote')"
+            (click)="onSave('planNote')"
           ></app-com-save-button>
         </div>
         <div class="mgt-22">
@@ -99,7 +99,7 @@
             <img src="/assets/speaker_notes_red.svg" alt="note icon red" />
           </div>
           <app-com-save-button
-            (click)="onSaveButtonClick('adminNote')"
+            (click)="onSave('adminNote')"
           ></app-com-save-button>
         </div>
         <div class="mgt-22">
@@ -108,6 +108,12 @@
             [control]="getAdminNoteFormControl()"
           ></app-com-admin-note>
         </div>
+      </div>
+
+      <div class="saveAndReturn mgt-93">
+        <app-com-save-and-return-button
+          (click)="onSaveAndReturn()"
+        ></app-com-save-and-return-button>
       </div>
     </form>
   </section>

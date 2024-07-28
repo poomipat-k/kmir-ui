@@ -11,6 +11,7 @@ import { AdminNoteComponent } from '../components/admin-note/admin-note.componen
 import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.component';
 import { PlanNoteComponent } from '../components/plan-note/plan-note.component';
 import { ProposedActivitiesComponent } from '../components/proposed-activities/proposed-activities.component';
+import { SaveAndReturnButtonComponent } from '../components/save-and-return-button/save-and-return-button.component';
 import { SaveButtonComponent } from '../components/save-button/save-button.component';
 import { ScoreTableAdminComponent } from '../components/score-table-admin/score-table-admin.component';
 import { PlanService } from '../services/plan.service';
@@ -29,6 +30,7 @@ import { ScoreTableRow } from '../shared/models/score-table-row';
     ReactiveFormsModule,
     PlanNoteComponent,
     AdminNoteComponent,
+    SaveAndReturnButtonComponent,
   ],
   templateUrl: './admin-dashboard-edit.component.html',
   styleUrl: './admin-dashboard-edit.component.scss',
@@ -132,9 +134,17 @@ export class AdminDashboardEditComponent implements OnInit {
     this.router.navigate(['/admin/dashboard']);
   }
 
-  onSaveButtonClick(name: string) {
-    console.log('==onSaveButtonClick', name);
+  onSave(name: string) {
+    console.log('==onSave', name);
     console.log(this.form());
+  }
+
+  onSaveAndReturn() {
+    // if (!this.validToSubmit()) {
+    //   console.error('form is not valid');
+    //   return;
+    // }
+    this.onSave('full');
   }
 
   getAssessmentScoreFormArray(): FormArray {
