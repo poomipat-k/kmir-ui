@@ -21,14 +21,23 @@
       <p>{{ plans()[activeIndex()].topic }}</p>
       <p>{{ plans()[activeIndex()].topicEn }}</p>
     </div>
+
+    @if (!editMode()) {
     <div class="meta__update">
       <app-com-updated-at [display]="updatedText()"></app-com-updated-at>
     </div>
+    }
   </div>
 
+  @if (editMode()) {
+  <app-com-custom-editor
+    [control]="getFormControl()"
+    [height]="410"
+  ></app-com-custom-editor>
+  } @else {
   <div
     class="display"
     [innerHTML]="plans()[activeIndex()].proposedActivity ?? '' | safeHtml"
   ></div>
-  }
+  } }
 </div>

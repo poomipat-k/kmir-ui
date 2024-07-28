@@ -1,7 +1,14 @@
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.component';
+import { ProposedActivitiesComponent } from '../components/proposed-activities/proposed-activities.component';
 import { SaveButtonComponent } from '../components/save-button/save-button.component';
 import { ScoreTableAdminComponent } from '../components/score-table-admin/score-table-admin.component';
 import { PlanService } from '../services/plan.service';
@@ -16,6 +23,8 @@ import { ScoreTableRow } from '../shared/models/score-table-row';
     SaveButtonComponent,
     IconTooltipComponent,
     ScoreTableAdminComponent,
+    ProposedActivitiesComponent,
+    ReactiveFormsModule,
   ],
   templateUrl: './admin-dashboard-edit.component.html',
   styleUrl: './admin-dashboard-edit.component.scss',
@@ -71,10 +80,13 @@ export class AdminDashboardEditComponent implements OnInit {
           q_7: new FormControl(null, Validators.required),
         })
     );
+    const paFormArray = this.plans().map(
+      (_) => new FormControl(null, Validators.required)
+    );
     this.form.set(
       new FormGroup({
         assessmentScore: new FormArray(assessmentFormArray),
-        proposedActivity: new FormArray([]),
+        proposedActivity: new FormArray(paFormArray),
         planNote: new FormArray([]),
         adminNote: new FormControl(null),
       })
@@ -92,6 +104,10 @@ export class AdminDashboardEditComponent implements OnInit {
 
   getAssessmentScoreFormArray(): FormArray {
     return this.form().get('assessmentScore') as FormArray;
+  }
+
+  getProposedActivitiesFormArray(): FormArray {
+    return this.form().get('proposedActivity') as FormArray;
   }
 
   private computeTopicShortList(): string[] {

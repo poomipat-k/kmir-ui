@@ -11,38 +11,64 @@
   </nav>
 
   <section class="content mgt-30 pdl-46">
-    <h1 class="header">{{ "header" }}</h1>
-    <div class="topicContainer">
+    <h1 class="header pdl-27">Admin IR</h1>
+    <div class="topicContainer pdl-27">
       <div>
-        <h2 class="topic">{{ "topic" }}</h2>
-        <h2 class="topic">{{ "topicEn" }}</h2>
+        <h2 class="topic">Forem ipsum dolor sit amet,</h2>
+        <h2 class="topic">หัวข้อภาษาไทย</h2>
       </div>
     </div>
 
-    <!-- Admin assessment Score -->
-    <div class="mgt-81">
-      <div class="assessment">
-        <div class="assessment__left">
-          <h3 class="assessment__header">Admin assessment Score</h3>
-          <app-com-icon-tooltip
-            [hasTooltip]="true"
-            tooltipText="Admin assessment Score"
-          ></app-com-icon-tooltip>
+    <form [formGroup]="form()">
+      <!-- Admin assessment Score -->
+      <div class="mgt-81">
+        <div class="assessment">
+          <div class="assessment__left">
+            <h3 class="assessment__header">Admin assessment Score</h3>
+            <app-com-icon-tooltip
+              [hasTooltip]="true"
+              tooltipText="Admin assessment Score"
+            ></app-com-icon-tooltip>
+          </div>
+          <app-com-save-button
+            (click)="onSaveButtonClick('assessmentScore')"
+          ></app-com-save-button>
         </div>
-        <app-com-save-button
-          (click)="onSaveButtonClick('assessmentScore')"
-        ></app-com-save-button>
+
+        <div class="mgt-17">
+          <app-com-score-table-admin
+            [shortNames]="topicShortList()"
+            [criteria]="criteriaList()"
+            [data]="assessmentScoreData()"
+            [editMode]="true"
+            [formArray]="getAssessmentScoreFormArray()"
+          ></app-com-score-table-admin>
+        </div>
       </div>
 
-      <div class="mgt-17">
-        <app-com-score-table-admin
-          [shortNames]="topicShortList()"
-          [criteria]="criteriaList()"
-          [data]="assessmentScoreData()"
-          [editMode]="true"
-          [formArray]="getAssessmentScoreFormArray()"
-        ></app-com-score-table-admin>
+      <!-- Proposed activities -->
+      <div class="hr--dashed mgt-76"></div>
+      <div class="mgt-44">
+        <div class="commonRow">
+          <div class="commonRow__left">
+            <h3 class="commonRow__header" id="proposedActivity">
+              Proposed activities
+            </h3>
+            <img src="/assets/event_note_blue.svg" alt="note icon" />
+          </div>
+          <app-com-save-button
+            (click)="onSaveButtonClick('proposedActivity')"
+          ></app-com-save-button>
+        </div>
+        <div class="mgt-34">
+          <app-com-proposed-activities
+            [plans]="plans()"
+            [editMode]="true"
+            [formArray]="getProposedActivitiesFormArray()"
+          >
+          </app-com-proposed-activities>
+        </div>
       </div>
-    </div>
+    </form>
   </section>
 </div>

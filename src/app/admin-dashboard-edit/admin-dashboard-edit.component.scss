@@ -80,7 +80,34 @@
   }
 }
 
+.commonRow {
+  display: flex;
+  justify-content: space-between;
+
+  &__left {
+    display: flex;
+    gap: 10px;
+  }
+
+  &__header {
+    font-family: $custom-font;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 53px;
+    color: #000;
+  }
+}
+
+.hr {
+  &--dashed {
+    border-top: 1px dashed rgba(0, 0, 0, 0.36);
+  }
+}
+
 .pdl {
+  &-27 {
+    padding-left: 27px;
+  }
   &-46 {
     padding-left: 46px;
   }
@@ -93,8 +120,17 @@
   &-30 {
     margin-top: 30px;
   }
+  &-34 {
+    margin-top: 34px;
+  }
+  &-44 {
+    margin-top: 44px;
+  }
   &-54 {
     margin-top: 54px;
+  }
+  &-76 {
+    margin-top: 76px;
   }
   &-81 {
     margin-top: 81px;
