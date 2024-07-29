@@ -14,6 +14,7 @@ import {
 export class TooltipDirective {
   tooltipContent = input('');
   animationDuration = input(300);
+  fadeOut = input(true);
 
   private elRef: ElementRef = inject(ElementRef);
   private renderer: Renderer2 = inject(Renderer2);
@@ -48,11 +49,17 @@ export class TooltipDirective {
       });
     }, 2);
 
-    setTimeout(() => {
+    if (this.fadeOut()) {
+      setTimeout(() => {
+        tooltips?.forEach((tooltip: any) => {
+          this.renderer.removeChild(this.elRef.nativeElement, tooltip);
+        });
+      }, this.animationDuration());
+    } else {
       tooltips?.forEach((tooltip: any) => {
         this.renderer.removeChild(this.elRef.nativeElement, tooltip);
       });
-    }, this.animationDuration());
+    }
   }
   constructor() {}
 }

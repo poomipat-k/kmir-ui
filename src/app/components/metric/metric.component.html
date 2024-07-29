@@ -48,6 +48,7 @@
         'item--active': cell.name === 'active'
       }"
       appTooltip
+      [fadeOut]="false"
       [tooltipContent]="getTooltipContent(cell)"
     ></div>
     } @else {
