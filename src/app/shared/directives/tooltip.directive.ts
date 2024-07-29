@@ -15,6 +15,7 @@ export class TooltipDirective {
   tooltipContent = input('');
   animationDuration = input(300);
   fadeOut = input(true);
+  width = input('141px');
 
   private elRef: ElementRef = inject(ElementRef);
   private renderer: Renderer2 = inject(Renderer2);
@@ -24,6 +25,7 @@ export class TooltipDirective {
     const text = this.renderer.createText(this.tooltipContent());
     this.renderer.appendChild(tooltip, text);
     this.renderer.addClass(tooltip, 'appTooltip');
+    this.renderer.setStyle(tooltip, 'width', this.width());
 
     // 0 ms won't work
     setTimeout(() => {
