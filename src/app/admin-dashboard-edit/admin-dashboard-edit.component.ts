@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { pick } from 'lodash-es';
+import { environment } from '../../environments/environment';
 import { AdminNoteComponent } from '../components/admin-note/admin-note.component';
 import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.component';
 import { PlanNoteComponent } from '../components/plan-note/plan-note.component';
@@ -39,6 +40,7 @@ import { ScoreTableRow } from '../shared/models/score-table-row';
 export class AdminDashboardEditComponent implements OnInit {
   private readonly router: Router = inject(Router);
   private readonly planService: PlanService = inject(PlanService);
+  protected isProduction = environment.production;
 
   // signals
   protected plans = signal<PlanDetails[]>([]);
@@ -135,6 +137,21 @@ export class AdminDashboardEditComponent implements OnInit {
     this.router.navigate(['/admin/dashboard']);
   }
 
+  onPatchScores() {
+    const formArray = this.form().get('assessmentScore') as FormArray;
+    formArray.controls.forEach((fg) => {
+      fg.patchValue({
+        q_1: 8,
+        q_2: 8,
+        q_3: 8,
+        q_4: 8,
+        q_5: 8,
+        q_6: 8,
+        q_7: 8,
+      });
+    });
+  }
+
   onSave(name: string) {
     console.log('==onSave', name);
     console.log(this.form());
@@ -194,6 +211,6 @@ export class AdminDashboardEditComponent implements OnInit {
         ) || []
       );
     });
-    return scoreData || [];
+    return scoreData;
   }
 }

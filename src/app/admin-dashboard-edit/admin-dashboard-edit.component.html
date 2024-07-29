@@ -35,6 +35,12 @@
           ></app-com-save-button>
         </div>
 
+        @if (!isProduction) {
+        <button style="padding: 10px" (click)="onPatchScores()">
+          Patch Value
+        </button>
+        }
+
         <div class="mgt-17">
           <app-com-score-table-admin
             [shortNames]="topicShortList()"
