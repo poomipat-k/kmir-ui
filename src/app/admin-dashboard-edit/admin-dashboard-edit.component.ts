@@ -1,5 +1,12 @@
 import { ViewportScroller } from '@angular/common';
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  OnInit,
+  signal,
+  viewChild,
+} from '@angular/core';
 import {
   FormArray,
   FormControl,
@@ -44,6 +51,10 @@ import { ScoreTableRow } from '../shared/models/score-table-row';
   styleUrl: './admin-dashboard-edit.component.scss',
 })
 export class AdminDashboardEditComponent implements OnInit {
+  proposedActivityComponent =
+    viewChild<ProposedActivitiesComponent>('proposedActivity');
+  planNoteComponent = viewChild<PlanNoteComponent>('planNote');
+
   private readonly router: Router = inject(Router);
   private readonly planService: PlanService = inject(PlanService);
   private readonly themeService: ThemeService = inject(ThemeService);
@@ -208,6 +219,7 @@ export class AdminDashboardEditComponent implements OnInit {
     }
     console.error('errorId:', errorId);
     if (errorId) {
+      this.navigateToErrorPlan(errorId);
       this.scrollToId(errorId);
     }
   }
@@ -221,7 +233,30 @@ export class AdminDashboardEditComponent implements OnInit {
     const errorId = name;
     console.error('errorId:', errorId);
     if (errorId) {
+      this.navigateToErrorPlan(errorId);
       this.scrollToId(errorId);
+    }
+  }
+
+  private navigateToErrorPlan(errorId: string) {
+    if (errorId === 'proposedActivity') {
+      const formArray = this.form().get(errorId) as FormArray;
+      for (let i = 0; i < formArray.length; i++) {
+        if (!formArray.at(i).valid) {
+          this.proposedActivityComponent()?.activeIndex?.set(i);
+          return;
+        }
+      }
+    }
+
+    if (errorId === 'planNote') {
+      const formArray = this.form().get(errorId) as FormArray;
+      for (let i = 0; i < formArray.length; i++) {
+        if (!formArray.at(i).valid) {
+          this.planNoteComponent()?.activeIndex?.set(i);
+          return;
+        }
+      }
     }
   }
 
