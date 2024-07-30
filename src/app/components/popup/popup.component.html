@@ -1,5 +1,9 @@
 @if (show()) {
-<div @popup [ngClass]="{ container: true, 'container--error': error() }">
+<div
+  @popup
+  [ngClass]="{ container: true, 'container--error': error() }"
+  [style]="{ width: width() }"
+>
   <div [ngClass]="{ 'icon-container': true, 'icon-container--error': error() }">
     <div class="icon">
       @if (error()) {

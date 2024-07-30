@@ -12,11 +12,13 @@ import { environment } from '../../environments/environment';
 import { AdminNoteComponent } from '../components/admin-note/admin-note.component';
 import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.component';
 import { PlanNoteComponent } from '../components/plan-note/plan-note.component';
+import { PopupComponent } from '../components/popup/popup.component';
 import { ProposedActivitiesComponent } from '../components/proposed-activities/proposed-activities.component';
 import { SaveAndReturnButtonComponent } from '../components/save-and-return-button/save-and-return-button.component';
 import { SaveButtonComponent } from '../components/save-button/save-button.component';
 import { ScoreTableAdminComponent } from '../components/score-table-admin/score-table-admin.component';
 import { PlanService } from '../services/plan.service';
+import { ThemeService } from '../services/theme.service';
 import { AssessmentCriteria } from '../shared/models/assessment-criteria';
 import { PlanDetails } from '../shared/models/plan-details';
 import { ScoreTableRow } from '../shared/models/score-table-row';
@@ -33,6 +35,7 @@ import { ScoreTableRow } from '../shared/models/score-table-row';
     PlanNoteComponent,
     AdminNoteComponent,
     SaveAndReturnButtonComponent,
+    PopupComponent,
   ],
   templateUrl: './admin-dashboard-edit.component.html',
   styleUrl: './admin-dashboard-edit.component.scss',
@@ -40,12 +43,16 @@ import { ScoreTableRow } from '../shared/models/score-table-row';
 export class AdminDashboardEditComponent implements OnInit {
   private readonly router: Router = inject(Router);
   private readonly planService: PlanService = inject(PlanService);
+  private readonly themeService: ThemeService = inject(ThemeService);
   protected isProduction = environment.production;
 
   // signals
   protected plans = signal<PlanDetails[]>([]);
   protected criteriaList = signal<AssessmentCriteria[]>([]);
   protected adminNote = signal('');
+  protected showPopup = signal(false);
+  protected isPopupError = signal(false);
+  protected popupText = signal('Update successfully');
 
   protected form = signal<FormGroup>(
     new FormGroup({
@@ -61,6 +68,8 @@ export class AdminDashboardEditComponent implements OnInit {
   protected assessmentScoreData = computed(() => this.computeAssessmentData());
 
   ngOnInit(): void {
+    this.themeService.changeTheme('silver');
+
     this.planService.getAllPlansDetails().subscribe((res) => {
       console.log('==res', res);
       if (res?.assessmentCriteria?.length > 0) {
@@ -168,8 +177,42 @@ export class AdminDashboardEditComponent implements OnInit {
       payload = pick(this.form().value, 'adminNote');
     }
 
-    this.planService.adminEdit(payload).subscribe((result) => {
-      console.log('==result', result);
+    this.planService.adminEdit(payload).subscribe({
+      next: (res) => {
+        console.log('==res', res);
+        if (res.success) {
+          this.popupText.set('แก้ไขข้อมูลสำเร็จ');
+          this.isPopupError.set(false);
+          this.showPopup.set(true);
+          setTimeout(() => {
+            this.showPopup.set(false);
+            if (name === 'full') {
+              this.router.navigate(['/admin/dashboard']);
+            }
+          }, 2000);
+        } else {
+          this.popupText.set('ไม่มีการเปลี่ยนแปลงของข้อมูล');
+          this.isPopupError.set(false);
+          this.showPopup.set(true);
+          setTimeout(() => {
+            this.showPopup.set(false);
+            if (name === 'full') {
+              this.router.navigate(['/admin/dashboard']);
+            }
+          }, 2000);
+        }
+      },
+      error: (err) => {
+        console.log('==err', err);
+        this.popupText.set(
+          `แก้ไขข้อมูลไม่สำเร็จ\nmessage: ${err?.error?.message}\nname: ${err?.error?.name}`
+        );
+        this.isPopupError.set(true);
+        this.showPopup.set(true);
+        setTimeout(() => {
+          this.showPopup.set(false);
+        }, 2000);
+      },
     });
   }
 

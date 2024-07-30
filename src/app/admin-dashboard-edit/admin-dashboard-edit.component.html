@@ -124,3 +124,12 @@
     </form>
   </section>
 </div>
+
+<div class="popup">
+  <app-com-popup
+    [displayText]="popupText()"
+    [show]="showPopup()"
+    [error]="isPopupError()"
+    width="400px"
+  ></app-com-popup>
+</div>

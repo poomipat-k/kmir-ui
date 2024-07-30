@@ -1,8 +1,8 @@
 @import "../../../styles.scss";
 
 .container {
-  width: 24rem;
-  height: 18.4rem;
+  width: 240px;
+
   padding: 32px;
 
   border-radius: 10px;
@@ -15,6 +15,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  white-space: pre-wrap;
 
   &--error {
     border: 1px solid #ff3300;

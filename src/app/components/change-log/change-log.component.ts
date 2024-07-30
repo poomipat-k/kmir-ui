@@ -69,7 +69,6 @@ export class ChangeLogComponent {
       let ts = ts1;
       if (ts2 && new Date(ts2) >= new Date(ts1)) {
         ts = ts2;
-        list.push('assessment score');
       }
 
       if (plan.readinessWillingnessUpdatedAt === ts) {

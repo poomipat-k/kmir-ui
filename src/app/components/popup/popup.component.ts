@@ -51,4 +51,5 @@ export class PopupComponent {
   show = input.required<boolean>();
   error = input(false);
   displayText = input('');
+  width = input('240px');
 }
