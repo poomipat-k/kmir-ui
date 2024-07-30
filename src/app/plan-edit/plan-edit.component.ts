@@ -116,7 +116,6 @@ export class PlanEditComponent implements OnInit {
     this.planService
       .getPlanDetails(this.planName() || '')
       .subscribe((planDetails) => {
-        console.log('==edit plan planDetails', planDetails);
         if (planDetails) {
           this.planDetails.set(planDetails);
           this.computedScoreTableAndRefreshForm();

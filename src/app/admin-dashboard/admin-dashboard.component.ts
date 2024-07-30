@@ -126,7 +126,6 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     this.initMetricControlValue();
 
     this.planService.getAllPlansDetails().subscribe((res) => {
-      console.log('==res', res);
       if (res?.assessmentCriteria?.length > 0) {
         this.criteriaList.set(res.assessmentCriteria);
       }

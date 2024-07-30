@@ -94,7 +94,6 @@ export class AdminDashboardEditComponent implements OnInit {
     this.scroller.setOffset(this.scrollerOffset());
 
     this.planService.getAllPlansDetails().subscribe((res) => {
-      console.log('==res', res);
       if (res?.assessmentCriteria?.length > 0) {
         this.criteriaList.set(res.assessmentCriteria);
       }
@@ -274,8 +273,6 @@ export class AdminDashboardEditComponent implements OnInit {
   }
 
   onSave(name: string) {
-    console.log('==onSave', name);
-    console.log(this.form());
     let payload: any;
     if (name === 'full') {
       this.assessmentScoreSubmitted.set(true);
@@ -323,7 +320,6 @@ export class AdminDashboardEditComponent implements OnInit {
         }
       },
       error: (err) => {
-        console.log('==err', err);
         this.popupText.set(
           `แก้ไขข้อมูลไม่สำเร็จ\nmessage: ${err?.error?.message}\nname: ${err?.error?.name}`
         );
