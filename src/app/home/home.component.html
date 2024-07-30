@@ -48,7 +48,8 @@
           [ngClass]="{
             card: true,
             'card--open': plan.open,
-            'card--owner': $index === 0
+            'card--owner':
+              $index === 0 && getCurrentUser().userRole !== 'viewer'
           }"
           (click)="onCardClick($index)"
         >

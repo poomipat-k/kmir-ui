@@ -299,7 +299,6 @@ export class AdminDashboardEditComponent implements OnInit {
 
     this.planService.adminEdit(payload).subscribe({
       next: (res) => {
-        console.log('==res', res);
         if (res.success) {
           this.popupText.set('แก้ไขข้อมูลสำเร็จ');
           this.isPopupError.set(false);

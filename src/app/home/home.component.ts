@@ -49,8 +49,21 @@ export class HomeComponent implements OnInit {
     this.planService.getAllPreviewPlan().subscribe((res: PreviewPlan[]) => {
       if (res && res.length > 0) {
         const curUser = this.getCurrentUser();
-        const myPlan = res.find((plan) => plan.userId === curUser.id);
+        if (curUser.userRole === 'viewer') {
+          const list = res.map((plan) => {
+            const item = new PlanCard();
+            item.data = plan;
+            item.open = false;
+            return item;
+          });
+          // pop admin card
+          list.pop();
+          this.plans.set(list);
+          return;
+        }
+        let myPlan = res.find((plan) => plan.userId === curUser.id);
         if (!myPlan) {
+          console.log('==here');
           return;
         }
         const firstPlanCard = new PlanCard();
