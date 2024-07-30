@@ -87,7 +87,7 @@
           form().get('proposedActivity')?.touched &&
           proposedActivitySubmitted()) {
           <app-com-error-message
-            text="กรุณากรอก proposedActivity"
+            [text]="proposedActivityErrorMsg()"
             marginTop="10px"
             fontSize="16px"
           ></app-com-error-message>
@@ -119,7 +119,7 @@
           @if (!form().get('planNote')?.valid && form().get('planNote')?.touched
           && planNoteSubmitted()) {
           <app-com-error-message
-            text="กรุณากรอก note of plan"
+            [text]="planNoteErrorMsg()"
             marginTop="10px"
             fontSize="16px"
           ></app-com-error-message>

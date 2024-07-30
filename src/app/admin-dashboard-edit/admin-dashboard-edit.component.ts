@@ -73,6 +73,8 @@ export class AdminDashboardEditComponent implements OnInit {
   protected proposedActivitySubmitted = signal(false);
   protected planNoteSubmitted = signal(false);
   protected adminNoteSubmitted = signal(false);
+  protected proposedActivityErrorMsg = signal('กรุณากรอก Proposed activity');
+  protected planNoteErrorMsg = signal('กรุณากรอก Note of Plan');
 
   protected form = signal<FormGroup>(
     new FormGroup({
@@ -243,6 +245,10 @@ export class AdminDashboardEditComponent implements OnInit {
       const formArray = this.form().get(errorId) as FormArray;
       for (let i = 0; i < formArray.length; i++) {
         if (!formArray.at(i).valid) {
+          const newErrMsg = `กรุณากรอก Proposed activity: ${
+            this.plans()[i].name
+          }`;
+          this.proposedActivityErrorMsg.set(newErrMsg);
           this.proposedActivityComponent()?.activeIndex?.set(i);
           return;
         }
@@ -253,6 +259,8 @@ export class AdminDashboardEditComponent implements OnInit {
       const formArray = this.form().get(errorId) as FormArray;
       for (let i = 0; i < formArray.length; i++) {
         if (!formArray.at(i).valid) {
+          const newErrMsg = `กรุณากรอก Note of Plan: ${this.plans()[i].name}`;
+          this.planNoteErrorMsg.set(newErrMsg);
           this.planNoteComponent()?.activeIndex?.set(i);
           return;
         }
