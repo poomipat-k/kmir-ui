@@ -43,12 +43,22 @@
 
         <div class="mgt-17">
           <app-com-score-table-admin
+            id="assessmentScore"
             [shortNames]="topicShortList()"
             [criteria]="criteriaList()"
             [data]="assessmentScoreData()"
             [editMode]="true"
             [formArray]="getAssessmentScoreFormArray()"
           ></app-com-score-table-admin>
+          @if (!form().get('assessmentScore')?.valid &&
+          form().get('assessmentScore')?.touched && assessmentScoreSubmitted())
+          {
+          <app-com-error-message
+            text="กรุณาให้คะแนนให้ครบทุกข้อ และครบทุก plan"
+            marginTop="10px"
+            fontSize="16px"
+          ></app-com-error-message>
+          }
         </div>
       </div>
 
@@ -66,11 +76,21 @@
         </div>
         <div class="mgt-34">
           <app-com-proposed-activities
+            id="proposedActivity"
             [plans]="plans()"
             [editMode]="true"
             [formArray]="getProposedActivitiesFormArray()"
           >
           </app-com-proposed-activities>
+          @if (!form().get('proposedActivity')?.valid &&
+          form().get('proposedActivity')?.touched &&
+          proposedActivitySubmitted()) {
+          <app-com-error-message
+            text="กรุณากรอก proposedActivity"
+            marginTop="10px"
+            fontSize="16px"
+          ></app-com-error-message>
+          }
         </div>
       </div>
 
@@ -88,11 +108,20 @@
         </div>
         <div class="mgt-22">
           <app-com-plan-note
+            id="planNote"
             [plans]="plans()"
             [editMode]="true"
             [formArray]="getPlanNoteFormArray()"
           >
           </app-com-plan-note>
+          @if (!form().get('planNote')?.valid && form().get('planNote')?.touched
+          && planNoteSubmitted()) {
+          <app-com-error-message
+            text="กรุณากรอก planNote"
+            marginTop="10px"
+            fontSize="16px"
+          ></app-com-error-message>
+          }
         </div>
       </div>
 
@@ -110,9 +139,18 @@
         </div>
         <div class="mgt-22">
           <app-com-admin-note
+            id="adminNote"
             [editMode]="true"
             [control]="getAdminNoteFormControl()"
           ></app-com-admin-note>
+          @if (!form().get('adminNote')?.valid &&
+          form().get('adminNote')?.touched && adminNoteSubmitted()) {
+          <app-com-error-message
+            text="กรุณากรอก admin note"
+            marginTop="10px"
+            fontSize="16px"
+          ></app-com-error-message>
+          }
         </div>
       </div>
 

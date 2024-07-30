@@ -77,7 +77,7 @@ export class PlanEditComponent implements OnInit {
   protected popupText = signal('Update plan successfully');
   protected originalForm = signal<PlanFormValue>(new PlanFormValue());
   protected planDetails = signal<PlanDetails>(new PlanDetails());
-  protected scrollerOffset = signal<[number, number]>([0, 40]); // [x, y
+  protected scrollerOffset = signal<[number, number]>([0, 40]); // [x, y]
   protected irTypeOptions = signal<DropdownOption[]>([
     {
       value: 'type_1',
@@ -309,7 +309,7 @@ export class PlanEditComponent implements OnInit {
     this.onSaveButtonClick('full');
   }
 
-  validToSubmit(): boolean {
+  private validToSubmit(): boolean {
     if (!this.isFormValid()) {
       this.markFieldsTouched();
       return false;

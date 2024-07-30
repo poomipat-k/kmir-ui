@@ -1,3 +1,4 @@
+import { ViewportScroller } from '@angular/common';
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import {
   FormArray,
@@ -10,6 +11,7 @@ import { Router } from '@angular/router';
 import { pick } from 'lodash-es';
 import { environment } from '../../environments/environment';
 import { AdminNoteComponent } from '../components/admin-note/admin-note.component';
+import { ErrorMessageComponent } from '../components/error-message/error-message.component';
 import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.component';
 import { PlanNoteComponent } from '../components/plan-note/plan-note.component';
 import { PopupComponent } from '../components/popup/popup.component';
@@ -36,6 +38,7 @@ import { ScoreTableRow } from '../shared/models/score-table-row';
     AdminNoteComponent,
     SaveAndReturnButtonComponent,
     PopupComponent,
+    ErrorMessageComponent,
   ],
   templateUrl: './admin-dashboard-edit.component.html',
   styleUrl: './admin-dashboard-edit.component.scss',
@@ -44,6 +47,7 @@ export class AdminDashboardEditComponent implements OnInit {
   private readonly router: Router = inject(Router);
   private readonly planService: PlanService = inject(PlanService);
   private readonly themeService: ThemeService = inject(ThemeService);
+  private readonly scroller: ViewportScroller = inject(ViewportScroller);
   protected isProduction = environment.production;
 
   // signals
@@ -53,13 +57,18 @@ export class AdminDashboardEditComponent implements OnInit {
   protected showPopup = signal(false);
   protected isPopupError = signal(false);
   protected popupText = signal('Update successfully');
+  protected scrollerOffset = signal<[number, number]>([0, 0]); // [x, y]
+  protected assessmentScoreSubmitted = signal(false);
+  protected proposedActivitySubmitted = signal(false);
+  protected planNoteSubmitted = signal(false);
+  protected adminNoteSubmitted = signal(false);
 
   protected form = signal<FormGroup>(
     new FormGroup({
       assessmentScore: new FormArray([]),
       proposedActivity: new FormArray([]),
       planNote: new FormArray([]),
-      adminNote: new FormControl(null),
+      adminNote: new FormControl(null, Validators.required),
     })
   );
 
@@ -69,6 +78,7 @@ export class AdminDashboardEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.themeService.changeTheme('silver');
+    this.scroller.setOffset(this.scrollerOffset());
 
     this.planService.getAllPlansDetails().subscribe((res) => {
       console.log('==res', res);
@@ -137,7 +147,7 @@ export class AdminDashboardEditComponent implements OnInit {
         assessmentScore: new FormArray(assessmentFormArray),
         proposedActivity: new FormArray(paFormArray),
         planNote: new FormArray(pnFormArray),
-        adminNote: new FormControl(this.adminNote()),
+        adminNote: new FormControl(this.adminNote(), Validators.required),
       })
     );
   }
@@ -161,20 +171,90 @@ export class AdminDashboardEditComponent implements OnInit {
     });
   }
 
+  private validToSubmit(name: string): boolean {
+    if (name === 'full') {
+      if (!this.form()?.valid) {
+        this.markAllFieldsTouched();
+        return false;
+      }
+      return true;
+    }
+    if (!this.form()?.get(name)?.valid) {
+      this.markFieldsTouched(name);
+      return false;
+    }
+    return true;
+  }
+
+  private markAllFieldsTouched() {
+    const formGroup = this.form();
+    if (formGroup) {
+      formGroup.markAllAsTouched();
+    }
+
+    let errorId = '';
+    const fields = [
+      'assessmentScore',
+      'proposedActivity',
+      'planNote',
+      'adminNote',
+    ];
+
+    for (const f of fields) {
+      if (!this.form()?.get(f)?.valid) {
+        errorId = f;
+        break;
+      }
+    }
+    console.error('errorId:', errorId);
+    if (errorId) {
+      this.scrollToId(errorId);
+    }
+  }
+
+  private markFieldsTouched(name: string) {
+    const arrayOrGroup = this.form().get(name);
+    if (arrayOrGroup) {
+      arrayOrGroup.markAllAsTouched();
+    }
+
+    const errorId = name;
+    console.error('errorId:', errorId);
+    if (errorId) {
+      this.scrollToId(errorId);
+    }
+  }
+
+  private scrollToId(id: string) {
+    this.scroller.setOffset([0, 100]);
+    this.scroller.scrollToAnchor(id);
+  }
+
   onSave(name: string) {
     console.log('==onSave', name);
     console.log(this.form());
     let payload: any;
     if (name === 'full') {
+      this.assessmentScoreSubmitted.set(true);
+      this.proposedActivitySubmitted.set(true);
+      this.planNoteSubmitted.set(true);
+      this.adminNoteSubmitted.set(true);
       payload = this.form().value;
     } else if (name === 'assessmentScore') {
+      this.assessmentScoreSubmitted.set(true);
       payload = pick(this.form().value, 'assessmentScore');
     } else if (name === 'proposedActivity') {
+      this.proposedActivitySubmitted.set(true);
       payload = pick(this.form().value, 'proposedActivity');
     } else if (name === 'planNote') {
+      this.planNoteSubmitted.set(true);
       payload = pick(this.form().value, 'planNote');
     } else if (name === 'adminNote') {
+      this.adminNoteSubmitted.set(true);
       payload = pick(this.form().value, 'adminNote');
+    }
+    if (!this.validToSubmit(name)) {
+      return;
     }
 
     this.planService.adminEdit(payload).subscribe({
@@ -196,9 +276,6 @@ export class AdminDashboardEditComponent implements OnInit {
           this.showPopup.set(true);
           setTimeout(() => {
             this.showPopup.set(false);
-            if (name === 'full') {
-              this.router.navigate(['/admin/dashboard']);
-            }
           }, 2000);
         }
       },
@@ -217,10 +294,6 @@ export class AdminDashboardEditComponent implements OnInit {
   }
 
   onSaveAndReturn() {
-    // if (!this.validToSubmit()) {
-    //   console.error('form is not valid');
-    //   return;
-    // }
     this.onSave('full');
   }
 

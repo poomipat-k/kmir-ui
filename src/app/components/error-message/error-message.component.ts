@@ -10,4 +10,5 @@ import { Component, input } from '@angular/core';
 export class ErrorMessageComponent {
   text = input('');
   marginTop = input('0px');
+  fontSize = input('12px');
 }
