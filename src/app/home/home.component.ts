@@ -64,7 +64,6 @@ export class HomeComponent implements OnInit {
         }
         let myPlan = res.find((plan) => plan.userId === curUser.id);
         if (!myPlan) {
-          console.log('==here');
           return;
         }
         const firstPlanCard = new PlanCard();
@@ -97,7 +96,6 @@ export class HomeComponent implements OnInit {
   }
 
   canAccessPlanDetails(index: number) {
-    console.log('==canAccessPlanDetails', index);
     return (
       this.userService.currentUser().id === this.plans()[index].data.userId ||
       this.getCurrentUser().userRole === 'admin' ||

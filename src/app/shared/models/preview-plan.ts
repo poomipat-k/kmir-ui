@@ -4,6 +4,6 @@ export class PreviewPlan {
   userId: number;
   topic: string;
   topicEn: string;
-  goal: string;
+  irGoalDetails: string;
   constructor() {}
 }
