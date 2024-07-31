@@ -22,7 +22,7 @@ import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.comp
 export class ScoreTableAdminComponent {
   shortNames = input<string[]>([]);
   criteria = input<AssessmentCriteria[]>([]);
-  data = input<ScoreTableRow[][]>([]);
+  data = input<ScoreTableRow[][]>();
   editMode = input(false);
   formArray = input<FormArray>();
 
