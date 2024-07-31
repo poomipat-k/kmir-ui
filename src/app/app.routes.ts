@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { adminOrViewerGuard } from './guard/admin-or-viewer.guard';
 import { adminGuard } from './guard/admin.guard';
 import { authGuard } from './guard/auth.guard';
 import { canEditPlanGuard } from './guard/can-edit-plan.guard';
@@ -43,7 +44,7 @@ export const routes: Routes = [
         (mod) => mod.AdminDashboardComponent
       ),
     title: 'admin dashboard',
-    canActivate: [adminGuard],
+    canActivate: [adminOrViewerGuard],
   },
   {
     path: 'admin/dashboard/edit',

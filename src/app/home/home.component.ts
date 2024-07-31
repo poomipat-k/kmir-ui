@@ -57,7 +57,8 @@ export class HomeComponent implements OnInit {
             return item;
           });
           // pop admin card
-          list.pop();
+          const adminCard = list.pop()!;
+          list.unshift(adminCard);
           this.plans.set(list);
           return;
         }
@@ -96,6 +97,7 @@ export class HomeComponent implements OnInit {
   }
 
   canAccessPlanDetails(index: number) {
+    console.log('==canAccessPlanDetails', index);
     return (
       this.userService.currentUser().id === this.plans()[index].data.userId ||
       this.getCurrentUser().userRole === 'admin' ||

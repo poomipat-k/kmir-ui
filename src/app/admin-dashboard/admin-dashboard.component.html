@@ -62,6 +62,7 @@
         </h2>
       </div>
 
+      @if (userService.currentUser().userRole === 'admin') {
       <button class="editButton mgt-58" (click)="toEditPage()">
         <p class="editButton__text">แก้ไขข้อมูล</p>
         <svg
@@ -91,6 +92,7 @@
           </g>
         </svg>
       </button>
+      }
     </div>
     <!-- Metric -->
     <div class="mgt-94">
