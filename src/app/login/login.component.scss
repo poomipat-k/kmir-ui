@@ -52,9 +52,21 @@
   }
 }
 
+.usage {
+  text-align: center;
+  font-family: $custom-font;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #ff3300;
+}
+
 .mgt {
   &-10 {
     margin-top: 10px;
+  }
+  &-16 {
+    margin-top: 16px;
   }
   &-24 {
     margin-top: 24px;
