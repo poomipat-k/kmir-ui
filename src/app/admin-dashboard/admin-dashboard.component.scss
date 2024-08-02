@@ -294,10 +294,14 @@
   }
 }
 
+.logs {
+  position: relative;
+}
+
 .backToTop {
   position: absolute;
-  bottom: -100px;
-  right: -22px;
+  top: -15px;
+  right: -56px;
 }
 
 // For intersection API debugging purpose
