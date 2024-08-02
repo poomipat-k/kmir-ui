@@ -69,6 +69,8 @@ export class ChangeLogComponent {
       let ts = ts1;
       if (ts2 && new Date(ts2) >= new Date(ts1)) {
         ts = ts2;
+        // assessmentScore data can come from both admin or user record
+        list.push('assessmentScore');
       }
 
       if (plan.readinessWillingnessUpdatedAt === ts) {
@@ -88,9 +90,6 @@ export class ChangeLogComponent {
       }
       if (plan.contactPersonUpdatedAt === ts) {
         list.push('contactPerson');
-      }
-      if (plan.assessmentScore?.[0]?.createdAt === ts) {
-        list.push('assessmentScore');
       }
       return list.join(', ');
     });

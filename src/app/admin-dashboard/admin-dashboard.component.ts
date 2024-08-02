@@ -137,10 +137,6 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
       }
       this.adminNote.set(res.adminNote);
     });
-    // // Todo: remove this
-    // setTimeout(() => {
-    //   this.scroller.scrollToPosition([0, 1400]);
-    // }, 100);
 
     this.refreshMetric();
 

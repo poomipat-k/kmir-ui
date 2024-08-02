@@ -59,7 +59,7 @@ export class AdminDashboardEditComponent implements OnInit {
   private readonly planService: PlanService = inject(PlanService);
   private readonly themeService: ThemeService = inject(ThemeService);
   private readonly scroller: ViewportScroller = inject(ViewportScroller);
-  protected isProduction = environment.production;
+  protected isProduction = signal(environment.production);
 
   // signals
   protected plans = signal<PlanDetails[]>([]);
