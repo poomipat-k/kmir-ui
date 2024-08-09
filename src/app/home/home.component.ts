@@ -9,11 +9,12 @@ import { UserService } from '../services/user.service';
 import { PlanCard } from '../shared/models/plan-card';
 import { PreviewPlan } from '../shared/models/preview-plan';
 import { User } from '../shared/models/user';
+import { SafeHtmlPipe } from '../shared/pipe/safe-html.pipe';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, BackToTopComponent],
+  imports: [CommonModule, BackToTopComponent, SafeHtmlPipe],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
   animations: [
