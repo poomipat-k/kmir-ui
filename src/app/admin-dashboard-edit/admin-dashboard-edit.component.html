@@ -27,7 +27,8 @@
             <h3 class="assessment__header">Admin assessment Score</h3>
             <app-com-icon-tooltip
               [hasTooltip]="true"
-              tooltipText="Admin assessment Score"
+              [tooltipText]="assessmentScoreTooltip()"
+              width="500px"
             ></app-com-icon-tooltip>
           </div>
           <app-com-save-button
