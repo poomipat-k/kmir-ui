@@ -16,6 +16,8 @@ export class TooltipDirective {
   animationDuration = input(300);
   fadeOut = input(true);
   width = input('141px');
+  padding = input('24px');
+  backgroundColor = input('rgba(255, 255, 255, 1)');
 
   private elRef: ElementRef = inject(ElementRef);
   private renderer: Renderer2 = inject(Renderer2);
@@ -26,6 +28,8 @@ export class TooltipDirective {
     this.renderer.appendChild(tooltip, text);
     this.renderer.addClass(tooltip, 'appTooltip');
     this.renderer.setStyle(tooltip, 'width', this.width());
+    this.renderer.setStyle(tooltip, 'padding', this.padding());
+    this.renderer.setStyle(tooltip, 'background-color', this.backgroundColor());
 
     // 0 ms won't work
     setTimeout(() => {

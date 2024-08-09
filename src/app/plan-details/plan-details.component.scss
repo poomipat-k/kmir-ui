@@ -87,10 +87,6 @@
   padding-left: 22px;
 
   &__header {
-    &Container {
-      position: relative;
-    }
-
     font-family: $custom-font;
     font-weight: 600;
     font-size: 44px;
@@ -99,10 +95,11 @@
 
     &__icon {
       position: absolute;
+      font-size: 18px;
+      line-height: 18px;
       width: 18px;
       height: 18px;
-      right: -28px;
-      bottom: 25%;
+      transform: translate(5px);
     }
   }
 

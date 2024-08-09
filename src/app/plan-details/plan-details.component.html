@@ -115,17 +115,17 @@
     >
       <app-com-metric [data]="metricData()"></app-com-metric>
       <div class="mgt-13">
-        <div class="metricAndWillingness__headerContainer">
+        <div>
           <h3 class="metricAndWillingness__header">
             Readiness and Willingness Assessment
+            <app-com-icon-tooltip
+              class="metricAndWillingness__header__icon"
+              [hasTooltip]="true"
+              [tooltipText]="readinessTooltipText()"
+              width="320px"
+            >
+            </app-com-icon-tooltip>
           </h3>
-          <app-com-icon-tooltip
-            class="metricAndWillingness__header__icon"
-            [hasTooltip]="true"
-            [tooltipText]="readinessTooltipText()"
-            width="320px"
-          >
-          </app-com-icon-tooltip>
         </div>
         <app-com-updated-at
           [display]="getEditHistory('readinessWillingness')"
