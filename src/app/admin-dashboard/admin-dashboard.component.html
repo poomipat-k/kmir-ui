@@ -112,7 +112,8 @@
         <div class="mgt-12">
           <app-com-icon-tooltip
             [hasTooltip]="true"
-            tooltipText="Test readiness tooltip"
+            [tooltipText]="readinessTooltipText()"
+            width="500px"
           ></app-com-icon-tooltip>
         </div>
       </div>
@@ -184,7 +185,8 @@
           <div class="mgt-15">
             <app-com-icon-tooltip
               [hasTooltip]="true"
-              tooltipText="Test tooltip text"
+              [tooltipText]="assessmentScoreTooltip()"
+              width="500px"
             ></app-com-icon-tooltip>
           </div>
         </div>

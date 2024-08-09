@@ -11,4 +11,5 @@ import { TooltipDirective } from '../../shared/directives/tooltip.directive';
 export class IconTooltipComponent {
   hasTooltip = input(false);
   tooltipText = input<string>('');
+  width = input('141px');
 }

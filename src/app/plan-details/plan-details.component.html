@@ -119,11 +119,13 @@
           <h3 class="metricAndWillingness__header">
             Readiness and Willingness Assessment
           </h3>
-          <img
-            src="/assets/more_info.svg"
-            alt="more info icon"
+          <app-com-icon-tooltip
             class="metricAndWillingness__header__icon"
-          />
+            [hasTooltip]="true"
+            [tooltipText]="readinessTooltipText()"
+            width="320px"
+          >
+          </app-com-icon-tooltip>
         </div>
         <app-com-updated-at
           [display]="getEditHistory('readinessWillingness')"
@@ -142,7 +144,8 @@
           <div class="mgt-15">
             <app-com-icon-tooltip
               [hasTooltip]="true"
-              tooltipText="Test tooltip text"
+              [tooltipText]="assessmentScoreTooltip()"
+              width="400px"
             ></app-com-icon-tooltip>
           </div>
         </div>
@@ -184,7 +187,8 @@
           <h4 class="goal__type__text">{{ planDetails().irGoalType }}</h4>
           <app-com-icon-tooltip
             [hasTooltip]="true"
-            tooltipText="Type details"
+            [tooltipText]="irWorkGoalTooltip()"
+            width="400px"
           ></app-com-icon-tooltip>
         </div>
         <div
