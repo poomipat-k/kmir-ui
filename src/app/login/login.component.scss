@@ -3,6 +3,7 @@
 .login {
   width: 272px;
   margin: auto;
+  padding-bottom: 184px;
 
   &__header {
     text-align: left;
@@ -53,6 +54,11 @@
 }
 
 .usage {
+  &-box {
+    width: 287px;
+    transform: translateX(calc(274px - 287px));
+  }
+
   text-align: center;
   font-family: $custom-font;
   font-weight: 500;
