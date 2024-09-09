@@ -54,7 +54,6 @@ export class PlanEditComponent implements OnInit {
 
   protected form = signal<FormGroup>(
     new FormGroup({
-      readinessWillingness: new FormControl(null, Validators.required),
       assessmentScore: new FormGroup({
         q_1: new FormControl(null, Validators.required),
         q_2: new FormControl(null, Validators.required),
@@ -174,7 +173,6 @@ export class PlanEditComponent implements OnInit {
         return a.order >= b.order ? 1 : -1;
       });
       this.form().patchValue({
-        readinessWillingness: plan.readinessWillingness,
         irGoalType: plan.irGoalType,
         irGoalDetails: plan.irGoalDetails,
         proposedActivity: plan.proposedActivity,
@@ -204,14 +202,6 @@ export class PlanEditComponent implements OnInit {
 
   onSaveButtonClick(name: string) {
     const newPlanValue = new PlanFormValue();
-    if (name === 'full' || name === 'readinessWillingness') {
-      const newValue: string = this.form().value.readinessWillingness;
-      const diff = newValue !== this.originalForm().readinessWillingness;
-      if (diff) {
-        newPlanValue.readinessWillingness = newValue;
-      }
-      this.getControl('readinessWillingness').markAsTouched({ onlySelf: true });
-    }
 
     if (name === 'full' || name === 'assessmentScore') {
       const newValue = this.form().value.assessmentScore;
@@ -273,10 +263,6 @@ export class PlanEditComponent implements OnInit {
           this.showPopup.set(true);
           this.originalForm.update((oldValue: PlanFormValue) => {
             const updateValue = cloneDeep(oldValue);
-            if (newPlanValue.readinessWillingness) {
-              updateValue.readinessWillingness =
-                newPlanValue.readinessWillingness;
-            }
             if (newPlanValue.assessmentScore) {
               updateValue.assessmentScore = newPlanValue.assessmentScore;
             }

@@ -79,28 +79,33 @@
   font-size: 44px;
   line-height: 56px;
   color: #1c1b1f;
+
+  &__description {
+    padding-right: 100px;
+    font-family: $custom-font-looped;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 23px;
+
+    &--bold {
+      font-weight: 600;
+    }
+  }
 }
 
-.metricAndWillingness {
-  display: flex;
-  gap: 20px;
-  padding-left: 22px;
+.readiness {
+  &__container {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
 
   &__header {
     font-family: $custom-font;
     font-weight: 600;
-    font-size: 44px;
-    line-height: 59px;
+    font-size: 28px;
+    line-height: 46px;
     color: #1c1b1f;
-
-    &__icon {
-      position: absolute;
-      font-size: 18px;
-      line-height: 18px;
-      width: 18px;
-      height: 18px;
-      transform: translate(5px);
-    }
   }
 
   &__text {
@@ -108,11 +113,22 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 23px;
-    color: #000;
-    white-space: pre-wrap;
 
-    max-height: 170px;
-    overflow-y: scroll;
+    &--bold {
+      font-weight: 500;
+      line-height: 30px;
+    }
+  }
+}
+
+.metric {
+  display: flex;
+  gap: 20px;
+  padding-left: 22px;
+
+  &__descriptionBox {
+    background-color: #fff;
+    flex: 1;
   }
 }
 

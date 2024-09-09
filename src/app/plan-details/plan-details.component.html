@@ -70,9 +70,19 @@
       <div>
         <h2 class="topic">{{ planDetails().topic }}</h2>
         <h2 class="topic">{{ planDetails().topicEn }}</h2>
+        <p class="topic__description mgt-14">
+          ระบบนี้พัฒนาให้เอื้อต่อการ<span class="topic__description--bold"
+            >ประสานงานร่วมกันระหว่างนักวิชาการแผนงานและนักวิชาการด้านต่างประเทศ
+            สสส.</span
+          >
+          ในการร่วมกันกำหนดเป้าหมาย ประเมินความก้าวหน้า บันทึกกิจกรรมต่างๆ
+          ที่เกี่ยวข้องกับงานด้านต่างประเทศ หน้าที่แสดงข้อมูลนี้
+          จะแสดงผลและแก้ไขได้เฉพาะแก่นักวิชาการแผนงานที่มี log in
+          และทีมด้านต่างประเทศ
+        </p>
       </div>
       @if (userService.currentUser().userRole === 'user') {
-      <button class="editButton mgt-58" (click)="toEditPage()">
+      <button class="editButton mgt-14" (click)="toEditPage()">
         <p class="editButton__text">แก้ไขข้อมูล</p>
         <svg
           width="20"
@@ -103,37 +113,45 @@
       </button>
       }
     </div>
-    <div
-      id="readiness"
-      class="metricAndWillingness mgt-80"
-      appIntersectionElement
-      (isIntersecting)="isIntersecting($event, 0)"
-      [isContinuous]="true"
-      [threshold]="0"
-      [debounceTime]="0"
-      [rootMargin]="intersectionRootMargin()"
-    >
-      <app-com-metric [data]="metricData()"></app-com-metric>
-      <div class="mgt-13">
-        <div>
-          <h3 class="metricAndWillingness__header">
-            Readiness and Willingness Assessment
-            <app-com-icon-tooltip
-              class="metricAndWillingness__header__icon"
-              [hasTooltip]="true"
-              [tooltipText]="readinessTooltipText()"
-              width="320px"
-            >
-            </app-com-icon-tooltip>
-          </h3>
-        </div>
+    <div>
+      <div
+        class="readiness__container mgt-39"
+        id="readiness"
+        appIntersectionElement
+        (isIntersecting)="isIntersecting($event, 0)"
+        [isContinuous]="true"
+        [threshold]="0"
+        [debounceTime]="0"
+        [rootMargin]="intersectionRootMargin()"
+      >
+        <h3 class="readiness__header">Readiness and Willingness Assessment</h3>
+        <app-com-icon-tooltip
+          [hasTooltip]="true"
+          [tooltipText]="readinessTooltipText()"
+          width="500px"
+        >
+        </app-com-icon-tooltip>
         <app-com-updated-at
-          [display]="getEditHistory('readinessWillingness')"
+          [display]="getEditHistory('assessmentScore')"
         ></app-com-updated-at>
-        <div
-          class="mgt-8 metricAndWillingness__text"
-          [innerHTML]="planDetails().readinessWillingness | safeHtml"
-        ></div>
+      </div>
+      <div class="mgt-20">
+        <p class="readiness__text">
+          ส่วนนี้แสดงการให้ความหมายตามระดับคะแนนทั้งจากแกนด้านความเต็มใจและแกนด้านศักยภาพ
+          ซึ่งเป็นการวิเคราะห์ผลจากคะแนนที่แผนงาน
+          และทีมด้านต่างประเทศประเมินร่วมกัน
+        </p>
+        <p class="readiness__text">
+          <span class="readiness__text--bold">ข้อแนะนำการใช้งาน:</span> สามารถ
+          Click ปีที่ต้องการเพื่อแสดงข้อมูลการให้ความหมาย หากไม่ Click เลือกปีใด
+          จะแสดงความหมายของทุกปี
+        </p>
+      </div>
+    </div>
+    <div class="metric mgt-45">
+      <app-com-metric [data]="metricData()"></app-com-metric>
+      <div class="metric__descriptionBox mgt-13">
+        <p>Placeholder</p>
       </div>
     </div>
 

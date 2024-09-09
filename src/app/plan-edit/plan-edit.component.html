@@ -20,39 +20,6 @@
     </div>
 
     <form [formGroup]="form()" class="mgt-117">
-      <!-- Readiness and Willingness -->
-      <div>
-        <div class="readiness__headerContainer">
-          <div class="readiness__headerContainer--left">
-            <h3 class="readiness__header" id="readinessWillingness">
-              Readiness and Willingness Assessment
-            </h3>
-            <app-com-icon-tooltip
-              [hasTooltip]="true"
-              [tooltipText]="readinessTooltipText()"
-              width="500px"
-            ></app-com-icon-tooltip>
-          </div>
-          <app-com-save-button
-            (click)="onSaveButtonClick('readinessWillingness')"
-          ></app-com-save-button>
-        </div>
-        <div class="mgt-20">
-          <app-com-custom-editor
-            [control]="getControl('readinessWillingness')"
-            [height]="326"
-          ></app-com-custom-editor>
-
-          @if (!getControl('readinessWillingness').valid &&
-          getControl('readinessWillingness').touched) {
-          <app-com-error-message
-            text="กรุณากรอก Readiness and Willingness Assessment"
-            marginTop="8px"
-          ></app-com-error-message>
-          }
-        </div>
-      </div>
-
       <!-- Self-assessment Score -->
       <div class="mgt-82">
         <div class="assessment__headerContainer">
