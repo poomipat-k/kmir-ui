@@ -43,14 +43,9 @@
         </div>
 
         <div class="mgt-20">
-          <p class="assessment__instruction">
-            <span class="assessment__instruction--bold"
-              >ข้อแนะนำการใช้งาน:
-            </span>
-            ทีมต่างประเทศ สสส.
-            อาจพิจารณาจัดกระบวนการภายในร่วมกันให้คะแนนประเมินในแต่ละข้อถามของทุกแผน
-            โดยอาจระบุความคิดเห็นหรือเหตุผลในส่วนข้อสังเกตและหมายเหตุเพื่อใช้ประโยชน์ในแต่ละรอบประเมิน
-          </p>
+          <app-com-instruction-note
+            text="ทีมต่างประเทศ สสส. อาจพิจารณาจัดกระบวนการภายในร่วมกันให้คะแนนประเมินในแต่ละข้อถามของทุกแผน โดยอาจระบุความคิดเห็นหรือเหตุผลในส่วนข้อสังเกตและหมายเหตุเพื่อใช้ประโยชน์ในแต่ละรอบประเมิน"
+          ></app-com-instruction-note>
           <div class="assessment__scale__container mgt-20">
             <p class="assessment__scale assessment__scale--bold">
               Likert scale
@@ -84,6 +79,24 @@
             fontSize="16px"
           ></app-com-error-message>
           }
+        </div>
+      </div>
+      <!-- IR Work Goal -->
+      <div class="hr--dashed mgt-50"></div>
+      <div class="mgt-44">
+        <div class="commonRow">
+          <div class="commonRow__left">
+            <h3 class="commonRow__header">IR Work Goal</h3>
+            <img src="/assets/flag_circle_red.svg" alt="note icon" />
+          </div>
+          <app-com-save-button
+            (click)="onSave('irWorkGoal')"
+          ></app-com-save-button>
+        </div>
+        <div class="mgt-20">
+          <app-com-instruction-note
+            text="เป้าหมายด้านต่างประเทศควรเกิดจากการหารือและเห็นชอบร่วมกันระหว่างแผนงานและทีมต่างประเทศ สสส. ตามความพร้อมของแต่ละแผนงานและความคาดหวังขององค์กร "
+          ></app-com-instruction-note>
         </div>
       </div>
 

@@ -20,6 +20,7 @@ import { environment } from '../../environments/environment';
 import { AdminNoteComponent } from '../components/admin-note/admin-note.component';
 import { ErrorMessageComponent } from '../components/error-message/error-message.component';
 import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.component';
+import { InstructionNoteComponent } from '../components/instruction-note/instruction-note.component';
 import { PlanNoteComponent } from '../components/plan-note/plan-note.component';
 import { PopupComponent } from '../components/popup/popup.component';
 import { ProposedActivitiesComponent } from '../components/proposed-activities/proposed-activities.component';
@@ -46,6 +47,7 @@ import { ScoreTableRow } from '../shared/models/score-table-row';
     SaveAndReturnButtonComponent,
     PopupComponent,
     ErrorMessageComponent,
+    InstructionNoteComponent,
   ],
   templateUrl: './admin-dashboard-edit.component.html',
   styleUrl: './admin-dashboard-edit.component.scss',
@@ -291,6 +293,8 @@ export class AdminDashboardEditComponent implements OnInit {
     } else if (name === 'assessmentScore') {
       this.assessmentScoreSubmitted.set(true);
       payload = pick(this.form().value, 'assessmentScore');
+    } else if (name === 'irWorkGoal') {
+      console.log('===onSave ', name);
     } else if (name === 'proposedActivity') {
       this.proposedActivitySubmitted.set(true);
       payload = pick(this.form().value, 'proposedActivity');

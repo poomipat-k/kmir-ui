@@ -1,0 +1,17 @@
+@import "../../../styles.scss";
+
+.instruction {
+  font-family: $custom-font-looped;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 27px;
+  color: #1c1b1f;
+
+  &--bold {
+    font-weight: 600;
+  }
+
+  &__remark {
+    color: #d32f06;
+  }
+}

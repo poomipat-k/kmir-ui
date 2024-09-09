@@ -80,18 +80,6 @@
     color: #1c1b1f;
   }
 
-  &__instruction {
-    font-family: $custom-font-looped;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 27px;
-    color: #1c1b1f;
-
-    &--bold {
-      font-weight: 600;
-    }
-  }
-
   &__scale {
     &__container {
       display: flex;
@@ -163,6 +151,9 @@
   }
   &-44 {
     margin-top: 44px;
+  }
+  &-50 {
+    margin-top: 50px;
   }
   &-54 {
     margin-top: 54px;
