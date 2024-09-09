@@ -68,15 +68,45 @@
 
   &__left {
     display: flex;
+    align-items: center;
     gap: 6px;
   }
 
   &__header {
     font-family: $custom-font;
     font-weight: 600;
-    font-size: 24px;
-    line-height: 40px;
+    font-size: 28px;
+    line-height: 46px;
     color: #1c1b1f;
+  }
+
+  &__instruction {
+    font-family: $custom-font-looped;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 27px;
+    color: #1c1b1f;
+
+    &--bold {
+      font-weight: 600;
+    }
+  }
+
+  &__scale {
+    &__container {
+      display: flex;
+      gap: 20px;
+    }
+
+    font-family: $custom-font-looped;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+    color: #d32f06;
+
+    &--bold {
+      font-weight: 600;
+    }
   }
 }
 
@@ -119,8 +149,8 @@
 }
 
 .mgt {
-  &-17 {
-    margin-top: 17px;
+  &-20 {
+    margin-top: 20px;
   }
   &-22 {
     margin-top: 22px;

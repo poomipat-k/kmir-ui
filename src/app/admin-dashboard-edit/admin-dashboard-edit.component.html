@@ -31,19 +31,42 @@
               width="500px"
             ></app-com-icon-tooltip>
           </div>
+          <!-- TODO: remove || isProduction() when want to go production -->
+          @if (!isProduction() || isProduction()) {
+          <button style="padding: 10px" (click)="onPatchScores()">
+            Patch Value
+          </button>
+          }
           <app-com-save-button
             (click)="onSave('assessmentScore')"
           ></app-com-save-button>
         </div>
 
-        <!-- TODO: remove || isProduction() when want to go production -->
-        @if (!isProduction() || isProduction()) {
-        <button style="padding: 10px" (click)="onPatchScores()">
-          Patch Value
-        </button>
-        }
+        <div class="mgt-20">
+          <p class="assessment__instruction">
+            <span class="assessment__instruction--bold"
+              >ข้อแนะนำการใช้งาน:
+            </span>
+            ทีมต่างประเทศ สสส.
+            อาจพิจารณาจัดกระบวนการภายในร่วมกันให้คะแนนประเมินในแต่ละข้อถามของทุกแผน
+            โดยอาจระบุความคิดเห็นหรือเหตุผลในส่วนข้อสังเกตและหมายเหตุเพื่อใช้ประโยชน์ในแต่ละรอบประเมิน
+          </p>
+          <div class="assessment__scale__container mgt-20">
+            <p class="assessment__scale assessment__scale--bold">
+              Likert scale
+            </p>
+            <p class="assessment__scale">
+              <span class="assessment__scale--bold">1</span> =
+              ไม่เห็นด้วยอย่างยิ่ง
+            </p>
+            <p class="assessment__scale">
+              <span class="assessment__scale--bold">10</span> =
+              เห็นด้วยอย่างยิ่ง
+            </p>
+          </div>
+        </div>
 
-        <div class="mgt-17">
+        <div class="mgt-20">
           <app-com-score-table-admin
             id="assessmentScore"
             [shortNames]="topicShortList()"
