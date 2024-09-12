@@ -21,6 +21,7 @@ import { AdminNoteComponent } from '../components/admin-note/admin-note.componen
 import { ErrorMessageComponent } from '../components/error-message/error-message.component';
 import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.component';
 import { InstructionNoteComponent } from '../components/instruction-note/instruction-note.component';
+import { IrWorkGoalComponent } from '../components/ir-work-goal/ir-work-goal.component';
 import { PlanNoteComponent } from '../components/plan-note/plan-note.component';
 import { PopupComponent } from '../components/popup/popup.component';
 import { ProposedActivitiesComponent } from '../components/proposed-activities/proposed-activities.component';
@@ -48,6 +49,7 @@ import { ScoreTableRow } from '../shared/models/score-table-row';
     PopupComponent,
     ErrorMessageComponent,
     InstructionNoteComponent,
+    IrWorkGoalComponent,
   ],
   templateUrl: './admin-dashboard-edit.component.html',
   styleUrl: './admin-dashboard-edit.component.scss',
@@ -89,6 +91,7 @@ export class AdminDashboardEditComponent implements OnInit {
   protected form = signal<FormGroup>(
     new FormGroup({
       assessmentScore: new FormArray([]),
+      irWorkGoal: new FormArray([]),
       proposedActivity: new FormArray([]),
       planNote: new FormArray([]),
       adminNote: new FormControl(null, Validators.required),
@@ -117,6 +120,7 @@ export class AdminDashboardEditComponent implements OnInit {
 
   private initForm() {
     const assessmentFormArray: FormGroup[] = [];
+    const irWorkGaolFromArray: FormGroup[] = [];
     const paFormArray: FormControl[] = [];
     const pnFormArray: FormControl[] = [];
     for (let i = 0; i < this.plans().length; i++) {
@@ -155,6 +159,17 @@ export class AdminDashboardEditComponent implements OnInit {
         })
       );
 
+      // irWorkGoal
+      irWorkGaolFromArray.push(
+        new FormGroup({
+          goalType: new FormControl(plan?.irGoalType, Validators.required),
+          goalDetails: new FormControl(
+            plan?.irGoalDetails,
+            Validators.required
+          ),
+        })
+      );
+
       // proposedActivity
       paFormArray.push(
         new FormControl(plan.proposedActivity, Validators.required)
@@ -167,6 +182,7 @@ export class AdminDashboardEditComponent implements OnInit {
     this.form.set(
       new FormGroup({
         assessmentScore: new FormArray(assessmentFormArray),
+        irWorkGoal: new FormArray(irWorkGaolFromArray),
         proposedActivity: new FormArray(paFormArray),
         planNote: new FormArray(pnFormArray),
         adminNote: new FormControl(this.adminNote(), Validators.required),
@@ -294,7 +310,7 @@ export class AdminDashboardEditComponent implements OnInit {
       this.assessmentScoreSubmitted.set(true);
       payload = pick(this.form().value, 'assessmentScore');
     } else if (name === 'irWorkGoal') {
-      console.log('===onSave ', name);
+      payload = pick(this.form().value, 'irWorkGoal');
     } else if (name === 'proposedActivity') {
       this.proposedActivitySubmitted.set(true);
       payload = pick(this.form().value, 'proposedActivity');
@@ -353,6 +369,10 @@ export class AdminDashboardEditComponent implements OnInit {
 
   getProposedActivitiesFormArray(): FormArray {
     return this.form().get('proposedActivity') as FormArray;
+  }
+
+  getIrGoalFormArray(): FormArray {
+    return this.form().get('irWorkGoal') as FormArray;
   }
 
   getPlanNoteFormArray(): FormArray {

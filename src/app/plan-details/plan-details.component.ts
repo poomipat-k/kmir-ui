@@ -205,11 +205,6 @@ export class PlanDetailsComponent implements OnInit {
 
   getEditHistory(name: string): string {
     const plan = this.planDetails();
-    if (name === 'readinessWillingness') {
-      const updatedAt = plan.readinessWillingnessUpdatedAt;
-      const updatedBy = plan.readinessWillingnessUpdatedBy;
-      return this.generateUpdatedAtString(updatedAt, updatedBy);
-    }
     if (name === 'assessmentScore') {
       let latestUpdateIndex = -1;
       let date = new Date(0);

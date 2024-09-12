@@ -81,6 +81,7 @@
           }
         </div>
       </div>
+
       <!-- IR Work Goal -->
       <div class="hr--dashed mgt-50"></div>
       <div class="mgt-44">
@@ -98,10 +99,17 @@
             text="เป้าหมายด้านต่างประเทศควรเกิดจากการหารือและเห็นชอบร่วมกันระหว่างแผนงานและทีมต่างประเทศ สสส. ตามความพร้อมของแต่ละแผนงานและความคาดหวังขององค์กร "
           ></app-com-instruction-note>
         </div>
+        <div class="mgt-34">
+          <app-com-ir-work-goal
+            [plans]="plans()"
+            [editMode]="true"
+            [formArray]="getIrGoalFormArray()"
+          ></app-com-ir-work-goal>
+        </div>
       </div>
 
       <!-- Proposed activities -->
-      <div class="hr--dashed mgt-76"></div>
+      <div class="hr--dashed mgt-44"></div>
       <div class="mgt-44">
         <div class="commonRow">
           <div class="commonRow__left">
@@ -112,7 +120,12 @@
             (click)="onSave('proposedActivity')"
           ></app-com-save-button>
         </div>
-        <div class="mgt-34">
+        <div class="mgt-20">
+          <app-com-instruction-note
+            text="ส่วนนี้ออกแบบมาเพื่อให้ทั้งแผนงานและทีมต่างประเทศ สสส. ออกแบบร่วมกันในการกำหนดกิจกรรมที่สอดคล้องตามเป้าหมายด้านต่างประเทศ"
+          ></app-com-instruction-note>
+        </div>
+        <div class="mgt-20">
           <app-com-proposed-activities
             #proposedActivity
             id="proposedActivity"
@@ -134,7 +147,7 @@
       </div>
 
       <!-- Plan notes -->
-      <div class="hr--dashed mgt-67"></div>
+      <div class="hr--dashed mgt-44"></div>
       <div class="mgt-44">
         <div class="commonRow">
           <div class="commonRow__left">
@@ -145,7 +158,12 @@
             (click)="onSave('planNote')"
           ></app-com-save-button>
         </div>
-        <div class="mgt-22">
+        <div class="mgt-20">
+          <app-com-instruction-note
+            text="บันทึกข้อคิดเห็นหรือเหตุผลเพื่อใช้ประโยชน์ในแต่ละรอบประเมิน"
+          ></app-com-instruction-note>
+        </div>
+        <div class="mgt-20">
           <app-com-plan-note
             #planNote
             id="planNote"
@@ -177,7 +195,13 @@
             (click)="onSave('adminNote')"
           ></app-com-save-button>
         </div>
-        <div class="mgt-22">
+        <div class="mgt-20">
+          <app-com-instruction-note
+            text="บันทึกแผนหรือเป้าหมายภาพรวมด้านต่างประเทศขององค์กร หรือบันทึกภายในทีมต่างประเทศ เพื่อประเมินความก้าวหน้า ในองค์รวม "
+            remark="(เป็นส่วนที่ไม่แสดงในหน้าของแต่ละแผนงาน)"
+          ></app-com-instruction-note>
+        </div>
+        <div class="mgt-20">
           <app-com-admin-note
             id="adminNote"
             [editMode]="true"
@@ -194,7 +218,7 @@
         </div>
       </div>
 
-      <div class="saveAndReturn mgt-93">
+      <div class="saveAndReturn mgt-60">
         <app-com-save-and-return-button
           (click)="onSaveAndReturn()"
         ></app-com-save-and-return-button>

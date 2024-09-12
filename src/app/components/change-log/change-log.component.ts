@@ -73,9 +73,6 @@ export class ChangeLogComponent {
         list.push('assessmentScore');
       }
 
-      if (plan.readinessWillingnessUpdatedAt === ts) {
-        list.push('readiness');
-      }
       if (plan.irGoalTypeUpdatedAt === ts) {
         list.push('irWorkGoalType');
       }

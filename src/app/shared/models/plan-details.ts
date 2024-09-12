@@ -7,9 +7,6 @@ export class PlanDetails {
   topic: string;
   topicEn: string;
   topicShort: string;
-  readinessWillingness: string;
-  readinessWillingnessUpdatedAt: string;
-  readinessWillingnessUpdatedBy: string;
   assessmentCriteria: AssessmentCriteria[];
   assessmentScore: AssessmentScore[];
   irGoalType?: string;
