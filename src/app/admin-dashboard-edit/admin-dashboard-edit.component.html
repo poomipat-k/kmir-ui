@@ -101,10 +101,18 @@
         </div>
         <div class="mgt-34">
           <app-com-ir-work-goal
+            #irWorkGoal
             [plans]="plans()"
             [editMode]="true"
             [formArray]="getIrGoalFormArray()"
           ></app-com-ir-work-goal>
+          @if (!form().get('irWorkGoal')?.valid &&
+          form().get('irWorkGoal')?.touched && irWorkGoalSubmitted()) {
+          <app-com-error-message
+            [text]="irWorkGoalDetailsErrorMsg()"
+            marginTop="8px"
+          ></app-com-error-message>
+          }
         </div>
       </div>
 

@@ -55,6 +55,7 @@ import { ScoreTableRow } from '../shared/models/score-table-row';
   styleUrl: './admin-dashboard-edit.component.scss',
 })
 export class AdminDashboardEditComponent implements OnInit {
+  irWorkGoalComponent = viewChild<IrWorkGoalComponent>('irWorkGoal');
   proposedActivityComponent =
     viewChild<ProposedActivitiesComponent>('proposedActivity');
   planNoteComponent = viewChild<PlanNoteComponent>('planNote');
@@ -74,9 +75,11 @@ export class AdminDashboardEditComponent implements OnInit {
   protected popupText = signal('Update successfully');
   protected scrollerOffset = signal<[number, number]>([0, 0]); // [x, y]
   protected assessmentScoreSubmitted = signal(false);
+  protected irWorkGoalSubmitted = signal(false);
   protected proposedActivitySubmitted = signal(false);
   protected planNoteSubmitted = signal(false);
   protected adminNoteSubmitted = signal(false);
+  protected irWorkGoalDetailsErrorMsg = signal('กรุณากรอก Ir Work Goal');
   protected proposedActivityErrorMsg = signal('กรุณากรอก Proposed activity');
   protected planNoteErrorMsg = signal('กรุณากรอก Note of Plan');
   protected assessmentScoreTooltip = signal(
@@ -266,6 +269,18 @@ export class AdminDashboardEditComponent implements OnInit {
   }
 
   private navigateToErrorPlan(errorId: string) {
+    if (errorId === 'irWorkGoal') {
+      const formArray = this.form().get(errorId) as FormArray;
+      for (let i = 0; i < formArray.length; i++) {
+        if (!formArray.at(i).valid) {
+          const newErrMsg = `กรุณากรอก Ir Work Goal: ${this.plans()[i].name}`;
+          this.irWorkGoalDetailsErrorMsg.set(newErrMsg);
+          this.irWorkGoalComponent()?.activeIndex?.set(i);
+          return;
+        }
+      }
+    }
+
     if (errorId === 'proposedActivity') {
       const formArray = this.form().get(errorId) as FormArray;
       for (let i = 0; i < formArray.length; i++) {
@@ -310,6 +325,7 @@ export class AdminDashboardEditComponent implements OnInit {
       this.assessmentScoreSubmitted.set(true);
       payload = pick(this.form().value, 'assessmentScore');
     } else if (name === 'irWorkGoal') {
+      this.irWorkGoalSubmitted.set(true);
       payload = pick(this.form().value, 'irWorkGoal');
     } else if (name === 'proposedActivity') {
       this.proposedActivitySubmitted.set(true);
