@@ -66,32 +66,51 @@
   font-size: 64px;
   line-height: 106px;
   color: #1c1b1f;
+}
 
-  &__readiness {
-    &Container {
-      display: flex;
-      gap: 13px;
-    }
+.desc {
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    gap: 80px;
+  }
 
-    font-family: $custom-font;
-    font-weight: 600;
-    font-size: 44px;
-    line-height: 59px;
-    color: #1c1b1f;
+  font-family: $custom-font-looped;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26px;
+  color: #1c1b1f;
+
+  &__bold {
+    font-weight: 500;
   }
 }
 
-.topic {
-  &Container {
+.readiness {
+  &__container {
     display: flex;
-    justify-content: space-between;
+    gap: 11px;
   }
 
-  font-family: $custom-font;
-  font-weight: 500;
-  font-size: 44px;
-  line-height: 56px;
-  color: #1c1b1f;
+  &__header {
+    font-family: $custom-font;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 40px;
+    color: #1c1b1f;
+  }
+
+  &__desc {
+    font-family: $custom-font-looped;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+    color: #1c1b1f;
+
+    &--bold {
+      font-weight: 600;
+    }
+  }
 }
 
 .metric {
@@ -101,13 +120,14 @@
   &__control {
     &__container {
       display: flex;
+      flex: 1;
       flex-direction: column;
-      gap: 21px;
+      gap: 17px;
     }
 
     &__label {
       font-family: $custom-font;
-      font-weight: 400;
+      font-weight: 600;
       font-size: 16px;
       line-height: 16px;
       color: #000;
@@ -121,11 +141,31 @@
       }
     }
 
+    &__helper {
+      font-family: $custom-font-looped;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 14px;
+      color: #000;
+    }
+
     &__content {
       display: flex;
       gap: 14px;
       align-items: center;
     }
+  }
+
+  &__summary {
+    &__box {
+      width: 100%;
+      height: 100%;
+      // border: 1px solid blue;
+    }
+
+    width: 100%;
+    height: 100%;
+    // border: 1px solid red;
   }
 }
 
@@ -218,6 +258,9 @@
 }
 
 .mgt {
+  &--38 {
+    margin-top: -38px;
+  }
   &-8 {
     margin-top: 8px;
   }
@@ -233,8 +276,8 @@
   &-15 {
     margin-top: 15px;
   }
-  &-18 {
-    margin-top: 18px;
+  &-17 {
+    margin-top: 17px;
   }
   &-20 {
     margin-top: 20px;
@@ -257,9 +300,6 @@
   &-58 {
     margin-top: 58px;
   }
-  &-67 {
-    margin-top: 67px;
-  }
   &-78 {
     margin-top: 78px;
   }
@@ -268,9 +308,6 @@
   }
   &-82 {
     margin-top: 82px;
-  }
-  &-94 {
-    margin-top: 94px;
   }
   &-109 {
     margin-top: 109px;

@@ -1,4 +1,5 @@
 <div class="container mgt-54">
+  <!-- SIDE NAV -->
   <nav class="sideNav">
     <div class="sideNav__back" (click)="onBackToHomePage()">
       <img
@@ -53,13 +54,28 @@
       Notes
     </a>
   </nav>
-  <section class="content mgt-18 pdl-55">
+  <section class="content mgt-17 pdl-55">
     <h1 class="header">Admin IR</h1>
-    <div class="topicContainer">
+    <div class="desc__container">
       <div>
-        <h2 class="topic">
-          Forem ipsum dolor sit amet, consectetur adipiscing elit.
-        </h2>
+        <p class="desc">
+          หน้านี้พัฒนาเพื่อการใช้งานของนักวิชาการด้านต่างประเทศ สสส.
+          ในฐานะผู้รับผิดชอบในบทบาทหลัก 3 ส่วน ได้แก่ (1)
+          ผู้ประเมินร่วมและบันทึกกิจกรรมต่างๆ
+          ในความก้าวหน้างานด้านต่างประเทศของทุกแผน (2)
+          ผู้ประสานงานกับทุกแผนงานเมื่อถึงรอบการประเมินความก้าวหน้า
+          ตามแต่ที่กำหนดร่วมกัน และ (3) ผู้ดูแลระบบหรือแอดมิน
+          ในการให้อนุญาตแก้ไขข้อมูลต่างๆ
+          รวมทั้งการให้คำแนะนำและแก้ไขปัญหาเบื้องต้นของการใช้งาน
+        </p>
+        <br />
+        <p class="desc">
+          <span class="desc__bold">หลักคิดของระบบคือ</span>
+          แอดมินหรือนักวิชาการด้านต่างประเทศ สสส.
+          เป็นผู้ได้รับสิทธิ์ในการเข้าดูเนื้อหาและแก้ไขได้ในทุกส่วน
+          ร่วมกับทุกแผน
+          ในแต่ละแผนจะสามารถเห็นและแก้ไขข้อมูลได้เฉพาะแผนที่ตนเองได้รับสิทธิ์เท่านั้น
+        </p>
       </div>
 
       @if (userService.currentUser().userRole === 'admin') {
@@ -95,10 +111,10 @@
       }
     </div>
     <!-- Metric -->
-    <div class="mgt-94">
-      <div class="header__readinessContainer">
+    <div class="mgt-54">
+      <div class="readiness__container">
         <h2
-          class="header__readiness"
+          class="readiness__header"
           id="readiness"
           appIntersectionElement
           (isIntersecting)="isIntersecting($event, 0)"
@@ -117,19 +133,30 @@
           ></app-com-icon-tooltip>
         </div>
       </div>
-      <div class="metric pdl-32 mgt-67">
+      <p class="readiness__desc mgt-15">
+        <span class="readiness__desc--bold"
+          >แสดงผลตามระดับคะแนน แสดงเหมือนกันทั้ง Admin และ แผน</span
+        >
+        ส่วนนี้แสดงการให้ความหมายตามระดับคะแนนทั้งจากแกนด้านความเต็มใจ
+        และแกนด้านศักยภาพ
+        ซึ่งเป็นการวิเคราะห์ผลจากคะแนนที่แผนงานและทีมด้านต่างประเทศประเมินร่วมกัน
+      </p>
+      <div class="metric pdl-32 mgt-54">
         <app-com-metric [data]="metricData()" size="large"></app-com-metric>
-        <div class="metric__control__container mgt-34">
+        <div class="metric__control__container mgt--38">
           <div>
             <p class="metric__control__label">Select Year</p>
-            <div class="metric__control__content mgt-18">
+            <p class="metric__control__helper mgt-17">
+              สามารถเลือกปีปัจจุบันหรือปีย้อนหลัง
+            </p>
+            <div class="metric__control__content mgt-17">
               <div>
                 <app-com-select-dropdown
                   [form]="metricFormGroup()"
                   controlName="fromYear"
                   [items]="getYearOptions()"
                   width="107px"
-                  height="46px"
+                  height="42px"
                   placeholder="Year 1"
                 ></app-com-select-dropdown>
               </div>
@@ -140,7 +167,7 @@
                   controlName="toYear"
                   [items]="getYearOptions()"
                   width="107px"
-                  height="46px"
+                  height="42px"
                   placeholder="Year 2"
                 ></app-com-select-dropdown>
               </div>
@@ -148,17 +175,30 @@
           </div>
           <div>
             <p class="metric__control__label">Select Plan</p>
-            <div class="metric__control__content mgt-18">
+            <p class="metric__control__helper mgt-17">
+              เลือกแสดงผลของทุกแผน หรือเฉพาะแผน
+            </p>
+            <div class="metric__control__content mgt-17">
               <div>
                 <app-com-select-dropdown
                   [form]="metricFormGroup()"
                   controlName="plan"
                   [items]="planOptions()"
                   width="120px"
-                  height="46px"
+                  height="42px"
                   color="#4D54AB"
                 ></app-com-select-dropdown>
               </div>
+            </div>
+          </div>
+
+          <!-- Score results summary -->
+          <div class="metric__summary__box">
+            <p class="metric__control__label">ความหมายตามระดับคะแนนที่ได้</p>
+            <div class="metric__summary mgt-17">
+              <app-com-metric-score-summary
+                maxHeight="310px"
+              ></app-com-metric-score-summary>
             </div>
           </div>
         </div>

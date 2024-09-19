@@ -31,16 +31,16 @@
               width="500px"
             ></app-com-icon-tooltip>
           </div>
-          <!-- TODO: remove || isProduction() when want to go production -->
-          @if (!isProduction() || isProduction()) {
-          <button style="padding: 10px" (click)="onPatchScores()">
-            Patch Value
-          </button>
-          }
           <app-com-save-button
             (click)="onSave('assessmentScore')"
           ></app-com-save-button>
         </div>
+        <!-- TODO: remove || isProduction() when want to go production -->
+        @if (!isProduction() || isProduction()) {
+        <button style="padding: 10px" (click)="onPatchScores()">
+          Patch Value
+        </button>
+        }
 
         <div class="mgt-20">
           <app-com-instruction-note

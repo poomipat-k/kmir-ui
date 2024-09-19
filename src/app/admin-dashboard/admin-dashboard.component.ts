@@ -15,6 +15,7 @@ import { AdminNoteComponent } from '../components/admin-note/admin-note.componen
 import { BackToTopComponent } from '../components/back-to-top/back-to-top.component';
 import { ChangeLogComponent } from '../components/change-log/change-log.component';
 import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.component';
+import { MetricScoreSummaryComponent } from '../components/metric-score-summary/metric-score-summary.component';
 import { MetricComponent } from '../components/metric/metric.component';
 import { PlanNoteComponent } from '../components/plan-note/plan-note.component';
 import { ProposedActivitiesComponent } from '../components/proposed-activities/proposed-activities.component';
@@ -53,6 +54,7 @@ import { SafeHtmlPipe } from '../shared/pipe/safe-html.pipe';
     PlanNoteComponent,
     AdminNoteComponent,
     ChangeLogComponent,
+    MetricScoreSummaryComponent,
   ],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.scss',
