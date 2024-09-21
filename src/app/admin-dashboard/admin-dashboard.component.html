@@ -197,7 +197,8 @@
             <p class="metric__control__label">ความหมายตามระดับคะแนนที่ได้</p>
             <div class="metric__summary mgt-17">
               <app-com-metric-score-summary
-                maxHeight="310px"
+                height="310px"
+                [data]="metricData()"
               ></app-com-metric-score-summary>
             </div>
           </div>

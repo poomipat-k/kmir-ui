@@ -7,3 +7,27 @@
   padding: 8px 11px 8px 10px;
   overflow: scroll;
 }
+
+.planName {
+  font-family: $custom-font-looped;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 23px;
+  color: #000;
+}
+
+.topic {
+  font-family: $custom-font-looped;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 23px;
+  color: #3a66d6;
+}
+
+.desc {
+  font-family: $custom-font-looped;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 23px;
+  color: #000;
+}
