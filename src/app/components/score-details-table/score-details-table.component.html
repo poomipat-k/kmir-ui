@@ -1,0 +1,29 @@
+<div class="table">
+  <div class="row">
+    <div class="header header--left">ระดับคะแนน</div>
+    <div class="header header--right">การให้ความหมาย</div>
+  </div>
+  @for (item of zoneRanks(); track $index) {
+  <div [ngClass]="{ row: true, 'row--stripe': $index % 2 == 1 }">
+    <div
+      [ngClass]="{
+        cell: true,
+        'cell--left': true,
+        borderBottom: $index < zoneRanks().length - 1
+      }"
+    >
+      <p>{{ item.topic }}</p>
+      <br />
+      <p class="bold">{{ item.topicEn }}</p>
+    </div>
+    <div
+      [ngClass]="{
+        cell: true,
+        'cell--right': true,
+        borderBottom: $index < zoneRanks().length - 1
+      }"
+      [innerHTML]="item.descriptionWithStyle || '' | safeHtml"
+    ></div>
+  </div>
+  }
+</div>

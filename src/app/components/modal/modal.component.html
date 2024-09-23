@@ -1,0 +1,16 @@
+@if (displayModal()) {
+<div
+  #modal
+  class="container"
+  (keyup)="onKeyUp($event)"
+  tabindex="0"
+  [style]="{ width: width(), height: height(), padding: padding() }"
+>
+  <ng-content></ng-content>
+</div>
+<div
+  class="backdrop"
+  (click)="onBackdropClicked()"
+  (keyup)="onKeyUp($event)"
+></div>
+}

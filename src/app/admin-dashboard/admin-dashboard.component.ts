@@ -19,6 +19,7 @@ import { MetricScoreSummaryComponent } from '../components/metric-score-summary/
 import { MetricComponent } from '../components/metric/metric.component';
 import { PlanNoteComponent } from '../components/plan-note/plan-note.component';
 import { ProposedActivitiesComponent } from '../components/proposed-activities/proposed-activities.component';
+import { ScoreDetailsLinkComponent } from '../components/score-details-link/score-details-link.component';
 import { ScoreTableAdminComponent } from '../components/score-table-admin/score-table-admin.component';
 import { SelectDropdownComponent } from '../components/select-dropdown/select-dropdown.component';
 import { UpdatedAtComponent } from '../components/updated-at/updated-at.component';
@@ -55,6 +56,7 @@ import { SafeHtmlPipe } from '../shared/pipe/safe-html.pipe';
     AdminNoteComponent,
     ChangeLogComponent,
     MetricScoreSummaryComponent,
+    ScoreDetailsLinkComponent,
   ],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.scss',

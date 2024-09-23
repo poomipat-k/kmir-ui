@@ -3,6 +3,7 @@ export class MetricScoreMeaning {
   topic: string;
   topicEn: string;
   description: string;
+  descriptionWithStyle?: string;
 
   constructor() {}
 }
