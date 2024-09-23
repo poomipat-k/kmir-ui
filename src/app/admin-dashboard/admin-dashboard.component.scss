@@ -5,7 +5,7 @@
   padding-left: 80px;
   padding-right: 130px;
   display: flex;
-  padding-bottom: 105px;
+  padding-bottom: 55px;
 }
 
 .sideNav {
@@ -292,14 +292,8 @@
   &-34 {
     margin-top: 34px;
   }
-  &-39 {
-    margin-top: 39px;
-  }
   &-44 {
     margin-top: 44px;
-  }
-  &-52 {
-    margin-top: 52px;
   }
   &-54 {
     margin-top: 54px;
@@ -307,17 +301,8 @@
   &-58 {
     margin-top: 58px;
   }
-  &-78 {
-    margin-top: 78px;
-  }
   &-80 {
     margin-top: 80px;
-  }
-  &-82 {
-    margin-top: 82px;
-  }
-  &-109 {
-    margin-top: 109px;
   }
 }
 
@@ -341,8 +326,8 @@
 
 .backToTop {
   position: absolute;
-  top: -15px;
   right: -56px;
+  bottom: -5px;
 }
 
 // For intersection API debugging purpose

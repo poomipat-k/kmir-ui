@@ -306,8 +306,8 @@
     </div>
 
     <!-- Proposed activities -->
-    <div class="hr--dashed mgt-82"></div>
-    <div class="mgt-14">
+    <div class="hr--dashed mgt-44"></div>
+    <div class="mgt-44">
       <div class="commonTextSection__headerSection">
         <div class="commonTextSection__headerBox">
           <h3
@@ -325,15 +325,20 @@
           <img src="/assets/event_note_blue.svg" alt="note icon" />
         </div>
       </div>
-      <div class="mgt-39">
+      <div class="mgt-20">
+        <app-com-instruction-note
+          text="ส่วนนี้ออกแบบมาเพื่อให้ทั้งแผนงานและทีมต่างประเทศ สสส. ออกแบบร่วมกันในการกำหนดกิจกรรมที่สอดคล้องตามเป้าหมายด้านต่างประเทศ"
+        ></app-com-instruction-note>
+      </div>
+      <div class="mgt-20">
         <app-com-proposed-activities
           [plans]="plans()"
         ></app-com-proposed-activities>
       </div>
     </div>
     <!-- Notes -->
-    <div class="hr--dashed mgt-78"></div>
-    <div class="mgt-52">
+    <div class="hr--dashed mgt-44"></div>
+    <div class="mgt-44">
       <div class="commonTextSection__headerSection">
         <div class="commonTextSection__headerBox">
           <h3
@@ -351,13 +356,18 @@
           <img src="/assets/speaker_notes.svg" alt="speaker notes" />
         </div>
       </div>
-      <div class="mgt-39">
+      <div class="mgt-20">
+        <app-com-instruction-note
+          text="บันทึกข้อคิดเห็นหรือเหตุผลเพื่อใช้ประโยชน์ในแต่ละรอบประเมิน"
+        ></app-com-instruction-note>
+      </div>
+      <div class="mgt-20">
         <app-com-plan-note [plans]="plans()"></app-com-plan-note>
       </div>
     </div>
     <!-- Admin Notes -->
-    <div class="hr--dashed mgt-78"></div>
-    <div class="mgt-52">
+    <div class="hr--dashed mgt-44"></div>
+    <div class="mgt-44">
       <div class="commonTextSection__headerSection">
         <div class="commonTextSection__headerBox">
           <h3 id="adminNote" class="commonTextSection__headerText">
@@ -367,12 +377,18 @@
         </div>
       </div>
       <div class="mgt-20">
+        <app-com-instruction-note
+          text="บันทึกแผนหรือเป้าหมายภาพรวมด้านต่างประเทศขององค์กร หรือบันทึกภายในทีมต่างประเทศ เพื่อประเมินความก้าวหน้า ในองค์รวม "
+          remark="(เป็นส่วนที่ไม่แสดงในหน้าของแต่ละแผนงาน)"
+        ></app-com-instruction-note>
+      </div>
+      <div class="mgt-20">
         <app-com-admin-note [text]="adminNote()"></app-com-admin-note>
       </div>
     </div>
 
     <!-- Log activities -->
-    <div class="logs mgt-109">
+    <div class="logs mgt-44">
       <div class="commonTextSection__headerSection">
         <div class="commonTextSection__headerBox">
           <h3 id="changeLog" class="commonTextSection__headerText">
@@ -383,6 +399,13 @@
             alt="event note for log activities"
           />
         </div>
+      </div>
+      <div class="mgt-20">
+        <app-com-instruction-note
+          label=""
+          text="ส่วนนี้พัฒนาขึ้นเพื่อบันทึกการเปลี่ยนแปลงที่เกิดขึ้นภายในระบบ ใช้ประโยชน์เพื่อสอบทานการแก้ไขข้อมูล "
+          remark="(เป็นส่วนที่ไม่แสดงในหน้าของแต่ละแผนงาน)"
+        ></app-com-instruction-note>
       </div>
       <div class="mgt-10">
         <app-com-change-log

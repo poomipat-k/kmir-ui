@@ -1,13 +1,16 @@
 @import "../../../styles.scss";
 
 .display {
+  height: 284px;
+  background-color: #fff;
+  overflow-y: scroll;
+  border-radius: 8px;
+
+  padding: 16px 20px;
   font-family: $custom-font-looped;
   font-weight: 400;
   font-size: 14px;
   line-height: 23px;
+  color: #000;
   white-space: pre-wrap;
-  max-height: 280px;
-  overflow-y: scroll;
-  border-bottom: 0.5px solid rgba(192, 195, 203, 0.5);
-  padding-bottom: 40px;
 }
