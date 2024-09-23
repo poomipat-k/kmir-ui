@@ -16,9 +16,8 @@
       border: true,
       'border--bottom': i === 6
     }"
-  >
-    {{ c.orderNumber + ". " + c.display }}
-  </p>
+    [innerHTML]="getCriteriaText(c) | safeHtml"
+  ></p>
   @if (editMode() ) { @for (name of shortNames(); track $index; let j = $index)
   {
   <div [ngClass]="{ editCell: true, border: true, 'border--bottom': i === 6 }">

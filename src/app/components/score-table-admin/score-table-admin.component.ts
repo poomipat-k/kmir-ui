@@ -5,6 +5,7 @@ import { TooltipDirective } from '../../shared/directives/tooltip.directive';
 import { AssessmentCriteria } from '../../shared/models/assessment-criteria';
 import { DropdownOption } from '../../shared/models/dropdown-option';
 import { ScoreTableRow } from '../../shared/models/score-table-row';
+import { SafeHtmlPipe } from '../../shared/pipe/safe-html.pipe';
 import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.component';
 
 @Component({
@@ -15,6 +16,7 @@ import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.comp
     TooltipDirective,
     CommonModule,
     SelectDropdownComponent,
+    SafeHtmlPipe,
   ],
   templateUrl: './score-table-admin.component.html',
   styleUrl: './score-table-admin.component.scss',
@@ -72,6 +74,10 @@ export class ScoreTableAdminComponent {
   getPlanText(index: number) {
     const num = index >= 12 ? index + 2 : index + 1;
     return `P.${num}`;
+  }
+
+  getCriteriaText(c: AssessmentCriteria) {
+    return c.orderNumber + '. ' + c.display;
   }
 
   getFormGroup(index: number) {
