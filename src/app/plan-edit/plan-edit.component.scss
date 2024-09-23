@@ -5,7 +5,7 @@
   padding-left: 80px;
   padding-right: 173px;
   display: flex;
-  padding-bottom: 135px;
+  padding-bottom: 114px;
 }
 
 .sideNav {
@@ -50,7 +50,7 @@
 }
 
 .topic {
-  &Container {
+  &__container {
     display: flex;
     justify-content: space-between;
   }
@@ -60,6 +60,19 @@
   font-size: 44px;
   line-height: 56px;
   color: #1c1b1f;
+
+  &__desc {
+    font-family: $custom-font-looped;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 23px;
+    color: #000;
+    max-width: 830px;
+
+    &--bold {
+      font-weight: 600;
+    }
+  }
 }
 
 .readiness {
@@ -160,7 +173,7 @@
 .saveAndReturn {
   display: flex;
   justify-content: center;
-  margin-top: 55px;
+  margin-top: 76px;
 }
 
 .mgt {
@@ -170,47 +183,29 @@
   &-5 {
     margin-top: 5px;
   }
-  &-12 {
-    margin-top: 12px;
-  }
   &-14 {
     margin-top: 14px;
   }
   &-16 {
     margin-top: 16px;
   }
-  &-18 {
-    margin-top: 18px;
-  }
   &-20 {
     margin-top: 20px;
   }
-  &-24 {
-    margin-top: 24px;
-  }
-  &-41 {
-    margin-top: 41px;
+  &-44 {
+    margin-top: 44px;
   }
   &-46 {
     margin-top: 46px;
   }
-  &-48 {
-    margin-top: 48px;
+  &-52 {
+    margin-top: 52px;
   }
   &-54 {
     margin-top: 54px;
   }
-  &-73 {
-    margin-top: 73px;
-  }
-  &-80 {
-    margin-top: 80px;
-  }
   &-82 {
     margin-top: 82px;
-  }
-  &-117 {
-    margin-top: 117px;
   }
 }
 

@@ -19,9 +19,11 @@ import { cloneDeep, isEqual } from 'lodash-es';
 import { CustomEditorComponent } from '../components/custom-editor/custom-editor.component';
 import { ErrorMessageComponent } from '../components/error-message/error-message.component';
 import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.component';
+import { InstructionNoteComponent } from '../components/instruction-note/instruction-note.component';
 import { PopupComponent } from '../components/popup/popup.component';
 import { SaveAndReturnButtonComponent } from '../components/save-and-return-button/save-and-return-button.component';
 import { SaveButtonComponent } from '../components/save-button/save-button.component';
+import { ScoreScaleDetailsComponent } from '../components/score-scale-details/score-scale-details.component';
 import { ScoreTableComponent } from '../components/score-table/score-table.component';
 import { SelectDropdownComponent } from '../components/select-dropdown/select-dropdown.component';
 import { PlanService } from '../services/plan.service';
@@ -44,6 +46,8 @@ import { ScoreTableRow } from '../shared/models/score-table-row';
     SaveAndReturnButtonComponent,
     PopupComponent,
     ErrorMessageComponent,
+    ScoreScaleDetailsComponent,
+    InstructionNoteComponent,
   ],
   templateUrl: './plan-edit.component.html',
   styleUrl: './plan-edit.component.scss',

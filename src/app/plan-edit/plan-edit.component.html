@@ -10,18 +10,28 @@
     </div>
   </nav>
 
-  <section class="content mgt-18 pdl-55">
+  <section class="content mgt-20 pdl-55">
     <h1 class="header">{{ planName() }}</h1>
-    <div class="topicContainer">
+    <div class="topic__container">
       <div>
         <h2 class="topic">{{ planDetails().topic }}</h2>
         <h2 class="topic">{{ planDetails().topicEn }}</h2>
+        <p class="topic__desc mgt-14">
+          ระบบนี้พัฒนาให้เอื้อต่อการ<span class="topic__desc--bold"
+            >ประสานงานร่วมกันระหว่างนักวิชาการแผนงานและนักวิชาการด้านต่างประเทศ
+            สสส.</span
+          >
+          ในการร่วมกันกำหนดเป้าหมาย ประเมินความก้าวหน้า บันทึกกิจกรรมต่างๆ
+          ที่เกี่ยวข้องกับงานด้านต่างประเทศ หน้าที่แสดงข้อมูลนี้
+          จะแสดงผลและแก้ไขได้เฉพาะแก่นักวิชาการแผนงานที่มี log in
+          และทีมด้านต่างประเทศ
+        </p>
       </div>
     </div>
 
-    <form [formGroup]="form()" class="mgt-117">
+    <form [formGroup]="form()" class="mgt-52">
       <!-- Self-assessment Score -->
-      <div class="mgt-82">
+      <div>
         <div class="assessment__headerContainer">
           <div class="assessment__headerContainer--left">
             <h3 class="assessment__header" id="assessmentScore">
@@ -37,7 +47,17 @@
             (click)="onSaveButtonClick('assessmentScore')"
           ></app-com-save-button>
         </div>
-        <div class="mgt-18">
+
+        <div class="mgt-20">
+          <app-com-instruction-note
+            text="ทีมต่างประเทศ สสส. อาจพิจารณาจัดกระบวนการภายในร่วมกันให้คะแนนประเมินในแต่ละข้อถามของทุกแผน โดยอาจระบุความคิดเห็นหรือเหตุผลในส่วนข้อสังเกตและหมายเหตุเพื่อใช้ประโยชน์ในแต่ละรอบประเมิน"
+          ></app-com-instruction-note>
+          <div class="mgt-20">
+            <app-com-score-scale-details></app-com-score-scale-details>
+          </div>
+        </div>
+
+        <div class="mgt-20">
           <app-com-score-table
             [data]="scoreTableData()"
             [editMode]="true"
@@ -53,14 +73,19 @@
         </div>
       </div>
 
-      <div class="hr--dashed mgt-73"></div>
       <!-- IR goal type and goal details-->
-      <div class="mgt-80">
+      <div class="hr--dashed mgt-44"></div>
+      <div class="mgt-44">
         <div class="goal__header">
           <h3>IR work goal</h3>
           <img src="/assets/flag_circle_unfill.svg" alt="" class="goal__icon" />
         </div>
-        <div class="goal__row mgt-2">
+        <div class="mgt-20">
+          <app-com-instruction-note
+            text="เป้าหมายด้านต่างประเทศควรเกิดจากการหารือและเห็นชอบร่วมกันระหว่างแผนงานและทีมต่างประเทศ สสส. ตามความพร้อมของแต่ละแผนงานและความคาดหวังขององค์กร"
+          ></app-com-instruction-note>
+        </div>
+        <div class="goal__row mgt-20">
           <div class="goal__type">
             <div class="mgt-5">
               <!-- Type -->
@@ -108,9 +133,9 @@
         </div>
       </div>
 
-      <div class="hr--dashed mgt-41"></div>
       <!-- Proposed activities -->
-      <div class="commonRow mgt-14">
+      <div class="hr--dashed mgt-44"></div>
+      <div class="commonRow mgt-44">
         <div class="commonRow__left">
           <h3 class="commonRow__header" id="proposedActivity">
             Proposed activities
@@ -121,7 +146,14 @@
           (click)="onSaveButtonClick('proposedActivity')"
         ></app-com-save-button>
       </div>
-      <div class="mgt-12">
+
+      <div class="mgt-20">
+        <app-com-instruction-note
+          text="ส่วนนี้ออกแบบมาเพื่อให้ทั้งแผนงานและทีมต่างประเทศ สสส. ออกแบบร่วมกันในการกำหนดกิจกรรมที่สอดคล้องตามเป้าหมายด้านต่างประเทศ"
+        ></app-com-instruction-note>
+      </div>
+
+      <div class="mgt-20">
         <app-com-custom-editor
           [control]="getControl('proposedActivity')"
           [height]="324"
@@ -135,18 +167,27 @@
         }
       </div>
 
-      <div class="hr--dashed mgt-46"></div>
       <!-- Notes -->
-      <div class="commonRow mgt-14">
+      <div class="hr--dashed mgt-44"></div>
+      <div class="commonRow mgt-44">
         <div class="commonRow__left">
-          <h3 class="commonRow__header" id="planNote">Notes</h3>
+          <h3 class="commonRow__header" id="planNote">
+            Notes บันทึกข้อคิดเห็นร่วมกัน
+          </h3>
           <img src="/assets/speaker_notes.svg" alt="speaker notes" />
         </div>
         <app-com-save-button
           (click)="onSaveButtonClick('planNote')"
         ></app-com-save-button>
       </div>
-      <div class="mgt-24">
+
+      <div class="mgt-20">
+        <app-com-instruction-note
+          text="บันทึกข้อคิดเห็นหรือเหตุผลเพื่อใช้ประโยชน์ในแต่ละรอบประเมิน"
+        ></app-com-instruction-note>
+      </div>
+
+      <div class="mgt-20">
         <app-com-custom-editor
           [control]="getControl('planNote')"
           [height]="324"
@@ -159,9 +200,9 @@
         }
       </div>
 
-      <div class="hr mgt-48"></div>
       <!-- Contact Person -->
-      <div class="commonRow mgt-14">
+      <div class="hr mgt-44"></div>
+      <div class="commonRow mgt-44">
         <div class="commonRow__left">
           <h3 class="commonRow__header" id="contactPerson">Contact Person</h3>
           <img src="/assets/account_circle.svg" alt="account icon" />
@@ -170,7 +211,12 @@
           (click)="onSaveButtonClick('contactPerson')"
         ></app-com-save-button>
       </div>
-      <div class="mgt-12">
+      <div class="mgt-20">
+        <app-com-instruction-note
+          text="กรุณาระบุผู้ประสานงานที่ได้รับมอบหมายให้เป็นตัวแทนในการบันทึกข้อมูลและประสานงานกับทีมด้านต่างประเทศ สสส."
+        ></app-com-instruction-note>
+      </div>
+      <div class="mgt-20">
         <app-com-custom-editor
           [control]="getControl('contactPerson')"
           [height]="279"
