@@ -2,12 +2,13 @@ import { Component, input, signal } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { DropdownOption } from '../../shared/models/dropdown-option';
 import { ScoreTableRow } from '../../shared/models/score-table-row';
+import { SafeHtmlPipe } from '../../shared/pipe/safe-html.pipe';
 import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.component';
 
 @Component({
   selector: 'app-com-score-table',
   standalone: true,
-  imports: [SelectDropdownComponent],
+  imports: [SelectDropdownComponent, SafeHtmlPipe],
   templateUrl: './score-table.component.html',
   styleUrl: './score-table.component.scss',
 })
@@ -61,5 +62,9 @@ export class ScoreTableComponent {
 
   getDropdownControlName(item: ScoreTableRow): string {
     return `q_${item.order}`;
+  }
+
+  genQuestionText(item: ScoreTableRow) {
+    return item.order + '. ' + item.question;
   }
 }

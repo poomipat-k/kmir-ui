@@ -1,8 +1,8 @@
 <div class="container">
-  <div class="willingness">Willingness</div>
-  <div class="cap">Capacity</div>
+  <div class="willingness">ความเต็มใจ (Willingness)</div>
+  <div class="cap">ขีดความสามารถ (Capacity)</div>
   @for (item of data(); track $index) {
-  <p class="question">{{ item.order + ". " + item.question }}</p>
+  <p class="question" [innerHTML]="genQuestionText(item) | safeHtml"></p>
   @if (editMode()) {
   <div class="dropdown">
     <app-com-select-dropdown
