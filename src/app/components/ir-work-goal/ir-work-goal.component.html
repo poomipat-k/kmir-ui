@@ -23,7 +23,19 @@
     </div>
 
     @if (!editMode()) {
-    <div class="meta__update">
+    <div class="meta__update mgt-10">
+      <div class="meta__update--left">
+        <p class="meta__update__type">
+          {{
+            getGoalTypeDisplay(plans()[activeIndex()].irGoalType) | titlecase
+          }}
+        </p>
+        <app-com-icon-tooltip
+          [hasTooltip]="true"
+          [tooltipText]="irWorkGoalTooltip()"
+          width="500px"
+        ></app-com-icon-tooltip>
+      </div>
       <app-com-updated-at [display]="updatedText()"></app-com-updated-at>
     </div>
     }

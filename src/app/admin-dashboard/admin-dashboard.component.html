@@ -38,9 +38,9 @@
       }"
       (click)="onNavItemClick(2)"
       [routerLink]="baseLink()"
-      fragment="proposedActivity"
+      fragment="irWorkGoal"
     >
-      Proposed activities
+      IR Work Goal
     </a>
     <a
       [ngClass]="{
@@ -48,6 +48,17 @@
         'sideNav__item--active': navActiveIndex() === 3
       }"
       (click)="onNavItemClick(3)"
+      [routerLink]="baseLink()"
+      fragment="proposedActivity"
+    >
+      Proposed activities
+    </a>
+    <a
+      [ngClass]="{
+        sideNav__item: true,
+        'sideNav__item--active': navActiveIndex() === 4
+      }"
+      (click)="onNavItemClick(4)"
       [routerLink]="baseLink()"
       fragment="planNote"
     >
@@ -260,6 +271,40 @@
       </div>
     </div>
 
+    <!-- IR Work Goal -->
+    <div class="hr--dashed mgt-44"></div>
+    <div class="mgt-44">
+      <div class="commonTextSection__headerSection">
+        <div class="commonTextSection__headerBox">
+          <h3
+            id="irWorkGoal"
+            class="commonTextSection__headerText"
+            appIntersectionElement
+            (isIntersecting)="isIntersecting($event, 2)"
+            [isContinuous]="true"
+            [threshold]="0"
+            [debounceTime]="0"
+            [rootMargin]="intersectionRootMargin()"
+          >
+            IR Work Goal
+          </h3>
+          <img src="/assets/flag_circle_red.svg" alt="note icon" />
+        </div>
+      </div>
+      <div>
+        <app-com-instruction-note
+          text="เป้าหมายด้านต่างประเทศควรเกิดจากการหารือและเห็นชอบร่วมกันระหว่างแผนงานและทีมต่างประเทศ สสส. ตามความพร้อมของแต่ละแผนงานและความคาดหวังขององค์กร"
+        ></app-com-instruction-note>
+      </div>
+      <div class="mgt-20">
+        <app-com-ir-work-goal
+          #irWorkGoal
+          [plans]="plans()"
+          [editMode]="false"
+        ></app-com-ir-work-goal>
+      </div>
+    </div>
+
     <!-- Proposed activities -->
     <div class="hr--dashed mgt-82"></div>
     <div class="mgt-14">
@@ -269,7 +314,7 @@
             id="proposedActivity"
             class="commonTextSection__headerText"
             appIntersectionElement
-            (isIntersecting)="isIntersecting($event, 2)"
+            (isIntersecting)="isIntersecting($event, 3)"
             [isContinuous]="true"
             [threshold]="0"
             [debounceTime]="0"
@@ -295,7 +340,7 @@
             id="planNote"
             class="commonTextSection__headerText"
             appIntersectionElement
-            (isIntersecting)="isIntersecting($event, 3)"
+            (isIntersecting)="isIntersecting($event, 4)"
             [isContinuous]="true"
             [threshold]="0"
             [debounceTime]="0"

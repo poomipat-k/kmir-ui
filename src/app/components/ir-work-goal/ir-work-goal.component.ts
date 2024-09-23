@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, TitleCasePipe } from '@angular/common';
 import { Component, computed, input, signal } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { DropdownOption } from '../../shared/models/dropdown-option';
@@ -19,6 +19,7 @@ import { UpdatedAtComponent } from '../updated-at/updated-at.component';
     CustomEditorComponent,
     SelectDropdownComponent,
     IconTooltipComponent,
+    TitleCasePipe,
   ],
   templateUrl: './ir-work-goal.component.html',
   styleUrl: './ir-work-goal.component.scss',
@@ -90,5 +91,10 @@ export class IrWorkGoalComponent {
 
   onPlanButtonClick(index: number) {
     this.activeIndex.set(index);
+  }
+
+  getGoalTypeDisplay(raw?: string) {
+    if (!raw) return '';
+    return raw.split('_').join(' ');
   }
 }

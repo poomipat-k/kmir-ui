@@ -16,6 +16,7 @@ import { BackToTopComponent } from '../components/back-to-top/back-to-top.compon
 import { ChangeLogComponent } from '../components/change-log/change-log.component';
 import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.component';
 import { InstructionNoteComponent } from '../components/instruction-note/instruction-note.component';
+import { IrWorkGoalComponent } from '../components/ir-work-goal/ir-work-goal.component';
 import { MetricScoreSummaryComponent } from '../components/metric-score-summary/metric-score-summary.component';
 import { MetricComponent } from '../components/metric/metric.component';
 import { PlanNoteComponent } from '../components/plan-note/plan-note.component';
@@ -61,6 +62,7 @@ import { SafeHtmlPipe } from '../shared/pipe/safe-html.pipe';
     ScoreDetailsLinkComponent,
     ScoreScaleDetailsComponent,
     InstructionNoteComponent,
+    IrWorkGoalComponent,
   ],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.scss',
@@ -72,7 +74,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
   1: temp (last active item before goes out of intersection area)
   2: active
   */
-  protected navActiveList = signal([2, 0, 0, 0]);
+  protected navActiveList = signal([2, 0, 0, 0, 0]);
   protected scrollerOffset = signal<[number, number]>([0, 40]); // [x, y]
   protected ignoreIntersection = signal(false);
   protected releaseIgnoreIntersectionTimeoutId = signal<any>(undefined);
@@ -386,7 +388,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
 
   onNavItemClick(index: number) {
     this.ignoreIntersection.set(true);
-    const newList = [0, 0, 0, 0];
+    const newList = [0, 0, 0, 0, 0];
     newList[index] = 2; // mark as active
     this.navActiveList.set(newList);
     this.resetReleaseIgnoreIntersectionTimer();

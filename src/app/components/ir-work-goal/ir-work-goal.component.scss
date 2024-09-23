@@ -49,7 +49,22 @@
   }
 
   &__update {
-    text-align: right;
+    display: flex;
+    justify-content: space-between;
+
+    &--left {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    &__type {
+      font-family: $custom-font;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 33px;
+      color: #f0b358;
+    }
   }
 }
 
@@ -71,4 +86,10 @@
   line-height: 23px;
   color: #000;
   white-space: pre-wrap;
+}
+
+.mgt {
+  &-10 {
+    margin-top: 10px;
+  }
 }
