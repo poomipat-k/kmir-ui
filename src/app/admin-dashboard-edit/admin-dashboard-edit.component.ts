@@ -27,6 +27,7 @@ import { PopupComponent } from '../components/popup/popup.component';
 import { ProposedActivitiesComponent } from '../components/proposed-activities/proposed-activities.component';
 import { SaveAndReturnButtonComponent } from '../components/save-and-return-button/save-and-return-button.component';
 import { SaveButtonComponent } from '../components/save-button/save-button.component';
+import { ScoreScaleDetailsComponent } from '../components/score-scale-details/score-scale-details.component';
 import { ScoreTableAdminComponent } from '../components/score-table-admin/score-table-admin.component';
 import { PlanService } from '../services/plan.service';
 import { ThemeService } from '../services/theme.service';
@@ -50,6 +51,7 @@ import { ScoreTableRow } from '../shared/models/score-table-row';
     ErrorMessageComponent,
     InstructionNoteComponent,
     IrWorkGoalComponent,
+    ScoreScaleDetailsComponent,
   ],
   templateUrl: './admin-dashboard-edit.component.html',
   styleUrl: './admin-dashboard-edit.component.scss',

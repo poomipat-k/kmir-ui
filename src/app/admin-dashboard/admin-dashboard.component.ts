@@ -15,11 +15,13 @@ import { AdminNoteComponent } from '../components/admin-note/admin-note.componen
 import { BackToTopComponent } from '../components/back-to-top/back-to-top.component';
 import { ChangeLogComponent } from '../components/change-log/change-log.component';
 import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.component';
+import { InstructionNoteComponent } from '../components/instruction-note/instruction-note.component';
 import { MetricScoreSummaryComponent } from '../components/metric-score-summary/metric-score-summary.component';
 import { MetricComponent } from '../components/metric/metric.component';
 import { PlanNoteComponent } from '../components/plan-note/plan-note.component';
 import { ProposedActivitiesComponent } from '../components/proposed-activities/proposed-activities.component';
 import { ScoreDetailsLinkComponent } from '../components/score-details-link/score-details-link.component';
+import { ScoreScaleDetailsComponent } from '../components/score-scale-details/score-scale-details.component';
 import { ScoreTableAdminComponent } from '../components/score-table-admin/score-table-admin.component';
 import { SelectDropdownComponent } from '../components/select-dropdown/select-dropdown.component';
 import { UpdatedAtComponent } from '../components/updated-at/updated-at.component';
@@ -57,6 +59,8 @@ import { SafeHtmlPipe } from '../shared/pipe/safe-html.pipe';
     ChangeLogComponent,
     MetricScoreSummaryComponent,
     ScoreDetailsLinkComponent,
+    ScoreScaleDetailsComponent,
+    InstructionNoteComponent,
   ],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.scss',

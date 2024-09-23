@@ -241,13 +241,23 @@
           ></app-com-updated-at>
         </div>
       </div>
+      <div>
+        <app-com-instruction-note
+          text="ทีมต่างประเทศ สสส. อาจพิจารณาจัดกระบวนการภายในร่วมกันให้คะแนนประเมินในแต่ละข้อถามของทุกแผน โดยอาจระบุความคิดเห็นหรือเหตุผลในส่วนข้อสังเกตและหมายเหตุเพื่อใช้ประโยชน์ในแต่ละรอบประเมิน"
+        ></app-com-instruction-note>
+        <div class="mgt-20">
+          <app-com-score-scale-details></app-com-score-scale-details>
+        </div>
+      </div>
 
       <!-- Table -->
-      <app-com-score-table-admin
-        [shortNames]="topicShortList()"
-        [criteria]="criteriaList()"
-        [data]="assessmentScoreData()"
-      ></app-com-score-table-admin>
+      <div class="mgt-32">
+        <app-com-score-table-admin
+          [shortNames]="topicShortList()"
+          [criteria]="criteriaList()"
+          [data]="assessmentScoreData()"
+        ></app-com-score-table-admin>
+      </div>
     </div>
 
     <!-- Proposed activities -->
