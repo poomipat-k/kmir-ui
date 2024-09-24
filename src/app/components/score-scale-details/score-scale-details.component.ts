@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-com-score-scale-details',
@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './score-scale-details.component.html',
   styleUrl: './score-scale-details.component.scss',
 })
-export class ScoreScaleDetailsComponent {}
+export class ScoreScaleDetailsComponent {
+  fontSize = input('16px');
+}

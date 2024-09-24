@@ -212,6 +212,12 @@
     font-size: 18px;
     line-height: 30px;
     white-space: pre-wrap;
+
+    background-color: #fff;
+    height: 159px;
+    border-radius: 8px;
+    padding: 10px 29px 10px 21px;
+    overflow: scroll;
   }
 }
 
@@ -316,23 +322,14 @@
   &-40 {
     margin-top: 40px;
   }
-  &-45 {
-    margin-top: 45px;
+  &-44 {
+    margin-top: 44px;
   }
   &-54 {
     margin-top: 54px;
   }
   &-58 {
     margin-top: 58px;
-  }
-  &-70 {
-    margin-top: 70px;
-  }
-  &-80 {
-    margin-top: 80px;
-  }
-  &-114 {
-    margin-top: 114px;
   }
 }
 

@@ -11,4 +11,5 @@ export class InstructionNoteComponent {
   label = input('ข้อแนะนำการใช้งาน: ');
   text = input('');
   remark = input('');
+  fontSize = input('16px');
 }

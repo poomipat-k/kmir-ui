@@ -151,7 +151,7 @@
         </p>
       </div>
     </div>
-    <div class="metric mgt-45">
+    <div class="metric mgt-44">
       <app-com-metric
         [data]="metricData()"
         (selectedCell)="onMetricCellClick($event)"
@@ -170,7 +170,9 @@
       <app-com-score-details-link></app-com-score-details-link>
     </div>
 
-    <div class="mgt-45">
+    <!-- Score table -->
+    <div class="hr--dashed mgt-44"></div>
+    <div class="mgt-44">
       <div class="assessment__header">
         <div class="assessment__header__textContainer">
           <h3 class="assessment__header__text">Self-assessment Score</h3>
@@ -189,11 +191,25 @@
         </div>
       </div>
 
+      <div>
+        <app-com-instruction-note
+          fontSize="14px"
+          text="นักวิชาการแผนอาจพิจารณาจัดกระบวนการภายในร่วมกัน (เช่น ร่วมกับผู้บริหารสำนักและนักวิชาการ) ให้คะแนนประเมินในแต่ละข้อถาม โดยอาจระบุความคิดเห็นหรือเหตุผลในส่วนข้อสังเกตและหมายเหตุเพื่อใช้ประโยชน์ในแต่ละรอบประเมิน "
+        ></app-com-instruction-note>
+        <div class="mgt-20">
+          <app-com-score-scale-details
+            fontSize="14px"
+          ></app-com-score-scale-details>
+        </div>
+      </div>
+
       <!-- Table -->
-      <app-com-score-table [data]="scoreTableData()"></app-com-score-table>
-      <div class="hr--dashed mgt-114 mgr-6"></div>
+      <div class="mgt-44">
+        <app-com-score-table [data]="scoreTableData()"></app-com-score-table>
+      </div>
+      <div class="hr--dashed mgt-44 mgr-6"></div>
       <!-- IR work goal -->
-      <div class="mgt-39">
+      <div class="mgt-44">
         <div class="goal__headerSection">
           <div class="goal__headerBox">
             <h3
@@ -216,7 +232,15 @@
             ></app-com-updated-at>
           </div>
         </div>
-        <div class="goal__type mgt-8">
+
+        <div>
+          <app-com-instruction-note
+            fontSize="14px"
+            text="นักวิชาการแผนอาจพิจารณาจัดกระบวนการภายในร่วมกัน (เช่น ร่วมกับผู้บริหารสำนักและนักวิชาการ) ให้คะแนนประเมินในแต่ละข้อถาม โดยอาจระบุความคิดเห็นหรือเหตุผลในส่วนข้อสังเกตและหมายเหตุเพื่อใช้ประโยชน์ในแต่ละรอบประเมิน "
+          ></app-com-instruction-note>
+        </div>
+
+        <div class="goal__type mgt-20">
           <h4 class="goal__type__text">{{ planDetails().irGoalType }}</h4>
           <app-com-icon-tooltip
             [hasTooltip]="true"
@@ -230,9 +254,9 @@
         ></div>
       </div>
     </div>
-    <div class="hr--dashed mgt-70"></div>
     <!-- Proposed activities -->
-    <div class="mgt-14">
+    <div class="hr--dashed mgt-44"></div>
+    <div class="mgt-44">
       <div class="commonTextSection__headerSection">
         <div class="commonTextSection__headerBox">
           <h3
@@ -249,20 +273,22 @@
           </h3>
           <img src="/assets/event_note.svg" alt="note icon" />
         </div>
+
         <div class="mgt-15">
           <app-com-updated-at
             [display]="getEditHistory('proposedActivity')"
           ></app-com-updated-at>
         </div>
       </div>
+
       <div
         class="commonTextSection__text mgt-20"
         [innerHTML]="planDetails().proposedActivity ?? '' | safeHtml"
       ></div>
     </div>
-    <div class="hr--dashed mgt-80"></div>
     <!-- Notes -->
-    <div class="mgt-45">
+    <div class="hr--dashed mgt-44"></div>
+    <div class="mgt-44">
       <div class="commonTextSection__headerSection">
         <div class="commonTextSection__headerBox">
           <h3
