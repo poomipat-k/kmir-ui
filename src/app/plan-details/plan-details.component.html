@@ -142,17 +142,32 @@
           และทีมด้านต่างประเทศประเมินร่วมกัน
         </p>
         <p class="readiness__text">
-          <span class="readiness__text--bold">ข้อแนะนำการใช้งาน:</span> สามารถ
-          Click ปีที่ต้องการเพื่อแสดงข้อมูลการให้ความหมาย หากไม่ Click เลือกปีใด
-          จะแสดงความหมายของทุกปี
+          <span class="readiness__text--bold-500">ข้อแนะนำการใช้งาน:</span>
+          สามารถ Click ปีที่ต้องการเพื่อแสดงข้อมูลการให้ความหมาย และ Click
+          <span class="readiness__text--bold-600"
+            >ช่องอื่นเพื่อ Reset การเลือก</span
+          >
+          หากไม่ Click เลือกปีใด จะแสดงความหมายของทุกปี
         </p>
       </div>
     </div>
     <div class="metric mgt-45">
-      <app-com-metric [data]="metricData()"></app-com-metric>
-      <div class="metric__descriptionBox mgt-13">
-        <p>Placeholder</p>
+      <app-com-metric
+        [data]="metricData()"
+        (selectedCell)="onMetricCellClick($event)"
+      ></app-com-metric>
+      <div class="metric__box">
+        <p class="metric__text">ความหมายตามระดับคะแนนที่ได้</p>
+        <div class="metric__description">
+          <app-com-metric-score-summary
+            height="372px"
+            [data]="metricData()"
+          ></app-com-metric-score-summary>
+        </div>
       </div>
+    </div>
+    <div class="alignRight">
+      <app-com-score-details-link></app-com-score-details-link>
     </div>
 
     <div class="mgt-45">

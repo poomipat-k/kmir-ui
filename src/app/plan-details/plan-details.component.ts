@@ -10,7 +10,9 @@ import {
 import { Router, RouterModule } from '@angular/router';
 import { BackToTopComponent } from '../components/back-to-top/back-to-top.component';
 import { IconTooltipComponent } from '../components/icon-tooltip/icon-tooltip.component';
+import { MetricScoreSummaryComponent } from '../components/metric-score-summary/metric-score-summary.component';
 import { MetricComponent } from '../components/metric/metric.component';
+import { ScoreDetailsLinkComponent } from '../components/score-details-link/score-details-link.component';
 import { ScoreTableComponent } from '../components/score-table/score-table.component';
 import { UpdatedAtComponent } from '../components/updated-at/updated-at.component';
 import { DateService } from '../services/date.service';
@@ -18,6 +20,7 @@ import { PlanService } from '../services/plan.service';
 import { ThemeService } from '../services/theme.service';
 import { UserService } from '../services/user.service';
 import { IntersectionElementDirective } from '../shared/directives/intersection-element.directive';
+import { MetricCell } from '../shared/models/metric-cell';
 import { MetricInput } from '../shared/models/metric-input';
 import { PlanDetails } from '../shared/models/plan-details';
 import { ScoreTableRow } from '../shared/models/score-table-row';
@@ -36,6 +39,8 @@ import { SafeHtmlPipe } from '../shared/pipe/safe-html.pipe';
     IntersectionElementDirective,
     RouterModule,
     SafeHtmlPipe,
+    MetricScoreSummaryComponent,
+    ScoreDetailsLinkComponent,
   ],
   templateUrl: './plan-details.component.html',
   styleUrl: './plan-details.component.scss',
@@ -54,6 +59,7 @@ export class PlanDetailsComponent implements OnInit {
   protected scrollerOffset = signal<[number, number]>([0, 40]); // [x, y]
   protected ignoreIntersection = signal(false);
   protected releaseIgnoreIntersectionTimeoutId = signal<any>(undefined);
+  protected metricSelectedCell = signal<MetricCell | undefined>(undefined);
   protected readinessTooltipText = signal(
     'กรอบการประเมินความพร้อมด้านต่างประเทศอ้างอิงจากการทบทวนวรรณกรรมและปรับให้เหมาะสมกับบริบทงานต่างประเทศของ สสส. มุ่งเน้น 2 มิติหลัก ได้แก่ ความเต็มใจ (Willingness) และขีดความสามารถ (Capacity) ของแผนงานหรือสำนักต่างๆในการมีส่วนร่วมในการดำเนินงานด้านต่างประเทศอย่างมีประสิทธิผล การแปรผลแบบเมทริกซ์ เหมาะแก่การใช้ประโยชน์ด้านการตัดสินใจเชิงกลยุทธ์ภายใน สสส.'
   );
@@ -183,6 +189,14 @@ export class PlanDetailsComponent implements OnInit {
         )
       );
     }
+    const selectedCell = this.metricSelectedCell();
+    if (selectedCell?.name === 'hasData' && selectedCell?.data?.length > 0) {
+      const x = selectedCell.data[0].x;
+      const y = selectedCell.data[0].y;
+      return scoreData.filter((c) => c.x === x && c.y === y);
+    }
+
+    console.log('==scoreData:', scoreData);
     return scoreData || [];
   }
 
@@ -279,6 +293,17 @@ export class PlanDetailsComponent implements OnInit {
     newList[index] = 2;
     this.navActiveList.set(newList);
     this.resetReleaseIgnoreIntersectionTimer();
+  }
+
+  onMetricCellClick(cell: MetricCell) {
+    if (
+      cell?.data?.[0]?.x === this.metricSelectedCell()?.data?.[0]?.x &&
+      cell?.data?.[0]?.y === this.metricSelectedCell()?.data?.[0]?.y
+    ) {
+      return;
+    }
+    // Set new selected cell to trigger recalculation of metric data
+    this.metricSelectedCell.set(cell);
   }
 
   private resetReleaseIgnoreIntersectionTimer() {
