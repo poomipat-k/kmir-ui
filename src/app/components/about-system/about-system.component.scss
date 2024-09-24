@@ -1,0 +1,93 @@
+@import "../../../styles.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.group {
+  &__header {
+    font-family: $custom-font;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 40px;
+    color: #000;
+  }
+
+  &__desc {
+    font-family: $custom-font-looped;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+    color: #000;
+  }
+}
+
+.card {
+  &__container {
+    display: flex;
+    gap: 30px;
+  }
+
+  display: flex;
+  align-items: flex-start;
+  padding: 10px;
+  gap: 10px;
+  flex: 1;
+  border-radius: 8px;
+  background-color: #fef8e3;
+
+  &__icon {
+    width: 24px;
+    height: auto;
+  }
+
+  &__text {
+    font-family: $custom-font;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 26px;
+    color: #000;
+
+    &--bold {
+      font-weight: 700;
+    }
+  }
+
+  &--small {
+    min-height: 72px;
+  }
+  &--medium {
+    min-height: 98px;
+  }
+  &--large {
+    min-height: 150px;
+  }
+}
+
+.footer {
+  font-family: $custom-font;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 40px;
+  color: #000;
+  text-align: center;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.hr {
+  border-top: 1px dashed rgba(0, 0, 0, 0.5);
+}
+
+.mgt {
+  &-16 {
+    margin-top: 16px;
+  }
+  &-32 {
+    margin-top: 32px;
+  }
+}

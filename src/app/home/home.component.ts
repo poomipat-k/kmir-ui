@@ -2,6 +2,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { AboutSystemComponent } from '../components/about-system/about-system.component';
 import { BackToTopComponent } from '../components/back-to-top/back-to-top.component';
 import { PlanService } from '../services/plan.service';
 import { ThemeService } from '../services/theme.service';
@@ -14,7 +15,12 @@ import { SafeHtmlPipe } from '../shared/pipe/safe-html.pipe';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, BackToTopComponent, SafeHtmlPipe],
+  imports: [
+    CommonModule,
+    BackToTopComponent,
+    SafeHtmlPipe,
+    AboutSystemComponent,
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
   animations: [
