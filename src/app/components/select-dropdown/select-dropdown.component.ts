@@ -29,6 +29,9 @@ export class SelectDropdownComponent {
   width = input('100%');
   height = input('30px');
   padding = input('8px 32px 8px 0px');
+  displayAlign = input('right');
+  dropdownJustifyContent = input('center');
+  dropdownPadding = input('0');
   placeholder = input('');
   disabled = input(false);
   onChange = input<() => void>();

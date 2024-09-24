@@ -145,6 +145,16 @@
         และแกนด้านศักยภาพ
         ซึ่งเป็นการวิเคราะห์ผลจากคะแนนที่แผนงานและทีมด้านต่างประเทศประเมินร่วมกัน
       </p>
+
+      <p class="readiness__instruction mgt-16">
+        <span class="readiness__instruction--500">ข้อแนะนำการใช้งาน: </span
+        >สามารถ Click ปีที่ต้องการเพื่อแสดงข้อมูลการให้ความหมาย และ
+        <span class="readiness__instruction--600"
+          >Click ช่องอื่นเพื่อ Reset การเลือ</span
+        >
+        หากไม่ Click เลือกปีใด จะแสดงความหมายของทุกปี
+      </p>
+
       <div class="metric pdl-32 mgt-54">
         <app-com-metric [data]="metricData()" size="large"></app-com-metric>
         <div class="metric__control__container mgt--38">
@@ -162,6 +172,7 @@
                   width="107px"
                   height="42px"
                   placeholder="Year 1"
+                  dropdownPadding="0 6px 0 0"
                 ></app-com-select-dropdown>
               </div>
               <p class="metric__control__label--to">To</p>
@@ -173,6 +184,7 @@
                   width="107px"
                   height="42px"
                   placeholder="Year 2"
+                  dropdownPadding="0 6px 0 0"
                 ></app-com-select-dropdown>
               </div>
             </div>
@@ -188,11 +200,23 @@
                   [form]="metricFormGroup()"
                   controlName="plan"
                   [items]="planOptions()"
-                  width="120px"
+                  width="307px"
                   height="42px"
                   color="#4D54AB"
+                  fontSize="18px"
+                  displayAlign="left"
+                  padding="15px 0 15px 16px"
+                  dropdownPadding="0 0 0 16px"
+                  dropdownJustifyContent="flex-start"
                 ></app-com-select-dropdown>
               </div>
+
+              <p
+                class="metric__control__clearFilter"
+                (click)="onClearMetricFilter()"
+              >
+                Clear filter
+              </p>
             </div>
           </div>
 

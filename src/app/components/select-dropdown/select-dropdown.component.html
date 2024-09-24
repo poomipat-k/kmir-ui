@@ -19,7 +19,8 @@
         'font-size': fontSize(),
         height: height(),
         padding: padding(),
-        color: color()
+        color: color(),
+        'text-align': displayAlign()
       }"
     />
 
@@ -49,7 +50,13 @@
     @for (item of items(); track $index) {
     <label
       class="radio__label"
-      [style]="{ 'font-size': fontSize(), height: height(), color: color() }"
+      [style]="{
+        'font-size': fontSize(),
+        height: height(),
+        color: color(),
+        padding: dropdownPadding(),
+        'justify-content': dropdownJustifyContent()
+      }"
       (click)="onDropdownClicked()"
     >
       <input

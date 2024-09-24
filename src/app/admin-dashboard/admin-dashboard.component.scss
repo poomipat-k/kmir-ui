@@ -112,6 +112,22 @@
       font-weight: 600;
     }
   }
+
+  &__instruction {
+    font-family: $custom-font-looped;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 30px;
+    color: #000;
+
+    &--500 {
+      font-weight: 500;
+    }
+
+    &--600 {
+      font-weight: 600;
+    }
+  }
 }
 
 .metric {
@@ -152,8 +168,23 @@
 
     &__content {
       display: flex;
-      gap: 14px;
+      gap: 17px;
       align-items: center;
+    }
+
+    &__clearFilter {
+      font-family: $custom-font;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 23px;
+      color: #4d54ab;
+      text-decoration: underline;
+      cursor: pointer;
+      transition: transform 100ms ease-out;
+
+      &:hover {
+        transform: scale(1.02);
+      }
     }
   }
 
@@ -280,6 +311,9 @@
   }
   &-15 {
     margin-top: 15px;
+  }
+  &-16 {
+    margin-top: 16px;
   }
   &-17 {
     margin-top: 17px;

@@ -400,6 +400,10 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     this.resetReleaseIgnoreIntersectionTimer();
   }
 
+  onClearMetricFilter() {
+    console.log('===[onClearMetricFilter]');
+  }
+
   private resetReleaseIgnoreIntersectionTimer() {
     if (!!this.releaseIgnoreIntersectionTimeoutId()) {
       clearTimeout(this.releaseIgnoreIntersectionTimeoutId());
