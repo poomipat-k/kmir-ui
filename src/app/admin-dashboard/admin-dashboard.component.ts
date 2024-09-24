@@ -219,7 +219,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
       hourCycle: 'h24',
       timeZone: 'Asia/bangkok',
     });
-    return `latest edit by Admin ${localDateTime}`;
+    return `last edited by Admin ${localDateTime}`;
   }
 
   initMetricControlValue() {
@@ -394,7 +394,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
       hourCycle: 'h24',
       timeZone: 'Asia/bangkok',
     });
-    return `latest edit by ${who} ${local}`;
+    return `last edited by ${who} ${local}`;
   }
 
   onBackToHomePage() {

@@ -38,7 +38,7 @@ export class ProposedActivitiesComponent {
       hourCycle: 'h24',
       timeZone: 'Asia/bangkok',
     });
-    return `latest edit by ${who} ${local}`;
+    return `last edited by ${who} ${local}`;
   });
 
   getFormControlAt(index: number) {

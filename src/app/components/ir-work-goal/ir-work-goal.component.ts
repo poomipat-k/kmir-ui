@@ -78,7 +78,7 @@ export class IrWorkGoalComponent {
       hourCycle: 'h24',
       timeZone: 'Asia/bangkok',
     });
-    return `latest edit by ${who} ${local}`;
+    return `last edited by ${who} ${local}`;
   });
 
   getGoalDetailsFormControlAt(index: number) {
