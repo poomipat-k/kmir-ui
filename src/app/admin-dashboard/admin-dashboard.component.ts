@@ -414,11 +414,20 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     // reset metricSelectedCell
     this.resetMetricSelectedCell();
     // metric controls field to default value
-    this.initMetricControlValue();
+    this.resetMetricControls();
   }
 
   private resetMetricSelectedCell() {
     this.metricSelectedCell.set(undefined);
+  }
+
+  private resetMetricControls() {
+    const [currentYear] = this.dateService.getYearMonthDay(new Date());
+    this.metricFormGroup().patchValue({
+      fromYear: this.minYear(),
+      toYear: currentYear,
+      plan: 'all',
+    });
   }
 
   onMetricCellClick(cell: MetricCell) {
