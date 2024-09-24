@@ -35,6 +35,7 @@ import { AssessmentCriteria } from '../shared/models/assessment-criteria';
 import { AssessmentScore } from '../shared/models/assessment-score';
 import { DropdownOption } from '../shared/models/dropdown-option';
 import { LatestScore } from '../shared/models/latest-score';
+import { MetricCell } from '../shared/models/metric-cell';
 import { MetricInput } from '../shared/models/metric-input';
 import { PlanDetails } from '../shared/models/plan-details';
 import { ScoreTableRow } from '../shared/models/score-table-row';
@@ -83,6 +84,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     new FormGroup({})
   );
   protected minYear = signal(2022);
+  protected metricSelectedCell = signal<MetricCell | undefined>(undefined);
   protected metricYearOptions = signal<DropdownOption[]>([]);
   protected criteriaList = signal<AssessmentCriteria[]>([]);
   protected plans = signal<PlanDetails[]>([]);
@@ -198,6 +200,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
       )
       .subscribe((scores) => {
         this.metricScores.set(scores || []);
+        this.resetMetricSelectedCell();
       });
   }
 
@@ -324,7 +327,13 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
         );
       }
     }
-    return scoreData || [];
+    const selectedCell = this.metricSelectedCell();
+    if (selectedCell?.name === 'hasData' && selectedCell?.data?.length > 0) {
+      const x = selectedCell.data[0].x;
+      const y = selectedCell.data[0].y;
+      return scoreData.filter((c) => c.x === x && c.y === y);
+    }
+    return scoreData;
   }
 
   private computeTopicShortMap() {
@@ -402,6 +411,25 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
 
   onClearMetricFilter() {
     console.log('===[onClearMetricFilter]');
+    // reset metricSelectedCell
+    this.resetMetricSelectedCell();
+    // metric controls field to default value
+    this.initMetricControlValue();
+  }
+
+  private resetMetricSelectedCell() {
+    this.metricSelectedCell.set(undefined);
+  }
+
+  onMetricCellClick(cell: MetricCell) {
+    if (
+      cell?.data?.[0]?.x === this.metricSelectedCell()?.data?.[0]?.x &&
+      cell?.data?.[0]?.y === this.metricSelectedCell()?.data?.[0]?.y
+    ) {
+      return;
+    }
+    // Set new selected cell to trigger recalculation of metric data
+    this.metricSelectedCell.set(cell);
   }
 
   private resetReleaseIgnoreIntersectionTimer() {

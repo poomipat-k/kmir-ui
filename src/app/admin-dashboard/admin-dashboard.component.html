@@ -156,7 +156,11 @@
       </p>
 
       <div class="metric pdl-32 mgt-54">
-        <app-com-metric [data]="metricData()" size="large"></app-com-metric>
+        <app-com-metric
+          [data]="metricData()"
+          size="large"
+          (selectedCell)="onMetricCellClick($event)"
+        ></app-com-metric>
         <div class="metric__control__container mgt--38">
           <div>
             <p class="metric__control__label">Select Year</p>

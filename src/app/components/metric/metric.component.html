@@ -41,12 +41,13 @@
   }
   <div [ngClass]="{ grid: true, 'grid--large': size() === 'large' }">
     @for (row of gridItems(); track $index; let idx = $index) { @for (cell of
-    row; track $index; let idy = $index) { @if (cell.name === 'active') {
+    row; track $index; let idy = $index) { @if (cell.name === 'hasData') {
     <div
       [ngClass]="{
         cell: true,
-        'item--active': cell.name === 'active'
+        'item--hasData': true
       }"
+      (click)="onCellClick(cell)"
       appTooltip
       [fadeOut]="false"
       [tooltipContent]="getTooltipContent(cell)"
@@ -56,6 +57,7 @@
     ></div>
     } @else {
     <div
+      (click)="onCellClick(cell)"
       [ngClass]="{
         item: true,
         'item--a': cell.name === 'a',

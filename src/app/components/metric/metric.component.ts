@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 import { TooltipDirective } from '../../shared/directives/tooltip.directive';
 import { MetricCell } from '../../shared/models/metric-cell';
 import { MetricInput } from '../../shared/models/metric-input';
@@ -16,6 +16,7 @@ export class MetricComponent {
   yLabel = input<string>('Capacity');
   data = input<MetricInput[]>([]);
   size = input('small');
+  selectedCell = output<MetricCell>();
 
   protected gridItems = computed(() => this.handleDataChanged());
   private readonly originalGridPos = [
@@ -42,10 +43,14 @@ export class MetricComponent {
 
     metricInput.forEach((item) => {
       const [row, col] = [rowCount - item.y, item.x - 1];
-      cellGrid[row][col].name = 'active';
+      cellGrid[row][col].name = 'hasData';
       cellGrid[row][col].data.push(item);
     });
     return cellGrid;
+  }
+
+  onCellClick(cell: MetricCell) {
+    this.selectedCell.emit(cell);
   }
 
   getTooltipContent(cell: MetricCell) {

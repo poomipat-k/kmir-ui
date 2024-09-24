@@ -156,12 +156,14 @@ $grid-item-large: 54px;
   &--i {
     background-color: #facf54;
   }
-  &--active {
+  &--hasData {
     background-color: rgba(249, 179, 43, 0.88);
-    // background-color: rgba(255, 107, 0, 0.3);
     border: 1px dashed #d32f06;
     transform: translate(-0.5px, 0.5px);
     // mix-blend-mode: multiply;
+    // background-color: rgba(255, 107, 0, 0.3);
+
+    cursor: pointer;
 
     &:hover {
       background-color: rgba(255, 107, 0, 0.6);

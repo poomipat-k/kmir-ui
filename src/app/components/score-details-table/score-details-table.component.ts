@@ -29,6 +29,5 @@ export class ScoreDetailsTableComponent implements OnInit {
       }
     }
     this.zoneRanks.set(rankList);
-    console.log('===zoneRanks', this.zoneRanks());
   }
 }
