@@ -200,7 +200,6 @@ export class PlanDetailsComponent implements OnInit {
       return scoreData.filter((c) => c.x === x && c.y === y);
     }
 
-    console.log('==scoreData:', scoreData);
     return scoreData || [];
   }
 

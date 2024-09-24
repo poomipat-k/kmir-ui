@@ -410,7 +410,6 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
   }
 
   onClearMetricFilter() {
-    console.log('===[onClearMetricFilter]');
     // reset metricSelectedCell
     this.resetMetricSelectedCell();
     // metric controls field to default value

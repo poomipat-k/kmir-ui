@@ -308,7 +308,7 @@
             [debounceTime]="0"
             [rootMargin]="intersectionRootMargin()"
           >
-            Notes
+            Notes บันทึกข้อคิดเห็นร่วมกัน
           </h3>
           <img src="/assets/speaker_notes.svg" alt="speaker notes" />
         </div>
@@ -332,6 +332,7 @@
       ></div>
     </div>
     <!-- Contact Person -->
+    <div class="hr--dashed mgt-44"></div>
     <div class="mgt-44">
       <div class="commonTextSection__headerSection">
         <div class="commonTextSection__headerBox">
@@ -360,7 +361,6 @@
         [innerHTML]="planDetails().contactPerson ?? '' | safeHtml"
       ></div>
     </div>
-    <div class="hr--dashed mgt-44"></div>
     <div class="backToTop">
       <app-com-back-to-top></app-com-back-to-top>
     </div>
