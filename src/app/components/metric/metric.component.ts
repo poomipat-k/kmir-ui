@@ -56,7 +56,7 @@ export class MetricComponent {
   getTooltipContent(cell: MetricCell) {
     let res: string[] = [];
     cell.data?.forEach((yearData) => {
-      res.push(`\u2022 ${yearData.name} (${yearData.year + 543})\n`);
+      res.push(`\u2022 ${yearData.name} (${yearData.year})\n`);
     });
     return res.join('');
   }
