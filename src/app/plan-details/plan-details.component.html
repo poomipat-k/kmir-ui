@@ -236,7 +236,7 @@
         <div>
           <app-com-instruction-note
             fontSize="14px"
-            text="นักวิชาการแผนอาจพิจารณาจัดกระบวนการภายในร่วมกัน (เช่น ร่วมกับผู้บริหารสำนักและนักวิชาการ) ให้คะแนนประเมินในแต่ละข้อถาม โดยอาจระบุความคิดเห็นหรือเหตุผลในส่วนข้อสังเกตและหมายเหตุเพื่อใช้ประโยชน์ในแต่ละรอบประเมิน "
+            text="นักวิชาการแผนอาจพิจารณาจัดกระบวนการภายในร่วมกัน (เช่น ร่วมกับผู้บริหารสำนักและนักวิชาการ) ให้คะแนนประเมินในแต่ละข้อถาม โดยอาจระบุความคิดเห็นหรือเหตุผลในส่วนข้อสังเกตและหมายเหตุเพื่อใช้ประโยชน์ในแต่ละรอบประเมิน"
           ></app-com-instruction-note>
         </div>
 
@@ -281,8 +281,15 @@
         </div>
       </div>
 
+      <div>
+        <app-com-instruction-note
+          fontSize="14px"
+          text="ส่วนนี้ออกแบบมาเพื่อให้ทั้งแผนงานและทีมต่างประเทศ สสส. ออกแบบร่วมกันในการกำหนดกิจกรรมที่สอดคล้องตามเป้าหมายด้านต่างประเทศ"
+        ></app-com-instruction-note>
+      </div>
+
       <div
-        class="commonTextSection__text mgt-20"
+        class="commonTextSection__text mgt-20 commonTextSection__text--large"
         [innerHTML]="planDetails().proposedActivity ?? '' | safeHtml"
       ></div>
     </div>
@@ -311,13 +318,21 @@
           ></app-com-updated-at>
         </div>
       </div>
+
+      <div>
+        <app-com-instruction-note
+          fontSize="14px"
+          text="บันทึกข้อคิดเห็นหรือเหตุผลเพื่อใช้ประโยชน์ในแต่ละรอบประเมิน"
+        ></app-com-instruction-note>
+      </div>
+
       <div
-        class="commonTextSection__text mgt-20"
+        class="commonTextSection__text commonTextSection__text--large mgt-20"
         [innerHTML]="planDetails().planNote ?? '' | safeHtml"
       ></div>
     </div>
     <!-- Contact Person -->
-    <div class="mgt-40">
+    <div class="mgt-44">
       <div class="commonTextSection__headerSection">
         <div class="commonTextSection__headerBox">
           <h3
@@ -341,10 +356,11 @@
         </div>
       </div>
       <div
-        class="commonTextSection__text mgt-20"
+        class="commonTextSection__text commonTextSection__text--small mgt-20"
         [innerHTML]="planDetails().contactPerson ?? '' | safeHtml"
       ></div>
     </div>
+    <div class="hr--dashed mgt-44"></div>
     <div class="backToTop">
       <app-com-back-to-top></app-com-back-to-top>
     </div>

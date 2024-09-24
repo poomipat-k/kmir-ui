@@ -5,7 +5,7 @@
   padding-left: 80px;
   padding-right: 173px;
   display: flex;
-  padding-bottom: 200px;
+  padding-bottom: 77px;
 }
 
 .sideNav {
@@ -254,7 +254,19 @@
     white-space: pre-wrap;
     max-height: 280px;
     overflow-y: scroll;
-    border-bottom: 0.5px solid rgba(192, 195, 203, 0.5);
+
+    background-color: #fff;
+    height: 159px;
+    border-radius: 8px;
+    padding: 20px 29px 20px 21px;
+    overflow: scroll;
+
+    &--large {
+      height: 327px;
+    }
+    &--small {
+      height: 98px;
+    }
   }
 }
 
@@ -319,17 +331,11 @@
   &-39 {
     margin-top: 39px;
   }
-  &-40 {
-    margin-top: 40px;
-  }
   &-44 {
     margin-top: 44px;
   }
   &-54 {
     margin-top: 54px;
-  }
-  &-58 {
-    margin-top: 58px;
   }
 }
 
@@ -346,8 +352,8 @@
 
 .backToTop {
   position: absolute;
-  bottom: -8px;
-  right: -100px;
+  bottom: 144px;
+  right: -80px;
 }
 
 // For intersection API debugging purpose
