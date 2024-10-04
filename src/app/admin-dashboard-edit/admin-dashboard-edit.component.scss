@@ -49,6 +49,25 @@
   color: #1c1b1f;
 }
 
+.desc {
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    gap: 80px;
+  }
+
+  font-family: $custom-font-looped;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26px;
+  color: #1c1b1f;
+  white-space: pre-wrap;
+
+  &__bold {
+    font-weight: 500;
+  }
+}
+
 .topic {
   &Container {
     display: flex;
@@ -111,8 +130,8 @@
 }
 
 .pdl {
-  &-27 {
-    padding-left: 27px;
+  &-6 {
+    padding-left: 6px;
   }
   &-46 {
     padding-left: 46px;
@@ -146,8 +165,5 @@
   }
   &-76 {
     margin-top: 76px;
-  }
-  &-81 {
-    margin-top: 81px;
   }
 }

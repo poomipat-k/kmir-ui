@@ -11,17 +11,26 @@
   </nav>
 
   <section class="content mgt-30 pdl-46">
-    <h1 class="header pdl-27">Admin IR</h1>
-    <div class="topicContainer pdl-27">
+    <h1 class="header pdl-6">Admin IR</h1>
+    <div class="topicContainer pdl-6">
       <div>
-        <h2 class="topic">Forem ipsum dolor sit amet,</h2>
-        <h2 class="topic">หัวข้อภาษาไทย</h2>
+        <p class="desc">
+          {{ pageDescription() }}
+        </p>
+        <br />
+        <p class="desc">
+          <span class="desc__bold">หลักคิดของระบบคือ</span>
+          แอดมินหรือนักวิชาการด้านต่างประเทศ สสส.
+          เป็นผู้ได้รับสิทธิ์ในการเข้าดูเนื้อหาและแก้ไขได้ในทุกส่วน
+          ร่วมกับทุกแผน
+          ในแต่ละแผนจะสามารถเห็นและแก้ไขข้อมูลได้เฉพาะแผนที่ตนเองได้รับสิทธิ์เท่านั้น
+        </p>
       </div>
     </div>
 
     <form [formGroup]="form()">
       <!-- Admin assessment Score -->
-      <div class="mgt-81">
+      <div class="mgt-54">
         <div class="assessment">
           <div class="assessment__left">
             <h3 class="assessment__header">Admin assessment Score</h3>
