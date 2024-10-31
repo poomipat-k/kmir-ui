@@ -162,13 +162,30 @@ export class PlanDetailsComponent implements OnInit {
       criteriaMap[cri.orderNumber] = cri.category === 'willingness' ? 'x' : 'y';
     });
     const scoreData: MetricInput[] = [];
-    const sumScoreByYear: { [key: number]: { x: number; y: number } } = {};
+    const sumScoreByYear: {
+      [key: number]: {
+        x: number;
+        y: number;
+        hasAdminScore: boolean;
+        hasUserScore: boolean;
+      };
+    } = {};
     this.planDetails()?.assessmentScore?.forEach((row) => {
       const axis: 'x' | 'y' = criteriaMap[row.criteriaOrder];
       if (!sumScoreByYear[row.year]) {
-        sumScoreByYear[row.year] = { x: 0, y: 0 };
+        sumScoreByYear[row.year] = {
+          x: 0,
+          y: 0,
+          hasAdminScore: false,
+          hasUserScore: false,
+        };
       }
       sumScoreByYear[row.year][axis] += row.score;
+      if (row.userRole === 'admin') {
+        sumScoreByYear[row.year].hasAdminScore = true;
+      } else if (row.userRole === 'user') {
+        sumScoreByYear[row.year].hasUserScore = true;
+      }
     });
     let divideX = 0;
     let divideY = 0;
@@ -183,15 +200,18 @@ export class PlanDetailsComponent implements OnInit {
       return [];
     }
     for (const [k, v] of Object.entries(sumScoreByYear)) {
-      // Divide by 2 is for admin and plan owner
-      scoreData.push(
-        new MetricInput(
-          Math.round(v.x / 2 / divideX),
-          Math.round(v.y / 2 / divideY),
-          +k,
-          this.planDetails().topicShort
-        )
-      );
+      // only display if the plan has both admin score and plan owner scores
+      if (v.hasAdminScore && v.hasUserScore) {
+        // Divide by 2 is for admin and plan owner
+        scoreData.push(
+          new MetricInput(
+            Math.round(v.x / 2 / divideX),
+            Math.round(v.y / 2 / divideY),
+            +k,
+            this.planDetails().topicShort
+          )
+        );
+      }
     }
     const selectedCell = this.metricSelectedCell();
     if (selectedCell?.name === 'hasData' && selectedCell?.data?.length > 0) {
