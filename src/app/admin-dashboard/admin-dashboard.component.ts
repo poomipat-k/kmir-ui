@@ -139,6 +139,9 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
   protected scoreTableLatestUpdateText = computed(() =>
     this.computedScoreTableLatestUpdateText()
   );
+  protected scoreCompletePlan = computed(() =>
+    this.computePlanScoreCompleted()
+  );
 
   protected readonly themeService: ThemeService = inject(ThemeService);
   private readonly planService: PlanService = inject(PlanService);
@@ -183,11 +186,26 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     const scoreData = plans?.map((plan) => {
       return (
         plan?.assessmentScore?.map(
-          (s) => new ScoreTableRow(s.criteriaOrder, s.score)
+          (s) =>
+            new ScoreTableRow(s.criteriaOrder, s.score, undefined, plan.planId)
         ) || []
       );
     });
     return scoreData || [];
+  }
+
+  computePlanScoreCompleted() {
+    const [currentYear] = this.dateService.getYearMonthDay(new Date());
+    const completedScorePlanId: Set<number> = new Set();
+    const metricData = this.metricData();
+    if (metricData) {
+      metricData.forEach((item) => {
+        if (item.year === currentYear) {
+          completedScorePlanId.add(item.planId || -1);
+        }
+      });
+    }
+    return completedScorePlanId;
   }
 
   refreshMetric() {
@@ -341,7 +359,8 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
               Math.round(v.x / 2 / divideX),
               Math.round(v.y / 2 / divideY),
               +year,
-              this.topicShortMap()[+planId]
+              this.topicShortMap()[+planId],
+              +planId
             )
           );
         }

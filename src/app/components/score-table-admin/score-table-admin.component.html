@@ -40,7 +40,14 @@
     }
   </div>
   } } @else { @for (name of shortNames(); track $index; let j = $index) {
-  <p [ngClass]="{ score: true, border: true, 'border--bottom': i === 6 }">
+  <p
+    [ngClass]="{
+      score: true,
+      border: true,
+      'border--bottom': i === 6,
+      'score--red': !unHighlightSet()?.has(data()?.[j]?.[0]?.planId || -1)
+    }"
+  >
     {{ data()?.[j]?.[i]?.score || '-' }}
   </p>
   } } }

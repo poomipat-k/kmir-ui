@@ -25,6 +25,7 @@ export class ScoreTableAdminComponent {
   shortNames = input<string[]>([]);
   criteria = input<AssessmentCriteria[]>([]);
   data = input<ScoreTableRow[][]>();
+  unHighlightSet = input<Set<number>>();
   editMode = input(false);
   formArray = input<FormArray>();
 

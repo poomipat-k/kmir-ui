@@ -95,6 +95,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  &--red {
+    color: #ff3300;
+  }
 }
 
 .dropdown {
