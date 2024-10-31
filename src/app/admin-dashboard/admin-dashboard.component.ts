@@ -294,7 +294,14 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     }
     */
     const sumScoreObj: {
-      [planId: number]: { [year: number]: { x: number; y: number } };
+      [planId: number]: {
+        [year: number]: {
+          x: number;
+          y: number;
+          hasAdminScore: boolean;
+          hasUserScore: boolean;
+        };
+      };
     } = {};
     this.metricScores()?.forEach((row) => {
       const axis: 'x' | 'y' =
@@ -304,9 +311,19 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
         sumScoreObj[planId] = {};
       }
       if (!sumScoreObj[planId][row.year]) {
-        sumScoreObj[planId][row.year] = { x: 0, y: 0 };
+        sumScoreObj[planId][row.year] = {
+          x: 0,
+          y: 0,
+          hasAdminScore: false,
+          hasUserScore: false,
+        };
       }
       sumScoreObj[planId][row.year][axis] += row.score;
+      if (row.userRole === 'admin') {
+        sumScoreObj[planId][row.year].hasAdminScore = true;
+      } else if (row.userRole === 'user') {
+        sumScoreObj[planId][row.year].hasUserScore = true;
+      }
     });
     // Todo: try refactor and remove hard code
     let divideX = 3;
@@ -316,15 +333,18 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     }
     for (const planId of Object.keys(sumScoreObj)) {
       for (const [year, v] of Object.entries(sumScoreObj[+planId])) {
-        // Divide by 2 is for admin and plan owner
-        scoreData.push(
-          new MetricInput(
-            Math.round(v.x / 2 / divideX),
-            Math.round(v.y / 2 / divideY),
-            +year,
-            this.topicShortMap()[+planId]
-          )
-        );
+        // only display if the plan has both admin score and plan owner scores
+        if (v.hasAdminScore && v.hasUserScore) {
+          // Divide by 2 is for admin and plan owner
+          scoreData.push(
+            new MetricInput(
+              Math.round(v.x / 2 / divideX),
+              Math.round(v.y / 2 / divideY),
+              +year,
+              this.topicShortMap()[+planId]
+            )
+          );
+        }
       }
     }
     const selectedCell = this.metricSelectedCell();
