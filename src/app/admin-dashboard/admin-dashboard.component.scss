@@ -116,7 +116,7 @@
   &__instruction {
     font-family: $custom-font-looped;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 30px;
     color: #000;
 
@@ -221,6 +221,14 @@
       line-height: 59px;
       color: #1c1b1f;
     }
+  }
+
+  &__helper {
+    font-family: $custom-font-looped;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+    color: #d32f06;
   }
 }
 

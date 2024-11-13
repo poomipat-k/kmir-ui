@@ -44,8 +44,8 @@
             (click)="onSave('assessmentScore')"
           ></app-com-save-button>
         </div>
-        <!-- TODO: remove || isProduction() when want to go production -->
-        @if (!isProduction() || isProduction()) {
+
+        @if (!isProduction()) {
         <button style="padding: 10px" (click)="onPatchScores()">
           Patch Value
         </button>

@@ -3,16 +3,13 @@
 .scale {
   &__container {
     display: flex;
-    gap: 20px;
   }
 
   font-family: $custom-font-looped;
-  font-weight: 400;
-  // font-size: 16px;
+  font-weight: 600;
+  font-size: 16px;
   line-height: 26px;
-  color: #d32f06;
-
-  &--bold {
-    font-weight: 600;
-  }
+  color: #3a66d6;
+  text-decoration: none;
+  cursor: pointer;
 }
