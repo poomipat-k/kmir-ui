@@ -37,7 +37,7 @@ export class CustomEditorComponent implements OnInit {
       font_size_formats:
         '10px 12px 13px 14px 16px 18px 20px 24px 28px 32px 48px',
       line_height_formats:
-        '10px 16px 18px 20px 24px 27px 30px 33px 36px 39px 44px 48px 52px',
+        '10px 16px 18px 20px 24px 26px 27px 30px 33px 36px 39px 44px 48px 52px',
       block_unsupported_drop: true,
       paste_block_drop: true,
       height: this.height(),
