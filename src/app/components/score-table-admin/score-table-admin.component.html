@@ -45,7 +45,7 @@
       score: true,
       border: true,
       'border--bottom': i === 6,
-      'score--red': !unHighlightSet()?.has(data()?.[j]?.[0]?.planId || -1)
+      'score--red': data()?.[j]?.[i]?.score && !unHighlightSet()?.has(data()?.[j]?.[0]?.planId || -1)
     }"
   >
     {{ data()?.[j]?.[i]?.score || '-' }}

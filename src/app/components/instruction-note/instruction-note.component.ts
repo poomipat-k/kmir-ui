@@ -12,4 +12,5 @@ export class InstructionNoteComponent {
   text = input('');
   remark = input('');
   fontSize = input('16px');
+  editorGuide = input(false);
 }

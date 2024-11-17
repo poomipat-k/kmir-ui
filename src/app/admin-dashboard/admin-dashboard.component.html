@@ -287,7 +287,8 @@
           <app-com-score-scale-details></app-com-score-scale-details>
         </div>
         <p class="assessment__helper">
-          ตัวเลขสีแดงคือ Plan ที่ยังไม่ได้กรอกคะแนน
+          หมายเหตุ: ตัวเลขสีแดงคือคะแนนที่แผนงานยังไม่ได้กรอกคะแนน
+          ซึ่งทำให้คะแนนจะไม่แสดงบนตาราง
         </p>
       </div>
 
@@ -325,6 +326,7 @@
       <div>
         <app-com-instruction-note
           text="เป้าหมายด้านต่างประเทศควรเกิดจากการหารือและเห็นชอบร่วมกันระหว่างแผนงานและทีมต่างประเทศ สสส. ตามความพร้อมของแต่ละแผนงานและความคาดหวังขององค์กร"
+          [editorGuide]="true"
         ></app-com-instruction-note>
       </div>
       <div class="mgt-20">
@@ -359,6 +361,7 @@
       <div class="mgt-20">
         <app-com-instruction-note
           text="ส่วนนี้ออกแบบมาเพื่อให้ทั้งแผนงานและทีมต่างประเทศ สสส. ออกแบบร่วมกันในการกำหนดกิจกรรมที่สอดคล้องตามเป้าหมายด้านต่างประเทศ"
+          [editorGuide]="true"
         ></app-com-instruction-note>
       </div>
       <div class="mgt-20">
@@ -390,6 +393,7 @@
       <div class="mgt-20">
         <app-com-instruction-note
           text="บันทึกข้อคิดเห็นหรือเหตุผลเพื่อใช้ประโยชน์ในแต่ละรอบประเมิน"
+          [editorGuide]="true"
         ></app-com-instruction-note>
       </div>
       <div class="mgt-20">
@@ -411,6 +415,7 @@
         <app-com-instruction-note
           text="บันทึกแผนหรือเป้าหมายภาพรวมด้านต่างประเทศขององค์กร หรือบันทึกภายในทีมต่างประเทศ เพื่อประเมินความก้าวหน้า ในองค์รวม "
           remark="(เป็นส่วนที่ไม่แสดงในหน้าของแต่ละแผนงาน)"
+          [editorGuide]="true"
         ></app-com-instruction-note>
       </div>
       <div class="mgt-20">
