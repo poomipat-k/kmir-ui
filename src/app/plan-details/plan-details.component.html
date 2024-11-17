@@ -237,6 +237,7 @@
           <app-com-instruction-note
             fontSize="14px"
             text="นักวิชาการแผนอาจพิจารณาจัดกระบวนการภายในร่วมกัน (เช่น ร่วมกับผู้บริหารสำนักและนักวิชาการ) ให้คะแนนประเมินในแต่ละข้อถาม โดยอาจระบุความคิดเห็นหรือเหตุผลในส่วนข้อสังเกตและหมายเหตุเพื่อใช้ประโยชน์ในแต่ละรอบประเมิน"
+            [editorGuide]="true"
           ></app-com-instruction-note>
         </div>
 
@@ -285,6 +286,7 @@
         <app-com-instruction-note
           fontSize="14px"
           text="ส่วนนี้ออกแบบมาเพื่อให้ทั้งแผนงานและทีมต่างประเทศ สสส. ออกแบบร่วมกันในการกำหนดกิจกรรมที่สอดคล้องตามเป้าหมายด้านต่างประเทศ"
+          [editorGuide]="true"
         ></app-com-instruction-note>
       </div>
 
@@ -323,6 +325,7 @@
         <app-com-instruction-note
           fontSize="14px"
           text="บันทึกข้อคิดเห็นหรือเหตุผลเพื่อใช้ประโยชน์ในแต่ละรอบประเมิน"
+          [editorGuide]="true"
         ></app-com-instruction-note>
       </div>
 
@@ -356,6 +359,10 @@
           ></app-com-updated-at>
         </div>
       </div>
+      <p class="editorNote">
+        กรณีที่ copy text จากที่อื่นมาวาง ให้คลุมดำทั้งหมดก่อนและปรับขนาด font
+        อีกครั้งก่อน save แนะนำขนาดฟ้อนต์ 16 px
+      </p>
       <div
         class="commonTextSection__text commonTextSection__text--small mgt-20"
         [innerHTML]="planDetails().contactPerson ?? '' | safeHtml"
