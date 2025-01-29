@@ -1,1 +1,83 @@
-<p style="font-size: 60px">Home</p>
+<div class="container">
+  <h1 class="header">ระบบติดตามความพร้อมด้านต่างประเทศของ สสส.</h1>
+  <h1 class="header">
+    Monitoring Framework for International Relations of Thai Health Promotion
+    Foundation
+  </h1>
+  <p class="description mgt-36">
+    ยินดีต้อนรับสู่ระบบติดตามความพร้อมด้านต่างประเทศของ สสส.
+    เว็บไซต์นี้ออกแบบขึ้นเพื่อเป็นเครื่องมือสำคัญในการติดตามและเสริมสร้าง
+    ความเข้มแข็งในการทำงานร่วมกันด้านงานต่างประเทศของสำนักงานกองทุนสนับสนุนการสร้างเสริมสุขภาพ
+    (สสส.) โดยมีวัตถุประสงค์หลัก
+    เพื่อส่งเสริมการประสานงานและพัฒนาศักยภาพด้านต่างประเทศอย่างมีประสิทธิภาพ
+  </p>
+  <!-- system summary -->
+  <div class="mgt-32">
+    <app-com-about-system></app-com-about-system>
+  </div>
+
+  <div class="mgt-48">
+    <div class="dashboardSummary">
+      <img
+        src="/assets/activity_zone.png"
+        alt="activity_zone"
+        class="dashboardSummary__logo"
+      />
+      <h2 class="dashboardSummary__header">Dashboard Summary</h2>
+    </div>
+    <div class="mgt-24">
+      <p class="dashboardSummary__desc">
+        หัวข้อส่วนนี้พัฒนาเพื่อนำเสนอเป้าหมายด้านต่างประเทศของทุกแผน สสส.
+      </p>
+      <p class="dashboardSummary__desc">
+        แต่สำหรับรายละเอียดของแต่ละแผนและการแก้ไขข้อมูลจะสามารถใช้งานได้เฉพาะแผนที่ท่านรับผิดชอบ
+        (Click ใน text)
+      </p>
+    </div>
+    <div class="dashboard mgt-44">
+      @for (plan of plans(); track $index) {
+      <div class="dashboard__item">
+        <div
+          [ngClass]="{
+            card: true,
+            'card--open': plan.open,
+            'card--owner': $index === 0
+          }"
+          (click)="onCardClick($index)"
+        >
+          <div class="card__left" (click)="goToPlanDetailsPage($event, $index)">
+            <h2 class="card__header">{{ plan.data.name }}</h2>
+            <div>
+              <p class="card__topic">{{ plan.data.topic }}</p>
+              <p class="card__topic">{{ plan.data.topicEn }}</p>
+            </div>
+          </div>
+        </div>
+        @if(plan.open){
+        <div
+          [ngClass]="{ cardExpand: true, 'cardExpand--owner': $index === 0 }"
+          @slide
+        >
+          <div class="cardExpand__headerContainer">
+            <img
+              src="/assets/flag_circle.svg"
+              alt="flag icon"
+              class="cardExpand__icon"
+            />
+            <h3 class="cardExpand__header">IR Work GOAL</h3>
+          </div>
+          <p
+            class="cardExpand__text mgt-12"
+            [innerHTML]="plan.data.irGoalDetails | safeHtml"
+          ></p>
+        </div>
+        }
+      </div>
+      }
+    </div>
+  </div>
+
+  <div class="backToTop">
+    <app-com-back-to-top></app-com-back-to-top>
+  </div>
+</div>

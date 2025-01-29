@@ -1,0 +1,252 @@
+<div class="container mgt-54">
+  <nav class="sideNav">
+    <div class="sideNav__back" (click)="onBackToPlanDetailsPage()">
+      <img
+        src="/assets/arrow_back.svg"
+        alt="arrow back"
+        class="sideNav__back__icon"
+      />
+      <p class="sideNav__back__text">Back</p>
+    </div>
+  </nav>
+
+  <section class="content mgt-20 pdl-55">
+    <h1 class="header">{{ planName() }}</h1>
+    <div class="topic__container">
+      <div>
+        <h2 class="topic">{{ planDetails().topic }}</h2>
+        <h2 class="topic">{{ planDetails().topicEn }}</h2>
+        <p class="topic__desc mgt-14">
+          ระบบนี้พัฒนาให้เอื้อต่อการ<span class="topic__desc--bold"
+            >ประสานงานร่วมกันระหว่างนักวิชาการแผนงานและนักวิชาการด้านต่างประเทศ
+            สสส.</span
+          >
+          ในการร่วมกันกำหนดเป้าหมาย ประเมินความก้าวหน้า บันทึกกิจกรรมต่างๆ
+          ที่เกี่ยวข้องกับงานด้านต่างประเทศ หน้าที่แสดงข้อมูลนี้
+          จะแสดงผลและแก้ไขได้เฉพาะแก่นักวิชาการแผนงานที่มี log in
+          และทีมด้านต่างประเทศ
+        </p>
+      </div>
+    </div>
+
+    <form [formGroup]="form()" class="mgt-52">
+      <!-- Self-assessment Score -->
+      <div>
+        <div class="assessment__headerContainer">
+          <div class="assessment__headerContainer--left">
+            <h3 class="assessment__header" id="assessmentScore">
+              Self-assessment Score
+            </h3>
+            <app-com-icon-tooltip
+              [hasTooltip]="true"
+              [tooltipText]="assessmentScoreTooltip()"
+              width="500px"
+            ></app-com-icon-tooltip>
+          </div>
+          <app-com-save-button
+            (click)="onSaveButtonClick('assessmentScore')"
+          ></app-com-save-button>
+        </div>
+
+        <div class="mgt-20">
+          <app-com-instruction-note
+            text="ทีมต่างประเทศ สสส. อาจพิจารณาจัดกระบวนการภายในร่วมกันให้คะแนนประเมินในแต่ละข้อถามของทุกแผน โดยอาจระบุความคิดเห็นหรือเหตุผลในส่วนข้อสังเกตและหมายเหตุเพื่อใช้ประโยชน์ในแต่ละรอบประเมิน"
+          ></app-com-instruction-note>
+          <div class="mgt-20">
+            <app-com-score-scale-details></app-com-score-scale-details>
+          </div>
+        </div>
+
+        <div class="mgt-20">
+          <app-com-score-table
+            [data]="scoreTableData()"
+            [editMode]="true"
+            [form]="getAssessmentScoreFormGroup()"
+          ></app-com-score-table>
+          @if (!getControl('assessmentScore').valid &&
+          getControl('assessmentScore').touched) {
+          <app-com-error-message
+            text="กรุณาตรวจสอบ Self-assessment Score ให้ถูกต้อง"
+            marginTop="8px"
+          ></app-com-error-message>
+          }
+        </div>
+      </div>
+
+      <!-- IR goal type and goal details-->
+      <div class="hr--dashed mgt-44"></div>
+      <div class="mgt-44">
+        <div class="goal__header">
+          <h3>IR work goal</h3>
+          <img src="/assets/flag_circle_unfill.svg" alt="" class="goal__icon" />
+        </div>
+        <div class="mgt-20">
+          <app-com-instruction-note
+            text="เป้าหมายด้านต่างประเทศควรเกิดจากการหารือและเห็นชอบร่วมกันระหว่างแผนงานและทีมต่างประเทศ สสส. ตามความพร้อมของแต่ละแผนงานและความคาดหวังขององค์กร"
+            [editorGuide]="true"
+          ></app-com-instruction-note>
+        </div>
+        <div class="goal__row mgt-20">
+          <div class="goal__type">
+            <div class="mgt-5">
+              <!-- Type -->
+              <app-com-select-dropdown
+                id="irGoalType"
+                [form]="form()"
+                controlName="irGoalType"
+                [items]="irTypeOptions()"
+                width="89px"
+                height="38px"
+                fontSize="16px"
+              ></app-com-select-dropdown>
+              @if (!getControl('irGoalType').valid &&
+              getControl('irGoalType').touched) {
+              <app-com-error-message
+                text="กรุณาเลือก Type"
+                marginTop="8px"
+              ></app-com-error-message>
+              }
+            </div>
+            <app-com-icon-tooltip
+              [hasTooltip]="true"
+              [tooltipText]="irWorkGoalTooltip()"
+              width="500px"
+            ></app-com-icon-tooltip>
+          </div>
+          <app-com-save-button
+            (click)="onSaveButtonClick('irGoal')"
+          ></app-com-save-button>
+        </div>
+        <div class="mgt-16">
+          <!-- Goal details -->
+          <app-com-custom-editor
+            id="irGoalDetails"
+            [control]="getControl('irGoalDetails')"
+            [height]="264"
+          ></app-com-custom-editor>
+          @if (!getControl('irGoalDetails').valid &&
+          getControl('irGoalDetails').touched) {
+          <app-com-error-message
+            text="กรุณากรอก Goal details"
+            marginTop="8px"
+          ></app-com-error-message>
+          }
+        </div>
+      </div>
+
+      <!-- Proposed activities -->
+      <div class="hr--dashed mgt-44"></div>
+      <div class="commonRow mgt-44">
+        <div class="commonRow__left">
+          <h3 class="commonRow__header" id="proposedActivity">
+            Proposed activities
+          </h3>
+          <img src="/assets/event_note.svg" alt="note icon" />
+        </div>
+        <app-com-save-button
+          (click)="onSaveButtonClick('proposedActivity')"
+        ></app-com-save-button>
+      </div>
+
+      <div class="mgt-20">
+        <app-com-instruction-note
+          text="ส่วนนี้ออกแบบมาเพื่อให้ทั้งแผนงานและทีมต่างประเทศ สสส. ออกแบบร่วมกันในการกำหนดกิจกรรมที่สอดคล้องตามเป้าหมายด้านต่างประเทศ"
+          [editorGuide]="true"
+        ></app-com-instruction-note>
+      </div>
+
+      <div class="mgt-20">
+        <app-com-custom-editor
+          [control]="getControl('proposedActivity')"
+          [height]="324"
+        ></app-com-custom-editor>
+        @if (!getControl('proposedActivity').valid &&
+        getControl('proposedActivity').touched) {
+        <app-com-error-message
+          text="กรุณากรอก Proposed activities"
+          marginTop="8px"
+        ></app-com-error-message>
+        }
+      </div>
+
+      <!-- Notes -->
+      <div class="hr--dashed mgt-44"></div>
+      <div class="commonRow mgt-44">
+        <div class="commonRow__left">
+          <h3 class="commonRow__header" id="planNote">
+            Notes บันทึกข้อคิดเห็นร่วมกัน
+          </h3>
+          <img src="/assets/speaker_notes.svg" alt="speaker notes" />
+        </div>
+        <app-com-save-button
+          (click)="onSaveButtonClick('planNote')"
+        ></app-com-save-button>
+      </div>
+
+      <div class="mgt-20">
+        <app-com-instruction-note
+          text="บันทึกข้อคิดเห็นหรือเหตุผลเพื่อใช้ประโยชน์ในแต่ละรอบประเมิน"
+          [editorGuide]="true"
+        ></app-com-instruction-note>
+      </div>
+
+      <div class="mgt-20">
+        <app-com-custom-editor
+          [control]="getControl('planNote')"
+          [height]="324"
+        ></app-com-custom-editor>
+        @if (!getControl('planNote').valid && getControl('planNote').touched) {
+        <app-com-error-message
+          text="กรุณากรอก Notes"
+          marginTop="8px"
+        ></app-com-error-message>
+        }
+      </div>
+
+      <!-- Contact Person -->
+      <div class="hr--dashed mgt-44"></div>
+      <div class="commonRow mgt-44">
+        <div class="commonRow__left">
+          <h3 class="commonRow__header" id="contactPerson">Contact Person</h3>
+          <img src="/assets/account_circle.svg" alt="account icon" />
+        </div>
+        <app-com-save-button
+          (click)="onSaveButtonClick('contactPerson')"
+        ></app-com-save-button>
+      </div>
+      <div class="mgt-20">
+        <app-com-instruction-note
+          text="กรุณาระบุผู้ประสานงานที่ได้รับมอบหมายให้เป็นตัวแทนในการบันทึกข้อมูลและประสานงานกับทีมด้านต่างประเทศ สสส."
+          [editorGuide]="true"
+        ></app-com-instruction-note>
+      </div>
+      <div class="mgt-20">
+        <app-com-custom-editor
+          [control]="getControl('contactPerson')"
+          [height]="279"
+        ></app-com-custom-editor>
+        @if (!getControl('contactPerson').valid &&
+        getControl('contactPerson').touched) {
+        <app-com-error-message
+          text="กรุณากรอก Contact Person"
+          marginTop="8px"
+        ></app-com-error-message>
+        }
+      </div>
+
+      <div class="saveAndReturn">
+        <app-com-save-and-return-button
+          (click)="onSaveAndReturn()"
+        ></app-com-save-and-return-button>
+      </div>
+    </form>
+  </section>
+</div>
+
+<div class="popup">
+  <app-com-popup
+    [displayText]="popupText()"
+    [show]="showPopup()"
+    [error]="isPopupError()"
+  ></app-com-popup>
+</div>

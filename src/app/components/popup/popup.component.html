@@ -1,0 +1,31 @@
+@if (show()) {
+<div
+  @popup
+  [ngClass]="{ container: true, 'container--error': error() }"
+  [style]="{ width: width() }"
+>
+  <div [ngClass]="{ 'icon-container': true, 'icon-container--error': error() }">
+    <div class="icon">
+      @if (error()) {
+      <div class="icon--error">X</div>
+      } @else {
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="33"
+        height="25"
+        viewBox="0 0 33 25"
+        fill="none"
+      >
+        <path
+          class="icon__path"
+          d="M11.6998 24.05L0.299805 12.65L3.1498 9.8L11.6998 18.35L30.0498 0L32.8998 2.85L11.6998 24.05Z"
+        />
+      </svg>
+      }
+    </div>
+  </div>
+  <div class="text mt-26">
+    {{ displayText() }}
+  </div>
+</div>
+}

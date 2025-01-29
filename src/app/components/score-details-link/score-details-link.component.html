@@ -1,0 +1,12 @@
+<p (click)="showModal()" class="link">ดูความหมายตามระดับคะแนนทั้งหมด</p>
+<app-com-modal #modal width="748px" height="661px" padding="24px">
+  <div class="header">
+    <h3 class="header__text">ความหมายตามระดับคะแนนทั้งหมด</h3>
+    <div class="header__button" (click)="closeModal()">
+      <img src="/assets/close_modal_icon.svg" alt="x icon" />
+    </div>
+  </div>
+  <div class="tableContainer mgt-24">
+    <app-com-score-details-table></app-com-score-details-table>
+  </div>
+</app-com-modal>

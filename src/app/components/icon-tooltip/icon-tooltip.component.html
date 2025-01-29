@@ -1,0 +1,9 @@
+@if (hasTooltip()) {
+<div appTooltip [tooltipContent]="tooltipText()" [width]="width()" class="icon">
+  <img src="/assets/more_info.svg" alt="" class="icon__img" />
+</div>
+} @else {
+<div class="icon">
+  <img src="/assets/more_info.svg" alt="" class="icon__img" />
+</div>
+}

@@ -1,0 +1,248 @@
+<div class="container mgt-54">
+  <nav class="sideNav">
+    <div class="sideNav__back" (click)="onBackToDashboardPage()">
+      <img
+        src="/assets/arrow_back.svg"
+        alt="arrow back"
+        class="sideNav__back__icon"
+      />
+      <p class="sideNav__back__text">Back</p>
+    </div>
+  </nav>
+
+  <section class="content mgt-30 pdl-46">
+    <h1 class="header pdl-6">Admin IR</h1>
+    <div class="topicContainer pdl-6">
+      <div>
+        <p class="desc">
+          {{ pageDescription() }}
+        </p>
+        <br />
+        <p class="desc">
+          <span class="desc__bold">หลักคิดของระบบคือ</span>
+          แอดมินหรือนักวิชาการด้านต่างประเทศ สสส.
+          เป็นผู้ได้รับสิทธิ์ในการเข้าดูเนื้อหาและแก้ไขได้ในทุกส่วน
+          ร่วมกับทุกแผน
+          ในแต่ละแผนจะสามารถเห็นและแก้ไขข้อมูลได้เฉพาะแผนที่ตนเองได้รับสิทธิ์เท่านั้น
+        </p>
+      </div>
+    </div>
+
+    <form [formGroup]="form()">
+      <!-- Admin assessment Score -->
+      <div class="mgt-54">
+        <div class="assessment">
+          <div class="assessment__left">
+            <h3 class="assessment__header">Admin assessment Score</h3>
+            <app-com-icon-tooltip
+              [hasTooltip]="true"
+              [tooltipText]="assessmentScoreTooltip()"
+              width="500px"
+            ></app-com-icon-tooltip>
+          </div>
+          <app-com-save-button
+            (click)="onSave('assessmentScore')"
+          ></app-com-save-button>
+        </div>
+
+        @if (!isProduction()) {
+        <button style="padding: 10px" (click)="onPatchScores()">
+          Patch Value
+        </button>
+        }
+
+        <div class="mgt-20">
+          <app-com-instruction-note
+            text="ทีมต่างประเทศ สสส. อาจพิจารณาจัดกระบวนการภายในร่วมกันให้คะแนนประเมินในแต่ละข้อถามของทุกแผน โดยอาจระบุความคิดเห็นหรือเหตุผลในส่วนข้อสังเกตและหมายเหตุเพื่อใช้ประโยชน์ในแต่ละรอบประเมิน"
+          ></app-com-instruction-note>
+          <div class="mgt-20">
+            <app-com-score-scale-details></app-com-score-scale-details>
+          </div>
+        </div>
+
+        <div class="mgt-20">
+          <app-com-score-table-admin
+            id="assessmentScore"
+            [shortNames]="topicShortList()"
+            [criteria]="criteriaList()"
+            [data]="assessmentScoreData()"
+            [editMode]="true"
+            [formArray]="getAssessmentScoreFormArray()"
+          ></app-com-score-table-admin>
+          @if (!form().get('assessmentScore')?.valid &&
+          form().get('assessmentScore')?.touched && assessmentScoreSubmitted())
+          {
+          <app-com-error-message
+            text="กรุณาให้คะแนนให้ครบทุกข้อ และครบทุก plan"
+            marginTop="10px"
+            fontSize="16px"
+          ></app-com-error-message>
+          }
+        </div>
+      </div>
+
+      <!-- IR Work Goal -->
+      <div class="hr--dashed mgt-50"></div>
+      <div class="mgt-44">
+        <div class="commonRow">
+          <div class="commonRow__left">
+            <h3 class="commonRow__header">IR Work Goal</h3>
+            <img src="/assets/flag_circle_red.svg" alt="note icon" />
+          </div>
+          <app-com-save-button
+            (click)="onSave('irWorkGoal')"
+          ></app-com-save-button>
+        </div>
+        <div class="mgt-20">
+          <app-com-instruction-note
+            text="เป้าหมายด้านต่างประเทศควรเกิดจากการหารือและเห็นชอบร่วมกันระหว่างแผนงานและทีมต่างประเทศ สสส. ตามความพร้อมของแต่ละแผนงานและความคาดหวังขององค์กร"
+            [editorGuide]="true"
+          ></app-com-instruction-note>
+        </div>
+        <div class="mgt-34">
+          <app-com-ir-work-goal
+            #irWorkGoal
+            [plans]="plans()"
+            [editMode]="true"
+            [formArray]="getIrGoalFormArray()"
+          ></app-com-ir-work-goal>
+          @if (!form().get('irWorkGoal')?.valid &&
+          form().get('irWorkGoal')?.touched && irWorkGoalSubmitted()) {
+          <app-com-error-message
+            [text]="irWorkGoalDetailsErrorMsg()"
+            marginTop="8px"
+          ></app-com-error-message>
+          }
+        </div>
+      </div>
+
+      <!-- Proposed activities -->
+      <div class="hr--dashed mgt-44"></div>
+      <div class="mgt-44">
+        <div class="commonRow">
+          <div class="commonRow__left">
+            <h3 class="commonRow__header">Proposed activities</h3>
+            <img src="/assets/event_note_blue.svg" alt="note icon" />
+          </div>
+          <app-com-save-button
+            (click)="onSave('proposedActivity')"
+          ></app-com-save-button>
+        </div>
+        <div class="mgt-20">
+          <app-com-instruction-note
+            text="ส่วนนี้ออกแบบมาเพื่อให้ทั้งแผนงานและทีมต่างประเทศ สสส. ออกแบบร่วมกันในการกำหนดกิจกรรมที่สอดคล้องตามเป้าหมายด้านต่างประเทศ"
+            [editorGuide]="true"
+          ></app-com-instruction-note>
+        </div>
+        <div class="mgt-20">
+          <app-com-proposed-activities
+            #proposedActivity
+            id="proposedActivity"
+            [plans]="plans()"
+            [editMode]="true"
+            [formArray]="getProposedActivitiesFormArray()"
+          >
+          </app-com-proposed-activities>
+          @if (!form().get('proposedActivity')?.valid &&
+          form().get('proposedActivity')?.touched &&
+          proposedActivitySubmitted()) {
+          <app-com-error-message
+            [text]="proposedActivityErrorMsg()"
+            marginTop="10px"
+            fontSize="16px"
+          ></app-com-error-message>
+          }
+        </div>
+      </div>
+
+      <!-- Plan notes -->
+      <div class="hr--dashed mgt-44"></div>
+      <div class="mgt-44">
+        <div class="commonRow">
+          <div class="commonRow__left">
+            <h3 class="commonRow__header">Note of Plan</h3>
+            <img src="/assets/speaker_notes.svg" alt="note icon" />
+          </div>
+          <app-com-save-button
+            (click)="onSave('planNote')"
+          ></app-com-save-button>
+        </div>
+        <div class="mgt-20">
+          <app-com-instruction-note
+            text="บันทึกข้อคิดเห็นหรือเหตุผลเพื่อใช้ประโยชน์ในแต่ละรอบประเมิน"
+            [editorGuide]="true"
+          ></app-com-instruction-note>
+        </div>
+        <div class="mgt-20">
+          <app-com-plan-note
+            #planNote
+            id="planNote"
+            [plans]="plans()"
+            [editMode]="true"
+            [formArray]="getPlanNoteFormArray()"
+          >
+          </app-com-plan-note>
+          @if (!form().get('planNote')?.valid && form().get('planNote')?.touched
+          && planNoteSubmitted()) {
+          <app-com-error-message
+            [text]="planNoteErrorMsg()"
+            marginTop="10px"
+            fontSize="16px"
+          ></app-com-error-message>
+          }
+        </div>
+      </div>
+
+      <!-- Admin note -->
+      <div class="hr--dashed mgt-76"></div>
+      <div class="mgt-62">
+        <div class="commonRow">
+          <div class="commonRow__left">
+            <h3 class="commonRow__header">Notes of Admin</h3>
+            <img src="/assets/speaker_notes_red.svg" alt="note icon red" />
+          </div>
+          <app-com-save-button
+            (click)="onSave('adminNote')"
+          ></app-com-save-button>
+        </div>
+        <div class="mgt-20">
+          <app-com-instruction-note
+            text="บันทึกแผนหรือเป้าหมายภาพรวมด้านต่างประเทศขององค์กร หรือบันทึกภายในทีมต่างประเทศ เพื่อประเมินความก้าวหน้า ในองค์รวม "
+            remark="(เป็นส่วนที่ไม่แสดงในหน้าของแต่ละแผนงาน)"
+            [editorGuide]="true"
+          ></app-com-instruction-note>
+        </div>
+        <div class="mgt-20">
+          <app-com-admin-note
+            id="adminNote"
+            [editMode]="true"
+            [control]="getAdminNoteFormControl()"
+          ></app-com-admin-note>
+          @if (!form().get('adminNote')?.valid &&
+          form().get('adminNote')?.touched && adminNoteSubmitted()) {
+          <app-com-error-message
+            text="กรุณากรอก admin note"
+            marginTop="10px"
+            fontSize="16px"
+          ></app-com-error-message>
+          }
+        </div>
+      </div>
+
+      <div class="saveAndReturn mgt-60">
+        <app-com-save-and-return-button
+          (click)="onSaveAndReturn()"
+        ></app-com-save-and-return-button>
+      </div>
+    </form>
+  </section>
+</div>
+
+<div class="popup">
+  <app-com-popup
+    [displayText]="popupText()"
+    [show]="showPopup()"
+    [error]="isPopupError()"
+    width="400px"
+  ></app-com-popup>
+</div>

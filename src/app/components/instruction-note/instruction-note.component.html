@@ -1,0 +1,13 @@
+<p class="instruction" [style]="{ fontSize: fontSize() }">
+  <span class="instruction--bold">{{ label() }}</span>
+  {{ text() }}
+  @if (remark()) {
+  <span class="instruction__remark">{{ remark() }}</span>
+  }
+</p>
+@if (editorGuide()) {
+<p class="editorRemark">
+  กรณีที่ copy text จากที่อื่นมาวาง ให้คลุมดำทั้งหมดก่อนและปรับขนาด font
+  อีกครั้งก่อน save แนะนำขนาดฟ้อนต์ 16 px
+</p>
+}

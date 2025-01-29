@@ -1,0 +1,458 @@
+<div class="container mgt-54">
+  <!-- SIDE NAV -->
+  <nav class="sideNav">
+    <div class="sideNav__back" (click)="onBackToHomePage()">
+      <img
+        src="/assets/arrow_back.svg"
+        alt="arrow back"
+        class="sideNav__back__icon"
+      />
+      <p class="sideNav__back__text">Back</p>
+    </div>
+    <a
+      [ngClass]="{
+        sideNav__item: true,
+        'sideNav__item--active': navActiveIndex() === 0
+      }"
+      (click)="onNavItemClick(0)"
+      [routerLink]="baseLink()"
+      fragment="readiness"
+    >
+      Readiness and Willingness Assessment
+    </a>
+    <a
+      [ngClass]="{
+        sideNav__item: true,
+        'sideNav__item--active': navActiveIndex() === 1
+      }"
+      (click)="onNavItemClick(1)"
+      [routerLink]="baseLink()"
+      fragment="adminAssessmentScore"
+    >
+      Admin Assessment Score
+    </a>
+    <a
+      [ngClass]="{
+        sideNav__item: true,
+        'sideNav__item--active': navActiveIndex() === 2
+      }"
+      (click)="onNavItemClick(2)"
+      [routerLink]="baseLink()"
+      fragment="irWorkGoal"
+    >
+      IR Work Goal
+    </a>
+    <a
+      [ngClass]="{
+        sideNav__item: true,
+        'sideNav__item--active': navActiveIndex() === 3
+      }"
+      (click)="onNavItemClick(3)"
+      [routerLink]="baseLink()"
+      fragment="proposedActivity"
+    >
+      Proposed activities
+    </a>
+    <a
+      [ngClass]="{
+        sideNav__item: true,
+        'sideNav__item--active': navActiveIndex() === 4
+      }"
+      (click)="onNavItemClick(4)"
+      [routerLink]="baseLink()"
+      fragment="planNote"
+    >
+      Notes
+    </a>
+  </nav>
+  <section class="content mgt-17 pdl-55">
+    <h1 class="header">Admin IR</h1>
+    <div class="desc__container">
+      <div>
+        <p class="desc">
+          {{ pageDescription() }}
+        </p>
+        <br />
+        <p class="desc">
+          <span class="desc__bold">หลักคิดของระบบคือ</span>
+          แอดมินหรือนักวิชาการด้านต่างประเทศ สสส.
+          เป็นผู้ได้รับสิทธิ์ในการเข้าดูเนื้อหาและแก้ไขได้ในทุกส่วน
+          ร่วมกับทุกแผน
+          ในแต่ละแผนจะสามารถเห็นและแก้ไขข้อมูลได้เฉพาะแผนที่ตนเองได้รับสิทธิ์เท่านั้น
+        </p>
+      </div>
+
+      @if (userService.currentUser().userRole === 'admin') {
+      <button class="editButton mgt-58" (click)="toEditPage()">
+        <p class="editButton__text">แก้ไขข้อมูล</p>
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 20 20"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <mask
+            id="mask0_404_824"
+            style="mask-type: alpha"
+            maskUnits="userSpaceOnUse"
+            x="0"
+            y="0"
+            width="20"
+            height="20"
+          >
+            <rect width="20" height="20" fill="#D9D9D9" />
+          </mask>
+          <g mask="url(#mask0_404_824)">
+            <path
+              d="M13.125 10.75H4V9.25H13.125L8.9375 5.0625L10 4L16 10L10 16L8.9375 14.9375L13.125 10.75Z"
+              fill="#F47521"
+              fill-opacity="0.952941"
+            />
+          </g>
+        </svg>
+      </button>
+      }
+    </div>
+    <!-- Metric -->
+    <div class="mgt-54">
+      <div class="readiness__container">
+        <h2
+          class="readiness__header"
+          id="readiness"
+          appIntersectionElement
+          (isIntersecting)="isIntersecting($event, 0)"
+          [isContinuous]="true"
+          [threshold]="0"
+          [debounceTime]="0"
+          [rootMargin]="intersectionRootMargin()"
+        >
+          Readiness and Willingness Assessment
+        </h2>
+        <div class="mgt-12">
+          <app-com-icon-tooltip
+            [hasTooltip]="true"
+            [tooltipText]="readinessTooltipText()"
+            width="500px"
+          ></app-com-icon-tooltip>
+        </div>
+      </div>
+      <p class="readiness__desc mgt-15">
+        <span class="readiness__desc--bold"
+          >แสดงผลตามระดับคะแนน แสดงเหมือนกันทั้ง Admin และ แผน</span
+        >
+        ส่วนนี้แสดงการให้ความหมายตามระดับคะแนนทั้งจากแกนด้านความเต็มใจ
+        และแกนด้านศักยภาพ
+        ซึ่งเป็นการวิเคราะห์ผลจากคะแนนที่แผนงานและทีมด้านต่างประเทศประเมินร่วมกัน
+      </p>
+
+      <p class="readiness__instruction mgt-16">
+        <span class="readiness__instruction--500">ข้อแนะนำการใช้งาน: </span
+        >สามารถ Click ปีที่ต้องการเพื่อแสดงข้อมูลการให้ความหมาย และ
+        <span class="readiness__instruction--600"
+          >Click ช่องอื่นเพื่อ Reset การเลือก</span
+        >
+        หากไม่ Click เลือกปีใด จะแสดงความหมายของทุกปี
+      </p>
+
+      <div class="metric pdl-32 mgt-54">
+        <app-com-metric
+          [data]="metricData()"
+          size="large"
+          (selectedCell)="onMetricCellClick($event)"
+        ></app-com-metric>
+        <div class="metric__control__container mgt--38">
+          <div>
+            <p class="metric__control__label">Select Year</p>
+            <p class="metric__control__helper mgt-17">
+              สามารถเลือกปีปัจจุบันหรือปีย้อนหลัง
+            </p>
+            <div class="metric__control__content mgt-17">
+              <div>
+                <app-com-select-dropdown
+                  [form]="metricFormGroup()"
+                  controlName="fromYear"
+                  [items]="getYearOptions()"
+                  width="129px"
+                  height="42px"
+                  placeholder="Year 1"
+                  displayAlign="left"
+                  padding="15px 0 15px 16px"
+                  dropdownJustifyContent="flex-start"
+                  dropdownPadding="0 0 0 16px"
+                ></app-com-select-dropdown>
+              </div>
+              <p class="metric__control__label--to">To</p>
+              <div>
+                <app-com-select-dropdown
+                  [form]="metricFormGroup()"
+                  controlName="toYear"
+                  [items]="getYearOptions()"
+                  width="129px"
+                  height="42px"
+                  placeholder="Year 2"
+                  displayAlign="left"
+                  padding="15px 0 15px 16px"
+                  dropdownJustifyContent="flex-start"
+                  dropdownPadding="0 0 0 16px"
+                ></app-com-select-dropdown>
+              </div>
+            </div>
+          </div>
+          <div>
+            <p class="metric__control__label">Select Plan</p>
+            <p class="metric__control__helper mgt-17">
+              เลือกแสดงผลของทุกแผน หรือเฉพาะแผน
+            </p>
+            <div class="metric__control__content mgt-17">
+              <div>
+                <app-com-select-dropdown
+                  [form]="metricFormGroup()"
+                  controlName="plan"
+                  [items]="planOptions()"
+                  width="307px"
+                  height="42px"
+                  color="#4D54AB"
+                  fontSize="18px"
+                  displayAlign="left"
+                  padding="15px 0 15px 16px"
+                  dropdownPadding="0 0 0 16px"
+                  dropdownJustifyContent="flex-start"
+                ></app-com-select-dropdown>
+              </div>
+
+              <p
+                class="metric__control__clearFilter"
+                (click)="onClearMetricFilter()"
+              >
+                Clear filter
+              </p>
+            </div>
+          </div>
+
+          <!-- Score results summary -->
+          <div class="metric__summary__box">
+            <p class="metric__control__label">ความหมายตามระดับคะแนนที่ได้</p>
+            <div class="metric__summary mgt-17">
+              <app-com-metric-score-summary
+                height="310px"
+                [data]="metricData()"
+              ></app-com-metric-score-summary>
+            </div>
+          </div>
+
+          <div class="alignRight">
+            <app-com-score-details-link></app-com-score-details-link>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin assessment scores -->
+    <div class="hr--dashed mgt-32"></div>
+    <div class="mgt-44">
+      <div class="assessment__header">
+        <div class="assessment__header__textContainer">
+          <h3
+            id="adminAssessmentScore"
+            class="assessment__header__text"
+            appIntersectionElement
+            (isIntersecting)="isIntersecting($event, 1)"
+            [isContinuous]="true"
+            [threshold]="0"
+            [debounceTime]="0"
+            [rootMargin]="intersectionRootMargin()"
+          >
+            Admin assessment Score
+          </h3>
+          <div class="mgt-15">
+            <app-com-icon-tooltip
+              [hasTooltip]="true"
+              [tooltipText]="assessmentScoreTooltip()"
+              width="500px"
+            ></app-com-icon-tooltip>
+          </div>
+        </div>
+        <div class="mgt-15">
+          <app-com-updated-at
+            [display]="scoreTableLatestUpdateText()"
+          ></app-com-updated-at>
+        </div>
+      </div>
+      <div>
+        <app-com-instruction-note
+          text="ทีมต่างประเทศ สสส. อาจพิจารณาจัดกระบวนการภายในร่วมกันให้คะแนนประเมินในแต่ละข้อถามของทุกแผน โดยอาจระบุความคิดเห็นหรือเหตุผลในส่วนข้อสังเกตและหมายเหตุเพื่อใช้ประโยชน์ในแต่ละรอบประเมิน"
+        ></app-com-instruction-note>
+        <div class="mgt-20">
+          <app-com-score-scale-details></app-com-score-scale-details>
+        </div>
+        <p class="assessment__helper">
+          หมายเหตุ: ตัวเลขสีแดงคือคะแนนที่แผนงานยังไม่ได้กรอกคะแนน
+          ซึ่งทำให้คะแนนจะไม่แสดงบนตาราง
+        </p>
+      </div>
+
+      <!-- Table -->
+      <div class="mgt-32">
+        <app-com-score-table-admin
+          [shortNames]="topicShortList()"
+          [criteria]="criteriaList()"
+          [data]="assessmentScoreData()"
+          [unHighlightSet]="scoreCompletePlan()"
+        ></app-com-score-table-admin>
+      </div>
+    </div>
+
+    <!-- IR Work Goal -->
+    <div class="hr--dashed mgt-44"></div>
+    <div class="mgt-44">
+      <div class="commonTextSection__headerSection">
+        <div class="commonTextSection__headerBox">
+          <h3
+            id="irWorkGoal"
+            class="commonTextSection__headerText"
+            appIntersectionElement
+            (isIntersecting)="isIntersecting($event, 2)"
+            [isContinuous]="true"
+            [threshold]="0"
+            [debounceTime]="0"
+            [rootMargin]="intersectionRootMargin()"
+          >
+            IR Work Goal
+          </h3>
+          <img src="/assets/flag_circle_red.svg" alt="note icon" />
+        </div>
+      </div>
+      <div>
+        <app-com-instruction-note
+          text="เป้าหมายด้านต่างประเทศควรเกิดจากการหารือและเห็นชอบร่วมกันระหว่างแผนงานและทีมต่างประเทศ สสส. ตามความพร้อมของแต่ละแผนงานและความคาดหวังขององค์กร"
+        ></app-com-instruction-note>
+      </div>
+      <div class="mgt-20">
+        <app-com-ir-work-goal
+          #irWorkGoal
+          [plans]="plans()"
+          [editMode]="false"
+        ></app-com-ir-work-goal>
+      </div>
+    </div>
+
+    <!-- Proposed activities -->
+    <div class="hr--dashed mgt-44"></div>
+    <div class="mgt-44">
+      <div class="commonTextSection__headerSection">
+        <div class="commonTextSection__headerBox">
+          <h3
+            id="proposedActivity"
+            class="commonTextSection__headerText"
+            appIntersectionElement
+            (isIntersecting)="isIntersecting($event, 3)"
+            [isContinuous]="true"
+            [threshold]="0"
+            [debounceTime]="0"
+            [rootMargin]="intersectionRootMargin()"
+          >
+            Proposed activities
+          </h3>
+          <img src="/assets/event_note_blue.svg" alt="note icon" />
+        </div>
+      </div>
+      <div class="mgt-20">
+        <app-com-instruction-note
+          text="ส่วนนี้ออกแบบมาเพื่อให้ทั้งแผนงานและทีมต่างประเทศ สสส. ออกแบบร่วมกันในการกำหนดกิจกรรมที่สอดคล้องตามเป้าหมายด้านต่างประเทศ"
+        ></app-com-instruction-note>
+      </div>
+      <div class="mgt-20">
+        <app-com-proposed-activities
+          [plans]="plans()"
+        ></app-com-proposed-activities>
+      </div>
+    </div>
+    <!-- Notes -->
+    <div class="hr--dashed mgt-44"></div>
+    <div class="mgt-44">
+      <div class="commonTextSection__headerSection">
+        <div class="commonTextSection__headerBox">
+          <h3
+            id="planNote"
+            class="commonTextSection__headerText"
+            appIntersectionElement
+            (isIntersecting)="isIntersecting($event, 4)"
+            [isContinuous]="true"
+            [threshold]="0"
+            [debounceTime]="0"
+            [rootMargin]="intersectionRootMargin()"
+          >
+            Note of Plan
+          </h3>
+          <img src="/assets/speaker_notes.svg" alt="speaker notes" />
+        </div>
+      </div>
+      <div class="mgt-20">
+        <app-com-instruction-note
+          text="บันทึกข้อคิดเห็นหรือเหตุผลเพื่อใช้ประโยชน์ในแต่ละรอบประเมิน"
+        ></app-com-instruction-note>
+      </div>
+      <div class="mgt-20">
+        <app-com-plan-note [plans]="plans()"></app-com-plan-note>
+      </div>
+    </div>
+    <!-- Admin Notes -->
+    <div class="hr--dashed mgt-44"></div>
+    <div class="mgt-44">
+      <div class="commonTextSection__headerSection">
+        <div class="commonTextSection__headerBox">
+          <h3 id="adminNote" class="commonTextSection__headerText">
+            Notes of Admin
+          </h3>
+          <img src="/assets/speaker_notes_red.svg" alt="speaker notes" />
+        </div>
+      </div>
+      <div class="mgt-20">
+        <app-com-instruction-note
+          text="บันทึกแผนหรือเป้าหมายภาพรวมด้านต่างประเทศขององค์กร หรือบันทึกภายในทีมต่างประเทศ เพื่อประเมินความก้าวหน้า ในองค์รวม "
+          remark="(เป็นส่วนที่ไม่แสดงในหน้าของแต่ละแผนงาน)"
+        ></app-com-instruction-note>
+      </div>
+      <div class="mgt-20">
+        <app-com-admin-note [text]="adminNote()"></app-com-admin-note>
+      </div>
+    </div>
+
+    <!-- Log activities -->
+    <div class="logs mgt-44">
+      <div class="commonTextSection__headerSection">
+        <div class="commonTextSection__headerBox">
+          <h3 id="changeLog" class="commonTextSection__headerText">
+            Log activities
+          </h3>
+          <img
+            src="/assets/event_note_log.svg"
+            alt="event note for log activities"
+          />
+        </div>
+      </div>
+      <div class="mgt-20">
+        <app-com-instruction-note
+          label=""
+          text="ส่วนนี้พัฒนาขึ้นเพื่อบันทึกการเปลี่ยนแปลงที่เกิดขึ้นภายในระบบ ใช้ประโยชน์เพื่อสอบทานการแก้ไขข้อมูล "
+          remark="(เป็นส่วนที่ไม่แสดงในหน้าของแต่ละแผนงาน)"
+        ></app-com-instruction-note>
+      </div>
+      <div class="mgt-10">
+        <app-com-change-log
+          [plans]="plans()"
+          [latestScores]="latestScores()"
+        ></app-com-change-log>
+      </div>
+
+      <!-- Back to top button -->
+      <div class="backToTop">
+        <app-com-back-to-top></app-com-back-to-top>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- For intersection API debugging -->
+<!-- <div class="intersectionBox"></div> -->

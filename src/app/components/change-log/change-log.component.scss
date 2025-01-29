@@ -1,0 +1,68 @@
+@import "../../../styles.scss";
+
+$plan: 100px;
+$by: 100px;
+$time: 200px;
+
+.table {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.row {
+  display: flex;
+}
+
+.header {
+  font-family: $custom-font-looped;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 26px;
+  color: #000;
+  border-bottom: 1px solid #0000005c;
+  padding: 8px 0;
+
+  &__plan {
+    flex: 0 0 $plan;
+  }
+  &__remainSpace {
+    flex: 1;
+  }
+  &__by {
+    flex: 0 0 $by;
+  }
+
+  &__time {
+    flex: 0 0 $time;
+  }
+}
+
+.cell {
+  font-family: $custom-font-looped;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26px;
+  color: #000;
+
+  &__plan {
+    flex: 0 0 $plan;
+  }
+  &__remainSpace {
+    flex: 1;
+  }
+  &__by {
+    flex: 0 0 $by;
+  }
+  &__time {
+    flex: 0 0 $time;
+    display: flex;
+    gap: 13px;
+  }
+}
+
+.mgb {
+  &-10 {
+    margin-bottom: 10px;
+  }
+}

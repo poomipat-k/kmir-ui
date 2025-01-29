@@ -1,0 +1,24 @@
+<div class="table">
+  <div class="row mgb-10">
+    <p class="header header__plan">Plan</p>
+    <p class="header header__remainSpace">Edit อะไร</p>
+    <p class="header header__by">Edit by</p>
+    <p class="header header__time">Last Edited</p>
+  </div>
+
+  @for (plan of plans(); track $index) {
+  <div class="row">
+    <p class="cell cell__plan">{{ plan.name }}</p>
+    <p class="cell cell__remainSpace">
+      {{ editItemList()[$index] }}
+    </p>
+    <p class="cell cell__by">{{ editByList()[$index] }}</p>
+    <div class="cell cell__time">
+      @if (plan.updatedAt) {
+      <p>{{ dateAndTimeList()[$index][0] }}</p>
+      <p>{{ dateAndTimeList()[$index][1] }}</p>
+      }
+    </div>
+  </div>
+  }
+</div>

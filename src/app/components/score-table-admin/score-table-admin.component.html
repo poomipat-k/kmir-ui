@@ -1,0 +1,54 @@
+<div [ngClass]="{ grid: true, 'grid--editMode': editMode() }">
+  <div>&nbsp;</div>
+  <p class="assessment">Assessment</p>
+  @for (name of shortNames(); track $index;) {
+  <p appTooltip [tooltipContent]="name" class="planLabel">
+    {{ getPlanText($index) }}
+  </p>
+  }
+  <div class="willingness">ความเต็มใจ (Willingness)</div>
+  <div class="capacity">ขีดความสามารถ (Capacity)</div>
+
+  @for (c of criteria(); track $index; let i = $index) {
+  <p
+    [ngClass]="{
+      question: true,
+      border: true,
+      'border--bottom': i === 6
+    }"
+    [innerHTML]="getCriteriaText(c) | safeHtml"
+  ></p>
+  @if (editMode() ) { @for (name of shortNames(); track $index; let j = $index)
+  {
+  <div [ngClass]="{ editCell: true, border: true, 'border--bottom': i === 6 }">
+    <p class="editCell__label">{{ getPlanText($index) }}</p>
+    @if (formArray()?.at($index)) {
+    <div class="editDropdown">
+      <app-com-select-dropdown
+        [form]="getFormGroup($index)"
+        [controlName]="'q_' + (i + 1)"
+        [items]="scoreOptions()"
+        width="46px"
+        height="28px"
+        fontSize="15px"
+        iconWidth="12px"
+        padding="8px 22px 8px 0"
+        iconFromRight="6px"
+      ></app-com-select-dropdown>
+    </div>
+    <div class="h-20"></div>
+    }
+  </div>
+  } } @else { @for (name of shortNames(); track $index; let j = $index) {
+  <p
+    [ngClass]="{
+      score: true,
+      border: true,
+      'border--bottom': i === 6,
+      'score--red': data()?.[j]?.[i]?.score && !unHighlightSet()?.has(data()?.[j]?.[0]?.planId || -1)
+    }"
+  >
+    {{ data()?.[j]?.[i]?.score || '-' }}
+  </p>
+  } } }
+</div>

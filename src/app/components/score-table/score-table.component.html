@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="willingness">ความเต็มใจ (Willingness)</div>
+  <div class="cap">ขีดความสามารถ (Capacity)</div>
+  @for (item of data(); track $index) {
+  <p class="question" [innerHTML]="genQuestionText(item) | safeHtml"></p>
+  @if (editMode()) {
+  <div class="dropdown">
+    <app-com-select-dropdown
+      [form]="form()"
+      [controlName]="getDropdownControlName(item)"
+      [items]="scoreOptions()"
+      width="64px"
+    ></app-com-select-dropdown>
+  </div>
+  } @else {
+  <div class="score">{{ item.score }}</div>
+  } }
+</div>

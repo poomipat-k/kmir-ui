@@ -1,0 +1,385 @@
+@import "../../styles.scss";
+
+.container {
+  padding-top: 14px;
+  padding-left: 80px;
+  padding-right: 130px;
+  display: flex;
+  padding-bottom: 55px;
+}
+
+.sideNav {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  position: sticky;
+  top: 60px;
+
+  &__back {
+    display: flex;
+    gap: 8px;
+    padding: 10px 0;
+    align-items: center;
+    cursor: pointer;
+
+    &__text {
+      font-family: $custom-font;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 23px;
+    }
+
+    &__icon {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &__item {
+    padding: 10px 0;
+    width: 125px;
+    cursor: pointer;
+    font-family: $custom-font;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 23px;
+    color: #1c1b1f;
+    text-decoration: none;
+    border-bottom: 1px solid #1c1b1f;
+
+    &--active {
+      font-weight: 600;
+      color: #e76f51;
+      border-bottom: 1px solid #e76f51;
+    }
+  }
+}
+
+.content {
+  width: 100%;
+  position: relative;
+}
+
+.header {
+  font-family: $custom-font;
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 106px;
+  color: #1c1b1f;
+}
+
+.desc {
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    gap: 80px;
+  }
+
+  font-family: $custom-font-looped;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26px;
+  color: #1c1b1f;
+  white-space: pre-wrap;
+
+  &__bold {
+    font-weight: 500;
+  }
+}
+
+.readiness {
+  &__container {
+    display: flex;
+    gap: 11px;
+  }
+
+  &__header {
+    font-family: $custom-font;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 40px;
+    color: #1c1b1f;
+  }
+
+  &__desc {
+    font-family: $custom-font-looped;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+    color: #1c1b1f;
+
+    &--bold {
+      font-weight: 600;
+    }
+  }
+
+  &__instruction {
+    font-family: $custom-font-looped;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 30px;
+    color: #000;
+
+    &--500 {
+      font-weight: 500;
+    }
+
+    &--600 {
+      font-weight: 600;
+    }
+  }
+}
+
+.metric {
+  display: flex;
+  gap: 18px;
+
+  &__control {
+    &__container {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      gap: 17px;
+    }
+
+    &__label {
+      font-family: $custom-font;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 16px;
+      color: #000;
+
+      &--to {
+        font-family: $custom-font;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 33px;
+        color: #000;
+      }
+    }
+
+    &__helper {
+      font-family: $custom-font-looped;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 14px;
+      color: #000;
+    }
+
+    &__content {
+      display: flex;
+      gap: 17px;
+      align-items: center;
+    }
+
+    &__clearFilter {
+      font-family: $custom-font;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 23px;
+      color: #4d54ab;
+      text-decoration: underline;
+      cursor: pointer;
+      transition: transform 100ms ease-out;
+
+      &:hover {
+        transform: scale(1.02);
+      }
+    }
+  }
+
+  &__summary {
+    &__box {
+      width: 100%;
+      height: 100%;
+      // border: 1px solid blue;
+    }
+
+    width: 100%;
+    height: 100%;
+    // border: 1px solid red;
+  }
+}
+
+.alignRight {
+  text-align: right;
+}
+
+.assessment {
+  &__header {
+    display: flex;
+    gap: 6px;
+
+    &__textContainer {
+      display: flex;
+      gap: 3px;
+    }
+    &__text {
+      font-family: $custom-font;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 59px;
+      color: #1c1b1f;
+    }
+  }
+
+  &__helper {
+    font-family: $custom-font-looped;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+    color: #d32f06;
+  }
+}
+
+.commonTextSection {
+  &__headerSection {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__headerBox {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  &__headerText {
+    font-family: $custom-font;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 53px;
+    color: #000;
+  }
+
+  &__icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  &__text {
+    font-family: $custom-font-looped;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 23px;
+    white-space: pre-wrap;
+    max-height: 280px;
+    overflow-y: scroll;
+    border-bottom: 0.5px solid rgba(192, 195, 203, 0.5);
+  }
+}
+
+.editButton {
+  height: 46px;
+  min-width: 160px;
+  display: flex;
+  gap: 4px;
+  padding: 8px 10px 8px 20px;
+  background-color: #fff7df;
+  border: 1px solid #f47521f3;
+  border-radius: 46px;
+  align-items: center;
+  cursor: pointer;
+
+  &__text {
+    font-family: $custom-font;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 30px;
+    color: #000;
+  }
+
+  &__icon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.hr {
+  &--dashed {
+    border: 1px dashed rgba(0, 0, 0, 0.36);
+  }
+}
+
+.mgt {
+  &--38 {
+    margin-top: -38px;
+  }
+  &-8 {
+    margin-top: 8px;
+  }
+  &-10 {
+    margin-top: 10px;
+  }
+  &-12 {
+    margin-top: 12px;
+  }
+  &-14 {
+    margin-top: 14px;
+  }
+  &-15 {
+    margin-top: 15px;
+  }
+  &-16 {
+    margin-top: 16px;
+  }
+  &-17 {
+    margin-top: 17px;
+  }
+  &-20 {
+    margin-top: 20px;
+  }
+  &-32 {
+    margin-top: 32px;
+  }
+  &-34 {
+    margin-top: 34px;
+  }
+  &-44 {
+    margin-top: 44px;
+  }
+  &-54 {
+    margin-top: 54px;
+  }
+  &-58 {
+    margin-top: 58px;
+  }
+  &-80 {
+    margin-top: 80px;
+  }
+}
+
+.mgr {
+  &-6 {
+    margin-right: 6px;
+  }
+}
+.pdl {
+  &-32 {
+    padding-left: 32px;
+  }
+  &-55 {
+    padding-left: 55px;
+  }
+}
+
+.logs {
+  position: relative;
+}
+
+.backToTop {
+  position: absolute;
+  right: -56px;
+  bottom: -5px;
+}
+
+// For intersection API debugging purpose
+.intersectionBox {
+  position: fixed;
+  top: 0%;
+  right: 0;
+  width: 82vw;
+  height: calc(50%);
+  border: 1px solid blue;
+  background-color: rgba($color: #000000, $alpha: 0.2);
+}

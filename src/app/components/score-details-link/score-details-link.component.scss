@@ -1,0 +1,52 @@
+@import "../../../styles.scss";
+
+.link {
+  font-family: $custom-font-looped;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 26px;
+  color: #1c1b1f;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.header {
+  display: flex;
+  padding: 10px;
+
+  &__text {
+    font-family: $custom-font;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 33px;
+    text-align: center;
+    color: #000;
+    flex: 1;
+  }
+
+  &__button {
+    width: 36px;
+    height: auto;
+    cursor: pointer;
+    transition: transform 300ms ease-out;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.tableContainer {
+  width: 700px;
+  max-height: 533px;
+  overflow-y: scroll;
+
+  border: 1px solid #989898;
+  border-radius: 8px;
+}
+
+.mgt {
+  &-24 {
+    margin-top: 24px;
+  }
+}

@@ -1,0 +1,74 @@
+<div class="login mgt-87">
+  <h1 class="login__header">เข้าสู่ระบบเพื่อใช้งาน</h1>
+
+  <form [formGroup]="form()" (ngSubmit)="onSubmit()" class="form mgt-10">
+    <div>
+      <div class="login__item">
+        <label for="username" class="login__label">Username</label>
+        <div>
+          <app-com-input-text
+            id="username"
+            [control]="getControl('username')"
+            placeholder="Enter Username"
+            (keyUp)="onKeyUp()"
+            [error]="
+              (formTouched() && !getControl('username').valid) || apiError()
+            "
+          ></app-com-input-text>
+          @if (formTouched() && !getControl('username').valid) {
+          <app-com-error-message
+            text="กรุณาระบุ Username"
+            marginTop="6px"
+          ></app-com-error-message>
+          }
+        </div>
+      </div>
+      <div class="login__item mgt-10">
+        <label for="password" class="login__label">Password</label>
+        <div>
+          <app-com-input-text
+            id="password"
+            [type]="passwordType()"
+            [control]="getControl('password')"
+            [isPassword]="true"
+            placeholder="Enter Password"
+            (newPasswordType)="onPasswordTypeChange($event)"
+            (keyUp)="onKeyUp()"
+            [error]="
+              (formTouched() && !getControl('password').valid) || apiError()
+            "
+          ></app-com-input-text>
+          @if (formTouched() && !getControl('password').valid) { @if
+          (getControl('password').errors?.['minlength']) {
+          <app-com-error-message
+            text="รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวอักษร"
+            marginTop="6px"
+          ></app-com-error-message>
+          } @else if (getControl('password').errors?.['maxlength']) {
+          <app-com-error-message
+            text="รหัสผ่านต้องมีความยาวไม่เกิน 60 ตัวอักษร"
+            marginTop="6px"
+          ></app-com-error-message>
+          }@else if (getControl('password').errors?.['required']) {
+          <app-com-error-message
+            text="โปรดระบุรหัสผ่าน"
+            marginTop="6px"
+          ></app-com-error-message>
+          } }
+        </div>
+      </div>
+    </div>
+    @if (apiError()) {
+    <app-com-error-message
+      text="Username หรือ Password ไม่ถูกต้อง"
+      marginTop="6px"
+    ></app-com-error-message>
+    }
+    <div class="usage-box mgt-16">
+      <p class="usage">*เพื่อให้มีประสิทธิภาพการใช้งานที่ดีที่สุด</p>
+      <p class="usage">เสนอให้ใช้งานบน Desktop หรือ Tablet แนวนอน</p>
+      <p class="usage">ไม่เหมาะกับการใช้งานบนมือถือ*</p>
+    </div>
+    <button class="button mgt-24">เข้าสู่ระบบ</button>
+  </form>
+</div>

@@ -1,0 +1,15 @@
+<div class="container" [style]="{ minHeight: height(), maxHeight: height() }">
+  @for (group of groupData(); track $index; let groupIndex = $index) {
+  <div>
+    <p class="planName">
+      {{ genPlansText(group.list) }}
+    </p>
+    <p class="topic">{{ group.meaning.topic }}</p>
+    <p class="topic">{{ group.meaning.topicEn }}</p>
+    <p class="desc">{{ group.meaning.description }}</p>
+    @if (groupIndex < groupData().length - 1) {
+    <div class="hr"></div>
+    }
+  </div>
+  }
+</div>

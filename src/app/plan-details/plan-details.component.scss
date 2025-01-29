@@ -1,0 +1,368 @@
+@import "../../styles.scss";
+
+.container {
+  padding-top: 14px;
+  padding-left: 80px;
+  padding-right: 173px;
+  display: flex;
+  padding-bottom: 131px;
+}
+
+.sideNav {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  position: sticky;
+  top: 60px;
+
+  &__back {
+    display: flex;
+    gap: 8px;
+    padding: 10px 0;
+    align-items: center;
+    cursor: pointer;
+
+    &__text {
+      font-family: $custom-font;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 23px;
+    }
+
+    &__icon {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &__item {
+    padding: 10px 0;
+    width: 125px;
+    cursor: pointer;
+    font-family: $custom-font;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 23px;
+    color: #1c1b1f;
+    text-decoration: none;
+    border-bottom: 1px solid #1c1b1f;
+
+    &--active {
+      font-weight: 600;
+      color: #e76f51;
+      border-bottom: 1px solid #e76f51;
+    }
+  }
+}
+
+.content {
+  width: 100%;
+  position: relative;
+}
+
+.header {
+  font-family: $custom-font;
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 106px;
+  color: #1c1b1f;
+}
+
+.topic {
+  &Container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  font-family: $custom-font;
+  font-weight: 500;
+  font-size: 44px;
+  line-height: 56px;
+  color: #1c1b1f;
+
+  &__description {
+    padding-right: 100px;
+    font-family: $custom-font-looped;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 23px;
+
+    &--bold {
+      font-weight: 600;
+    }
+  }
+}
+
+.readiness {
+  &__container {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  &__header {
+    font-family: $custom-font;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 28px;
+    color: #1c1b1f;
+  }
+
+  &__text {
+    font-family: $custom-font-looped;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 23px;
+
+    &--bold-500 {
+      font-weight: 500;
+      line-height: 30px;
+    }
+    &--bold-600 {
+      font-weight: 600;
+      line-height: 30px;
+    }
+  }
+}
+
+.metric {
+  display: flex;
+  gap: 20px;
+  padding-left: 22px;
+
+  &__text {
+    font-family: $custom-font;
+    font-size: 16px;
+    line-height: 16px;
+    color: #000;
+  }
+  &__box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__description {
+    flex: 1;
+  }
+}
+
+.assessment {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+
+    &__textContainer {
+      display: flex;
+      gap: 3px;
+    }
+    &__text {
+      font-family: $custom-font;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 59px;
+      color: #1c1b1f;
+    }
+  }
+}
+
+.goal {
+  &__headerSection {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__headerBox {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  &__headerText {
+    font-family: $custom-font;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 53px;
+    color: #000;
+  }
+
+  &__icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  &__type {
+    display: flex;
+    gap: 9px;
+    align-items: center;
+
+    &__text {
+      font-family: $custom-font;
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 24px;
+      color: #f0b358;
+    }
+  }
+
+  &__details {
+    font-family: $custom-font-looped;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+    white-space: pre-wrap;
+
+    background-color: #fff;
+    height: 159px;
+    border-radius: 8px;
+    padding: 10px 29px 10px 21px;
+    overflow: scroll;
+  }
+}
+
+.commonTextSection {
+  &__headerSection {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__headerBox {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  &__headerText {
+    font-family: $custom-font;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 53px;
+    color: #000;
+  }
+
+  &__icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  &__text {
+    font-family: $custom-font-looped;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+    white-space: pre-wrap;
+    max-height: 280px;
+    overflow-y: scroll;
+
+    background-color: #fff;
+    height: 159px;
+    border-radius: 8px;
+    padding: 20px 29px 20px 21px;
+    overflow: scroll;
+
+    &--large {
+      height: 327px;
+    }
+    &--small {
+      height: 98px;
+    }
+  }
+}
+
+.editButton {
+  height: 46px;
+  min-width: 160px;
+  display: flex;
+  gap: 4px;
+  padding: 8px 10px 8px 20px;
+  background-color: #fff7df;
+  border: 1px solid #f47521f3;
+  border-radius: 46px;
+  align-items: center;
+  cursor: pointer;
+
+  &__text {
+    font-family: $custom-font;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 30px;
+    color: #000;
+  }
+
+  &__icon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.hr {
+  &--dashed {
+    border: 1px dashed rgba(0, 0, 0, 0.36);
+  }
+}
+
+.alignRight {
+  text-align: right;
+}
+
+.mgt {
+  &-8 {
+    margin-top: 8px;
+  }
+  &-13 {
+    margin-top: 13px;
+  }
+  &-14 {
+    margin-top: 14px;
+  }
+  &-15 {
+    margin-top: 15px;
+  }
+  &-16 {
+    margin-top: 16px;
+  }
+  &-18 {
+    margin-top: 18px;
+  }
+  &-20 {
+    margin-top: 20px;
+  }
+  &-39 {
+    margin-top: 39px;
+  }
+  &-44 {
+    margin-top: 44px;
+  }
+  &-54 {
+    margin-top: 54px;
+  }
+}
+
+.mgr {
+  &-6 {
+    margin-right: 6px;
+  }
+}
+.pdl {
+  &-55 {
+    padding-left: 55px;
+  }
+}
+
+.backToTop {
+  position: absolute;
+  bottom: 104px;
+  right: -80px;
+}
+
+// For intersection API debugging purpose
+.intersectionBox {
+  position: fixed;
+  top: 0%;
+  right: 0;
+  width: 82vw;
+  height: calc(50%);
+  border: 1px solid blue;
+  background-color: rgba($color: #000000, $alpha: 0.2);
+}

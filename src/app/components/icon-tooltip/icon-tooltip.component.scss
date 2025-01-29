@@ -1,0 +1,15 @@
+.icon {
+  position: relative;
+  align-self: start;
+  width: 18px;
+  height: 18px;
+
+  &__img {
+    width: 18px;
+    height: 18px;
+  }
+
+  * {
+    pointer-events: none;
+  }
+}

@@ -1,0 +1,41 @@
+@import "../../../styles.scss";
+
+.container {
+  background-color: #fff;
+  width: 100%;
+  border-radius: 8px;
+  padding: 8px 11px 8px 10px;
+  overflow: scroll;
+  white-space: pre-wrap;
+}
+
+.planName {
+  font-family: $custom-font-looped;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 23px;
+  color: #000;
+}
+
+.topic {
+  font-family: $custom-font-looped;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 23px;
+  color: #3a66d6;
+}
+
+.desc {
+  font-family: $custom-font-looped;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 23px;
+  color: #000;
+}
+
+.hr {
+  width: 100%;
+  border-top: 1px dashed #989898;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}

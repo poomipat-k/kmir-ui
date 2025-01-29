@@ -1,0 +1,76 @@
+<div [ngClass]="{ box: true, 'box--large': size() === 'large' }">
+  <p
+    [ngClass]="{
+      box__label: true,
+      'box__label--y': size() === 'small',
+      'box__label-large--y': size() === 'large'
+    }"
+  >
+    {{ yLabel() }}
+  </p>
+  <p class="box__label box__label--x">{{ xLabel() }}</p>
+  <p class="box__label box__label--0">0</p>
+  @if (size() === 'small') {
+  <div>
+    <p class="box__label box__label--xLow">Low</p>
+    <p class="box__label box__label--xMed">Medium</p>
+    <p class="box__label box__label--xHigh">High</p>
+    <p class="box__label box__label--10">10</p>
+  </div>
+  <div class="box__label-rotate">
+    <p class="box__label box__label--xLow">Low</p>
+    <p class="box__label box__label--xMed">Medium</p>
+    <p class="box__label box__label--xHigh">High</p>
+    <p class="box__label box__label--10 box__label--10-y">10</p>
+  </div>
+  } @else if (size() === 'large') {
+  <div>
+    <p class="box__label-large box__label-large--xLow">Low</p>
+    <p class="box__label-large box__label-large--xMed">Medium</p>
+    <p class="box__label-large box__label-large--xHigh">High</p>
+    <p class="box__label-large box__label-large--10">10</p>
+  </div>
+  <div class="box__label-large-rotate">
+    <p class="box__label-large box__label-large--xLow">Low</p>
+    <p class="box__label-large box__label-large--xMed">Medium</p>
+    <p class="box__label-large box__label-large--xHigh">High</p>
+    <p class="box__label-large box__label-large--10 box__label-large--10-y">
+      10
+    </p>
+  </div>
+  }
+  <div [ngClass]="{ grid: true, 'grid--large': size() === 'large' }">
+    @for (row of gridItems(); track $index; let idx = $index) { @for (cell of
+    row; track $index; let idy = $index) { @if (cell.name === 'hasData') {
+    <div
+      [ngClass]="{
+        cell: true,
+        'item--hasData': true
+      }"
+      (click)="onCellClick(cell)"
+      appTooltip
+      [fadeOut]="false"
+      [tooltipContent]="getTooltipContent(cell)"
+      width="220px"
+      padding="12px 7px"
+      backgroundColor="rgba(255, 255, 255, 0.8)"
+    ></div>
+    } @else {
+    <div
+      (click)="onCellClick(cell)"
+      [ngClass]="{
+        item: true,
+        'item--a': cell.name === 'a',
+        'item--b': cell.name === 'b',
+        'item--c': cell.name === 'c',
+        'item--d': cell.name === 'd',
+        'item--e': cell.name === 'e',
+        'item--f': cell.name === 'f',
+        'item--g': cell.name === 'g',
+        'item--h': cell.name === 'h',
+        'item--i': cell.name === 'i',
+      }"
+    ></div>
+    } } }
+  </div>
+</div>

@@ -1,0 +1,74 @@
+<div class="container">
+  <div class="buttons">
+    @for (name of buttons(); track $index) {
+    <div
+      [ngClass]="{
+        buttons__button: true,
+        'buttons__button--active': activeIndex() === $index
+      }"
+      (click)="onPlanButtonClick($index)"
+    >
+      {{ name }}
+    </div>
+    }
+  </div>
+  @if (plans().length > 0) {
+  <div class="meta">
+    <div class="meta__name">
+      <p class="meta__name--bold">
+        {{ "IR Work Goal " + plans()[activeIndex()].name | titlecase }}
+      </p>
+      <p>{{ plans()[activeIndex()].topic }}</p>
+      <p>{{ plans()[activeIndex()].topicEn }}</p>
+    </div>
+
+    @if (!editMode()) {
+    <div class="meta__update mgt-10">
+      <div class="meta__update--left">
+        <p class="meta__update__type">
+          {{
+            getGoalTypeDisplay(plans()[activeIndex()].irGoalType) | titlecase
+          }}
+        </p>
+        <app-com-icon-tooltip
+          [hasTooltip]="true"
+          [tooltipText]="irWorkGoalTooltip()"
+          width="500px"
+        ></app-com-icon-tooltip>
+      </div>
+      <app-com-updated-at [display]="updatedText()"></app-com-updated-at>
+    </div>
+    }
+  </div>
+
+  @if (editMode()) { @for (item of plans(); track $index) { @if ($index ===
+  activeIndex()) {
+  <div class="dropdown mgt-5">
+    <!-- Type -->
+    <app-com-select-dropdown
+      id="irGoalType"
+      [form]="getIrGoalFormGroupAt($index)"
+      controlName="goalType"
+      [items]="irTypeOptions()"
+      width="89px"
+      height="38px"
+      fontSize="16px"
+    ></app-com-select-dropdown>
+
+    <app-com-icon-tooltip
+      [hasTooltip]="true"
+      [tooltipText]="irWorkGoalTooltip()"
+      width="500px"
+    ></app-com-icon-tooltip>
+  </div>
+  <app-com-custom-editor
+    [control]="getGoalDetailsFormControlAt($index)"
+    [height]="410"
+  ></app-com-custom-editor>
+  } } } @else {
+  <div
+    class="display"
+    [innerHTML]="plans()[activeIndex()].irGoalDetails ?? '' | safeHtml"
+  ></div>
+  } }
+</div>

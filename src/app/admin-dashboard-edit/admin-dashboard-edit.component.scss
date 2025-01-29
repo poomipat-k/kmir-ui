@@ -1,0 +1,169 @@
+@import "../../styles.scss";
+
+.container {
+  display: flex;
+  padding-top: 14px;
+  padding-left: 80px;
+  padding-right: 173px;
+  padding-bottom: 150px;
+}
+
+.sideNav {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  position: sticky;
+  top: 60px;
+
+  &__back {
+    display: flex;
+    gap: 8px;
+    padding: 10px 0;
+    align-items: center;
+    cursor: pointer;
+
+    &__text {
+      font-family: $custom-font;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 23px;
+    }
+
+    &__icon {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+.content {
+  width: 100%;
+  position: relative;
+}
+
+.header {
+  font-family: $custom-font;
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 106px;
+  color: #1c1b1f;
+}
+
+.desc {
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    gap: 80px;
+  }
+
+  font-family: $custom-font-looped;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26px;
+  color: #1c1b1f;
+  white-space: pre-wrap;
+
+  &__bold {
+    font-weight: 500;
+  }
+}
+
+.topic {
+  &Container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  font-family: $custom-font;
+  font-weight: 500;
+  font-size: 44px;
+  line-height: 56px;
+  color: #1c1b1f;
+}
+
+.assessment {
+  display: flex;
+  justify-content: space-between;
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  &__header {
+    font-family: $custom-font;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 46px;
+    color: #1c1b1f;
+  }
+}
+
+.commonRow {
+  display: flex;
+  justify-content: space-between;
+
+  &__left {
+    display: flex;
+    gap: 10px;
+  }
+
+  &__header {
+    font-family: $custom-font;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 53px;
+    color: #000;
+  }
+}
+
+.saveAndReturn {
+  display: flex;
+  justify-content: center;
+}
+
+.hr {
+  &--dashed {
+    border-top: 1px dashed rgba(0, 0, 0, 0.36);
+  }
+}
+
+.pdl {
+  &-6 {
+    padding-left: 6px;
+  }
+  &-46 {
+    padding-left: 46px;
+  }
+}
+
+.mgt {
+  &-20 {
+    margin-top: 20px;
+  }
+  &-30 {
+    margin-top: 30px;
+  }
+  &-34 {
+    margin-top: 34px;
+  }
+  &-44 {
+    margin-top: 44px;
+  }
+  &-50 {
+    margin-top: 50px;
+  }
+  &-54 {
+    margin-top: 54px;
+  }
+  &-60 {
+    margin-top: 60px;
+  }
+  &-62 {
+    margin-top: 62px;
+  }
+  &-76 {
+    margin-top: 76px;
+  }
+}

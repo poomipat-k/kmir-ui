@@ -1,0 +1,8 @@
+@if (editMode()) {
+<app-com-custom-editor
+  [control]="control()"
+  [height]="410"
+></app-com-custom-editor>
+} @else {
+<div class="display" [innerHTML]="text() | safeHtml"></div>
+}

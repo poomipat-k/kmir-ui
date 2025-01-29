@@ -1,0 +1,145 @@
+@import "../../../styles.scss";
+
+.grid {
+  display: grid;
+  grid-template-rows: 30px repeat(7, auto);
+  grid-template-columns: 37px 1fr repeat(14, 50px);
+  grid-template-areas:
+    "as   as . . . . . . . . . . . . . ."
+    "will  . . . . . . . . . . . . . . ."
+    "will  . . . . . . . . . . . . . . ."
+    "will  . . . . . . . . . . . . . . ."
+    "cap   . . . . . . . . . . . . . . ."
+    "cap   . . . . . . . . . . . . . . ."
+    "cap   . . . . . . . . . . . . . . ."
+    "cap   . . . . . . . . . . . . . . .";
+
+  &--editMode {
+    grid-template-columns: 37px 1fr repeat(14, 60px);
+    justify-items: stretch;
+  }
+}
+
+.editCell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.editDropdown {
+  display: flex;
+  justify-content: center;
+}
+
+.h-20 {
+  width: 100%;
+  height: 20px;
+  visibility: hidden;
+}
+
+.question {
+  padding: 10px;
+  padding-right: 9px;
+  font-family: $custom-font;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 23px;
+  color: #000;
+}
+
+.assessment {
+  font-family: $custom-font;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 23px;
+  text-align: center;
+  color: #000;
+}
+
+.planLabel {
+  font-family: $custom-font;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 23px;
+  text-align: center;
+  color: #000;
+  position: relative;
+}
+
+.border {
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+
+  &--bottom {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  }
+}
+
+.editCell {
+  &__label {
+    text-align: center;
+    font-family: $custom-font;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+    color: #989898;
+  }
+}
+
+.score {
+  font-family: $custom-font;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 30px;
+  text-align: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &--red {
+    color: #ff3300;
+  }
+}
+
+.dropdown {
+  padding-top: 12px;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  &:last-of-type {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  }
+}
+
+.willingness {
+  grid-area: will;
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+  text-align: center;
+  background-color: #e4e7f7;
+  font-family: $custom-font;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 31px;
+  color: #000;
+  border-radius: 4px;
+  margin-bottom: 4px;
+  margin-right: 7px;
+  width: 31px;
+  padding: 16px 0;
+}
+.capacity {
+  grid-area: cap;
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+  text-align: center;
+  background-color: #d0d6f4;
+  border-radius: 4px;
+  margin-top: 2px;
+  font-family: $custom-font;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 31px;
+  color: #000;
+  margin-right: 7px;
+  width: 31px;
+  padding: 16px 0;
+}
