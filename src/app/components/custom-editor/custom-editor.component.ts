@@ -23,7 +23,7 @@ export class CustomEditorComponent implements OnInit {
     'preview autolink autosave save code visualblocks visualchars fullscreen link media codesample table charmap nonbreaking anchor lists advlist wordcount help charmap emoticons'
   );
   protected editorToolbar = signal(
-    'undo redo | blocks fontsize | bold italic underline strikethrough | align numlist bullist | link | table media | lineheight outdent indent| forecolor backcolor removeformat | charmap emoticons | code fullscreen preview | save print | anchor codesample'
+    'undo redo | blocks fontsize fontfamily lineheight | bold italic underline strikethrough | align numlist bullist | link | table media | outdent indent| forecolor backcolor removeformat | charmap emoticons | code fullscreen preview | save print | anchor codesample'
   );
 
   ngOnInit(): void {
@@ -41,6 +41,10 @@ export class CustomEditorComponent implements OnInit {
       block_unsupported_drop: true,
       paste_block_drop: true,
       height: this.height(),
+      font_family_formats: 'IBM Plex Sans Thai Looped, sans-serif',
+
+      content_style:
+        "@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped:wght@400;500;600&display=swap'); body { font-family: 'IBM Plex Sans Thai Looped', sans-serif; }",
     });
   }
 }
